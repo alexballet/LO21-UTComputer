@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>589</width>
-    <height>754</height>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -162,7 +162,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -225,7 +225,7 @@
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -436,7 +436,7 @@
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -524,7 +524,7 @@
            <item row="3" column="0">
             <widget class="QPushButton" name="pushButton_49">
              <property name="text">
-              <string>,</string>
+              <string>.</string>
              </property>
             </widget>
            </item>
@@ -736,30 +736,47 @@
       <widget class="QWidget" name="">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>10</y>
-         <width>561</width>
-         <height>251</height>
+         <x>6</x>
+         <y>11</y>
+         <width>551</width>
+         <height>268</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLineEdit" name="message"/>
+         <widget class="QLineEdit" name="message">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QTableView" name="vuePile"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="commande"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLineEdit" name="commande"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_80">
+            <property name="text">
+             <string>&lt;-</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_81">
+            <property name="text">
+             <string>CLEAR</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
-      <zorder>message</zorder>
-      <zorder>vuePile</zorder>
-      <zorder>vuePile</zorder>
-      <zorder>message</zorder>
-      <zorder>vuePile</zorder>
-      <zorder>commande</zorder>
+      <zorder>layoutWidget</zorder>
       <zorder>opLogiques</zorder>
       <zorder>opPile</zorder>
       <zorder>opNumeriques</zorder>
@@ -769,6 +786,35 @@
       <attribute name="title">
        <string>Tab 2</string>
       </attribute>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>111</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Clavier cliquable</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <widget class="QCheckBox" name="activerClavier">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>63</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Actif</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
    </item>
@@ -776,5 +822,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_81</sender>
+   <signal>released()</signal>
+   <receiver>commande</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>519</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

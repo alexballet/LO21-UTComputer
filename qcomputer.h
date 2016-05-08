@@ -29,6 +29,8 @@ private slots:
 void on_commande_returnPressed();
 void editCommmande();
 
+void on_activerClavier_stateChanged(int arg1);
+
 private:
     Ui::QComputer *ui;
 };

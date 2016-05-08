@@ -37,12 +37,19 @@ QComputer::QComputer(QWidget *parent) :
 //        // Give the command bar some focus.
 //        ui->commande->setFocus(Qt::OtherFocusReason);
 
-        ui->setupUi(this);
+            ui->setupUi(this);
+
         //connect all the keyboard buttons
         QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
         foreach (QPushButton *button, buttons){
             connect(button, SIGNAL(released()), this, SLOT(editCommmande()));
         }
+        //disable keyboard
+        this->setFixedSize(589,322);
+        ui->clavier->hide();
+        ui->opLogiques->hide();
+        ui->opNumeriques->hide();
+        ui->opPile->hide();
 }
 
 QComputer::~QComputer()
@@ -86,11 +93,37 @@ void QComputer::on_commande_returnPressed()
 void QComputer::editCommmande(){
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
-    QString addedText;
-    if (button->text()=="_"){
-        addedText = " ";
+    QString addedText="";
+    if (button->text()!="<-" && button->text()!="CLEAR"){
+        if (button->text()=="_")
+            addedText = " ";
+        else
+            addedText = button->text();
     }
-    else
-        addedText = button->text();
+
+    if(button->text()=="<-"){
+        com.truncate(com.length()-1);
+        ui->commande->setText(com);
+    }
     ui->commande->setText(com+addedText);
+}
+
+
+
+void QComputer::on_activerClavier_stateChanged(int state)
+{
+    if(state){
+        ui->clavier->show();
+        ui->opLogiques->show();
+        ui->opNumeriques->show();
+        ui->opPile->show();
+        this->setFixedSize(589,750);
+    }
+    else{
+        ui->clavier->hide();
+        ui->opLogiques->hide();
+        ui->opNumeriques->hide();
+        ui->opPile->hide();
+        this->setFixedSize(589,322);
+    }
 }
