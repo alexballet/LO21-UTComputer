@@ -17,12 +17,6 @@ class QComputer;
 class QComputer : public QWidget
 {
     Q_OBJECT
-//    QLineEdit* message;
-//    QTableWidget* vuePile;
-//    QLineEdit* commande;
-//    QVBoxLayout* couche;
-    Pile* pile;
-    Controleur* controleur;
 
 public:
     explicit QComputer(QWidget *parent = 0);
@@ -33,6 +27,7 @@ void refresh();
 
 private slots:
 void on_commande_returnPressed();
+void editCommmande();
 
 private:
     Ui::QComputer *ui;
