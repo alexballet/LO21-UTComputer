@@ -1,6 +1,7 @@
 #ifndef COMPUTEREXCEPTION_H
 #define COMPUTEREXCEPTION_H
 
+#include <QString>
 
 class ComputerException {
     QString info;
