@@ -1,6 +1,5 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
-#include <QDebug>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),

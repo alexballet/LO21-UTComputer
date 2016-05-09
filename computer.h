@@ -1,11 +1,7 @@
 #ifndef _COMPUTER_H
 #define _COMPUTER_H
 
-#include <QObject>
 #include <QString>
-#include <QTextStream>
-#include <QDebug>
-#include <QStack>
 
 class ComputerException {
     QString info;
@@ -13,30 +9,6 @@ public:
     ComputerException(const QString& str):info(str){}
     QString getInfo() const { return info; }
 };
-
-
-class Litteral {
-
-
-
-};
-
-class Pile : public QObject {
-    Q_OBJECT
-
-    QStack<Litteral*> stack;
-    QString message;
-    Pile():message(""){};
-    static Pile* instance;
-
-public:
-    static Pile* getInstance();
-    static void libererInstance();
-    QString getMessage() const;
-    void setMessage(const QString& msg);
-};
-
-
 
 
 /*

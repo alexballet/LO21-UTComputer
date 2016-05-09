@@ -2,16 +2,12 @@
 #define QCOMPUTER_H
 
 #include <QWidget>
-#include <QLineEdit>
-#include <QTextEdit>
-#include <QTableWidget>
-#include <QVBoxLayout>
-#include <QHeaderView>
 #include <QDebug>
-#include "computer.h"
+#include "pile.h"
+//#include "computer.h"
 
 namespace Ui {
-class QComputer;
+    class QComputer;
 }
 
 class QComputer : public QWidget
