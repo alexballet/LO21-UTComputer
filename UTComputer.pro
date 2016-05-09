@@ -14,13 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         qcomputer.cpp \
-    computer.cpp \
     pile.cpp \
-    litteral.cpp
+    litteral.cpp \
+    computerexception.cpp
 
 HEADERS  += qcomputer.h \
-    computer.h \
     pile.h \
-    litteral.h
+    litteral.h \
+    computerexception.h
 
 FORMS    += qcomputer.ui
