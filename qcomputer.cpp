@@ -12,10 +12,8 @@ QComputer::QComputer(QWidget *parent) :
     // Create the object pointed by the class attributes
 //        pile= new Pile;
 //        controleur=new Controleur(ExpressionManager::getInstance(),*pile);
-//        ui->vuePile->setRowCount(pile->getNbItemsToAffiche());
-//        ui->vuePile->setColumnCount(1);
-        //put the message read-only.
-//        message->setReadOnly(true);
+        ui->vuePile->setRowCount(pile->getMaxAffiche());
+        ui->vuePile->setColumnCount(1);
 
 //        // inhibit modification
 //        vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
