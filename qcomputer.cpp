@@ -94,7 +94,7 @@ void QComputer::editCommmande(){
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
     QString addedText="";
-    if (button->text()!="<-" && button->text()!="CLEAR"){
+    if (button->objectName() !="DELETE" && button->objectName()!="EMPTY"){
         if (button->text()=="_")
             addedText = " ";
         else

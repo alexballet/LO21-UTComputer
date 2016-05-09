@@ -1,5 +1,7 @@
 #include "computer.h"
 
+Pile* Pile::instance = nullptr;
+
 Pile* Pile::getInstance() {
     if (!instance)
         return new Pile();

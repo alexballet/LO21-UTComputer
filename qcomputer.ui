@@ -21,7 +21,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Tab 1</string>
+       <string>Main</string>
       </attribute>
       <widget class="QGroupBox" name="opLogiques">
        <property name="geometry">
@@ -733,7 +733,7 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>6</x>
@@ -759,16 +759,16 @@
            <widget class="QLineEdit" name="commande"/>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_80">
+           <widget class="QPushButton" name="DELETE">
             <property name="text">
              <string>&lt;-</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_81">
+           <widget class="QPushButton" name="EMPTY">
             <property name="text">
-             <string>CLEAR</string>
+             <string>EMPTY</string>
             </property>
            </widget>
           </item>
@@ -784,7 +784,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Tab 2</string>
+       <string>Paramètres</string>
       </attribute>
       <widget class="QGroupBox" name="groupBox">
        <property name="geometry">
@@ -824,7 +824,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_81</sender>
+   <sender>EMPTY</sender>
    <signal>released()</signal>
    <receiver>commande</receiver>
    <slot>clear()</slot>

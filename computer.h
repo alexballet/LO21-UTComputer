@@ -26,7 +26,7 @@ class Pile : public QObject {
 
     QStack<Litteral*> stack;
     QString message;
-    Pile():message(""){};
+    Pile(): message(""){}
     static Pile* instance;
 
 public:
