@@ -1,5 +1,8 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
+#include <QStringList>
+#include <QTableView>
+#include <QTableWidgetItem>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -7,31 +10,39 @@ QComputer::QComputer(QWidget *parent) :
     {
         Pile* pile = Pile::getInstance();
         pile->setMessage("lelPile");
-        qDebug() << pile->getMessage();
-        pile->libererInstance();
-    // Create the object pointed by the class attributes
-//        pile= new Pile;
-//        controleur=new Controleur(ExpressionManager::getInstance(),*pile);
+        //qDebug() << pile->getMessage();
+        //pile->libererInstance();
+        QStack<Litteral*>* stack = pile->getStack();
+        stack->push(new Entier(5));
+        Litteral* top = pile->getStack()->top();
+        Entier* e = dynamic_cast<Entier*>(top);
+        qDebug() << e->getValue();
+
+        ui->setupUi(this);
         ui->vuePile->setRowCount(pile->getMaxAffiche());
         ui->vuePile->setColumnCount(1);
 
+        QStringList numberList;
+        for(unsigned int i=pile->getMaxAffiche(); i>0; i--) {
+            QString str= QString::number(i);
+           str+=" :";
+            numberList<<str;
+            // creation of the item of each line initialized with an empty chain (chaine vide).
+            ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
+        }
+         ui->vuePile->setVerticalHeaderLabels(numberList);
+                ui->vuePile->setFixedHeight(pile->getMaxAffiche()*ui->vuePile->rowHeight(0)+2);
+
+
 //        // inhibit modification
-//        vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
         //  create a list of tables "i:" for each line
         // and the items of each list.
-//        QStringList numberList;
-//        for(unsigned int i=pile->getNbItemsToAffiche(); i>0; i--) {
-//            QString str= QString::number(i);
-//            str+=" :";
-//            numberList<<str;
-//            // creation of the item of each line initialized with an empty chain (chaine vide).
-//            ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
-//    }
+
 //        // print the label list on a vertial header.
-//        ui->vuePile->setVerticalHeaderLabels(numberList);
+//
 //        // fixed width as a function of the number of items to print
-//        ui->vuePile->setFixedHeight(pile->getNbItemsToAffiche()*ui->vuePile->rowHeight(0)+2);
 //        // connection
 //        connect(pile,SIGNAL(modificationEtat()),this,SLOT(refresh()));
 //        // first message
@@ -39,7 +50,7 @@ QComputer::QComputer(QWidget *parent) :
 //        // Give the command bar some focus.
 //        ui->commande->setFocus(Qt::OtherFocusReason);
 
-        ui->setupUi(this);
+
 
         //connect all the keyboard buttons
         QList<QPushButton*> buttons = this->findChildren<QPushButton*>();

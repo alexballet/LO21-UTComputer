@@ -25,6 +25,7 @@ public:
     QString getMessage() const;
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
+    QStack<Litteral*>* getStack();
 };
 
 #endif // PILE_H

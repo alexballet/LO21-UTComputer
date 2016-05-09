@@ -25,3 +25,7 @@ void Pile::setMessage(const QString& msg) {
 unsigned int Pile::getMaxAffiche() const {
     return maxAffiche;
 }
+
+QStack<Litteral*>* Pile::getStack() {
+    return &stack;
+}
