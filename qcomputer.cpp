@@ -1,5 +1,8 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
+#include <QStringList>
+#include <QTableView>
+#include <QTableWidgetItem>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -7,13 +10,31 @@ QComputer::QComputer(QWidget *parent) :
     {
         Pile* pile = Pile::getInstance();
         pile->setMessage("lelPile");
-        qDebug() << pile->getMessage();
-        pile->libererInstance();
+        //qDebug() << pile->getMessage();
+        //pile->libererInstance();
+        QStack<Litteral*>* stack = pile->getStack();
+        stack->push(new Entier(5));
+        Litteral* top = pile->getStack()->top();
+        Entier* e = dynamic_cast<Entier*>(top);
+        qDebug() << e->getValue();
+
+
+        ui->vuePile->setRowCount(pile->getMaxAffiche());
+        ui->vuePile->setColumnCount(1);
+        QStringList numberList;
+        for(unsigned int i=pile->getMaxAffiche(); i>0; i--) {
+            QString str= QString::number(i);
+           str+=" :";
+            numberList<<str;
+            // creation of the item of each line initialized with an empty chain (chaine vide).
+            ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
+        }
+
     // Create the object pointed by the class attributes
 //        pile= new Pile;
 //        controleur=new Controleur(ExpressionManager::getInstance(),*pile);
-//        ui->vuePile->setRowCount(pile->getNbItemsToAffiche());
-//        ui->vuePile->setColumnCount(1);
+//
+//
         //put the message read-only.
 //        message->setReadOnly(true);
 
@@ -22,14 +43,7 @@ QComputer::QComputer(QWidget *parent) :
 
         //  create a list of tables "i:" for each line
         // and the items of each list.
-//        QStringList numberList;
-//        for(unsigned int i=pile->getNbItemsToAffiche(); i>0; i--) {
-//            QString str= QString::number(i);
-//            str+=" :";
-//            numberList<<str;
-//            // creation of the item of each line initialized with an empty chain (chaine vide).
-//            ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
-//    }
+
 //        // print the label list on a vertial header.
 //        ui->vuePile->setVerticalHeaderLabels(numberList);
 //        // fixed width as a function of the number of items to print

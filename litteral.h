@@ -1,15 +1,19 @@
 #ifndef LITTERAL_H
 #define LITTERAL_H
 
+#include <QString>
+
 class Litteral {
 private:
 
 public:
+    virtual QString toString() const = 0;
 
 
 };
 
 class LitteralNumerique : public Litteral {
+public:
 
 };
 
@@ -19,6 +23,7 @@ private:
 public:
     Entier(int v): value(v){}
     int getValue() const;
+    QString toString() const;
 };
 
 class Reel : public LitteralNumerique {
@@ -27,6 +32,7 @@ private:
 public:
     Reel(double v): value(v){}
     double getValue() const;
+    QString toString() const;
 };
 
 #endif // LITTERAL_H

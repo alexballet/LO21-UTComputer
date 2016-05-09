@@ -7,3 +7,11 @@ int Entier::getValue() const {
 double Reel::getValue() const {
     return value;
 }
+
+QString Entier::toString() const {
+    return QString::number(value);
+}
+
+QString Reel::toString() const {
+    return QString::number(value);
+}
