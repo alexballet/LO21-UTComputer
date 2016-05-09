@@ -1,6 +1,16 @@
 #include "computer.h"
-#include <algorithm>
 
+Pile* Pile::getInstance() {
+    if (!instance)
+        return new Pile();
+    else
+        return instance;
+}
+
+
+
+
+/*
 bool estUnOperateur(const QString s){
     if (s=="+") return true;
     if (s=="-") return true;
@@ -19,4 +29,4 @@ bool estUnNombre(const QString s){
 void Controleur::commande(const QString& c){
 
 }
-
+*/
