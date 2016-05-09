@@ -31,8 +31,9 @@ class Pile : public QObject {
 
 public:
     static Pile* getInstance();
-
-
+    static void libererInstance();
+    QString getMessage() const;
+    void setMessage(const QString& msg);
 };
 
 

@@ -9,7 +9,18 @@ Pile* Pile::getInstance() {
         return instance;
 }
 
+void Pile::libererInstance() {
+    if (instance)
+        delete instance;
+}
 
+QString Pile::getMessage() const {
+    return message;
+}
+
+void Pile::setMessage(const QString& msg) {
+    message = msg;
+}
 
 
 /*
