@@ -1,10 +1,15 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
+#include <QDebug>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QComputer)
-{
+    {
+        Pile* pile = Pile::getInstance();
+        pile->setMessage("lelPile");
+        qDebug() << pile->getMessage();
+        pile->libererInstance();
     // Create the object pointed by the class attributes
 //        pile= new Pile;
 //        controleur=new Controleur(ExpressionManager::getInstance(),*pile);
@@ -37,7 +42,7 @@ QComputer::QComputer(QWidget *parent) :
 //        // Give the command bar some focus.
 //        ui->commande->setFocus(Qt::OtherFocusReason);
 
-            ui->setupUi(this);
+        ui->setupUi(this);
 
         //connect all the keyboard buttons
         QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
