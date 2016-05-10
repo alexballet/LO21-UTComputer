@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>589</width>
-    <height>750</height>
+    <height>829</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,9 +27,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>270</y>
+         <y>284</y>
          <width>561</width>
-         <height>51</height>
+         <height>55</height>
         </rect>
        </property>
        <property name="title">
@@ -97,9 +97,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>320</y>
+         <y>335</y>
          <width>561</width>
-         <height>81</height>
+         <height>91</height>
         </rect>
        </property>
        <property name="title">
@@ -118,6 +118,9 @@
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QPushButton" name="pushButton_7">
            <property name="text">
@@ -168,10 +171,13 @@
           <x>0</x>
           <y>50</y>
           <width>561</width>
-          <height>32</height>
+          <height>38</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QPushButton" name="pushButton_12">
            <property name="text">
@@ -214,9 +220,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>400</y>
+         <y>422</y>
          <width>561</width>
-         <height>141</height>
+         <height>191</height>
         </rect>
        </property>
        <property name="title">
@@ -231,10 +237,16 @@
           <x>0</x>
           <y>20</y>
           <width>565</width>
-          <height>160</height>
+          <height>180</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <property name="bottomMargin">
+          <number>12</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
@@ -289,6 +301,9 @@
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
            <item>
             <widget class="QPushButton" name="pushButton_20">
              <property name="text">
@@ -425,7 +440,7 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>540</y>
+         <y>609</y>
          <width>561</width>
          <height>171</height>
         </rect>
@@ -441,11 +456,26 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>810</width>
-          <height>136</height>
+          <width>838</width>
+          <height>147</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,1">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMinimumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>279</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QGridLayout" name="gridLayout">
            <property name="sizeConstraint">
@@ -611,6 +641,9 @@
          </item>
          <item>
           <layout class="QGridLayout" name="gridLayout_2">
+           <property name="horizontalSpacing">
+            <number>-1</number>
+           </property>
            <item row="1" column="0">
             <widget class="QPushButton" name="pushButton_51">
              <property name="text">
