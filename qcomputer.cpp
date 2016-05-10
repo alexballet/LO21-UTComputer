@@ -21,12 +21,13 @@ QComputer::QComputer(QWidget *parent) :
         ui->setupUi(this);
         ui->vuePile->setRowCount(pile->getMaxAffiche());
         ui->vuePile->setColumnCount(1);
+        ui->vuePile->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
 
         QStringList numberList;
-        for(unsigned int i=pile->getMaxAffiche(); i>0; i--) {
-            QString str= QString::number(i);
-           str+=" :";
-            numberList<<str;
+        for(unsigned int i = pile->getMaxAffiche(); i>0; i--) {
+            QString str = QString::number(i);
+            str += " :";
+            numberList << str;
             // creation of the item of each line initialized with an empty chain (chaine vide).
             ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
         }
