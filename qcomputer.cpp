@@ -131,7 +131,7 @@ void QComputer::on_activerClavier_stateChanged(int state)
         ui->opLogiques->show();
         ui->opNumeriques->show();
         ui->opPile->show();
-        this->setFixedSize(589,750);
+        this->setFixedSize(589,776);
     }
     else{
         ui->clavier->hide();
