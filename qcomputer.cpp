@@ -14,9 +14,9 @@ QComputer::QComputer(QWidget *parent) :
         //pile->libererInstance();
         QStack<Litteral*>* stack = pile->getStack();
         stack->push(new Entier(5));
+        stack->push(new Entier(6));
         Litteral* top = pile->getStack()->top();
         Entier* e = dynamic_cast<Entier*>(top);
-        qDebug() << e->getValue();
 
         ui->setupUi(this);
         ui->vuePile->setRowCount(pile->getMaxAffiche());
@@ -72,7 +72,6 @@ QComputer::~QComputer()
 }
 
 void QComputer::refresh(){
-    //qDebug()<<"titi";
     Pile* pile = Pile::getInstance();
     // the message
     ui->message->setText(pile->getMessage());
@@ -81,9 +80,10 @@ void QComputer::refresh(){
     for(unsigned int i=0; i<pile->getMaxAffiche(); i++) ui->vuePile->item(i,0)->
             setText("");
     // update
-    for(QVectorIterator<Litteral*> it=*pile->getStack() ; it.hasNext() && nb<pile->
-        getMaxAffiche(); nb++){
-        ui->vuePile->item(pile->getMaxAffiche()-1-nb,0)->setText("toto"/*it.next()->toString()*/);
+    qDebug()<<pile->getStack()->top()->toString();
+    QVectorIterator<Litteral*> it(*pile->getStack());
+    for(it.toBack() ; it.hasPrevious() && nb<pile->getMaxAffiche(); nb++){
+        ui->vuePile->item(pile->getMaxAffiche()-1-nb,0)->setText(it.previous()->toString());
     }
 }
 

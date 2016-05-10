@@ -5,7 +5,8 @@ Controleur* Controleur::instance = nullptr;
 void Controleur::commande(const QString& com){
     bool ok=false;
     int e = com.toInt(&ok, 10);
-    if(isnumber(e)) {
+    if(ok) {
+        qDebug()<<"tutu";
         Pile* pile = Pile::getInstance();
         Entier* entier = new Entier(e);
         pile->getStack()->push(entier);
@@ -15,6 +16,6 @@ void Controleur::commande(const QString& com){
 
 Controleur* Controleur::getInstance() {
     if(!instance)
-        return new Controleur();
+        instance = new Controleur();
     return instance;
 }

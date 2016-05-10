@@ -16,7 +16,7 @@ private:
     QString message;
     unsigned int maxAffiche;
 
-    Pile():message(""), maxAffiche(5){}
+    Pile():message(""), maxAffiche(4){}
 
 public:
     static Pile* getInstance();

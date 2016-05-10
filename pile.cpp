@@ -4,9 +4,8 @@ Pile* Pile::instance = nullptr;
 
 Pile* Pile::getInstance() {
     if (!instance)
-        return new Pile();
-    else
-        return instance;
+        instance = new Pile();
+    return instance;
 }
 
 void Pile::libererInstance() {

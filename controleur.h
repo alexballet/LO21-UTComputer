@@ -2,6 +2,7 @@
 #define CONTROLEUR_H
 
 #include <QString>
+#include <QDebug>
 #include "litteral.h"
 #include "pile.h"
 
