@@ -29,3 +29,5 @@ unsigned int Pile::getMaxAffiche() const {
 QStack<Litteral*>* Pile::getStack() {
     return &stack;
 }
+
+

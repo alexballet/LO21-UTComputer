@@ -45,12 +45,12 @@ QComputer::QComputer(QWidget *parent) :
 //
 //        // fixed width as a function of the number of items to print
 //        // connection
-//        connect(pile,SIGNAL(modificationEtat()),this,SLOT(refresh()));
+        connect(pile,SIGNAL(modificationEtat()),this,SLOT(refresh()));
 //        // first message
-//        pile->setMessage("Bienvenue !");
+        pile->setMessage("Bienvenue !");
 //        // Give the command bar some focus.
-//        ui->commande->setFocus(Qt::OtherFocusReason);
-
+        ui->commande->setFocus(Qt::OtherFocusReason);
+        emit pile->modificationEtat();
 
 
         //connect all the keyboard buttons
@@ -70,38 +70,44 @@ QComputer::~QComputer()
 {
     delete ui;
 }
+
 void QComputer::refresh(){
-//    // the message
-//    ui->message->setText(pile->getMessage());
-//    unsigned int nb=0;
-//    // delete everything
-//    for(unsigned int i=0; i<pile->getNbItemsToAffiche(); i++) ui->vuePile->item(i,0)->
-//            setText("");
-//    // update
-//    for(Pile::iterator it=pile->begin(); it!=pile->end() && nb<pile->
-//        getNbItemsToAffiche(); ++it, nb++){
-//        ui->vuePile->item(pile->getNbItemsToAffiche()-1-nb,0)->setText((*it).toString());
-//    }
+    //qDebug()<<"titi";
+    Pile* pile = Pile::getInstance();
+    // the message
+    ui->message->setText(pile->getMessage());
+    unsigned int nb=0;
+    // delete everything
+    for(unsigned int i=0; i<pile->getMaxAffiche(); i++) ui->vuePile->item(i,0)->
+            setText("");
+    // update
+    for(QVectorIterator<Litteral*> it=*pile->getStack() ; it.hasNext() && nb<pile->
+        getMaxAffiche(); nb++){
+        ui->vuePile->item(pile->getMaxAffiche()-1-nb,0)->setText("toto"/*it.next()->toString()*/);
+    }
 }
 
 
 void QComputer::on_commande_returnPressed()
 {
-//    // the actual message is not important anymore
-//    pile->setMessage("");
-//    // getting text for the command bar
-//    QString c=ui->commande->text();
-//    // extraction of each element from the line
-//    //(we suppose that <space> is the field separator)
-//    QTextStream stream(&c);
-//    QString com;
-//    do {
-//        stream>>com; // element extraction
-//        // send the command to the controller
-//        if (com!="") controleur->commande(com);
-//    }while (com!="");
-//    // empty the command line
-//    ui->commande->clear();
+    Pile* pile = Pile::getInstance();
+    Controleur* controleur = Controleur::getInstance();
+    // the actual message is not important anymore
+    pile->setMessage("");
+    // getting text for the command bar
+    QString c=ui->commande->text();
+    // extraction of each element from the line
+    //(we suppose that <space> is the field separator)
+    QTextStream stream(&c);
+    QString com;
+    do {
+        stream>>com; // element extraction
+        // send the command to the controller
+        if (com!="") controleur->commande(com);
+    }while (com!="");
+    // empty the command line
+    ui->commande->clear();
+    emit pile->modificationEtat();
 }
 
 void QComputer::editCommmande(){

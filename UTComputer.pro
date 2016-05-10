@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         qcomputer.cpp \
     pile.cpp \
     litteral.cpp \
-    computerexception.cpp
+    computerexception.cpp \
+    controleur.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
     litteral.h \
-    computerexception.h
+    computerexception.h \
+    controleur.h
 
 FORMS    += qcomputer.ui

@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <QDebug>
+#include <QVector>
 #include "pile.h"
+#include "controleur.h"
 //#include "computer.h"
 
 namespace Ui {
@@ -18,9 +20,7 @@ public:
     explicit QComputer(QWidget *parent = 0);
     ~QComputer();
 public slots:
-void refresh();
-//void getNextCommande();
-
+    void refresh();
 private slots:
 void on_commande_returnPressed();
 void editCommmande();
