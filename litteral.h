@@ -2,6 +2,7 @@
 #define LITTERAL_H
 
 #include <QString>
+#include "computerexception.h"
 
 class Litteral {
 private:
@@ -36,5 +37,19 @@ public:
     QString toString() const;
     static Reel* createLit(const double v);
 };
+
+class Rationnel : public LitteralNumerique {
+private:
+    int numerateur;
+    int denominateur; //composition Entier ou int?
+public:
+    Rationnel(int n, int d);
+    int getNumerateur() const;
+    int getDenominateur() const;
+    QString toString() const;
+    void simplifier();
+    static Rationnel* createLit(const int v);
+};
+
 
 #endif // LITTERAL_H
