@@ -29,7 +29,7 @@ public:
     QStack<Litteral*>* getStack();
     void push(const QString& value, const QString& type); //push in stack
 signals:
-void modificationEtat();
+    void modificationEtat();
 };
 
 #endif // PILE_H

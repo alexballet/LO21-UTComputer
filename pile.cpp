@@ -53,10 +53,11 @@ void Pile::push(const QString& value, const QString& type){
 
     if (type == "Rationnel") {
         QStringList parts = value.split('/', QString::KeepEmptyParts);
-        getStack()->push(new Rationnel(parts.at(0).toInt(), parts.at(1).toInt()));
+        Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
+        rationnel->simplifier();
+        getStack()->push(rationnel);
         emit modificationEtat();
         return;
     }
 
-    throw ComputerException("Type inconnu!");
 }

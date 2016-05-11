@@ -53,7 +53,7 @@ QString Rationnel::toString() const {
 
 void Rationnel::simplifier() {
     if ((numerateur % denominateur) == 0) {
-        numerateur = numerateur % denominateur;
+        numerateur = numerateur / denominateur;
         denominateur = 1;
     }
 

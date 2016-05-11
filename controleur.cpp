@@ -8,12 +8,10 @@ void Controleur::parse(const QString& com) {
     QStringList words = com.split(" ");
 
     foreach (QString word, words) {
-        //qDebug() << word;
         if(word.count('.') == 1){
             pile->push(word, "Reel");
         }
         else if(word.count('/') == 1) {
-            qDebug() << "rationnel";
             pile->push(word, "Rationnel");
         }
         else if(word.count('.') == 0 && word[0].isDigit()) {
