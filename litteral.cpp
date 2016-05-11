@@ -1,9 +1,12 @@
 #include "litteral.h"
+#include <QDebug>
 
 //Entier
 int Entier::getValue() const {
     return value;
 }
+
+
 
 QString Entier::toString() const {
     return QString::number(value);
@@ -16,6 +19,11 @@ Entier* Entier::createLit(const int v){
 //Reel
 double Reel::getValue() const {
     return value;
+}
+
+Entier& Entier::operator= (const Entier& e) {
+    value = e.value;
+    return *this;
 }
 
 QString Reel::toString() const {
@@ -33,28 +41,38 @@ Rationnel::Rationnel(int n, int d) :numerateur(n), denominateur(d) {
     }
 }
 
-int Rationnel::getDenominateur() const {
+Entier Rationnel::getDenominateur() const {
     return denominateur;
 }
 
-int Rationnel::getNumerateur() const {
+Entier Rationnel::getNumerateur() const {
     return numerateur;
 }
 
 QString Rationnel::toString() const {
-    if (numerateur == 0) {
+    if (numerateur.getValue() == 0) {
         return QString::number(0);
     }
-    if (denominateur == 1) {
-        return QString::number(numerateur);
+    if (denominateur.getValue() == 1) {
+        return numerateur.toString();
     }
-    return QString::number(numerateur) + "/" + QString::number(denominateur);
+    return numerateur.toString() + "/" + denominateur.toString();
 }
 
-void Rationnel::simplifier() {
-    if ((numerateur % denominateur) == 0) {
-        numerateur = numerateur / denominateur;
-        denominateur = 1;
+int gcd (int n1, int n2) { //computes the GCD using Euclidean algorithm
+    int t;
+    while (n2 != 0) {
+        t = n1;
+        n1 = n2;
+        n2 = t % n2;
     }
+    return n1;
+}
+
+
+void Rationnel::simplifier() {
+   int g = gcd(numerateur.getValue(), denominateur.getValue());
+   numerateur = numerateur.getValue() / g;
+   denominateur = denominateur.getValue() / g;
 
 }

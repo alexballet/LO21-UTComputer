@@ -25,6 +25,7 @@ public:
     Entier(int v): value(v){}
     int getValue() const;
     QString toString() const;
+    Entier& operator= (const Entier& e);
     static Entier* createLit(const int v);
 };
 
@@ -40,15 +41,15 @@ public:
 
 class Rationnel : public LitteralNumerique {
 private:
-    int numerateur;
-    int denominateur; //composition Entier ou int?
+    Entier numerateur;
+    Entier denominateur;
 public:
     Rationnel(int n, int d);
-    int getNumerateur() const;
-    int getDenominateur() const;
+    Entier getNumerateur() const;
+    Entier getDenominateur() const;
     QString toString() const;
     void simplifier();
-    static Rationnel* createLit(const int v);
+    static Rationnel* createLit(const int n, const int d);
 };
 
 
