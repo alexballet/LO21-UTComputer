@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QStack>
+#include <QtCore/qmath.h>
 #include "litteral.h"
 
 class Pile : public QObject {
@@ -26,6 +27,7 @@ public:
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
     QStack<Litteral*>* getStack();
+    void push(const QString& value, const QString& type); //push in stack
 signals:
 void modificationEtat();
 };

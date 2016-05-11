@@ -231,7 +231,7 @@
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>1</x>
@@ -291,7 +291,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -355,7 +355,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -416,7 +416,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -470,7 +470,7 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>838</width>
+          <width>849</width>
           <height>147</height>
          </rect>
         </property>
@@ -485,7 +485,7 @@
           <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>279</number>
+          <number>290</number>
          </property>
          <property name="bottomMargin">
           <number>0</number>
@@ -658,20 +658,6 @@
            <property name="horizontalSpacing">
             <number>-1</number>
            </property>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="pushButton_51">
-             <property name="text">
-              <string>H</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QPushButton" name="pushButton_54">
-             <property name="text">
-              <string>C</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="0">
             <widget class="QPushButton" name="pushButton_61">
              <property name="text">
@@ -679,10 +665,10 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="4">
-            <widget class="QPushButton" name="pushButton_67">
+           <item row="1" column="5">
+            <widget class="QPushButton" name="pushButton_68">
              <property name="text">
-              <string>L</string>
+              <string>M</string>
              </property>
             </widget>
            </item>
@@ -700,10 +686,101 @@
              </property>
             </widget>
            </item>
+           <item row="0" column="2">
+            <widget class="QPushButton" name="pushButton_54">
+             <property name="text">
+              <string>C</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QPushButton" name="pushButton_67">
+             <property name="text">
+              <string>L</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="6">
+            <widget class="QPushButton" name="pushButton_69">
+             <property name="text">
+              <string>N</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
+            <widget class="QPushButton" name="pushButton_70">
+             <property name="text">
+              <string>G</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="1">
             <widget class="QPushButton" name="pushButton_53">
              <property name="text">
               <string>B</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QPushButton" name="pushButton_75">
+             <property name="text">
+              <string>Y</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="pushButton_51">
+             <property name="text">
+              <string>H</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="4">
+            <widget class="QPushButton" name="pushButton_76">
+             <property name="text">
+              <string>Z</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="5">
+            <widget class="QPushButton" name="pushButton_73">
+             <property name="text">
+              <string>T</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pushButton_57">
+             <property name="text">
+              <string>I</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="6">
+            <widget class="QPushButton" name="pushButton_74">
+             <property name="text">
+              <string>U</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QPushButton" name="pushButton_72">
+             <property name="text">
+              <string>S</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QPushButton" name="pushButton_71">
+             <property name="text">
+              <string>R</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="pushButton_58">
+             <property name="text">
+              <string>J</string>
              </property>
             </widget>
            </item>
@@ -728,17 +805,10 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="5">
-            <widget class="QPushButton" name="pushButton_68">
+           <item row="1" column="3">
+            <widget class="QPushButton" name="pushButton_66">
              <property name="text">
-              <string>M</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QPushButton" name="pushButton_58">
-             <property name="text">
-              <string>J</string>
+              <string>K</string>
              </property>
             </widget>
            </item>
@@ -767,76 +837,6 @@
             <widget class="QPushButton" name="pushButton_65">
              <property name="text">
               <string>F</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="3">
-            <widget class="QPushButton" name="pushButton_66">
-             <property name="text">
-              <string>K</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="pushButton_57">
-             <property name="text">
-              <string>I</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="6">
-            <widget class="QPushButton" name="pushButton_69">
-             <property name="text">
-              <string>N</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="6">
-            <widget class="QPushButton" name="pushButton_70">
-             <property name="text">
-              <string>G</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="3">
-            <widget class="QPushButton" name="pushButton_71">
-             <property name="text">
-              <string>R</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="4">
-            <widget class="QPushButton" name="pushButton_72">
-             <property name="text">
-              <string>S</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="5">
-            <widget class="QPushButton" name="pushButton_73">
-             <property name="text">
-              <string>T</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="6">
-            <widget class="QPushButton" name="pushButton_74">
-             <property name="text">
-              <string>U</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="3">
-            <widget class="QPushButton" name="pushButton_75">
-             <property name="text">
-              <string>Y</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="4">
-            <widget class="QPushButton" name="pushButton_76">
-             <property name="text">
-              <string>Z</string>
              </property>
             </widget>
            </item>
@@ -922,6 +922,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="SEND">
+            <property name="text">
+             <string>SEND</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -980,12 +987,12 @@
    <slot>clear()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>519</x>
-     <y>297</y>
+     <x>491</x>
+     <y>308</y>
     </hint>
     <hint type="destinationlabel">
-     <x>376</x>
-     <y>294</y>
+     <x>344</x>
+     <y>301</y>
     </hint>
    </hints>
   </connection>

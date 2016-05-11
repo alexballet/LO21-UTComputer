@@ -2,15 +2,18 @@
 
 Controleur* Controleur::instance = nullptr;
 
-void Controleur::commande(const QString& com){
-    bool ok=false;
-    int e = com.toInt(&ok, 10);
-    if(ok) {
-        qDebug()<<"tutu";
-        Pile* pile = Pile::getInstance();
-        Entier* entier = new Entier(e);
-        pile->getStack()->push(entier);
-        pile->modificationEtat();
+void Controleur::parse(const QString& com) {
+    Pile* pile = Pile::getInstance();
+    QStringList words = com.split(" ");
+    foreach (QString word, words) {
+        if(word.count('.')==1){
+            pile->push(word, "Reel");
+        }
+        else if(word.count('.')==0 && word[0].isDigit()){
+            pile->push(word, "Entier");
+        }
+        else
+            pile->setMessage("Litteral " + word + " inconnu");
     }
 }
 

@@ -9,14 +9,7 @@ QComputer::QComputer(QWidget *parent) :
     ui(new Ui::QComputer)
     {
         Pile* pile = Pile::getInstance();
-        pile->setMessage("lelPile");
-        //qDebug() << pile->getMessage();
-        //pile->libererInstance();
         QStack<Litteral*>* stack = pile->getStack();
-        stack->push(new Entier(5));
-        stack->push(new Entier(6));
-        Litteral* top = pile->getStack()->top();
-        Entier* e = dynamic_cast<Entier*>(top);
 
         ui->setupUi(this);
         ui->vuePile->setRowCount(pile->getMaxAffiche());
@@ -34,24 +27,15 @@ QComputer::QComputer(QWidget *parent) :
          ui->vuePile->setVerticalHeaderLabels(numberList);
                 ui->vuePile->setFixedHeight(pile->getMaxAffiche()*ui->vuePile->rowHeight(0)+2);
 
-
-//        // inhibit modification
+        // inhibit modification
         ui->vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-        //  create a list of tables "i:" for each line
-        // and the items of each list.
-
-//        // print the label list on a vertial header.
-//
-//        // fixed width as a function of the number of items to print
-//        // connection
+        // connection
         connect(pile,SIGNAL(modificationEtat()),this,SLOT(refresh()));
-//        // first message
+        // first message
         pile->setMessage("Bienvenue !");
-//        // Give the command bar some focus.
+        // Give the command bar some focus.
         ui->commande->setFocus(Qt::OtherFocusReason);
-        emit pile->modificationEtat();
-
 
         //connect all the keyboard buttons
         QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
@@ -80,7 +64,6 @@ void QComputer::refresh(){
     for(unsigned int i=0; i<pile->getMaxAffiche(); i++) ui->vuePile->item(i,0)->
             setText("");
     // update
-    qDebug()<<pile->getStack()->top()->toString();
     QVectorIterator<Litteral*> it(*pile->getStack());
     for(it.toBack() ; it.hasPrevious() && nb<pile->getMaxAffiche(); nb++){
         ui->vuePile->item(pile->getMaxAffiche()-1-nb,0)->setText(it.previous()->toString());
@@ -103,7 +86,7 @@ void QComputer::on_commande_returnPressed()
     do {
         stream>>com; // element extraction
         // send the command to the controller
-        if (com!="") controleur->commande(com);
+        if (com!="") controleur->parse(com);
     }while (com!="");
     // empty the command line
     ui->commande->clear();
@@ -114,7 +97,7 @@ void QComputer::editCommmande(){
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
     QString addedText="";
-    if (button->objectName() !="DELETE" && button->objectName()!="EMPTY"){
+    if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND"){
         if (button->text()=="_")
             addedText = " ";
         else
@@ -124,6 +107,10 @@ void QComputer::editCommmande(){
     if(button->text()=="<-"){
         com.truncate(com.length()-1);
         ui->commande->setText(com);
+    }
+    if(button->text()=="SEND"){
+        emit ui->commande->returnPressed();
+        return;
     }
     ui->commande->setText(com+addedText);
 }

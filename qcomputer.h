@@ -21,8 +21,8 @@ public:
     ~QComputer();
 public slots:
     void refresh();
+    void on_commande_returnPressed();
 private slots:
-void on_commande_returnPressed();
 void editCommmande();
 
 void on_activerClavier_stateChanged(int arg1);

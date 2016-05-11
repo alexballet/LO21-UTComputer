@@ -8,13 +8,13 @@ private:
 
 public:
     virtual QString toString() const = 0;
-
-
+    template<class T>
+    static Litteral& createLit(const T);
 };
 
 class LitteralNumerique : public Litteral {
 public:
-
+    virtual QString toString() const=0;
 };
 
 class Entier : public LitteralNumerique {
@@ -24,6 +24,7 @@ public:
     Entier(int v): value(v){}
     int getValue() const;
     QString toString() const;
+    static Entier* createLit(const int v);
 };
 
 class Reel : public LitteralNumerique {
@@ -33,6 +34,7 @@ public:
     Reel(double v): value(v){}
     double getValue() const;
     QString toString() const;
+    static Reel* createLit(const double v);
 };
 
 #endif // LITTERAL_H
