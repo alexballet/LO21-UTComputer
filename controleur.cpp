@@ -33,11 +33,11 @@ QString typeLitteral(const QString& lit){
         return "Entier";
     }
     else {
-        QRegularExpression re("[A-Z][A-Z0-9]*");
+        QRegularExpression re("[A-Z][A-Z0-9]*"); //starts with a capital letter and is followed by letters or numbers
         QRegularExpressionMatch match = re.match(lit);
-        qDebug() << match.captured(0);
-        if (match.hasMatch() && match.captured(0) == lit) {
-            qDebug()<<"atome";
+        //qDebug() << match.captured(0);
+        if (match.hasMatch() && match.captured(0) == lit) { //if the whole string is matched
+            qDebug() << "atome";
             return "Atome";
         }
     }

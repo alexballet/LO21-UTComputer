@@ -33,7 +33,7 @@ QStack<Litteral*>* Pile::getStack() {
 void Pile::push(const QString& value, const QString& type){
     if(type == "Entier"){
         bool ok;
-        Entier* entier = Entier::createLit(value.toInt(&ok, 10));
+        Entier* entier = Entier::createLit(value.toInt(&ok, 10)); //get rid of this?
         getStack()->push(entier);
         emit modificationEtat();
         return;
@@ -50,9 +50,9 @@ void Pile::push(const QString& value, const QString& type){
         if(parts.at(0) != "")
             e = qFabs(parts.at(0).toInt());
         double d = e + parts.at(1).toInt()*(qPow(10,-(parts.at(1).length())));
-        if(parts.at(0).toInt()<0 || parts.at(0)[0]=='-')
+        if(parts.at(0).toInt() < 0 || parts.at(0)[0] == '-')
             d *= (-1);
-        Reel* reel = Reel::createLit(d);
+        Reel* reel = Reel::createLit(d); //not necessary either?
         getStack()->push(reel);
         emit modificationEtat();
         return;
@@ -61,6 +61,7 @@ void Pile::push(const QString& value, const QString& type){
         QStringList parts = value.split('/', QString::KeepEmptyParts);
         Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
         try {
+            //converting into Entier, if possible
             if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
                 Entier* e = new Entier(rationnel->getNumerateur().getValue());
                 getStack()->push(e);
@@ -79,7 +80,7 @@ void Pile::push(const QString& value, const QString& type){
     else if (type == "Complexe"){
         Controleur* controleur = Controleur::getInstance();
         QStringList parts = value.split('$', QString::KeepEmptyParts);
-        if(parts.at(1)=="0" || parts.at(1)=="")//if it's not a complexe
+        if(parts.at(1) == "0" || parts.at(1) == "")//if it's not a complexe
             controleur->parse(parts.at(0));
         else{//if it's a complexe
             QString num = parts.at(0);
@@ -88,5 +89,13 @@ void Pile::push(const QString& value, const QString& type){
             getStack()->push(complexe);
             emit modificationEtat();
         }
-    }
+     }
+     else if (type == "Atome") {
+        Atome* a = new Atome(value);
+        Litteral* lt = a->getLitterale();
+        getStack()->push(lt);
+        emit modificationEtat();
+        return;
+     }
+
 }

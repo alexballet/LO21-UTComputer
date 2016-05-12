@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     litteral.cpp \
     computerexception.cpp \
     controleur.cpp \
-    variable.cpp
+    variable.cpp \
+    atome.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
     litteral.h \
     computerexception.h \
     controleur.h \
-    variable.h
+    variable.h \
+    atome.h
 
 FORMS    += qcomputer.ui

@@ -7,6 +7,7 @@
 #include <QtCore/qmath.h>
 #include <typeinfo>
 #include "litteral.h"
+#include "atome.h"
 #include "controleur.h"
 
 class Pile : public QObject {
