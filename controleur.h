@@ -13,4 +13,6 @@ public:
     void parse(const QString& com);//calls Pile::push() with a string argument for the type to push
 };
 
+QString typeLitteral(const QString& lit);
+
 #endif // CONTROLEUR_H

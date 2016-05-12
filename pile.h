@@ -5,7 +5,9 @@
 #include <QString>
 #include <QStack>
 #include <QtCore/qmath.h>
+#include <typeinfo>
 #include "litteral.h"
+#include "controleur.h"
 
 class Pile : public QObject {
     Q_OBJECT
