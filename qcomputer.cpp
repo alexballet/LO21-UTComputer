@@ -9,7 +9,6 @@ QComputer::QComputer(QWidget *parent) :
     ui(new Ui::QComputer)
 {
     Pile* pile = Pile::getInstance();
-    QStack<Litteral*>* stack = pile->getStack();
 
     ui->setupUi(this);
     ui->vuePile->setRowCount(pile->getMaxAffiche());
@@ -21,7 +20,7 @@ QComputer::QComputer(QWidget *parent) :
         QString str = QString::number(i);
         str += " :";
         numberList << str;
-        // creation of the item of each line initialized with an empty chain (chaine vide).
+        // creation of the item of each line initialized with an empty string (chaine vide).
         ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
     }
     ui->vuePile->setVerticalHeaderLabels(numberList);
@@ -35,6 +34,7 @@ QComputer::QComputer(QWidget *parent) :
 
     // first message
     pile->setMessage("Bienvenue !");
+
     // set ui message
     ui->message->setText(pile->getMessage());
 
@@ -64,6 +64,7 @@ void QComputer::refresh(){
     Pile* pile = Pile::getInstance();
     // the message
     ui->message->setText(pile->getMessage());
+
     unsigned int nb = 0;
     // delete everything
     for(unsigned int i=0; i<pile->getMaxAffiche(); i++)

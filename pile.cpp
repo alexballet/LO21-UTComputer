@@ -40,7 +40,7 @@ void Pile::push(const QString& value, const QString& type){
     }
     else if(type == "Reel"){
         QStringList parts = value.split('.', QString::KeepEmptyParts);
-        if(parts.at(1)=="" || parts.at(1)=="0"){
+        if(parts.at(1) == "" || parts.at(1) == "0"){
             Entier* entier = new Entier(parts.at(0).toInt());
             getStack()->push(entier);
             emit modificationEtat();
@@ -60,20 +60,13 @@ void Pile::push(const QString& value, const QString& type){
     else if (type == "Rationnel") {
         QStringList parts = value.split('/', QString::KeepEmptyParts);
         Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
-        rationnel->simplifier();
         try {
-            if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() ==0){
+            if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
                 Entier* e = new Entier(rationnel->getNumerateur().getValue());
                 getStack()->push(e);
-                emit modificationEtat();
-                return;
             }
             else{
-                int numerateur = rationnel->getNumerateur().getValue();
-                if(parts.at(0)=="")
-                    numerateur=1;
-                Rationnel* rationnel2 = new Rationnel(numerateur, parts.at(1).toInt());
-                getStack()->push(rationnel2);
+                getStack()->push(rationnel);
             }
         }
         catch (ComputerException e){

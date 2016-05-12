@@ -50,14 +50,14 @@ bool Reel::operator>(const int& a) const{
 }
 
 //Rationnel
-Rationnel::Rationnel(int n, int d) :numerateur(Entier(n)), denominateur(Entier(d)) {
+Rationnel::Rationnel(int n, int d) :numerateur(n), denominateur(d) {
     if (d == 0) {
         throw ComputerException("Le denominateur ne peut pas etre nul!");
     }
     simplifier();
 }
 
-Rationnel::Rationnel(const QString& s):numerateur(Entier(s.split('/').at(0).toInt())), denominateur(Entier(s.split('/').at(1).toInt())){
+Rationnel::Rationnel(const QString& s):numerateur(s.split('/').at(0).toInt()), denominateur(s.split('/').at(1).toInt()){
     if (s.split('/').at(1) == "0") {
         throw ComputerException("Le denominateur ne peut pas etre nul!");
     }
@@ -99,7 +99,7 @@ void Rationnel::simplifier() {
    int g = gcd(numerateur.getValue(), denominateur.getValue());
    numerateur = numerateur.getValue() / qFabs(g);
    denominateur = denominateur.getValue() / qFabs(g);
-   if(denominateur.getValue()<0){
+   if(denominateur.getValue() < 0){
        numerateur = numerateur.getValue()*(-1);
        denominateur = denominateur.getValue()*(-1);
    }

@@ -9,7 +9,7 @@ void Controleur::parse(const QString& com) {
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
-        if(type!="Inconnu")
+        if(type != "Inconnu")
             pile->push(word, type);
     }
 }
