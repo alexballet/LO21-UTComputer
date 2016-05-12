@@ -1,5 +1,6 @@
 #include "controleur.h"
 #include <QDebug>
+#include <QRegularExpressionMatch>
 
 Controleur* Controleur::instance = nullptr;
 
@@ -31,8 +32,17 @@ QString typeLitteral(const QString& lit){
         qDebug()<<"entier";
         return "Entier";
     }
-    else
-        return "Inconnu";
+    else {
+        QRegularExpression re("[A-Z][A-Z0-9]*");
+        QRegularExpressionMatch match = re.match(lit);
+        qDebug() << match.captured(0);
+        if (match.hasMatch() && match.captured(0) == lit) {
+            qDebug()<<"atome";
+            return "Atome";
+        }
+    }
+
+    return "Inconnu";
 }
 
 Controleur* Controleur::getInstance() {
