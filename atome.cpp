@@ -1,4 +1,6 @@
 #include "atome.h"
+#include "variable.h"
+#include <QDebug>
 
 Atome::Atome(QString id): id(id) {
 
@@ -13,5 +15,11 @@ QString Atome::toString() const {
 }
 
 Litteral* Atome::getLitterale() const {
-    return new Variable(new Entier(5), id);
+    VariableMap* varmap = VariableMap::getInstance();
+    QMap<QString, Variable*>* map = varmap->getMap();
+    if (map->contains(id)){
+        qDebug() << "found!";
+        return map->value(id);
+    }
+    return new Variable(new Entier(5), id); //should return an Expression
 }
