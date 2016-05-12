@@ -34,7 +34,7 @@ void Pile::push(const QString& value, const QString& type){
     if(type == "Entier"){
         bool ok;
         Entier* entier = Entier::createLit(value.toInt(&ok, 10)); //get rid of this?
-        getStack()->push(entier);
+        stack.push(entier);
         emit modificationEtat();
         return;
     }
@@ -42,7 +42,7 @@ void Pile::push(const QString& value, const QString& type){
         QStringList parts = value.split('.', QString::KeepEmptyParts);
         if(parts.at(1) == "" || parts.at(1) == "0"){
             Entier* entier = new Entier(parts.at(0).toInt());
-            getStack()->push(entier);
+            stack.push(entier);
             emit modificationEtat();
             return;
         }
@@ -53,7 +53,7 @@ void Pile::push(const QString& value, const QString& type){
         if(parts.at(0).toInt() < 0 || parts.at(0)[0] == '-')
             d *= (-1);
         Reel* reel = Reel::createLit(d); //not necessary either?
-        getStack()->push(reel);
+        stack.push(reel);
         emit modificationEtat();
         return;
     }
@@ -64,10 +64,10 @@ void Pile::push(const QString& value, const QString& type){
             //converting into Entier, if possible
             if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
                 Entier* e = new Entier(rationnel->getNumerateur().getValue());
-                getStack()->push(e);
+                stack.push(e);
             }
             else{
-                getStack()->push(rationnel);
+                stack.push(rationnel);
             }
         }
         catch (ComputerException e){
@@ -86,14 +86,14 @@ void Pile::push(const QString& value, const QString& type){
             QString num = parts.at(0);
             QString denum = parts.at(1);
             Complexe* complexe = new Complexe(num, denum);
-            getStack()->push(complexe);
+            stack.push(complexe);
             emit modificationEtat();
         }
      }
      else if (type == "Atome") {
         Atome* a = new Atome(value);
         Litteral* lt = a->getLitterale();
-        getStack()->push(lt);
+        stack.push(lt);
         emit modificationEtat();
         return;
      }
