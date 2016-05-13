@@ -14,12 +14,13 @@ QString Atome::toString() const {
     return id;
 }
 
-Litteral* Atome::getLitterale() const {
+Litteral* Atome::getLitterale() const { //finds the corresponding litterale
+    //is this a Variable?
     VariableMap* varmap = VariableMap::getInstance();
-    QMap<QString, Variable*>* map = varmap->getMap();
-    if (map->contains(id)){
-        qDebug() << "found!";
-        return map->value(id);
-    }
-    return new Variable(new Entier(5), id); //should return an Expression
+    Litteral* lit = varmap->findVar(id);
+    if (lit)
+        return lit;
+    //else if pour Programme
+    //else pour Expression
+    return new Variable(new Entier(5), id);
 }

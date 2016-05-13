@@ -1,8 +1,9 @@
 #include "variable.h"
+#include <QDebug>
 
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
     VariableMap* varmap = VariableMap::getInstance();
-    varmap->getMap()->insert(id, this);
+    varmap->insertVar(id, this);
 }
 
 const Litteral* Variable::getValue() const {
@@ -15,6 +16,10 @@ QString Variable::getId() const {
 
 QString Variable::toString() const {
     return value->toString();
+}
+
+void Variable::setValue(Litteral* v) {
+    value = v;
 }
 
 //Variable Map
@@ -35,6 +40,20 @@ void VariableMap::libererInstance() {
         delete instance;
 }
 
-QMap<QString, Variable*>* VariableMap::getMap() {
-    return &Map;
+Variable* VariableMap::findVar(QString id) const {
+    if (map.contains(id)){
+        qDebug() << "found!";
+        return map.value(id);
+    }
+    return nullptr;
+}
+
+void VariableMap::deleteVar(QString id) {
+    //try
+    map.remove(id);
+    //catch
+}
+
+void VariableMap::insertVar(QString id, Variable* var) {
+    map.insert(id, var);
 }

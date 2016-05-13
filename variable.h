@@ -13,17 +13,21 @@ public:
     const Litteral* getValue() const;
     QString getId() const;
     QString toString() const;
+    void setValue(Litteral* v);
 };
 
 class VariableMap {
 private:
-    QMap<QString, Variable*> Map; //maybe switch
+    QMap<QString, Variable*> map;
     static VariableMap* instance;
     VariableMap();
+    //interdire la recopie et l affectation des singletons
 public:
     static VariableMap* getInstance();
     static void libererInstance();
-    QMap<QString, Variable*>* getMap();
+    Variable* findVar(QString id) const;
+    void deleteVar(QString id);
+    void insertVar(QString id, Variable* var);
 
 };
 
