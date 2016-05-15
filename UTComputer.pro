@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     computerexception.cpp \
     controleur.cpp \
     variable.cpp \
-    atome.cpp
+    atome.cpp \
+    expression.cpp \
+    programme.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
@@ -27,6 +29,8 @@ HEADERS  += qcomputer.h \
     computerexception.h \
     controleur.h \
     variable.h \
-    atome.h
+    atome.h \
+    expression.h \
+    programme.h
 
 FORMS    += qcomputer.ui

@@ -12,7 +12,7 @@ namespace Ui {
     class QComputer;
 }
 
-class QComputer : public QWidget
+class QComputer : public QWidget //changer en QMainWindow? pour utiliser direct QMenuBar
 {
     Q_OBJECT
 
