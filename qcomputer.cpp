@@ -3,6 +3,7 @@
 #include <QStringList>
 #include <QTableView>
 #include <QTableWidgetItem>
+#include <QMenuBar>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -11,6 +12,17 @@ QComputer::QComputer(QWidget *parent) :
     Pile* pile = Pile::getInstance();
 
     ui->setupUi(this);
+
+    //menu bar
+    QMenuBar* menuBar = new QMenuBar();
+    QMenu *fileMenu = new QMenu("File");
+    menuBar->addMenu(fileMenu);
+    fileMenu->addAction("Properties");
+    fileMenu->addAction("Exit");
+    this->layout()->setMenuBar(menuBar);
+
+
+
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
     ui->vuePile->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
@@ -46,6 +58,8 @@ QComputer::QComputer(QWidget *parent) :
     foreach (QPushButton *button, buttons){
         connect(button, SIGNAL(released()), this, SLOT(editCommmande()));
     }
+
+
 
     //disable keyboard
     this->setFixedSize(589,322);
