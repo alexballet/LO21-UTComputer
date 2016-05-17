@@ -2,11 +2,10 @@
 #define LITTERAL_H
 
 #include <QString>
+#include <typeinfo>
 #include "computerexception.h"
 
 class Litteral {
-private:
-
 public:
     virtual QString toString() const = 0;
     template<class T>
@@ -18,6 +17,10 @@ public:
     virtual QString toString() const=0;
     virtual bool operator<(const int& a) const=0;
     virtual bool operator>(const int& a) const=0;
+    Litteral* operator +(Litteral& a);
+    Litteral* operator -(Litteral& a);
+//    Litteral& operator *(const Litteral& a);
+//    Litteral& operator /(const Litteral& a);
 };
 
 class Entier : public LitteralNumerique {
@@ -68,10 +71,22 @@ class Complexe : public Litteral {
     LitteralNumerique* pImaginaire;
 public:
     Complexe(const QString& pRe, const QString& pIm);
+    Complexe(LitteralNumerique& pRe, LitteralNumerique& pIm);
     LitteralNumerique* getPRe() const;
     LitteralNumerique* getPIm() const;
     QString toString() const;
 };
 
+template<class T>
+bool isEntier(T& a);
+
+template<class T>
+bool isReel(T& a);
+
+template<class T>
+bool isRationnel(T& a);
+
+template<class T>
+bool isComplexe(T& a);
 
 #endif // LITTERAL_H

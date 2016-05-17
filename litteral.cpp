@@ -2,6 +2,43 @@
 #include "controleur.h"
 #include <QDebug>
 
+//Litteral
+Litteral* LitteralNumerique::operator +(Litteral& a){
+    if(isEntier(*this) && isEntier(a)){
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        return new Entier(op2->getValue() + op1->getValue());
+    }
+    else if(isEntier(*this) && isReel(a)){
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        return new Reel(op2->getValue() + op1->getValue());
+    }
+    else if(isEntier(*this) && isRationnel(a)){
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        return new Rationnel(op1->getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
+    }
+    else if(isEntier(*this) && isComplexe(a)){
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        if(isEntier(*op2->getPRe())){
+            Entier *pRe = dynamic_cast<Entier*>(op2->getPRe());
+            Entier *pIm = dynamic_cast<Entier*>(op2->getPIm());
+            Entier *res = new Entier(pRe->getValue()+op1->getValue());
+            return new Complexe(*res, *pIm);
+        }
+    }
+}
+
+Litteral* LitteralNumerique::operator -(Litteral& a){
+    if(isEntier(*this) && isEntier(a)){
+        Entier *ent1 = dynamic_cast<Entier*>(this);
+        Entier *ent2 = dynamic_cast<Entier*>(&a);
+        return new Entier(ent2->getValue() - ent1->getValue());
+    }
+}
+
 //Entier
 int Entier::getValue() const {
     return value;
@@ -140,6 +177,40 @@ Complexe::Complexe(const QString& pRe, const QString& pIm){
     }
 }
 
+Complexe::Complexe(LitteralNumerique& pRe, LitteralNumerique& pIm){
+    if(isEntier(pRe))
+        pReelle = new Entier(pRe.toString());
+    else if(isReel(pRe))
+        pReelle = new Reel(pRe.toString());
+    else if(isRationnel(pRe)){
+        Rationnel* rat = new Rationnel(pRe.toString());
+        rat->simplifier();
+        if(rat->getDenominateur().getValue() == 1 || rat->getNumerateur().getValue() ==0){
+            Entier* e = new Entier(rat->getNumerateur().getValue());
+            pReelle = e;
+        }
+        else{
+            pReelle = rat;
+        }
+    }
+
+    if(isEntier(pIm))
+        pImaginaire = new Entier(pIm.toString());
+    else if(isReel(pIm))
+        pImaginaire = new Reel(pIm.toString());
+    else if(isRationnel(pIm)){
+        Rationnel* rat = new Rationnel(pIm.toString());
+        rat->simplifier();
+        if(rat->getDenominateur().getValue() == 1 || rat->getNumerateur().getValue() ==0){
+            Entier* e = new Entier(rat->getNumerateur().getValue());
+            pImaginaire = e;
+        }
+        else{
+            pImaginaire = rat;
+        }
+    }
+}
+
 LitteralNumerique* Complexe::getPRe() const{
     return pReelle;
 }
@@ -159,4 +230,28 @@ QString Complexe::toString() const{
         if(im=="1") im="";
         return getPRe()->toString() + " - " + im + "i";
     }
+}
+
+template<class T>
+bool isEntier(T& a){
+    Entier *e = dynamic_cast<Entier*>(&a);
+    return e!=nullptr;
+}
+
+template<class T>
+bool isReel(T& a){
+    Reel *r = dynamic_cast<Reel*>(&a);
+    return r!=nullptr;
+}
+
+template<class T>
+bool isRationnel(T& a){
+    Rationnel *r = dynamic_cast<Rationnel*>(&a);
+    return r!=nullptr;
+}
+
+template<class T>
+bool isComplexe(T& a){
+    Complexe *c = dynamic_cast<Complexe*>(&a);
+    return c!=nullptr;
 }

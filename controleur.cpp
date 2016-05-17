@@ -10,13 +10,24 @@ void Controleur::parse(const QString& com) {
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
-        if(type != "Inconnu")
+        if(type=="Operator"){
+            try{
+                applyOperator(word);
+            }
+            catch(ComputerException c){
+                pile->setMessage(c.getInfo());
+            }
+        }
+        else if(type != "Inconnu")
             pile->push(word, type);
     }
 }
 
 QString typeLitteral(const QString& lit){
-    if(lit.count('$')==1){
+    if(isOperator(lit)){
+        return "Operator";
+    }
+    else if(lit.count('$')==1){
         qDebug()<<"complexe";
         return "Complexe";
     }
@@ -45,8 +56,36 @@ QString typeLitteral(const QString& lit){
     return "Inconnu";
 }
 
+void Controleur::applyOperator(const QString& op){
+    Pile *pile = Pile::getInstance();
+    if(op=="+"){
+        if(pile->getStack()->length()>=2){
+            LitteralNumerique *x = dynamic_cast<LitteralNumerique*>(pile->pop());
+            Litteral *y = pile->pop();
+            Litteral *res = *x+*y;
+            pile->push(*res);
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="-"){
+        if(pile->getStack()->length()>=2){
+            LitteralNumerique *x = dynamic_cast<LitteralNumerique*>(pile->pop());
+            Litteral *y = pile->pop();
+            Litteral *res = *x-*y;
+            pile->push(*res);
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+}
+
 Controleur* Controleur::getInstance() {
     if(!instance)
         instance = new Controleur();
     return instance;
+}
+
+bool isOperator(const QString& a){
+    return a=="+" || a=="-" || a=="*" || a=="/";
 }

@@ -59,8 +59,9 @@ void Pile::push(const QString& value, const QString& type){
     }
     else if (type == "Rationnel") {
         QStringList parts = value.split('/', QString::KeepEmptyParts);
-        Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
         try {
+        Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
+
             //converting into Entier, if possible
             if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
                 Entier* e = new Entier(rationnel->getNumerateur().getValue());
@@ -97,5 +98,12 @@ void Pile::push(const QString& value, const QString& type){
         emit modificationEtat();
         return;
      }
+}
 
+void Pile::push(Litteral& l){
+    getStack()->push(&l);
+}
+
+Litteral* Pile::pop(){
+    return stack.pop();
 }
