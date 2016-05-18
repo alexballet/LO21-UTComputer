@@ -2,11 +2,12 @@
 #define COMPUTEREXCEPTION_H
 
 #include <QString>
+#include <QMediaPlayer>
 
 class ComputerException {
     QString info;
 public:
-    ComputerException(const QString& str):info(str){}
+    ComputerException(const QString& str);
     QString getInfo() const { return info; }
 };
 
