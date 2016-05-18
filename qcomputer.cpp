@@ -4,6 +4,7 @@
 #include <QTableView>
 #include <QTableWidgetItem>
 #include <QMenuBar>
+#include <QSettings>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -30,8 +31,6 @@ QComputer::QComputer(QWidget *parent) :
     this->layout()->setMenuBar(menuBar);
 
     connect(action, SIGNAL(triggered()),this,SLOT(slotOptions()));
-    //Ui::Options *ui2 = new Ui::Options;
-    //connect(ui2->activerClavier, SIGNAL(toggled(int)), this, SLOT(activerClavier(int));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
@@ -72,6 +71,8 @@ QComputer::QComputer(QWidget *parent) :
 
 
     //disable keyboard
+    QSettings settings;
+    settings.setValue("Clavier",false);
     this->setFixedSize(589,322);
     ui->clavier->hide();
     ui->opLogiques->hide();
@@ -170,6 +171,5 @@ void QComputer::slotOptions() {
     Options opt;
     opt.setModal(true);
     connect(&opt, SIGNAL(activerClavierSig(bool)), this, SLOT(activerClavier(bool)));
-    //connect(&opt, SIGNAL(toggled(int)), this, SLOT(activerClavier(int)));
     opt.exec();
 }

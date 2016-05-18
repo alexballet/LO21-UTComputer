@@ -1,5 +1,6 @@
 #include "options.h"
 #include "ui_options.h"
+#include <QSettings>
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
@@ -8,6 +9,9 @@ Options::Options(QWidget *parent) :
 
     ui->setupUi(this);
     connect(ui->activerClavier, SIGNAL(toggled(bool)), this, SLOT(activerClavierOpt(bool)));
+    QSettings settings;
+    //settings.setValue("Clavier", false);
+    ui->activerClavier->setChecked(settings.value("Clavier").toBool());
 }
 
 Options::~Options()
@@ -16,5 +20,7 @@ Options::~Options()
 }
 
 void Options::activerClavierOpt(bool s) {
+    QSettings settings;
+    settings.setValue("Clavier", s);
     emit activerClavierSig(s);
 }
