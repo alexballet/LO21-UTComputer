@@ -10,6 +10,7 @@ private:
 public:
     Expression(QString t);
     QString getText() const;
+    QString toString() const;
 };
 
 #endif // EXPRESSION_H
