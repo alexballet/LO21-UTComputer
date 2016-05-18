@@ -4,30 +4,202 @@
 
 //Litteral
 Litteral* LitteralNumerique::operator +(Litteral& a){
-    if(isEntier(*this) && isEntier(a)){
+    if(isEntier(*this) && isEntier(a)){//Entier + Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
         return new Entier(op2->getValue() + op1->getValue());
     }
-    else if(isEntier(*this) && isReel(a)){
+    else if(isEntier(*this) && isReel(a)){//Entier + Reel
         Entier *op1 = dynamic_cast<Entier*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         return new Reel(op2->getValue() + op1->getValue());
     }
-    else if(isEntier(*this) && isRationnel(a)){
+    else if(isEntier(*this) && isRationnel(a)){//Entier + Rationnel
         Entier *op1 = dynamic_cast<Entier*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
         return new Rationnel(op1->getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
     }
-    else if(isEntier(*this) && isComplexe(a)){
+    else if(isEntier(*this) && isComplexe(a)){//Entier + Complexe
         Entier *op1 = dynamic_cast<Entier*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
         if(isEntier(*op2->getPRe())){
             Entier *pRe = dynamic_cast<Entier*>(op2->getPRe());
-            Entier *pIm = dynamic_cast<Entier*>(op2->getPIm());
             Entier *res = new Entier(pRe->getValue()+op1->getValue());
-            return new Complexe(*res, *pIm);
+            return new Complexe(*res, *op2->getPIm());
         }
+        else if(isReel(*op2->getPRe())){
+            Reel *pRe = dynamic_cast<Reel*>(op2->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op1->getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+        else if(isRationnel(*op2->getPRe())){
+            Rationnel *pRe = dynamic_cast<Rationnel*>(op2->getPRe());
+            Rationnel *res = new Rationnel(pRe->getDenominateur().getValue()*op1->getValue()+pRe->getNumerateur().getValue(),pRe->getDenominateur().getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+    }
+    else if(isReel(*this) && isEntier(a)){//Reel + Entier
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        return new Reel(op2->getValue() + op1->getValue());
+    }
+    else if(isReel(*this) && isReel(a)){//Reel + Reel
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        return new Reel(op2->getValue() + op1->getValue());
+    }
+    else if(isReel(*this) && isRationnel(a)){//Reel + Rationnel
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        return new Reel(op1->getValue()+op2->getNumerateur().getValue()/op2->getDenominateur().getValue());
+    }
+    else if(isReel(*this) && isComplexe(a)){//Reel + Complexe
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        if(isEntier(*op2->getPRe())){
+            Entier *pRe = dynamic_cast<Entier*>(op2->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op1->getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+        else if(isReel(*op2->getPRe())){
+            Reel *pRe = dynamic_cast<Reel*>(op2->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op1->getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+        else if(isRationnel(*op2->getPRe())){
+            Rationnel *pRe = dynamic_cast<Rationnel*>(op2->getPRe());
+            Reel *res = new Reel(op1->getValue()+pRe->getNumerateur().getValue()/pRe->getDenominateur().getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+    }
+    else if(isRationnel(*this) && isEntier(a)){//Rationnel + Entier
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        return new Rationnel(op2->getValue()*op1->getDenominateur().getValue()+op1->getNumerateur().getValue(), op1->getDenominateur().getValue());
+    }
+    else if(isRationnel(*this) && isReel(a)){//Rationnel + Reel
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        return new Reel(op2->getValue()+op1->getNumerateur().getValue()/op1->getDenominateur().getValue());
+    }
+    else if(isRationnel(*this) && isRationnel(a)){//Rationnel + Rationnel
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        return new Rationnel(op1->getNumerateur().getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue()*op1->getDenominateur().getValue(),op1->getDenominateur().getValue()*op2->getDenominateur().getValue());
+    }
+    else if(isRationnel(*this) && isComplexe(a)){//Rationnel + Complexe
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        if(isEntier(*op2->getPRe())){
+            Entier *pRe = dynamic_cast<Entier*>(op2->getPRe());
+            Rationnel *res = new Rationnel(pRe->getValue()*op1->getDenominateur().getValue()+op1->getNumerateur().getValue(), op1->getDenominateur().getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+        else if(isReel(*op2->getPRe())){
+            Reel *pRe = dynamic_cast<Reel*>(op2->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op1->getNumerateur().getValue()/op1->getDenominateur().getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+        else if(isRationnel(*op2->getPRe())){
+            Rationnel *pRe = dynamic_cast<Rationnel*>(op2->getPRe());
+            Rationnel *res = new Rationnel(op1->getNumerateur().getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue()*op1->getDenominateur().getValue(),op1->getDenominateur().getValue()*pRe->getDenominateur().getValue());
+            return new Complexe(*res, *op2->getPIm());
+        }
+    }
+    else if(isComplexe(*this) && isEntier(a)){//Complexe + Entier
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        if(isEntier(*op1->getPRe())){
+            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
+            Entier *res = new Entier(op2->getValue()+pRe->getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+        else if(isReel(*op1->getPRe())){
+            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op2->getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+        else if(isRationnel(*op1->getPRe())){
+            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
+            Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+    }
+    else if(isComplexe(*this) && isReel(a)){//Complexe + Reel
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        if(isEntier(*op1->getPRe())){
+            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
+            Reel *res = new Reel(op2->getValue()+pRe->getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+        else if(isReel(*op1->getPRe())){
+            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op2->getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+        else if(isRationnel(*op1->getPRe())){
+            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
+            Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+    }
+    else if(isComplexe(*this) && isRationnel(a)){//Complexe + Rationnel
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        if(isEntier(*op1->getPRe())){
+            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
+            Rationnel *res = new Rationnel(pRe->getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+        else if(isReel(*op1->getPRe())){
+            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
+            Reel *res = new Reel(pRe->getValue()+op2->getNumerateur().getValue()/op2->getDenominateur().getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+        else if(isRationnel(*op1->getPRe())){
+            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
+            Rationnel *res = new Rationnel(pRe->getNumerateur().getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue()*pRe->getDenominateur().getValue(),pRe->getDenominateur().getValue()*op2->getDenominateur().getValue());
+            return new Complexe(*res, *op1->getPIm());
+        }
+    }
+    else if(isComplexe(*this) && isComplexe(a)){//Complexe + Complexe
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        Litteral *pRe = *op1->getPRe() + *op2->getPRe();
+        Litteral *pIm = *op1->getPIm() + *op2->getPIm();
+        LitteralNumerique *resRe = dynamic_cast<LitteralNumerique*>(pRe);
+        LitteralNumerique *resIm = dynamic_cast<LitteralNumerique*>(pIm);
+        return new Complexe(*resRe, *resIm);
+//        //calcul partie Reelle
+//        if(isEntier(*op2->getPRe())){
+//            Entier *pRe1 = dynamic_cast<Entier*>(op2->getPRe());
+//            if(isEntier(*op1->getPRe())){
+//                Entier *pRe2 = dynamic_cast<Entier*>(op1->getPRe());
+//                Entier *res = new Entier(pRe1->getValue() + pRe2->getValue());
+
+//            }
+//            else if(isReel(*op1->getPRe())){
+//                Reel *pRe2 = dynamic_cast<Reel*>(op1->getPRe());
+//                Reel *res = new Reel(pRe1->getValue() + pRe2->getValue());
+//                return new Complexe(*res, *op1->getPIm());
+//            }
+//            else if(isRationnel(*op1->getPRe())){
+//                Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
+//                Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
+//                return new Complexe(*res, *op1->getPIm());
+//            }
+//        }
+//        else if(isReel(*op2->getPRe())){
+//            Reel *pRe = dynamic_cast<Reel*>(op2->getPRe());
+//            Reel *res = new Reel(pRe->getValue()+op1->getNumerateur().getValue()/op1->getDenominateur().getValue());
+//            return new Complexe(*res, *op2->getPIm());
+//        }
+//        else if(isRationnel(*op2->getPRe())){
+//            Rationnel *pRe = dynamic_cast<Rationnel*>(op2->getPRe());
+//            Rationnel *res = new Rationnel(op1->getNumerateur().getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue()*op1->getDenominateur().getValue(),op1->getDenominateur().getValue()*pRe->getDenominateur().getValue());
+//            return new Complexe(*res, *op2->getPIm());
+//        }
     }
 }
 
