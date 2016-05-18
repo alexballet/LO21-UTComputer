@@ -2,6 +2,7 @@
 #include "ui_qcomputer.h"
 #include <QStringList>
 #include <QTableView>
+#include <QAction>
 #include <QTableWidgetItem>
 #include <QMenuBar>
 
@@ -15,17 +16,18 @@ QComputer::QComputer(QWidget *parent) :
 
     //menu bar
     QMenuBar* menuBar = new QMenuBar();
-    //File menu
-    QMenu *fileMenu = new QMenu("File");
-    menuBar->addMenu(fileMenu);
-    QAction* action = fileMenu->addAction("Options");
-    fileMenu->addAction("Exit");
 
     //Editors
     QMenu *editorsMenu = new QMenu("Editors");
     menuBar->addMenu(editorsMenu);
     editorsMenu->addAction("Variable editor");
     editorsMenu->addAction("Program editor");
+
+    //File menu
+    QMenu *fileMenu = new QMenu("Fichiers");
+    menuBar->addMenu(fileMenu);
+    QAction* action = fileMenu->addAction("Options");
+    fileMenu->addAction("Exit");
 
     this->layout()->setMenuBar(menuBar);
 
