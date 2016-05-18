@@ -17,8 +17,10 @@ public:
 
 private slots:
     void activerClavierOpt(bool);
+    void setMaxAfficheSlot(int);
 signals:
     void activerClavierSig(bool);
+    void setMaxAfficheSig(int);
 
 private:
     Ui::Options *ui;

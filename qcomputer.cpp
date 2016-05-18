@@ -11,6 +11,7 @@ QComputer::QComputer(QWidget *parent) :
     ui(new Ui::QComputer)
 {
     Pile* pile = Pile::getInstance();
+    QSettings settings;
 
     ui->setupUi(this);
 
@@ -33,6 +34,7 @@ QComputer::QComputer(QWidget *parent) :
     connect(action, SIGNAL(triggered()),this,SLOT(slotOptions()));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
+    settings.setValue("Pile", pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
     ui->vuePile->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
 
@@ -71,7 +73,7 @@ QComputer::QComputer(QWidget *parent) :
 
 
     //disable keyboard
-    QSettings settings;
+
     settings.setValue("Clavier",false);
     this->setFixedSize(589,322);
     ui->clavier->hide();
@@ -167,9 +169,30 @@ void QComputer::activerClavier(bool state)
     }
 }
 
+void QComputer::setMaxAffiche(int i) {
+    Pile* pile = Pile::getInstance();
+    pile->setMaxAffiche(i);
+    ui->vuePile->setRowCount(i);
+    QStringList numberList;
+    for(unsigned int i = pile->getMaxAffiche(); i>0; i--) {
+        QString str = QString::number(i);
+        str += " :";
+        numberList << str;
+        // creation of the item of each line initialized with an empty string (chaine vide).
+        ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
+    }
+    ui->vuePile->setVerticalHeaderLabels(numberList);
+    ui->vuePile->setFixedHeight(pile->getMaxAffiche() * ui->vuePile->rowHeight(0)+2);
+    emit pile->modificationEtat();
+
+}
+
+
 void QComputer::slotOptions() {
     Options opt;
     opt.setModal(true);
     connect(&opt, SIGNAL(activerClavierSig(bool)), this, SLOT(activerClavier(bool)));
+    connect(&opt, SIGNAL(setMaxAfficheSig(int)), this, SLOT(setMaxAffiche(int)));
     opt.exec();
 }
+

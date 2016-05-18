@@ -9,9 +9,10 @@ Options::Options(QWidget *parent) :
 
     ui->setupUi(this);
     connect(ui->activerClavier, SIGNAL(toggled(bool)), this, SLOT(activerClavierOpt(bool)));
+    connect(ui->dial, SIGNAL(valueChanged(int)), this, SLOT(setMaxAfficheSlot(int)));
     QSettings settings;
-    //settings.setValue("Clavier", false);
     ui->activerClavier->setChecked(settings.value("Clavier").toBool());
+    ui->dial->setValue(settings.value("Pile").toInt());
 }
 
 Options::~Options()
@@ -23,4 +24,10 @@ void Options::activerClavierOpt(bool s) {
     QSettings settings;
     settings.setValue("Clavier", s);
     emit activerClavierSig(s);
+}
+
+void Options::setMaxAfficheSlot(int i) {
+    QSettings settings;
+    settings.setValue("Pile", i);
+    emit setMaxAfficheSig(i);
 }

@@ -27,6 +27,7 @@ public:
     static void libererInstance();
 
     QString getMessage() const;
+    void setMaxAffiche(int);
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
     QStack<Litteral*>* getStack();

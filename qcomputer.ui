@@ -333,7 +333,7 @@
            <rect>
             <x>0</x>
             <y>20</y>
-            <width>561</width>
+            <width>635</width>
             <height>121</height>
            </rect>
           </property>
@@ -544,7 +544,7 @@
            <rect>
             <x>0</x>
             <y>20</y>
-            <width>561</width>
+            <width>904</width>
             <height>147</height>
            </rect>
           </property>
@@ -923,8 +923,6 @@
        </item>
       </layout>
      </widget>
-     <zorder>layoutWidget</zorder>
-     <zorder>layoutWidget</zorder>
     </widget>
    </item>
   </layout>

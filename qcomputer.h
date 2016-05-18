@@ -27,6 +27,7 @@ public slots:
 private slots:
     void editCommmande();
     void activerClavier(bool);
+    void setMaxAffiche(int);
 
 
 private:

@@ -22,6 +22,10 @@ void Pile::setMessage(const QString& msg) {
     message = msg;
 }
 
+void Pile::setMaxAffiche(int i) {
+    maxAffiche = i;
+}
+
 unsigned int Pile::getMaxAffiche() const {
     return maxAffiche;
 }
