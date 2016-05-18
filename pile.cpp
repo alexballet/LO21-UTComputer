@@ -80,12 +80,29 @@ void Pile::push(const QString& value, const QString& type){
     }
     else if (type == "Complexe"){
         Controleur* controleur = Controleur::getInstance();
-        QStringList parts = value.split('$', QString::KeepEmptyParts);
-        if(parts.at(1) == "0" || parts.at(1) == "")//if it's not a complexe
+        QStringList parts;
+        if(value.count('$')==1){
+            parts = value.split('$', QString::KeepEmptyParts);
+        }
+        else{//parts=[pRe,"+",pIm"i"]
+            QStringList partsTemp = value.split(' ', QString::KeepEmptyParts);
+            qDebug()<<"avant -> num : "<<partsTemp.at(0)<<partsTemp.at(1)<<" | denum : "<<partsTemp.at(2);
+            parts.append(partsTemp.at(0));
+            QString temp = partsTemp.at(2);
+            temp.truncate(temp.length()-1);
+            if(partsTemp.at(1)=="-")
+                temp.append('-');
+            if(temp=="")
+                temp.append('0');
+            parts.append(temp);
+            qDebug()<<parts;
+        }
+        if(parts.at(1) == "0" || parts.at(1) == "" || parts.at(1)=="-0" || parts.at(1)=="0-")//if it's not a complexe
             controleur->parse(parts.at(0));
         else{//if it's a complexe
             QString num = parts.at(0);
             QString denum = parts.at(1);
+            qDebug()<<"apres -> num : "<<num<<" | denum : "<<denum;
             Complexe* complexe = new Complexe(num, denum);
             stack.push(complexe);
             emit modificationEtat();
@@ -98,10 +115,6 @@ void Pile::push(const QString& value, const QString& type){
         emit modificationEtat();
         return;
      }
-}
-
-void Pile::push(Litteral& l){
-    getStack()->push(&l);
 }
 
 Litteral* Pile::pop(){

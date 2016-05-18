@@ -31,7 +31,6 @@ public:
     unsigned int getMaxAffiche() const;
     QStack<Litteral*>* getStack();
     void push(const QString& value, const QString& type); //push in stack
-    void push(Litteral& l); //push in stack
     Litteral* pop();
 signals:
     void modificationEtat();

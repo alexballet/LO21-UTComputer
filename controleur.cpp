@@ -27,7 +27,7 @@ QString typeLitteral(const QString& lit){
     if(isOperator(lit)){
         return "Operator";
     }
-    else if(lit.count('$')==1){
+    else if(lit.count('$')==1 || lit.count('i')==1){
         qDebug()<<"complexe";
         return "Complexe";
     }
@@ -60,20 +60,21 @@ void Controleur::applyOperator(const QString& op){
     Pile *pile = Pile::getInstance();
     if(op=="+"){
         if(pile->getStack()->length()>=2){
-            LitteralNumerique *x = dynamic_cast<LitteralNumerique*>(pile->pop());
+            Litteral *x = pile->pop();
             Litteral *y = pile->pop();
             Litteral *res = *x+*y;
-            pile->push(*res);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+            qDebug()<<typeLitteral(res->toString());
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
     else if(op=="-"){
         if(pile->getStack()->length()>=2){
-            LitteralNumerique *x = dynamic_cast<LitteralNumerique*>(pile->pop());
+            Litteral *x = pile->pop();
             Litteral *y = pile->pop();
             Litteral *res = *x-*y;
-            pile->push(*res);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
