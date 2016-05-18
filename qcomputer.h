@@ -6,6 +6,7 @@
 #include <QVector>
 #include "pile.h"
 #include "controleur.h"
+#include "options.h"
 //#include "computer.h"
 
 namespace Ui {
@@ -22,10 +23,11 @@ public:
 public slots:
     void refresh();
     void on_commande_returnPressed();
+    void slotOptions();
 private slots:
-void editCommmande();
+    void editCommmande();
+    void activerClavier(bool);
 
-void on_activerClavier_stateChanged(int arg1);
 
 private:
     Ui::QComputer *ui;

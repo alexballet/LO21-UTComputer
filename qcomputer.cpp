@@ -15,13 +15,23 @@ QComputer::QComputer(QWidget *parent) :
 
     //menu bar
     QMenuBar* menuBar = new QMenuBar();
+    //File menu
     QMenu *fileMenu = new QMenu("File");
     menuBar->addMenu(fileMenu);
-    fileMenu->addAction("Properties");
+    QAction* action = fileMenu->addAction("Options");
     fileMenu->addAction("Exit");
+
+    //Editors
+    QMenu *editorsMenu = new QMenu("Editors");
+    menuBar->addMenu(editorsMenu);
+    editorsMenu->addAction("Variable editor");
+    editorsMenu->addAction("Program editor");
+
     this->layout()->setMenuBar(menuBar);
 
-
+    connect(action, SIGNAL(triggered()),this,SLOT(slotOptions()));
+    //Ui::Options *ui2 = new Ui::Options;
+    //connect(ui2->activerClavier, SIGNAL(toggled(int)), this, SLOT(activerClavier(int));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
@@ -138,7 +148,7 @@ void QComputer::editCommmande(){
 
 
 
-void QComputer::on_activerClavier_stateChanged(int state)
+void QComputer::activerClavier(bool state)
 {
     if(state){
         ui->clavier->show();
@@ -154,4 +164,12 @@ void QComputer::on_activerClavier_stateChanged(int state)
         ui->opPile->hide();
         this->setFixedSize(589,322);
     }
+}
+
+void QComputer::slotOptions() {
+    Options opt;
+    opt.setModal(true);
+    connect(&opt, SIGNAL(activerClavierSig(bool)), this, SLOT(activerClavier(bool)));
+    //connect(&opt, SIGNAL(toggled(int)), this, SLOT(activerClavier(int)));
+    opt.exec();
 }

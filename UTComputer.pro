@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     variable.cpp \
     atome.cpp \
     expression.cpp \
-    programme.cpp
+    programme.cpp \
+    options.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
@@ -31,6 +32,8 @@ HEADERS  += qcomputer.h \
     variable.h \
     atome.h \
     expression.h \
-    programme.h
+    programme.h \
+    options.h
 
-FORMS    += qcomputer.ui
+FORMS    += qcomputer.ui \
+    options.ui
