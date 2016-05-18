@@ -1,5 +1,7 @@
 #include "atome.h"
+#include "programme.h"
 #include "variable.h"
+#include "expression.h"
 #include <QDebug>
 
 Atome::Atome(QString id): id(id) {
@@ -21,6 +23,10 @@ Litteral* Atome::getLitterale() const { //finds the corresponding litterale
     if (lit)
         return lit;
     //else if pour Programme
+    ProgrammeMap* progmap = ProgrammeMap::getInstance();
+    lit = progmap->findProg(id);
+    if (lit)
+        return lit;
     //else pour Expression
-    return new Variable(new Entier(5), id);
+    return new Expression(id);
 }
