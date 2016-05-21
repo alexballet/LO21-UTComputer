@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     atome.cpp \
     expression.cpp \
     programme.cpp \
-    options.cpp
+    options.cpp \
+    variableeditor.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
@@ -33,7 +34,9 @@ HEADERS  += qcomputer.h \
     atome.h \
     expression.h \
     programme.h \
-    options.h
+    options.h \
+    variableeditor.h
 
 FORMS    += qcomputer.ui \
-    options.ui
+    options.ui \
+    variableeditor.ui

@@ -22,19 +22,21 @@ QComputer::QComputer(QWidget *parent) :
     //File menu
     QMenu *fileMenu = new QMenu("Fichiers");
     menuBar->addMenu(fileMenu);
-    QAction* action = fileMenu->addAction("Options");
+    QAction* actionOptions = fileMenu->addAction("Options");
     fileMenu->addAction("Exit");
 
     //Editors
     QMenu *editorsMenu = new QMenu("Editors");
     menuBar->addMenu(editorsMenu);
-    editorsMenu->addAction("Variable editor");
+    QAction* actionVarEditor = editorsMenu->addAction("Variable editor");
     editorsMenu->addAction("Program editor");
 
     this->layout()->setMenuBar(menuBar);
 
     //ouvrir la fenetre "options"
-    connect(action, SIGNAL(triggered()),this,SLOT(slotOptions()));
+    connect(actionOptions, SIGNAL(triggered()),this,SLOT(slotOptions()));
+    //ouvrir l'editeur de variables
+    connect(actionVarEditor, SIGNAL(triggered()),this,SLOT(slotVarEditor()));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     settings.setValue("Pile", pile->getMaxAffiche());
@@ -199,3 +201,8 @@ void QComputer::slotOptions() {
     opt.exec();
 }
 
+void QComputer::slotVarEditor() {
+    VariableEditor varEditor;
+    varEditor.setModal(true);
+    varEditor.exec();
+}

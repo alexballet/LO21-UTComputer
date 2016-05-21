@@ -57,3 +57,7 @@ void VariableMap::deleteVar(QString id) {
 void VariableMap::insertVar(QString id, Variable* var) {
     map.insert(id, var);
 }
+
+int VariableMap::getCount() const {
+    return map.count();
+}

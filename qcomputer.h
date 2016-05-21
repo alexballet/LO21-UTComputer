@@ -7,6 +7,7 @@
 #include "pile.h"
 #include "controleur.h"
 #include "options.h"
+#include "variableeditor.h"
 //#include "computer.h"
 
 namespace Ui {
@@ -24,6 +25,7 @@ public slots:
     void refresh();
     void on_commande_returnPressed();
     void slotOptions();
+    void slotVarEditor();
 private slots:
     void editCommmande();
     void activerClavier(bool);

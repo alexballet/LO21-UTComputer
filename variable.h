@@ -28,6 +28,7 @@ public:
     Variable* findVar(QString id) const;
     void deleteVar(QString id);
     void insertVar(QString id, Variable* var);
+    int getCount() const;
 
 };
 
