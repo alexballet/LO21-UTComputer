@@ -58,6 +58,10 @@ void VariableMap::insertVar(QString id, Variable* var) {
     map.insert(id, var);
 }
 
+void VariableMap::setVar(QString id, QString value) {
+    map.value(id)->setValue(new Entier(value.toInt())); //ONLY ENTIER
+}
+
 unsigned int VariableMap::getCount() const {
     return map.count();
 }
