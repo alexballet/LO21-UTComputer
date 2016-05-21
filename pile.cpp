@@ -91,26 +91,26 @@ void Pile::push(const QString& value, const QString& type){
         else{//parts=[pRe,"+",pIm"i"]
             QStringList partsTemp = value.split(' ', QString::KeepEmptyParts);
             qDebug()<<"avant -> num : "<<partsTemp.at(0)<<partsTemp.at(1)<<" | denum : "<<partsTemp.at(2);
+            if(partsTemp.at(2) == "0i"){//if it's not a complexe
+                controleur->parse(partsTemp.at(0));
+                return;
+            }
             parts.append(partsTemp.at(0));
             QString temp = partsTemp.at(2);
             temp.truncate(temp.length()-1);
             if(partsTemp.at(1)=="-")
                 temp.append('-');
-            if(temp=="")
-                temp.append('0');
+            if(temp=="-" || temp=="")
+                temp.append('1');
             parts.append(temp);
-            qDebug()<<parts;
         }
-        if(parts.at(1) == "0" || parts.at(1) == "" || parts.at(1)=="-0" || parts.at(1)=="0-")//if it's not a complexe
-            controleur->parse(parts.at(0));
-        else{//if it's a complexe
+            qDebug()<<parts;
             QString num = parts.at(0);
             QString denum = parts.at(1);
             qDebug()<<"apres -> num : "<<num<<" | denum : "<<denum;
             Complexe* complexe = new Complexe(num, denum);
             stack.push(complexe);
             emit modificationEtat();
-        }
      }
      else if (type == "Atome") {
         Atome* a = new Atome(value);

@@ -106,62 +106,15 @@ Litteral* Litteral::operator +(Litteral& a){
             return new Complexe(*res, *op2->getPIm());
         }
     }
-    else if(isComplexe(*this) && isEntier(a)){//Complexe + Entier
+    else if(isComplexe(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Complexe + LitteralNumerique
         Complexe *op1 = dynamic_cast<Complexe*>(this);
-        Entier *op2 = dynamic_cast<Entier*>(&a);
-        if(isEntier(*op1->getPRe())){
-            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
-            Entier *res = new Entier(op2->getValue()+pRe->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isReel(*op1->getPRe())){
-            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
-            Reel *res = new Reel(pRe->getValue()+op2->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isRationnel(*op1->getPRe())){
-            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
-            Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-    }
-    else if(isComplexe(*this) && isReel(a)){//Complexe + Reel
-        Complexe *op1 = dynamic_cast<Complexe*>(this);
-        Reel *op2 = dynamic_cast<Reel*>(&a);
-        if(isEntier(*op1->getPRe())){
-            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
-            Reel *res = new Reel(op2->getValue()+pRe->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isReel(*op1->getPRe())){
-            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
-            Reel *res = new Reel(pRe->getValue()+op2->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isRationnel(*op1->getPRe())){
-            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
-            Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()+pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-    }
-    else if(isComplexe(*this) && isRationnel(a)){//Complexe + Rationnel
-        Complexe *op1 = dynamic_cast<Complexe*>(this);
-        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
-        if(isEntier(*op1->getPRe())){
-            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
-            Rationnel *res = new Rationnel(pRe->getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isReel(*op1->getPRe())){
-            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
-            Reel *res = new Reel(pRe->getValue()+(double)op2->getNumerateur().getValue()/op2->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isRationnel(*op1->getPRe())){
-            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
-            Rationnel *res = new Rationnel(pRe->getNumerateur().getValue()*op2->getDenominateur().getValue()+op2->getNumerateur().getValue()*pRe->getDenominateur().getValue(),pRe->getDenominateur().getValue()*op2->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
+        Litteral *op2 = dynamic_cast<Litteral*>(&a);
+        Litteral *op1pRe = dynamic_cast<Litteral*>(op1->getPRe());
+        Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
+        Litteral *pRe1 = *op2 + *op1pRe;
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm = dynamic_cast<LitteralNumerique*>(op1pIm);
+        return new Complexe(*pRe2, *pIm);
     }
     else if(isComplexe(*this) && isComplexe(a)){//Complexe + Complexe
         Complexe *op1 = dynamic_cast<Complexe*>(this);
@@ -175,22 +128,22 @@ Litteral* Litteral::operator +(Litteral& a){
 }
 
 Litteral* Litteral::operator -(Litteral& a){
-    if(isEntier(*this) && isEntier(a)){//Entier + Entier
+    if(isEntier(*this) && isEntier(a)){//Entier - Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
         return new Entier(op2->getValue() - op1->getValue());
     }
-    else if(isEntier(*this) && isReel(a)){//Entier + Reel
+    else if(isEntier(*this) && isReel(a)){//Entier - Reel
         Entier *op1 = dynamic_cast<Entier*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         return new Reel(op2->getValue() - op1->getValue());
     }
-    else if(isEntier(*this) && isRationnel(a)){//Entier + Rationnel
+    else if(isEntier(*this) && isRationnel(a)){//Entier - Rationnel
         Entier *op1 = dynamic_cast<Entier*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
         return new Rationnel(op1->getValue()*op2->getDenominateur().getValue()-op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
     }
-    else if(isEntier(*this) && isComplexe(a)){//Entier + Complexe
+    else if(isEntier(*this) && isComplexe(a)){//Entier - Complexe
         Entier *op1 = dynamic_cast<Entier*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
         if(isEntier(*op2->getPRe())){
@@ -209,22 +162,22 @@ Litteral* Litteral::operator -(Litteral& a){
             return new Complexe(*res, *op2->getPIm());
         }
     }
-    else if(isReel(*this) && isEntier(a)){//Reel + Entier
+    else if(isReel(*this) && isEntier(a)){//Reel - Entier
         Reel *op1 = dynamic_cast<Reel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
         return new Reel(op2->getValue() - op1->getValue());
     }
-    else if(isReel(*this) && isReel(a)){//Reel + Reel
+    else if(isReel(*this) && isReel(a)){//Reel - Reel
         Reel *op1 = dynamic_cast<Reel*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         return new Reel(op2->getValue() - op1->getValue());
     }
-    else if(isReel(*this) && isRationnel(a)){//Reel + Rationnel
+    else if(isReel(*this) && isRationnel(a)){//Reel - Rationnel
         Reel *op1 = dynamic_cast<Reel*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
         return new Reel(op1->getValue()-(double)op2->getNumerateur().getValue()/op2->getDenominateur().getValue());
     }
-    else if(isReel(*this) && isComplexe(a)){//Reel + Complexe
+    else if(isReel(*this) && isComplexe(a)){//Reel - Complexe
         Reel *op1 = dynamic_cast<Reel*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
         if(isEntier(*op2->getPRe())){
@@ -243,22 +196,22 @@ Litteral* Litteral::operator -(Litteral& a){
             return new Complexe(*res, *op2->getPIm());
         }
     }
-    else if(isRationnel(*this) && isEntier(a)){//Rationnel + Entier
+    else if(isRationnel(*this) && isEntier(a)){//Rationnel - Entier
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
         return new Rationnel(op2->getValue()*op1->getDenominateur().getValue()-op1->getNumerateur().getValue(), op1->getDenominateur().getValue());
     }
-    else if(isRationnel(*this) && isReel(a)){//Rationnel + Reel
+    else if(isRationnel(*this) && isReel(a)){//Rationnel - Reel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         return new Reel(op2->getValue()-(double)op1->getNumerateur().getValue()/op1->getDenominateur().getValue());
     }
-    else if(isRationnel(*this) && isRationnel(a)){//Rationnel + Rationnel
+    else if(isRationnel(*this) && isRationnel(a)){//Rationnel - Rationnel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
         return new Rationnel(op1->getNumerateur().getValue()*op2->getDenominateur().getValue()-op2->getNumerateur().getValue()*op1->getDenominateur().getValue(),op1->getDenominateur().getValue()*op2->getDenominateur().getValue());
     }
-    else if(isRationnel(*this) && isComplexe(a)){//Rationnel + Complexe
+    else if(isRationnel(*this) && isComplexe(a)){//Rationnel - Complexe
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
         if(isEntier(*op2->getPRe())){
@@ -277,64 +230,17 @@ Litteral* Litteral::operator -(Litteral& a){
             return new Complexe(*res, *op2->getPIm());
         }
     }
-    else if(isComplexe(*this) && isEntier(a)){//Complexe + Entier
+    else if(isComplexe(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Complexe - LitteralNumerique
         Complexe *op1 = dynamic_cast<Complexe*>(this);
-        Entier *op2 = dynamic_cast<Entier*>(&a);
-        if(isEntier(*op1->getPRe())){
-            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
-            Entier *res = new Entier(op2->getValue()-pRe->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isReel(*op1->getPRe())){
-            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
-            Reel *res = new Reel(pRe->getValue()-op2->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isRationnel(*op1->getPRe())){
-            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
-            Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()-pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
+        Litteral *op2 = dynamic_cast<Litteral*>(&a);
+        Litteral *op1pRe = dynamic_cast<Litteral*>(op1->getPRe());
+        Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
+        Litteral *pRe1 = *op2 - *op1pRe;
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm = dynamic_cast<LitteralNumerique*>(op1pIm);
+        return new Complexe(*pRe2, *pIm);
     }
-    else if(isComplexe(*this) && isReel(a)){//Complexe + Reel
-        Complexe *op1 = dynamic_cast<Complexe*>(this);
-        Reel *op2 = dynamic_cast<Reel*>(&a);
-        if(isEntier(*op1->getPRe())){
-            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
-            Reel *res = new Reel(op2->getValue()-pRe->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isReel(*op1->getPRe())){
-            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
-            Reel *res = new Reel(pRe->getValue()-op2->getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isRationnel(*op1->getPRe())){
-            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
-            Rationnel *res = new Rationnel(op2->getValue()*pRe->getDenominateur().getValue()-pRe->getNumerateur().getValue(), pRe->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-    }
-    else if(isComplexe(*this) && isRationnel(a)){//Complexe + Rationnel
-        Complexe *op1 = dynamic_cast<Complexe*>(this);
-        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
-        if(isEntier(*op1->getPRe())){
-            Entier *pRe = dynamic_cast<Entier*>(op1->getPRe());
-            Rationnel *res = new Rationnel(pRe->getValue()*op2->getDenominateur().getValue()-op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isReel(*op1->getPRe())){
-            Reel *pRe = dynamic_cast<Reel*>(op1->getPRe());
-            Reel *res = new Reel(pRe->getValue()-(double)op2->getNumerateur().getValue()/op2->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-        else if(isRationnel(*op1->getPRe())){
-            Rationnel *pRe = dynamic_cast<Rationnel*>(op1->getPRe());
-            Rationnel *res = new Rationnel(pRe->getNumerateur().getValue()*op2->getDenominateur().getValue()-op2->getNumerateur().getValue()*pRe->getDenominateur().getValue(),pRe->getDenominateur().getValue()*op2->getDenominateur().getValue());
-            return new Complexe(*res, *op1->getPIm());
-        }
-    }
-    else if(isComplexe(*this) && isComplexe(a)){//Complexe + Complexe
+    else if(isComplexe(*this) && isComplexe(a)){//Complexe - Complexe
         Complexe *op1 = dynamic_cast<Complexe*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
         Litteral *pRe = *op1->getPRe() - *op2->getPRe();
@@ -355,6 +261,114 @@ Litteral* Litteral::operator *(Litteral& a){
         Entier *op1 = dynamic_cast<Entier*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         return new Reel(op2->getValue() * op1->getValue());
+    }
+    else if(isEntier(*this) && isRationnel(a)){//Entier * Rationnel
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        return new Rationnel(op1->getValue()*op2->getNumerateur().getValue(), op2->getDenominateur().getValue());
+    }
+    else if(isEntier(*this) && isComplexe(a)){//Entier * Complexe
+        Litteral *op1 = dynamic_cast<Litteral*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
+        Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
+        Litteral *pRe1 = *op1 * *op2pRe;
+        Litteral *pIm1 = *op1 * *op2pIm;
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
+        return new Complexe(*pRe2, *pIm2);
+    }
+    else if(isReel(*this) && isEntier(a)){//Reel * Entier
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        return new Reel(op2->getValue() * op1->getValue());
+    }
+    else if(isReel(*this) && isReel(a)){//Reel * Reel
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        return new Reel(op2->getValue() * op1->getValue());
+    }
+    else if(isReel(*this) && isRationnel(a)){//Reel * Rationnel
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        return new Reel(op1->getValue()*((double)op2->getNumerateur().getValue()/op2->getDenominateur().getValue()));
+    }
+    else if(isReel(*this) && isComplexe(a)){//Reel * Complexe
+        Litteral *op1 = dynamic_cast<Litteral*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
+        Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
+        Litteral *pRe1 = *op1 * *op2pRe;
+        Litteral *pIm1 = *op1 * *op2pIm;
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
+        return new Complexe(*pRe2, *pIm2);
+    }
+    else if(isRationnel(*this) && isEntier(a)){//Rationnel * Entier
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        return new Rationnel(op2->getValue()*op1->getNumerateur().getValue(), op1->getDenominateur().getValue());
+    }
+    else if(isRationnel(*this) && isReel(a)){//Rationnel * Reel
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        return new Reel(op2->getValue()*((double)op1->getNumerateur().getValue()/op1->getDenominateur().getValue()));
+    }
+    else if(isRationnel(*this) && isRationnel(a)){//Rationnel * Rationnel
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        return new Rationnel(op1->getNumerateur().getValue()*op2->getNumerateur().getValue(), op1->getDenominateur().getValue()*op2->getDenominateur().getValue());
+    }
+    else if(isRationnel(*this) && isComplexe(a)){//Rationnel * Complexe
+        Litteral *op1 = dynamic_cast<Litteral*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
+        Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
+        Litteral *pRe1 = *op1 * *op2pRe;
+        Litteral *pIm1 = *op1 * *op2pIm;
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
+        return new Complexe(*pRe2, *pIm2);
+    }
+    else if(isComplexe(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Complexe * LitteralNumerique
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Litteral *op2 = dynamic_cast<Litteral*>(&a);
+        Litteral *op1pRe = dynamic_cast<Litteral*>(op1->getPRe());
+        Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
+        Litteral *pRe1 = *op2 * *op1pRe;
+        Litteral *pIm1 = *op2 * *op1pIm;
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
+        return new Complexe(*pRe2, *pIm2);
+    }
+    else if(isComplexe(*this) && isComplexe(a)){
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        Litteral *op1pRe = dynamic_cast<Litteral*>(op1->getPRe());
+        Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
+        Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
+        Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
+        Litteral *pRe1 = *(*op2pIm * *op1pIm) - *(*op2pRe * *op1pRe);
+        qDebug()<<(*op2pRe * *op1pRe)->toString();
+        qDebug()<<(*op2pIm * *op1pIm)->toString();
+        qDebug()<<(*(*op2pRe * *op1pRe) - *(*op2pIm * *op1pIm))->toString();
+        Litteral *pIm1 = *(*op1pRe * *op2pIm) + *(*op1pIm * *op2pRe);
+        LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
+        LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
+        return new Complexe(*pRe2, *pIm2);
+    }
+}
+
+Litteral* Litteral::operator /(Litteral& a){
+    if(isEntier(*this) && isEntier(a)){//Entier / Entier
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        return new Entier(op2->getValue() / op1->getValue());
+    }
+    else if(isEntier(*this) && isReel(a)){//Entier / Reel
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        return new Reel(op2->getValue() / (double)op1->getValue());
     }
     else if(isEntier(*this) && isRationnel(a)){//Entier * Rationnel
         Entier *op1 = dynamic_cast<Entier*>(this);

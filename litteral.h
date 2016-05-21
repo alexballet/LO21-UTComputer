@@ -13,6 +13,7 @@ public:
     Litteral* operator +(Litteral& a);
     Litteral* operator -(Litteral& a);
     Litteral* operator *(Litteral& a);
+    Litteral* operator /(Litteral& a);
 };
 
 class LitteralNumerique : public Litteral {
@@ -20,7 +21,6 @@ public:
     virtual QString toString() const=0;
     virtual bool operator<(const int& a) const=0;
     virtual bool operator>(const int& a) const=0;
-//    Litteral& operator /(const Litteral& a);
 };
 
 class Entier : public LitteralNumerique {
