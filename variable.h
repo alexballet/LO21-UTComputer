@@ -3,6 +3,7 @@
 #include "litteral.h"
 #include <QString>
 #include <QMap>
+#include <QList>
 
 class Variable : public Litteral {
 private:
@@ -28,8 +29,9 @@ public:
     Variable* findVar(QString id) const;
     void deleteVar(QString id);
     void insertVar(QString id, Variable* var);
-    int getCount() const;
-
+    unsigned int getCount() const;
+    QMap<QString, Variable*>::const_iterator getIterator() const;
+    QMap<QString, Variable*>::const_iterator getIteratorEnd() const;
 };
 
 

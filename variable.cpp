@@ -58,6 +58,16 @@ void VariableMap::insertVar(QString id, Variable* var) {
     map.insert(id, var);
 }
 
-int VariableMap::getCount() const {
+unsigned int VariableMap::getCount() const {
     return map.count();
+}
+
+QMap<QString, Variable*>::const_iterator VariableMap::getIterator() const {
+    QMap<QString, Variable*>::const_iterator i = map.constBegin();
+    return i;
+}
+
+QMap<QString, Variable*>::const_iterator VariableMap::getIteratorEnd() const {
+    QMap<QString, Variable*>::const_iterator i = map.constEnd();
+    return i;
 }
