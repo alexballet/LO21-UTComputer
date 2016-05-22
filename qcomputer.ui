@@ -109,7 +109,7 @@
         <height>451</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,2,4,5">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0,4,5">
        <property name="spacing">
         <number>0</number>
        </property>
@@ -151,6 +151,27 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="pushButton_24">
+             <property name="text">
+              <string>!=</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_29">
+             <property name="text">
+              <string>&lt;=</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_37">
+             <property name="text">
+              <string>&gt;=</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="pushButton_2">
              <property name="text">
               <string>&lt;</string>
@@ -187,6 +208,8 @@
            </item>
           </layout>
          </widget>
+         <zorder>layoutWidget</zorder>
+         <zorder>opPile</zorder>
         </widget>
        </item>
        <item>

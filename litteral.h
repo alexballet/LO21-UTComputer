@@ -15,6 +15,8 @@ public:
     Litteral* operator *(Litteral& a);
     Litteral* operator /(Litteral& a);
     Litteral* operator ==(Litteral& a);
+    Litteral* operator !=(Litteral& a);
+    Litteral* operator <=(Litteral& a);
 };
 
 class LitteralNumerique : public Litteral {

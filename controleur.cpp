@@ -352,6 +352,33 @@ void Controleur::applyOperatorLog(const QString& op){
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
+    else if(op=="!="){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            Litteral *res = (*y != *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="<="){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(!isComplexe(*x) && !isComplexe(*y)){
+                Litteral *res = (*y <= *x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
 }
 
 Controleur* Controleur::getInstance() {
