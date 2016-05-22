@@ -26,6 +26,14 @@ void Controleur::parse(const QString& com) {
                 pile->setMessage(c.getInfo());
             }
         }
+        else if(type=="OperatorPile"){
+            try{
+                applyOperatorPile(word);
+            }
+            catch(ComputerException c){
+                pile->setMessage(c.getInfo());
+            }
+        }
         else if(type != "Inconnu")
             pile->push(word, type);
     }
@@ -37,6 +45,9 @@ QString typeLitteral(const QString& lit){
     }
     else if(isOperatorLog(lit)){
         return "OperatorLog";
+    }
+    else if(isOperatorPile(lit)){
+        return "OperatorPile";
     }
     else if(lit.count('$')==1 || lit.count('i')==1){
         qDebug()<<"complexe";
@@ -482,18 +493,58 @@ void Controleur::applyOperatorLog(const QString& op){
     }
     else if(op=="NOT"){
         if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x)){
-                Litteral *res = notF(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
+            try{
+                Litteral *x = pile->pop();
+                if(isEntier(*x)){
+                    Litteral *res = notF(*x);
+                    pile->push(res->toString(), typeLitteral(res->toString()));
+                }
+                else{
+                    pile->push(x->toString(), typeLitteral(x->toString()));
+                    throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
+                }
             }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
+            catch(ComputerException e){
+                pile->setMessage(e.getInfo());
             }
         }
         else
-            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
+}
+
+void Controleur::applyOperatorPile(const QString& op){
+    Pile *pile = Pile::getInstance();
+    if(op=="DUP"){
+        try{
+            Litteral *x = pile->top();
+            pile->push(x->toString(), typeLitteral(x->toString()));
+        }
+        catch(ComputerException e){
+            pile->setMessage(e.getInfo());
+        }
+    }
+    if(op=="DROP"){
+        try{
+            pile->pop();
+        }
+        catch(ComputerException e){
+            pile->setMessage(e.getInfo());
+        }
+    }
+    if(op=="SWAP"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(y->toString(), typeLitteral(y->toString()));
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    if(op=="CLEAR"){
+        while(!pile->getStack()->isEmpty())
+            pile->pop();
     }
 }
 
@@ -508,4 +559,7 @@ bool isOperatorNum(const QString& a){
 }
 bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
+}
+bool isOperatorPile(const QString& a){
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGs" || a=="UNDO" || a=="REDO" || a=="CLEAR";
 }

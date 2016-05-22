@@ -124,5 +124,16 @@ void Pile::push(const QString& value, const QString& type){
 }
 
 Litteral* Pile::pop(){
-    return stack.pop();
+    if(stack.length()==0)
+        throw ComputerException("Erreur : Pile vide");
+    else
+        return stack.pop();
 }
+
+Litteral* Pile::top(){
+    if(stack.length()==0)
+        throw ComputerException("Erreur : Pile vide");
+    else
+        return stack.top();
+}
+

@@ -33,6 +33,7 @@ public:
     QStack<Litteral*>* getStack();
     void push(const QString& value, const QString& type); //push in stack
     Litteral* pop();
+    Litteral* top();
 signals:
     void modificationEtat();
 };
