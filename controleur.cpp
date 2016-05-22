@@ -99,6 +99,43 @@ void Controleur::applyOperator(const QString& op){
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
+    else if(op=="DIV"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(isEntier(*x) && isEntier(*y)){
+                Litteral *res = div(*y,*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else
+                throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérances entières");
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="MOD"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(isEntier(*x) && isEntier(*y)){
+                Litteral *res = mod(*y,*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else
+                throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérances entières");
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="NEG"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            Litteral *res = neg(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -108,5 +145,5 @@ Controleur* Controleur::getInstance() {
 }
 
 bool isOperator(const QString& a){
-    return a=="+" || a=="-" || a=="*" || a=="/";
+    return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM";
 }

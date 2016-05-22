@@ -247,6 +247,8 @@ Litteral* Litteral::operator /(Litteral& a){
     if(isEntier(*this) && isEntier(a)){//Entier / Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
+        if(op2->getValue()==0)
+            throw ComputerException("Erreur : Division par 0 impossible");
         return new Reel((double)op1->getValue() / op2->getValue());
     }
     else if(isEntier(*this) && isReel(a)){//Entier / Reel
@@ -262,6 +264,8 @@ Litteral* Litteral::operator /(Litteral& a){
     else if(isReel(*this) && isEntier(a)){//Reel / Entier
         Reel *op1 = dynamic_cast<Reel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
+        if(op2->getValue()==0)
+            throw ComputerException("Erreur : Division par 0 impossible");
         return new Reel(op1->getValue() / op2->getValue());
     }
     else if(isReel(*this) && isReel(a)){//Reel / Reel
@@ -277,6 +281,8 @@ Litteral* Litteral::operator /(Litteral& a){
     else if(isRationnel(*this) && isEntier(a)){//Rationnel / Entier
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
+        if(op2->getValue()==0)
+            throw ComputerException("Erreur : Division par 0 impossible");
         return new Rationnel(op1->getNumerateur().getValue(), op1->getDenominateur().getValue()*op2->getValue());
     }
     else if(isRationnel(*this) && isReel(a)){//Rationnel / Reel
@@ -307,6 +313,11 @@ Litteral* Litteral::operator /(Litteral& a){
     else if(isComplexe(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Complexe / LitteralNumerique
         Complexe *op1 = dynamic_cast<Complexe*>(this);
         Litteral *op2 = dynamic_cast<Litteral*>(&a);
+        if(isEntier(*op2)){
+            Entier *op2Test = dynamic_cast<Entier*>(&a);
+            if(op2Test->getValue()==0)
+                throw ComputerException("Erreur : Division par 0 impossible");
+        }
         Litteral *op1pRe = dynamic_cast<Litteral*>(op1->getPRe());
         Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
         Litteral *pRe1 = *op2 / *op1pRe;
@@ -333,7 +344,26 @@ Litteral* Litteral::operator /(Litteral& a){
     }
 }
 
+Litteral* div(Litteral& a, Litteral& b){
+    Entier *op1 = dynamic_cast<Entier*>(&a);
+    Entier *op2 = dynamic_cast<Entier*>(&b);
+    if(op2->getValue()==0)
+        throw ComputerException("Erreur : Division par 0 impossible");
+    return new Entier(op1->getValue() / op2->getValue());
+}
 
+Litteral* mod(Litteral& a, Litteral& b){
+    Entier *op1 = dynamic_cast<Entier*>(&a);
+    Entier *op2 = dynamic_cast<Entier*>(&b);
+    if(op2->getValue()==0)
+        throw ComputerException("Erreur : Division par 0 impossible");
+    return new Entier(op1->getValue() % op2->getValue());
+}
+
+Litteral* neg(Litteral& a){
+    Entier *op1 = new Entier(-1);
+    return *op1 * a;
+}
 
 //Entier
 int Entier::getValue() const {

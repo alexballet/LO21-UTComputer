@@ -89,5 +89,10 @@ bool isRationnel(T& a);
 template<class T>
 bool isComplexe(T& a);
 
+//opérateurs
+Litteral* div(Litteral& a, Litteral& b);
+Litteral* mod(Litteral& a, Litteral& b);
+Litteral* neg(Litteral& a);
+
 
 #endif // LITTERAL_H
