@@ -402,6 +402,17 @@ Litteral* re(Litteral& a){
         return &a;
 }
 
+Litteral* im(Litteral& a){
+    if(isComplexe(a)){
+        Complexe *op1 = dynamic_cast<Complexe*>(&a);
+        return op1->getPIm();
+    }
+    else{
+        Entier *res = new Entier(0);
+        return res;
+    }
+}
+
 //Entier
 int Entier::getValue() const {
     return value;

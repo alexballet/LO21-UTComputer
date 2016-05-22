@@ -198,6 +198,15 @@ void Controleur::applyOperator(const QString& op){
         else
             throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
+    else if(op=="IM"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            Litteral *res = im(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+        }
+        else
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
 }
 
 Controleur* Controleur::getInstance() {
