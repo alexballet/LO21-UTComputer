@@ -136,22 +136,29 @@ void QComputer::editCommmande(){
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
     QString addedText="";
-    if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND"){
-        if (button->text()=="_")
-            addedText = " ";
-        else
-            addedText = button->text();
-    }
-
-    if(button->text()=="<-"){
-        com.truncate(com.length()-1);
-        ui->commande->setText(com);
-    }
-    if(button->text()=="SEND"){
+    if(isOperator(button->text()) && button->text()!= "/"){
+        qDebug()<<"blibli";
+        ui->commande->setText(com+button->text());
         emit ui->commande->returnPressed();
-        return;
     }
-    ui->commande->setText(com+addedText);
+    else{
+        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND"){
+            if (button->text()=="_")
+                addedText = " ";
+            else
+                addedText = button->text();
+        }
+
+        if(button->text()=="<-"){
+            com.truncate(com.length()-1);
+            ui->commande->setText(com);
+        }
+        if(button->text()=="SEND"){
+            emit ui->commande->returnPressed();
+            return;
+        }
+        ui->commande->setText(com+addedText);
+    }
 }
 
 

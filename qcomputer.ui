@@ -378,13 +378,6 @@
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_24">
-               <property name="text">
-                <string>POW</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
            <item>

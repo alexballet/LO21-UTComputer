@@ -207,6 +207,36 @@ void Controleur::applyOperator(const QString& op){
         else
             throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
+    else if(op=="SIN"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+                Litteral *res = sin(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur SIN s'applique sur une opérande entière, réelle ou rationnelle");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
+    else if(op=="COS"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+                Litteral *res = cos(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur COS s'applique sur une opérande entière, réelle ou rationnelle");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -216,5 +246,5 @@ Controleur* Controleur::getInstance() {
 }
 
 bool isOperator(const QString& a){
-    return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM";
+    return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM" || a=="SIN" || a=="COS";
 }

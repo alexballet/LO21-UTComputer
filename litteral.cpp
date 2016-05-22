@@ -413,6 +413,40 @@ Litteral* im(Litteral& a){
     }
 }
 
+Litteral* sin(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qSin(res));
+}
+
+Litteral* cos(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qCos(res));
+}
+
 //Entier
 int Entier::getValue() const {
     return value;
