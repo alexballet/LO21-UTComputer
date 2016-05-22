@@ -95,6 +95,8 @@ Litteral* mod(Litteral& a, Litteral& b);
 Litteral* neg(Litteral& a);
 Litteral* num(Litteral& a);
 Litteral* den(Litteral& a);
+Litteral* createComplexe(Litteral& a, Litteral& b);
+Litteral* re(Litteral& a);
 
 
 #endif // LITTERAL_H

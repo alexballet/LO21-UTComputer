@@ -387,6 +387,21 @@ Litteral* den(Litteral& a){
     return res;
 }
 
+Litteral* createComplexe(Litteral& a, Litteral& b){
+    LitteralNumerique *op1 = dynamic_cast<LitteralNumerique*>(&a);
+    LitteralNumerique *op2 = dynamic_cast<LitteralNumerique*>(&b);
+    return new Complexe(*op1, *op2);
+}
+
+Litteral* re(Litteral& a){
+    if(isComplexe(a)){
+        Complexe *op1 = dynamic_cast<Complexe*>(&a);
+        return op1->getPRe();
+    }
+    else
+        return &a;
+}
+
 //Entier
 int Entier::getValue() const {
     return value;

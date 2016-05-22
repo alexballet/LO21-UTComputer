@@ -140,7 +140,7 @@ void Controleur::applyOperator(const QString& op){
             pile->push(res->toString(), typeLitteral(res->toString()));
         }
         else
-            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
     else if(op=="NUM"){
         if(pile->getStack()->length()>=1){
@@ -155,7 +155,7 @@ void Controleur::applyOperator(const QString& op){
             }
         }
         else
-            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
     else if(op=="DEN"){
         if(pile->getStack()->length()>=1){
@@ -170,7 +170,33 @@ void Controleur::applyOperator(const QString& op){
             }
         }
         else
-            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
+    else if(op=="$"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if((isEntier(*x) || isReel(*x) || isRationnel(*x)) && (isEntier(*y) || isReel(*y) || isRationnel(*y))){
+                Litteral *res = createComplexe(*y, *x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur $ s'applique sur des opérandes entières, réelles ou rationnelles");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="RE"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            Litteral *res = re(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+        }
+        else
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
 }
 
