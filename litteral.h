@@ -100,5 +100,9 @@ Litteral* re(Litteral& a);
 Litteral* im(Litteral& a);
 Litteral* sin(Litteral& a);
 Litteral* cos(Litteral& a);
+Litteral* tan(Litteral& a);
+Litteral* arcSin(Litteral& a);
+Litteral* arcCos(Litteral& a);
+Litteral* arcTan(Litteral& a);
 
 #endif // LITTERAL_H

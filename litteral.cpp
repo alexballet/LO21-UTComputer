@@ -447,6 +447,74 @@ Litteral* cos(Litteral& a){
     return new Reel(qCos(res));
 }
 
+Litteral* tan(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qTan(res));
+}
+
+Litteral* arcSin(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qAsin(res));
+}
+
+Litteral* arcCos(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qAcos(res));
+}
+
+Litteral* arcTan(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qAtan(res));
+}
+
 //Entier
 int Entier::getValue() const {
     return value;

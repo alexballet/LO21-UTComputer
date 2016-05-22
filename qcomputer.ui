@@ -333,7 +333,7 @@
            <rect>
             <x>0</x>
             <y>20</y>
-            <width>561</width>
+            <width>565</width>
             <height>130</height>
            </rect>
           </property>
@@ -378,13 +378,6 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_6">
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
              <item>
               <widget class="QPushButton" name="pushButton_20">
                <property name="text">
@@ -392,6 +385,13 @@
                </property>
               </widget>
              </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QPushButton" name="pushButton_21">
                <property name="text">
@@ -402,7 +402,7 @@
              <item>
               <widget class="QPushButton" name="pushButton_22">
                <property name="text">
-                <string>SINH</string>
+                <string>ARCSIN</string>
                </property>
               </widget>
              </item>
@@ -416,7 +416,7 @@
              <item>
               <widget class="QPushButton" name="pushButton_26">
                <property name="text">
-                <string>COSH</string>
+                <string>ARCCOS</string>
                </property>
               </widget>
              </item>
@@ -430,7 +430,7 @@
              <item>
               <widget class="QPushButton" name="pushButton_28">
                <property name="text">
-                <string>TANH</string>
+                <string>ARCTAN</string>
                </property>
               </widget>
              </item>
