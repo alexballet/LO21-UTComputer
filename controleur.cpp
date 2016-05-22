@@ -362,12 +362,79 @@ void Controleur::applyOperatorLog(const QString& op){
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
+    else if(op=="<"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(!isComplexe(*x) && !isComplexe(*y)){
+                Litteral *res = (*y < *x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op==">"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(!isComplexe(*x) && !isComplexe(*y)){
+                Litteral *res = (*y > *x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op==">="){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(!isComplexe(*x) && !isComplexe(*y)){
+                Litteral *res1 = (*y > *x);
+                Litteral *res2 = (*y == *x);
+                Entier *e1 = dynamic_cast<Entier*>(res1);
+                Entier *e2 = dynamic_cast<Entier*>(res2);
+                Entier *res;
+                if(e1->getValue()==1 || e2->getValue()==1)
+                    res = new Entier(1);
+                else
+                    res = new Entier(0);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
     else if(op=="<="){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
             if(!isComplexe(*x) && !isComplexe(*y)){
-                Litteral *res = (*y <= *x);
+                Litteral *res1 = (*y < *x);
+                Litteral *res2 = (*y == *x);
+                Entier *e1 = dynamic_cast<Entier*>(res1);
+                Entier *e2 = dynamic_cast<Entier*>(res2);
+                Entier *res;
+                if(e1->getValue()==1 || e2->getValue()==1)
+                    res = new Entier(1);
+                else
+                    res = new Entier(0);
                 pile->push(res->toString(), typeLitteral(res->toString()));
             }
             else{
