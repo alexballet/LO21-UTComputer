@@ -446,6 +446,55 @@ void Controleur::applyOperatorLog(const QString& op){
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
+    else if(op=="AND"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(isEntier(*x) && isEntier(*y)){
+                Litteral *res = andF(*y, *x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur AND s'applique sur des opérandes entières ou des expressions");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="OR"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            if(isEntier(*x) && isEntier(*y)){
+                Litteral *res = orF(*y, *x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur OR s'applique sur des opérandes entières ou des expressions");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+    else if(op=="NOT"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isEntier(*x)){
+                Litteral *res = notF(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+    }
 }
 
 Controleur* Controleur::getInstance() {

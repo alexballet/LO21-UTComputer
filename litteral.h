@@ -112,6 +112,8 @@ Litteral* exp(Litteral& a);
 Litteral* ln(Litteral& a);
 
 //opérateurs logiques
-
+Litteral* andF(Litteral& a, Litteral& b);
+Litteral* orF(Litteral& a, Litteral& b);
+Litteral* notF(Litteral& a);
 
 #endif // LITTERAL_H

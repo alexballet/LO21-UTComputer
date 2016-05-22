@@ -815,6 +815,32 @@ Litteral* ln(Litteral& a){
     return new Reel(qLn(res));
 }
 
+Litteral* andF(Litteral& a, Litteral& b){
+    Entier *op1 = dynamic_cast<Entier*>(&a);
+    Entier *op2 = dynamic_cast<Entier*>(&b);
+    if(op1->getValue()!=0 && op2->getValue()!=0)
+        return new Entier(1);
+    else
+        return new Entier(0);
+}
+
+Litteral* orF(Litteral& a, Litteral& b){
+    Entier *op1 = dynamic_cast<Entier*>(&a);
+    Entier *op2 = dynamic_cast<Entier*>(&b);
+    if(op1->getValue()!=0 || op2->getValue()!=0)
+        return new Entier(1);
+    else
+        return new Entier(0);
+}
+
+Litteral* notF(Litteral& a){
+    Entier *op1 = dynamic_cast<Entier*>(&a);
+    if(op1->getValue()==0)
+        return new Entier(1);
+    else
+        return new Entier(0);
+}
+
 //Entier
 int Entier::getValue() const {
     return value;
