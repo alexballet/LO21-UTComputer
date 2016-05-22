@@ -14,6 +14,7 @@ public:
     Litteral* operator -(Litteral& a);
     Litteral* operator *(Litteral& a);
     Litteral* operator /(Litteral& a);
+    Litteral* operator ==(Litteral& a);
 };
 
 class LitteralNumerique : public Litteral {
@@ -89,7 +90,7 @@ bool isRationnel(T& a);
 template<class T>
 bool isComplexe(T& a);
 
-//opérateurs
+//opérateurs numériques
 Litteral* div(Litteral& a, Litteral& b);
 Litteral* mod(Litteral& a, Litteral& b);
 Litteral* neg(Litteral& a);
@@ -106,5 +107,8 @@ Litteral* arcCos(Litteral& a);
 Litteral* arcTan(Litteral& a);
 Litteral* exp(Litteral& a);
 Litteral* ln(Litteral& a);
+
+//opérateurs logiques
+
 
 #endif // LITTERAL_H

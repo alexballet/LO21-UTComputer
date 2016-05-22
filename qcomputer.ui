@@ -487,20 +487,6 @@
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_37">
-               <property name="text">
-                <string>ARG</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_38">
-               <property name="text">
-                <string>NORM</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
            <item>

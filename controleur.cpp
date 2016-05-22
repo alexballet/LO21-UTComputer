@@ -10,9 +10,17 @@ void Controleur::parse(const QString& com) {
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
-        if(type=="Operator"){
+        if(type=="OperatorNum"){
             try{
-                applyOperator(word);
+                applyOperatorNum(word);
+            }
+            catch(ComputerException c){
+                pile->setMessage(c.getInfo());
+            }
+        }
+        else if(type=="OperatorLog"){
+            try{
+                applyOperatorLog(word);
             }
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
@@ -24,8 +32,11 @@ void Controleur::parse(const QString& com) {
 }
 
 QString typeLitteral(const QString& lit){
-    if(isOperator(lit)){
-        return "Operator";
+    if(isOperatorNum(lit)){
+        return "OperatorNum";
+    }
+    else if(isOperatorLog(lit)){
+        return "OperatorLog";
     }
     else if(lit.count('$')==1 || lit.count('i')==1){
         qDebug()<<"complexe";
@@ -56,7 +67,7 @@ QString typeLitteral(const QString& lit){
     return "Inconnu";
 }
 
-void Controleur::applyOperator(const QString& op){
+void Controleur::applyOperatorNum(const QString& op){
     Pile *pile = Pile::getInstance();
     if(op=="+"){
         if(pile->getStack()->length()>=2){
@@ -329,12 +340,29 @@ void Controleur::applyOperator(const QString& op){
     }
 }
 
+void Controleur::applyOperatorLog(const QString& op){
+    Pile *pile = Pile::getInstance();
+    if(op=="="){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            Litteral *res = (*y == *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+    }
+}
+
 Controleur* Controleur::getInstance() {
     if(!instance)
         instance = new Controleur();
     return instance;
 }
 
-bool isOperator(const QString& a){
+bool isOperatorNum(const QString& a){
     return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM" || a=="SIN" || a=="COS" || a=="TAN" || a=="ARCSIN" || a=="ARCCOS" || a=="ARCTAN" || a=="EXP" || a=="LN";
+}
+bool isOperatorLog(const QString& a){
+    return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }

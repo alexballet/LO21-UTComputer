@@ -249,7 +249,10 @@ Litteral* Litteral::operator /(Litteral& a){
         Entier *op2 = dynamic_cast<Entier*>(&a);
         if(op2->getValue()==0)
             throw ComputerException("Erreur : Division par 0 impossible");
-        return new Reel((double)op1->getValue() / op2->getValue());
+        if(op1->getValue() % op2->getValue()==0)
+            return new Entier(op1->getValue() / op2->getValue());
+        else
+            return new Rationnel(op1->getValue(), op2->getValue());
     }
     else if(isEntier(*this) && isReel(a)){//Entier / Reel
         Entier *op1 = dynamic_cast<Entier*>(this);
@@ -342,6 +345,54 @@ Litteral* Litteral::operator /(Litteral& a){
         LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
         return new Complexe(*pRe2, *pIm2);
     }
+}
+
+Litteral* Litteral::operator ==(Litteral& a){
+    if(isEntier(*this) && isEntier(a)){//Entier = Entier
+        Entier *op1 = dynamic_cast<Entier*>(this);
+        Entier *op2 = dynamic_cast<Entier*>(&a);
+        qDebug()<<"bli";
+        if(op1->getValue()==op2->getValue())
+            return new Entier(1);
+        else
+            return new Entier(0);
+    }
+    else if(isReel(*this) && isReel(a)){//Reel = Reel
+        Reel *op1 = dynamic_cast<Reel*>(this);
+        Reel *op2 = dynamic_cast<Reel*>(&a);
+        if(op1->getValue()==op2->getValue())
+            return new Entier(1);
+        else
+            return new Entier(0);
+    }
+    else if(isRationnel(*this) && isRationnel(a)){//Rationnel = Rationnel
+        Rationnel *op1 = dynamic_cast<Rationnel*>(this);
+        Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
+        double res1 = (double)op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+        double res2 = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
+        if(res1==res2)
+            return new Entier(1);
+        else
+            return new Entier(0);
+    }
+    else if(isComplexe(*this) && isComplexe(a)){//Complexe = Complexe
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        Litteral *op1pRe = dynamic_cast<Litteral*>(op1->getPRe());
+        Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
+        Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
+        Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
+        Litteral *t1Temp = (*op1pRe == *op2pRe);
+        Litteral *t2Temp = (*op1pIm == *op2pIm);
+        Entier *t1 = dynamic_cast<Entier*>(t1Temp);
+        Entier *t2 = dynamic_cast<Entier*>(t2Temp);
+        if(t1->getValue() && t2->getValue())
+            return new Entier(1);
+        else
+            return new Entier(0);
+    }
+    else
+        return new Entier(0);
 }
 
 Litteral* div(Litteral& a, Litteral& b){

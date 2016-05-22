@@ -136,8 +136,7 @@ void QComputer::editCommmande(){
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
     QString addedText="";
-    if(isOperator(button->text()) && button->text()!= "/"){
-        qDebug()<<"blibli";
+    if((isOperatorNum(button->text()) && button->text()!= "/" && button->text()!= "$" && button->text()!= "-") || isOperatorLog(button->text())){
         ui->commande->setText(com+button->text());
         emit ui->commande->returnPressed();
     }
