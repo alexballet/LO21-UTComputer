@@ -297,6 +297,36 @@ void Controleur::applyOperator(const QString& op){
         else
             throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
+    else if(op=="EXP"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+                Litteral *res = exp(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur EXP s'applique sur une opérande entière, réelle ou rationnelle");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
+    else if(op=="LN"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+                Litteral *res = ln(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur LN s'applique sur une opérande entière, réelle ou rationnelle");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -306,5 +336,5 @@ Controleur* Controleur::getInstance() {
 }
 
 bool isOperator(const QString& a){
-    return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM" || a=="SIN" || a=="COS" || a=="TAN" || a=="ARCSIN" || a=="ARCCOS" || a=="ARCTAN";
+    return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM" || a=="SIN" || a=="COS" || a=="TAN" || a=="ARCSIN" || a=="ARCCOS" || a=="ARCTAN" || a=="EXP" || a=="LN";
 }

@@ -515,6 +515,42 @@ Litteral* arcTan(Litteral& a){
     return new Reel(qAtan(res));
 }
 
+Litteral* exp(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    return new Reel(qExp(res));
+}
+
+Litteral* ln(Litteral& a){
+    double res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res = op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
+    }
+    else if(isReel(a)){
+        Reel *op1 = dynamic_cast<Reel*>(&a);
+        res = op1->getValue();
+    }
+    else{
+        Entier *op1 = dynamic_cast<Entier*>(&a);
+        res = op1->getValue();
+    }
+    if(res<=0)
+        throw ComputerException("Erreur : La fonction LN est définie sur ]0;+infini[");
+    return new Reel(qLn(res));
+}
+
 //Entier
 int Entier::getValue() const {
     return value;

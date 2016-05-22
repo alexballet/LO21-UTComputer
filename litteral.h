@@ -104,5 +104,7 @@ Litteral* tan(Litteral& a);
 Litteral* arcSin(Litteral& a);
 Litteral* arcCos(Litteral& a);
 Litteral* arcTan(Litteral& a);
+Litteral* exp(Litteral& a);
+Litteral* ln(Litteral& a);
 
 #endif // LITTERAL_H

@@ -440,6 +440,9 @@
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
               <widget class="QPushButton" name="pushButton_29">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>SQRT</string>
                </property>
