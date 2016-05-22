@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>589</width>
-    <height>776</height>
+    <height>732</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -385,6 +385,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_34">
+               <property name="text">
+                <string>$</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -434,20 +441,6 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_7">
-             <item>
-              <widget class="QPushButton" name="pushButton_29">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>SQRT</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QPushButton" name="pushButton_30">
                <property name="text">
@@ -455,6 +448,10 @@
                </property>
               </widget>
              </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
               <widget class="QPushButton" name="pushButton_31">
                <property name="text">
@@ -477,23 +474,12 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_34">
-               <property name="text">
-                <string>$</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QPushButton" name="pushButton_35">
                <property name="text">
                 <string>RE</string>
                </property>
               </widget>
              </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
               <widget class="QPushButton" name="pushButton_36">
                <property name="text">
@@ -516,6 +502,9 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8"/>
            </item>
           </layout>
          </widget>
