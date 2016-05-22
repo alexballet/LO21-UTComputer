@@ -89,4 +89,5 @@ bool isRationnel(T& a);
 template<class T>
 bool isComplexe(T& a);
 
+
 #endif // LITTERAL_H

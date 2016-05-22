@@ -98,11 +98,13 @@ void Pile::push(const QString& value, const QString& type){
             parts.append(partsTemp.at(0));
             QString temp = partsTemp.at(2);
             temp.truncate(temp.length()-1);
+            QString temp2;
             if(partsTemp.at(1)=="-")
-                temp.append('-');
+                temp2.append('-');
             if(temp=="-" || temp=="")
                 temp.append('1');
-            parts.append(temp);
+            temp2.append(temp);
+            parts.append(temp2);
         }
             qDebug()<<parts;
             QString num = parts.at(0);

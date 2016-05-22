@@ -62,7 +62,7 @@ void Controleur::applyOperator(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            Litteral *res = *x+*y;
+            Litteral *res = *y+*x;
             pile->push(res->toString(), typeLitteral(res->toString()));
             qDebug()<<typeLitteral(res->toString());
         }
@@ -73,7 +73,7 @@ void Controleur::applyOperator(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            Litteral *res = *x-*y;
+            Litteral *res = *y-*x;
             pile->push(res->toString(), typeLitteral(res->toString()));
         }
         else
@@ -83,7 +83,7 @@ void Controleur::applyOperator(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            Litteral *res = *x * *y;
+            Litteral *res = *y * *x;
             pile->push(res->toString(), typeLitteral(res->toString()));
         }
         else
@@ -93,7 +93,7 @@ void Controleur::applyOperator(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            Litteral *res = *x / *y;
+            Litteral *res = *y / *x;
             pile->push(res->toString(), typeLitteral(res->toString()));
         }
         else
