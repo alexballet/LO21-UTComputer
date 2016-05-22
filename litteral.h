@@ -93,6 +93,8 @@ bool isComplexe(T& a);
 Litteral* div(Litteral& a, Litteral& b);
 Litteral* mod(Litteral& a, Litteral& b);
 Litteral* neg(Litteral& a);
+Litteral* num(Litteral& a);
+Litteral* den(Litteral& a);
 
 
 #endif // LITTERAL_H

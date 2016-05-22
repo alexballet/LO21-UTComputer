@@ -365,6 +365,28 @@ Litteral* neg(Litteral& a){
     return *op1 * a;
 }
 
+Litteral* num(Litteral& a){
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        Entier *res = new Entier(op1->getNumerateur().getValue());
+        return res;
+    }
+    else
+        return &a;
+}
+
+Litteral* den(Litteral& a){
+    Entier *res;
+    if(isRationnel(a)){
+        Rationnel *op1 = dynamic_cast<Rationnel*>(&a);
+        res= new Entier(op1->getDenominateur().getValue());
+    }
+    else{
+        res = new Entier(1);
+    }
+    return res;
+}
+
 //Entier
 int Entier::getValue() const {
     return value;

@@ -107,8 +107,11 @@ void Controleur::applyOperator(const QString& op){
                 Litteral *res = div(*y,*x);
                 pile->push(res->toString(), typeLitteral(res->toString()));
             }
-            else
-                throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérances entières");
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérandes entières");
+            }
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
@@ -121,8 +124,11 @@ void Controleur::applyOperator(const QString& op){
                 Litteral *res = mod(*y,*x);
                 pile->push(res->toString(), typeLitteral(res->toString()));
             }
-            else
-                throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérances entières");
+            else{
+                pile->push(y->toString(), typeLitteral(y->toString()));
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérandes entières");
+            }
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
@@ -134,7 +140,37 @@ void Controleur::applyOperator(const QString& op){
             pile->push(res->toString(), typeLitteral(res->toString()));
         }
         else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+    }
+    else if(op=="NUM"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isRationnel(*x) || isEntier(*x)){
+                Litteral *res = num(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+    }
+    else if(op=="DEN"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            if(isRationnel(*x) || isEntier(*x)){
+                Litteral *res = den(*x);
+                pile->push(res->toString(), typeLitteral(res->toString()));
+            }
+            else{
+                pile->push(x->toString(), typeLitteral(x->toString()));
+                throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
+            }
+        }
+        else
+            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
     }
 }
 
