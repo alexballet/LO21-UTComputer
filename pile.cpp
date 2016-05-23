@@ -43,18 +43,22 @@ void Pile::push(const QString& value, const QString& type){
         return;
     }
     else if(type == "Reel"){
+        int e;
         QStringList parts = value.split('.', QString::KeepEmptyParts);
+        if(parts.at(0)==""){
+            e=0;
+        }
+        else{
+            e=qAbs(parts.at(0).toInt());
+        }
         if(parts.at(1) == "" || parts.at(1) == "0"){
             Entier* entier = new Entier(parts.at(0).toInt());
             stack.push(entier);
             emit modificationEtat();
             return;
         }
-        int e = 0;
-        if(parts.at(0) != "")
-            e = qFabs(parts.at(0).toInt());
         double d = e + parts.at(1).toInt()*(qPow(10,-(parts.at(1).length())));
-        if(parts.at(0).toInt() < 0 || parts.at(0)[0] == '-')
+        if(parts.at(0)!="" && (parts.at(0).toInt() < 0 || parts.at(0)[0] == '-'))
             d *= (-1);
         Reel* reel = Reel::createLit(d); //not necessary either?
         stack.push(reel);
