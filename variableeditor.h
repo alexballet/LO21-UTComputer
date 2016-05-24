@@ -18,6 +18,9 @@ public:
 
 private:
     Ui::VariableEditor *ui;
+    void refreshTab();
+private slots:
+    void newVariableSlot();
 };
 
 #endif // VARIABLEEDITOR_H

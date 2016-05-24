@@ -2,6 +2,7 @@
 #include "ui_variableeditor.h"
 #include <QStringList>
 #include <QMap>
+#include <QMessageBox>
 #include <QDebug>
 
 VariableEditor::VariableEditor(QWidget *parent) :
@@ -10,6 +11,31 @@ VariableEditor::VariableEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    refreshTab();
+
+    connect(ui->newVariableBtn, SIGNAL(clicked()), this, SLOT(newVariableSlot()));
+}
+
+VariableEditor::~VariableEditor()
+{
+    delete ui;
+}
+
+void VariableEditor::newVariableSlot() {
+    const QString name = ui->lineEdit->text();
+    const QString value = ui->lineEdit_2->text();
+    if (name.isEmpty() || value.isEmpty()) {
+        int ret = QMessageBox::critical(this, tr("Variable Editor"),
+                                       tr("Invalid input!"),
+                                       QMessageBox::Ok);
+        return;
+    }
+
+    new Variable(new Entier(value), name.toUpper());
+    refreshTab();
+}
+
+void VariableEditor::refreshTab() {
     VariableMap* varmap = VariableMap::getInstance();
 
     ui->variableView->setRowCount(varmap->getCount());
@@ -21,9 +47,4 @@ VariableEditor::VariableEditor(QWidget *parent) :
         ui->variableView->setItem(row, 0, new QTableWidgetItem(i.key()));
         ui->variableView->setItem(row++, 1, new QTableWidgetItem(i.value()->toString()));
     }
-}
-
-VariableEditor::~VariableEditor()
-{
-    delete ui;
 }
