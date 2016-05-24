@@ -37,7 +37,8 @@ HEADERS  += qcomputer.h \
     programme.h \
     options.h \
     variableeditor.h \
-    programeditor.h
+    programeditor.h \
+    operateur.h
 
 FORMS    += qcomputer.ui \
     options.ui \

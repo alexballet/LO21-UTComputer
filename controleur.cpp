@@ -12,7 +12,7 @@ void Controleur::parse(const QString& com) {
         QString type = typeLitteral(word);
         if(type=="OperatorNum"){
             try{
-                applyOperatorNum(word);
+                applyOperatorNum(word, ops.value(word));
             }
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
@@ -78,299 +78,223 @@ QString typeLitteral(const QString& lit){
     return "Inconnu";
 }
 
-void Controleur::applyOperatorNum(const QString& op){
+void Controleur::applyOperatorNum(const QString& op, const int nbOp){
     Pile *pile = Pile::getInstance();
-    qDebug()<<0;
-    if(op=="+"){
-        qDebug()<<1;
-        if(pile->getStack()->length()>=2){
-            qDebug()<<2;
-            Litteral *tempx = pile->pop();
-            Litteral *tempy = pile->pop();
-            Litteral *x;
-            Litteral *y;
-            qDebug()<<3;
-            qDebug()<<tempx->toString();
-            Variable *atx = dynamic_cast<Variable*>(tempx);
-            Variable *aty = dynamic_cast<Variable*>(tempy);
-            if(atx){
-                qDebug()<<4;
-                x = atx->getValue();
-                qDebug()<<5;
-            }
-            else
-                x = tempx;
-            if(aty){
-                qDebug()<<4;
-                y = aty->getValue();
-                qDebug()<<5;
-            }
-            else
-                y = tempy;
-            Litteral *res = *y+*x;
-            pile->push(res->toString(), typeLitteral(res->toString()));
-            qDebug()<<typeLitteral(res->toString());
+    if(pile->getStack()->length()<nbOp)
+        throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
+    Litteral *temp1 = pile->pop();
+    Litteral *x;
+    Litteral *y;
+    Variable *var1 = dynamic_cast<Variable*>(temp1);
+    if(var1)
+        x = var1->getValue();
+    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1)){
+        x = temp1;
+    }
+    else{
+        pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+        throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
+    }
+
+    if(nbOp==2){
+        Litteral *temp2 = pile->pop();
+        Variable *var2 = dynamic_cast<Variable*>(temp2);
+        if(var2)
+            y = var2->getValue();
+        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2)){
+            y = temp2;
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(temp2->toString(), typeLitteral(temp2->toString()));
+            pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+            throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
+        }
+    }
+
+    if(op=="+"){
+        Litteral *res = *y+*x;
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="-"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Litteral *res = *y-*x;
-            pile->push(res->toString(), typeLitteral(res->toString()));
-        }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        Litteral *res = *y-*x;
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="*"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Litteral *res = *y * *x;
-            pile->push(res->toString(), typeLitteral(res->toString()));
-        }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        Litteral *res = *y * *x;
+        pile->push(res->toString(), typeLitteral(res->toString()));
+
     }
     else if(op=="/"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Litteral *res = *y / *x;
+        Litteral *res;
+        try{
+            res = *y / *x;
             pile->push(res->toString(), typeLitteral(res->toString()));
+        }catch(ComputerException c){
+            pile->setMessage(c.getInfo());
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
     else if(op=="DIV"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(isEntier(*x) && isEntier(*y)){
-                Litteral *res = div(*y,*x);
+        if(isEntier(*x) && isEntier(*y)){
+            Litteral *res;
+            try{
+                res = div(*y, *x);
                 pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
+            }catch(ComputerException c){
+                pile->setMessage(c.getInfo());
                 pile->push(y->toString(), typeLitteral(y->toString()));
                 pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérandes entières");
             }
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérandes entières");
+        }
     }
     else if(op=="MOD"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(isEntier(*x) && isEntier(*y)){
-                Litteral *res = mod(*y,*x);
+        if(isEntier(*x) && isEntier(*y)){
+            Litteral *res;
+            try{
+                res = mod(*y, *x);
                 pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
+            }catch(ComputerException c){
+                pile->setMessage(c.getInfo());
                 pile->push(y->toString(), typeLitteral(y->toString()));
                 pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérandes entières");
             }
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérandes entières");
+        }
     }
     else if(op=="NEG"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            Litteral *res = neg(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
-        }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        Litteral *res = neg(*x);
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="NUM"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isRationnel(*x) || isEntier(*x)){
-                Litteral *res = num(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
-            }
+        if(isRationnel(*x) || isEntier(*x)){
+            Litteral *res;
+            res = num(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
+        }
     }
     else if(op=="DEN"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isRationnel(*x) || isEntier(*x)){
-                Litteral *res = den(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
-            }
+        if(isRationnel(*x) || isEntier(*x)){
+            Litteral *res;
+            res = den(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
+        }
     }
     else if(op=="$"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if((isEntier(*x) || isReel(*x) || isRationnel(*x)) && (isEntier(*y) || isReel(*y) || isRationnel(*y))){
-                Litteral *res = createComplexe(*y, *x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur $ s'applique sur des opérandes entières, réelles ou rationnelles");
-            }
+        if((isEntier(*x) || isReel(*x) || isRationnel(*x)) && (isEntier(*y) || isReel(*y) || isRationnel(*y))){
+            Litteral *res = createComplexe(*y, *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur $ s'applique sur des opérandes entières, réelles ou rationnelles");
+        }
     }
     else if(op=="RE"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            Litteral *res = re(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
-        }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        Litteral *res = re(*x);
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="IM"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            Litteral *res = im(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
-        }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        Litteral *res = im(*x);
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="SIN"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = sin(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur SIN s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = sin(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur SIN s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="COS"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = cos(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur COS s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = cos(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur COS s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="TAN"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = tan(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur TAN s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = tan(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur TAN s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="ARCSIN"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = arcSin(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur ARCSIN s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = arcSin(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur ARCSIN s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="ARCCOS"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = arcCos(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur ARCCOS s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = arcCos(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur ARCCOS s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="ARCTAN"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = arcTan(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur ARCTAN s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = arcTan(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur ARCTAN s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="EXP"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = exp(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur EXP s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = exp(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur EXP s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
     else if(op=="LN"){
-        if(pile->getStack()->length()>=1){
-            Litteral *x = pile->pop();
-            if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
-                Litteral *res = ln(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur LN s'applique sur une opérande entière, réelle ou rationnelle");
-            }
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+            Litteral *res = ln(*x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
+        else{
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur LN s'applique sur une opérande entière, réelle ou rationnelle");
+        }
     }
 }
 

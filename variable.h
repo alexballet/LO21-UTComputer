@@ -17,6 +17,9 @@ public:
     void setValue(Litteral* v);
 };
 
+template<class T>
+bool isVariable(T& a);
+
 class VariableMap {
 private:
     QMap<QString, Variable*> map;

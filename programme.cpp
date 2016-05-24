@@ -15,6 +15,12 @@ QString Programme::toString() const {
     return id; //todo
 }
 
+template<class T>
+bool isProgramme(T& a){
+    Programme *c = dynamic_cast<Programme*>(&a);
+    return c!=nullptr;
+}
+
 //ProgrammeMap
 ProgrammeMap::ProgrammeMap() {
 

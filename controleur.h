@@ -4,14 +4,18 @@
 #include <QString>
 #include <QDebug>
 #include "litteral.h"
+#include "programme.h"
+#include "variable.h"
+#include "atome.h"
 #include "pile.h"
+#include "operateur.h"
 
 class Controleur {
     static Controleur* instance;
 public:
     static Controleur* getInstance();
     void parse(const QString& com);//calls Pile::push() with a string argument for the type to push
-    void applyOperatorNum(const QString& op);
+    void applyOperatorNum(const QString& op, const int nbOp);
     void applyOperatorLog(const QString& op);
     void applyOperatorPile(const QString& op);
 };

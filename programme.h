@@ -15,6 +15,8 @@ public:
     QString toString() const;
 };
 
+template<class T>
+bool isProgramme(T& a);
 
 class ProgrammeMap {
 private:

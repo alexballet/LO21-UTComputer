@@ -22,6 +22,12 @@ void Variable::setValue(Litteral* v) {
     value = v;
 }
 
+template<class T>
+bool isVariable(T& a){
+    Variable *c = dynamic_cast<Variable*>(&a);
+    return c!=nullptr;
+}
+
 //Variable Map
 VariableMap::VariableMap() {
 
