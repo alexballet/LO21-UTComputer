@@ -1,9 +1,15 @@
 #include "variable.h"
+#include "controleur.h"
 #include <QDebug>
 
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
-    VariableMap* varmap = VariableMap::getInstance();
-    varmap->insertVar(id, this);
+    if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
+        throw ComputerException("Variable ne peut pas avoir un nom");
+    }
+    else {
+        VariableMap* varmap = VariableMap::getInstance();
+        varmap->insertVar(id, this);
+    }
 }
 
 Litteral* Variable::getValue() const {
