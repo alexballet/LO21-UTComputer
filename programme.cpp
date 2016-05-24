@@ -10,7 +10,7 @@ Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
 
 Programme::Programme(const QString& i): id("lel") {
     QString temp = i;
-    instructions = temp.remove('[').remove(']').split(' ');
+    instructions = temp.remove('[').remove(']').split(' ', QString::SkipEmptyParts);
     qDebug()<<"instructions : "<<instructions;
 }
 
@@ -21,8 +21,10 @@ QString Programme::getId() const {
 QString Programme::toString() const {
     QString str;
     str.append('[');
+    str.append(' ');
     foreach(QString s, instructions){
         str.append(s);
+        str.append(' ');
     }
     str.append(']');
     return str;
@@ -35,7 +37,10 @@ bool isProgramme(T& a){
 }
 
 bool isProgramme(const QString& i){
-    qDebug()<<i.at(0);
+    qDebug()<<"tout : "<<i;
+    qDebug()<<"premier : "<<i.at(0);
+    qDebug()<<"taille : "<<i.length();
+    qDebug()<<"dernier : "<<i.at(i.length()-1);
     return i.at(0)=='[' && i.at(i.length()-1)==']';
 }
 

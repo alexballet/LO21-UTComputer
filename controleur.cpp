@@ -6,13 +6,14 @@ Controleur* Controleur::instance = nullptr;
 
 void Controleur::parse(const QString& com) {
     Pile* pile = Pile::getInstance();
+    qDebug()<<"parsed : "<<com;
     qDebug()<<typeLitteral(com);
     if(typeLitteral(com)=="Programme"){
         pile->push(Litteral::createLitteral(com, "Programme"));
         return;
     }
 
-    QStringList words = com.split(" ");
+    QStringList words = com.split(' ', QString::SkipEmptyParts);
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
