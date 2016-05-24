@@ -208,8 +208,6 @@
            </item>
           </layout>
          </widget>
-         <zorder>layoutWidget</zorder>
-         <zorder>opPile</zorder>
         </widget>
        </item>
        <item>
@@ -331,7 +329,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_79">
+              <widget class="QPushButton" name="EVAL">
                <property name="text">
                 <string>EVAL</string>
                </property>

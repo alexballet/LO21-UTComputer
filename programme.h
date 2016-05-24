@@ -4,19 +4,23 @@
 #include "litteral.h"
 #include <QVector>
 #include <QMap>
+#include <QRegularExpressionMatch>
 
 class Programme : public Litteral {
 private:
-    QVector<Litteral*> instructions; //best solution?
+    QStringList instructions; //best solution?
     QString id;
 public:
-    Programme(QVector<Litteral *> i, QString id);
+    Programme(QStringList i, QString id);
+    Programme(const QString& i);
     QString getId() const;
     QString toString() const;
 };
 
 template<class T>
 bool isProgramme(T& a);
+
+bool isProgramme(const QString& i);
 
 class ProgrammeMap {
 private:

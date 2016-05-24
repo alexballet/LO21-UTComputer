@@ -6,6 +6,12 @@ Controleur* Controleur::instance = nullptr;
 
 void Controleur::parse(const QString& com) {
     Pile* pile = Pile::getInstance();
+    qDebug()<<typeLitteral(com);
+    if(typeLitteral(com)=="Programme"){
+        pile->push(Litteral::createLitteral(com, "Programme"));
+        return;
+    }
+
     QStringList words = com.split(" ");
 
     foreach (QString word, words) {
@@ -36,7 +42,7 @@ void Controleur::parse(const QString& com) {
         }
         else if(type != "Inconnu") {
             try {
-            pile->push(Litteral::createLitteral(word, type));
+                pile->push(Litteral::createLitteral(word, type));
             }
             catch (ComputerException e) {
                 pile->setMessage(e.getInfo());
@@ -46,7 +52,11 @@ void Controleur::parse(const QString& com) {
 }
 
 QString typeLitteral(const QString& lit){
-    if(isOperatorNum(lit)){
+    if(isProgramme(lit)){
+        qDebug()<<"typeLitteral : programme";
+        return "Programme";
+    }
+    else if(isOperatorNum(lit)){
         return "OperatorNum";
     }
     else if(isOperatorLog(lit)){
@@ -477,6 +487,16 @@ void Controleur::applyOperatorPile(const QString& op){
         while(!pile->getStack()->isEmpty())
             pile->pop();
     }
+    if(op=="EVAL"){
+        Litteral *x = pile->pop();
+        Programme *p = dynamic_cast<Programme*>(x);
+        if(p){
+            QString temp = p->toString().remove('[').remove(']');
+            Controleur::getInstance()->parse(temp);
+        }
+        else
+            throw ComputerException("Erreur : l'argument empilé n'est pas un programme");
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -492,5 +512,9 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGs" || a=="UNDO" || a=="REDO" || a=="CLEAR";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGs" || a=="UNDO" || a=="REDO" || a=="CLEAR" || a=="EVAL";
+}
+
+bool isOperator(const QString& a){
+    return isOperatorNum(a) || isOperatorLog(a) || isOperatorPile(a);
 }

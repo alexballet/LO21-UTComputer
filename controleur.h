@@ -24,5 +24,6 @@ QString typeLitteral(const QString& lit);
 bool isOperatorNum(const QString& a);
 bool isOperatorLog(const QString& a);
 bool isOperatorPile(const QString& a);
+bool isOperator(const QString& a);
 
 #endif // CONTROLEUR_H

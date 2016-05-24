@@ -1,10 +1,17 @@
 #include "programme.h"
+#include "controleur.h"
 #include <QDebug>
 
 //Programme
-Programme::Programme(QVector<Litteral*> i, QString id): instructions(i), id(id) {
+Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
     progmap->insertProg(id, this);
+}
+
+Programme::Programme(const QString& i): id("lel") {
+    QString temp = i;
+    instructions = temp.remove('[').remove(']').split(' ');
+    qDebug()<<"instructions : "<<instructions;
 }
 
 QString Programme::getId() const {
@@ -12,13 +19,24 @@ QString Programme::getId() const {
 }
 
 QString Programme::toString() const {
-    return id; //todo
+    QString str;
+    str.append('[');
+    foreach(QString s, instructions){
+        str.append(s);
+    }
+    str.append(']');
+    return str;
 }
 
 template<class T>
 bool isProgramme(T& a){
     Programme *c = dynamic_cast<Programme*>(&a);
     return c!=nullptr;
+}
+
+bool isProgramme(const QString& i){
+    qDebug()<<i.at(0);
+    return i.at(0)=='[' && i.at(i.length()-1)==']';
 }
 
 //ProgrammeMap

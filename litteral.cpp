@@ -7,8 +7,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
     if (type == "Entier") {
         return new Entier(value.toInt());
     }
-
-    if (type == "Reel") {
+    else if (type == "Reel") {
             int e;
             QStringList parts = value.split('.', QString::KeepEmptyParts);
             if(parts.at(0) == ""){
@@ -25,8 +24,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
                 d *= (-1);
             return new Reel(d);
     }
-
-    if (type == "Rationnel") {
+    else if (type == "Rationnel") {
         QStringList parts = value.split('/', QString::KeepEmptyParts);
         Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
         //converting into Entier, if possible
@@ -37,9 +35,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
             return rationnel;
         }
     }
-
-
-    if (type == "Complexe"){
+    else if (type == "Complexe"){
             QStringList parts;
             if(value.count('$') == 1){
                 parts = value.split('$', QString::KeepEmptyParts);
@@ -67,12 +63,17 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
                 qDebug()<<"apres -> re : "<< re <<" | im : "<< im;
                 return new Complexe(re, im);
          }
-
-    if (type == "Atome") {
+        else if (type == "Atome") {
             qDebug()<<"bla";
             Atome* a = new Atome(value);
             return a->getLitterale();
          }
+        else if (type == "Programme") {
+            qDebug()<<"blu";
+            qDebug()<<value;
+            Programme* a = new Programme(value);
+            return a;
+        }
 
 }
 
