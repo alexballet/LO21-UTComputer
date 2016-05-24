@@ -11,6 +11,10 @@ QString Programme::getId() const {
     return id;
 }
 
+QString Programme::toString() const {
+    return id; //todo
+}
+
 //ProgrammeMap
 ProgrammeMap::ProgrammeMap() {
 
@@ -45,4 +49,18 @@ void ProgrammeMap::deleteProg(QString id) {
 
 void ProgrammeMap::insertProg(QString id, Programme* prog) {
     map.insert(id, prog);
+}
+
+unsigned int ProgrammeMap::getCount() const {
+    return map.count();
+}
+
+QMap<QString, Programme*>::const_iterator ProgrammeMap::getIteratorBegin() const {
+    QMap<QString, Programme*>::const_iterator i = map.constBegin();
+    return i;
+}
+
+QMap<QString, Programme*>::const_iterator ProgrammeMap::getIteratorEnd() const {
+    QMap<QString, Programme*>::const_iterator i = map.constEnd();
+    return i;
 }

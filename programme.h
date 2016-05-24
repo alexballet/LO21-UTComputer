@@ -12,6 +12,7 @@ private:
 public:
     Programme(QVector<Litteral *> i, QString id);
     QString getId() const;
+    QString toString() const;
 };
 
 
@@ -26,6 +27,9 @@ public:
     Programme* findProg(QString id) const;
     void deleteProg(QString id);
     void insertProg(QString id, Programme* prog);
+    unsigned int getCount() const;
+    QMap<QString, Programme*>::const_iterator getIteratorBegin() const;
+    QMap<QString, Programme*>::const_iterator getIteratorEnd() const;
 };
 
 
