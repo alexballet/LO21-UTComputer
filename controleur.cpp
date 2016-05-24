@@ -12,7 +12,7 @@ void Controleur::parse(const QString& com) {
         QString type = typeLitteral(word);
         if(type=="OperatorNum"){
             try{
-                applyOperatorNum(word, ops.value(word));
+                applyOperatorNum(word, opsNum.value(word));
             }
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
@@ -20,7 +20,7 @@ void Controleur::parse(const QString& com) {
         }
         else if(type=="OperatorLog"){
             try{
-                applyOperatorLog(word);
+                applyOperatorNum(word, opsLog.value(word));
             }
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
@@ -298,165 +298,143 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
     }
 }
 
-void Controleur::applyOperatorLog(const QString& op){
+void Controleur::applyOperatorLog(const QString& op, const int nbOp){
     Pile *pile = Pile::getInstance();
-    if(op=="="){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Litteral *res = (*y == *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+    if(pile->getStack()->length()<nbOp)
+        throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
+    Litteral *temp1 = pile->pop();
+    Litteral *x;
+    Litteral *y;
+    Variable *var1 = dynamic_cast<Variable*>(temp1);
+    if(var1)
+        x = var1->getValue();
+    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1)){
+        x = temp1;
+    }
+    else{
+        pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+        throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
+    }
+
+    if(nbOp==2){
+        Litteral *temp2 = pile->pop();
+        Variable *var2 = dynamic_cast<Variable*>(temp2);
+        if(var2)
+            y = var2->getValue();
+        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2)){
+            y = temp2;
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(temp2->toString(), typeLitteral(temp2->toString()));
+            pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+            throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
+        }
+    }
+
+    if(op=="="){
+        Litteral *res = (*y == *x);
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="!="){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Litteral *res = (*y != *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
-        }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        Litteral *res = (*y != *x);
+        pile->push(res->toString(), typeLitteral(res->toString()));
     }
     else if(op=="<"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(!isComplexe(*x) && !isComplexe(*y)){
-                Litteral *res = (*y < *x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
-            }
+        if(!isComplexe(*x) && !isComplexe(*y)){
+            Litteral *res = (*y < *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+        }
     }
     else if(op==">"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(!isComplexe(*x) && !isComplexe(*y)){
-                Litteral *res = (*y > *x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
-            }
+        if(!isComplexe(*x) && !isComplexe(*y)){
+            Litteral *res = (*y > *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+        }
     }
     else if(op==">="){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(!isComplexe(*x) && !isComplexe(*y)){
-                Litteral *res1 = (*y > *x);
-                Litteral *res2 = (*y == *x);
-                Entier *e1 = dynamic_cast<Entier*>(res1);
-                Entier *e2 = dynamic_cast<Entier*>(res2);
-                Entier *res;
-                if(e1->getValue()==1 || e2->getValue()==1)
-                    res = new Entier(1);
-                else
-                    res = new Entier(0);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
-            }
+        if(!isComplexe(*x) && !isComplexe(*y)){
+            Litteral *res1 = (*y > *x);
+            Litteral *res2 = (*y == *x);
+            Entier *e1 = dynamic_cast<Entier*>(res1);
+            Entier *e2 = dynamic_cast<Entier*>(res2);
+            Entier *res;
+            if(e1->getValue()==1 || e2->getValue()==1)
+                res = new Entier(1);
+            else
+                res = new Entier(0);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+        }
     }
     else if(op=="<="){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(!isComplexe(*x) && !isComplexe(*y)){
-                Litteral *res1 = (*y < *x);
-                Litteral *res2 = (*y == *x);
-                Entier *e1 = dynamic_cast<Entier*>(res1);
-                Entier *e2 = dynamic_cast<Entier*>(res2);
-                Entier *res;
-                if(e1->getValue()==1 || e2->getValue()==1)
-                    res = new Entier(1);
-                else
-                    res = new Entier(0);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
-            }
+        if(!isComplexe(*x) && !isComplexe(*y)){
+            Litteral *res1 = (*y < *x);
+            Litteral *res2 = (*y == *x);
+            Entier *e1 = dynamic_cast<Entier*>(res1);
+            Entier *e2 = dynamic_cast<Entier*>(res2);
+            Entier *res;
+            if(e1->getValue()==1 || e2->getValue()==1)
+                res = new Entier(1);
+            else
+                res = new Entier(0);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
+        }
     }
     else if(op=="AND"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(isEntier(*x) && isEntier(*y)){
-                Litteral *res = andF(*y, *x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
-            }
-            else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur AND s'applique sur des opérandes entières ou des expressions");
-            }
+        if(isEntier(*x) && isEntier(*y)){
+            Litteral *res = andF(*y, *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur AND s'applique sur des opérandes entières ou des expressions");
+        }
     }
     else if(op=="OR"){
-        if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            if(isEntier(*x) && isEntier(*y)){
-                Litteral *res = orF(*y, *x);
+        if(isEntier(*x) && isEntier(*y)){
+            Litteral *res = orF(*y, *x);
+            pile->push(res->toString(), typeLitteral(res->toString()));
+        }
+        else{
+            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(x->toString(), typeLitteral(x->toString()));
+            throw ComputerException("Erreur : L'opérateur OR s'applique sur des opérandes entières ou des expressions");
+        }
+    }
+    else if(op=="NOT"){
+        try{
+            if(isEntier(*x)){
+                Litteral *res = notF(*x);
                 pile->push(res->toString(), typeLitteral(res->toString()));
             }
             else{
-                pile->push(y->toString(), typeLitteral(y->toString()));
                 pile->push(x->toString(), typeLitteral(x->toString()));
-                throw ComputerException("Erreur : L'opérateur OR s'applique sur des opérandes entières ou des expressions");
+                throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
             }
         }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
-    }
-    else if(op=="NOT"){
-        if(pile->getStack()->length()>=1){
-            try{
-                Litteral *x = pile->pop();
-                if(isEntier(*x)){
-                    Litteral *res = notF(*x);
-                    pile->push(res->toString(), typeLitteral(res->toString()));
-                }
-                else{
-                    pile->push(x->toString(), typeLitteral(x->toString()));
-                    throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
-                }
-            }
-            catch(ComputerException e){
-                pile->setMessage(e.getInfo());
-            }
+        catch(ComputerException e){
+            pile->setMessage(e.getInfo());
         }
-        else
-            throw ComputerException("Erreur : 1 argument empilé nécessaire");
     }
 }
 

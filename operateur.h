@@ -5,7 +5,7 @@
 #include <QMap>
 #include <QList>
 
-static const QMap<QString, int> ops{
+static const QMap<QString, int> opsNum{
     {"+", 2},
     {"-", 2},
     {"*", 2},
@@ -26,6 +26,18 @@ static const QMap<QString, int> ops{
     {"ARCTAN", 1},
     {"EXP", 1},
     {"LN", 1}
+    };
+
+static const QMap<QString, int> opsLog{
+    {"=", 2},
+    {"!=", 2},
+    {"<", 2},
+    {">", 2},
+    {">=", 2},
+    {"<=", 2},
+    {"AND", 1},
+    {"OR", 1},
+    {"NOT", 1}
     };
 
 #endif // OPERATEUR_H

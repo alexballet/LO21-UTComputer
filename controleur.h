@@ -16,7 +16,7 @@ public:
     static Controleur* getInstance();
     void parse(const QString& com);//calls Pile::push() with a string argument for the type to push
     void applyOperatorNum(const QString& op, const int nbOp);
-    void applyOperatorLog(const QString& op);
+    void applyOperatorLog(const QString& op, const int nbOp);
     void applyOperatorPile(const QString& op);
 };
 
