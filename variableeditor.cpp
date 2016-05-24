@@ -4,15 +4,14 @@
 #include <QMap>
 #include <QMessageBox>
 #include <QDebug>
+#include "controleur.h"
 
 VariableEditor::VariableEditor(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::VariableEditor)
 {
     ui->setupUi(this);
-
     refreshTab();
-
     connect(ui->newVariableBtn, SIGNAL(clicked()), this, SLOT(newVariableSlot()));
 }
 
@@ -25,13 +24,13 @@ void VariableEditor::newVariableSlot() {
     const QString name = ui->lineEdit->text();
     const QString value = ui->lineEdit_2->text();
     if (name.isEmpty() || value.isEmpty()) {
-        int ret = QMessageBox::critical(this, tr("Variable Editor"),
+        QMessageBox::critical(this, tr("Variable Editor"),
                                        tr("Invalid input!"),
                                        QMessageBox::Ok);
         return;
     }
 
-    new Variable(new Entier(value), name.toUpper());
+    new Variable(Litteral::createLitteral(value, typeLitteral(value)), name.toUpper());
     refreshTab();
 }
 
@@ -43,7 +42,7 @@ void VariableEditor::refreshTab() {
 
     QMap<QString, Variable*>::const_iterator i;
     int row = 0;
-    for (i = varmap->getIterator(); i != varmap->getIteratorEnd(); ++i) {
+    for (i = varmap->getIteratorBegin(); i != varmap->getIteratorEnd(); ++i) {
         ui->variableView->setItem(row, 0, new QTableWidgetItem(i.key()));
         ui->variableView->setItem(row++, 1, new QTableWidgetItem(i.value()->toString()));
     }

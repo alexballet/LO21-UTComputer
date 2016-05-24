@@ -28,21 +28,16 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
 
     if (type == "Rationnel") {
         QStringList parts = value.split('/', QString::KeepEmptyParts);
-        try {
-            Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
-            //converting into Entier, if possible
-            if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
-                return new Entier(rationnel->getNumerateur().getValue());
-            }
-            else {
-                return rationnel;
-            }
+        Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
+        //converting into Entier, if possible
+        if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
+            return new Entier(rationnel->getNumerateur().getValue());
         }
-        catch (ComputerException e){
-            Pile* pile = Pile::getInstance();
-            pile->setMessage(e.getInfo());
+        else {
+            return rationnel;
         }
     }
+
 
     if (type == "Complexe"){
             QStringList parts;
@@ -80,10 +75,6 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
          }
 
 }
-
-
-
-
 
 
 Litteral* Litteral::operator +(Litteral& a){

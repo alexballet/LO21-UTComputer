@@ -47,7 +47,7 @@ Litteral* Pile::pop(){
         return stack.pop();
 }
 
-Litteral* Pile::top(){
+Litteral* Pile::top() const{
     if(stack.length()==0)
         throw ComputerException("Erreur : Pile vide");
     else

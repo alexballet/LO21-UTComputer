@@ -34,8 +34,14 @@ void Controleur::parse(const QString& com) {
                 pile->setMessage(c.getInfo());
             }
         }
-        else if(type != "Inconnu")
+        else if(type != "Inconnu") {
+            try {
             pile->push(Litteral::createLitteral(word, type));
+            }
+            catch (ComputerException e) {
+                pile->setMessage(e.getInfo());
+            }
+        }
     }
 }
 
