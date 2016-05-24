@@ -121,6 +121,7 @@ void Pile::push(const QString& value, const QString& type){
      else if (type == "Atome") {
         qDebug()<<"bla";
         Atome* a = new Atome(value);
+        qDebug()<<value;
         Litteral* lt = a->getLitterale();
         stack.push(lt);
         emit modificationEtat();
