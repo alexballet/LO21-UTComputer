@@ -4,6 +4,7 @@
 #include <QString>
 #include <QMap>
 #include <QList>
+#include <QTableWidgetItem>
 
 class Variable : public Litteral {
 private:

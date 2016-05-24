@@ -21,6 +21,7 @@ private:
     void refreshTab();
 private slots:
     void newVariableSlot();
+    void editVariableSlot(QTableWidgetItem*);
 };
 
 #endif // VARIABLEEDITOR_H
