@@ -3,6 +3,89 @@
 #include <QDebug>
 
 //Litteral
+Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
+    if (type == "Entier") {
+        return new Entier(value.toInt());
+    }
+
+    if (type == "Reel") {
+            int e;
+            QStringList parts = value.split('.', QString::KeepEmptyParts);
+            if(parts.at(0) == ""){
+                e = 0;
+            }
+            else {
+                e = qAbs(parts.at(0).toInt());
+            }
+            if (parts.at(1) == "" || parts.at(1) == "0") {
+                return new Entier(parts.at(0).toInt());
+            }
+            double d = e + parts.at(1).toInt() * (qPow(10,-(parts.at(1).length())));
+            if(parts.at(0) != "" && (parts.at(0).toInt() < 0 || parts.at(0)[0] == '-'))
+                d *= (-1);
+            return new Reel(d);
+    }
+
+    if (type == "Rationnel") {
+        QStringList parts = value.split('/', QString::KeepEmptyParts);
+        try {
+            Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
+            //converting into Entier, if possible
+            if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
+                return new Entier(rationnel->getNumerateur().getValue());
+            }
+            else {
+                return rationnel;
+            }
+        }
+        catch (ComputerException e){
+            Pile* pile = Pile::getInstance();
+            pile->setMessage(e.getInfo());
+        }
+    }
+
+    if (type == "Complexe"){
+            QStringList parts;
+            if(value.count('$') == 1){
+                parts = value.split('$', QString::KeepEmptyParts);
+            }
+            else{ //parts = [pRe,"+",pIm"i"]
+                QStringList partsTemp = value.split(' ', QString::KeepEmptyParts);
+                qDebug()<<"avant -> re : "<<partsTemp.at(0)<<partsTemp.at(1)<<" | im : "<<partsTemp.at(2);
+                if(partsTemp.at(2) == "0i"){//if it's not a complexe
+                    return new Entier(partsTemp.at(0).toInt());
+                }
+                parts.append(partsTemp.at(0));
+                QString temp = partsTemp.at(2);
+                temp.truncate(temp.length()-1);
+                QString temp2;
+                if(partsTemp.at(1) == "-")
+                    temp2.append('-');
+                if(temp == "-" || temp == "")
+                    temp.append('1');
+                temp2.append(temp);
+                parts.append(temp2);
+            }
+                qDebug()<<parts;
+                QString re = parts.at(0);
+                QString im = parts.at(1);
+                qDebug()<<"apres -> re : "<< re <<" | im : "<< im;
+                return new Complexe(re, im);
+         }
+
+    if (type == "Atome") {
+            qDebug()<<"bla";
+            Atome* a = new Atome(value);
+            return a->getLitterale();
+         }
+
+}
+
+
+
+
+
+
 Litteral* Litteral::operator +(Litteral& a){
     if(isEntier(*this) && isEntier(a)){//Entier + Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
