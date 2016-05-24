@@ -68,7 +68,7 @@ unsigned int VariableMap::getCount() const {
     return map.count();
 }
 
-QMap<QString, Variable*>::const_iterator VariableMap::getIterator() const {
+QMap<QString, Variable*>::const_iterator VariableMap::getIteratorBegin() const {
     QMap<QString, Variable*>::const_iterator i = map.constBegin();
     return i;
 }

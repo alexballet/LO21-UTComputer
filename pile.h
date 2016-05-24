@@ -31,10 +31,9 @@ public:
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
     QStack<Litteral*>* getStack();
-    void push(const QString& value, const QString& type); //push in stack
     void push(Litteral* lit);
     Litteral* pop();
-    Litteral* top();
+    Litteral* top() const;
 signals:
     void modificationEtat();
 };
