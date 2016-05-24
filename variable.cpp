@@ -6,7 +6,7 @@ Variable::Variable(Litteral *v, QString id): value(v), id(id) {
     varmap->insertVar(id, this);
 }
 
-const Litteral* Variable::getValue() const {
+Litteral* Variable::getValue() const {
     return value;
 }
 

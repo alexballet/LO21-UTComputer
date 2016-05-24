@@ -11,7 +11,7 @@ private:
     QString id;
 public:
     Variable(Litteral* v, QString id);
-    const Litteral* getValue() const;
+    Litteral* getValue() const;
     QString getId() const;
     QString toString() const;
     void setValue(Litteral* v);

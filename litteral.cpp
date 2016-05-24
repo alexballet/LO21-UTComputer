@@ -1057,3 +1057,5 @@ bool isComplexe(T& a){
     Complexe *c = dynamic_cast<Complexe*>(&a);
     return c!=nullptr;
 }
+
+

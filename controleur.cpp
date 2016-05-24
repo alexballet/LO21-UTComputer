@@ -80,10 +80,33 @@ QString typeLitteral(const QString& lit){
 
 void Controleur::applyOperatorNum(const QString& op){
     Pile *pile = Pile::getInstance();
+    qDebug()<<0;
     if(op=="+"){
+        qDebug()<<1;
         if(pile->getStack()->length()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
+            qDebug()<<2;
+            Litteral *tempx = pile->pop();
+            Litteral *tempy = pile->pop();
+            Litteral *x;
+            Litteral *y;
+            qDebug()<<3;
+            qDebug()<<tempx->toString();
+            Variable *atx = dynamic_cast<Variable*>(tempx);
+            Variable *aty = dynamic_cast<Variable*>(tempy);
+            if(atx){
+                qDebug()<<4;
+                x = atx->getValue();
+                qDebug()<<5;
+            }
+            else
+                x = tempx;
+            if(aty){
+                qDebug()<<4;
+                y = aty->getValue();
+                qDebug()<<5;
+            }
+            else
+                y = tempy;
             Litteral *res = *y+*x;
             pile->push(res->toString(), typeLitteral(res->toString()));
             qDebug()<<typeLitteral(res->toString());
