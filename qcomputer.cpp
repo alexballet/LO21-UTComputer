@@ -79,12 +79,12 @@ QComputer::QComputer(QWidget *parent) :
 
     //disable keyboard
 
-    settings.setValue("Clavier",false);
-    this->setFixedSize(589,322);
+    settings.setValue("Clavier", true);
+    /*this->setFixedSize(589,322);
     ui->clavier->hide();
     ui->opLogiques->hide();
     ui->opNumeriques->hide();
-    ui->opPile->hide();
+    ui->opPile->hide();*/
 }
 
 QComputer::~QComputer()
@@ -154,6 +154,10 @@ void QComputer::editCommmande(){
         }
         if(button->text()=="SEND"){
             emit ui->commande->returnPressed();
+            return;
+        }
+        if(button->text()=="EMPTY"){
+            ui->commande->clear();
             return;
         }
         ui->commande->setText(com+addedText);

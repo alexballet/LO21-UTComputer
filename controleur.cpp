@@ -35,7 +35,7 @@ void Controleur::parse(const QString& com) {
             }
         }
         else if(type != "Inconnu")
-            pile->push(word, type);
+            pile->push(Litteral::createLitteral(word, type));
     }
 }
 
@@ -92,7 +92,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         x = temp1;
     }
     else{
-        pile->push(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\'')));
+        pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
         throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
     }
 
@@ -105,34 +105,34 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
             y = temp2;
         }
         else{
-            pile->push(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\'')));
-            pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+            pile->push(Litteral::createLitteral(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\''))));
+            pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
             throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
         }
     }
 
     if(op=="+"){
         Litteral *res = *y+*x;
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="-"){
         Litteral *res = *y-*x;
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="*"){
         Litteral *res = *y * *x;
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
 
     }
     else if(op=="/"){
         Litteral *res;
         try{
             res = *y / *x;
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }catch(ComputerException c){
             pile->setMessage(c.getInfo());
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
         }
     }
     else if(op=="DIV"){
@@ -140,16 +140,16 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
             Litteral *res;
             try{
                 res = div(*y, *x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
+                pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
             }catch(ComputerException c){
                 pile->setMessage(c.getInfo());
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
+                pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+                pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             }
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérandes entières");
         }
     }
@@ -158,31 +158,31 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
             Litteral *res;
             try{
                 res = mod(*y, *x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
+                pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
             }catch(ComputerException c){
                 pile->setMessage(c.getInfo());
-                pile->push(y->toString(), typeLitteral(y->toString()));
-                pile->push(x->toString(), typeLitteral(x->toString()));
+                pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+                pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             }
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérandes entières");
         }
     }
     else if(op=="NEG"){
         Litteral *res = neg(*x);
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="NUM"){
         if(isRationnel(*x) || isEntier(*x)){
             Litteral *res;
             res = num(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
         }
     }
@@ -190,109 +190,109 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         if(isRationnel(*x) || isEntier(*x)){
             Litteral *res;
             res = den(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
         }
     }
     else if(op=="$"){
         if((isEntier(*x) || isReel(*x) || isRationnel(*x)) && (isEntier(*y) || isReel(*y) || isRationnel(*y))){
             Litteral *res = createComplexe(*y, *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur $ s'applique sur des opérandes entières, réelles ou rationnelles");
         }
     }
     else if(op=="RE"){
         Litteral *res = re(*x);
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="IM"){
         Litteral *res = im(*x);
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="SIN"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = sin(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur SIN s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="COS"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = cos(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur COS s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="TAN"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = tan(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur TAN s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="ARCSIN"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = arcSin(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur ARCSIN s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="ARCCOS"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = arcCos(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur ARCCOS s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="ARCTAN"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = arcTan(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur ARCTAN s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="EXP"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = exp(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur EXP s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
     else if(op=="LN"){
         if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
             Litteral *res = ln(*x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur LN s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
@@ -312,7 +312,7 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
         x = temp1;
     }
     else{
-        pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+        pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
         throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
     }
 
@@ -325,39 +325,39 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
             y = temp2;
         }
         else{
-            pile->push(temp2->toString(), typeLitteral(temp2->toString()));
-            pile->push(temp1->toString(), typeLitteral(temp1->toString()));
+            pile->push(Litteral::createLitteral(temp2->toString(), typeLitteral(temp2->toString())));
+            pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
             throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
         }
     }
 
     if(op=="="){
         Litteral *res = (*y == *x);
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="!="){
         Litteral *res = (*y != *x);
-        pile->push(res->toString(), typeLitteral(res->toString()));
+        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
     }
     else if(op=="<"){
         if(!isComplexe(*x) && !isComplexe(*y)){
             Litteral *res = (*y < *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
     }
     else if(op==">"){
         if(!isComplexe(*x) && !isComplexe(*y)){
             Litteral *res = (*y > *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
     }
@@ -372,11 +372,11 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
                 res = new Entier(1);
             else
                 res = new Entier(0);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
     }
@@ -391,33 +391,33 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
                 res = new Entier(1);
             else
                 res = new Entier(0);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
     }
     else if(op=="AND"){
         if(isEntier(*x) && isEntier(*y)){
             Litteral *res = andF(*y, *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur AND s'applique sur des opérandes entières ou des expressions");
         }
     }
     else if(op=="OR"){
         if(isEntier(*x) && isEntier(*y)){
             Litteral *res = orF(*y, *x);
-            pile->push(res->toString(), typeLitteral(res->toString()));
+            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
         }
         else{
-            pile->push(y->toString(), typeLitteral(y->toString()));
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur OR s'applique sur des opérandes entières ou des expressions");
         }
     }
@@ -425,10 +425,10 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
         try{
             if(isEntier(*x)){
                 Litteral *res = notF(*x);
-                pile->push(res->toString(), typeLitteral(res->toString()));
+                pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
             }
             else{
-                pile->push(x->toString(), typeLitteral(x->toString()));
+                pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
                 throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
             }
         }
@@ -443,7 +443,7 @@ void Controleur::applyOperatorPile(const QString& op){
     if(op=="DUP"){
         try{
             Litteral *x = pile->top();
-            pile->push(x->toString(), typeLitteral(x->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
         }
         catch(ComputerException e){
             pile->setMessage(e.getInfo());
@@ -461,8 +461,8 @@ void Controleur::applyOperatorPile(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            pile->push(x->toString(), typeLitteral(x->toString()));
-            pile->push(y->toString(), typeLitteral(y->toString()));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");

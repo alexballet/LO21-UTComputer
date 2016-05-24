@@ -7,6 +7,7 @@
 
 class Litteral {
 public:
+    static Litteral* createLitteral(const QString& value, const QString& type);
     virtual QString toString() const = 0;
     template<class T>
     static Litteral& createLit(const T);
