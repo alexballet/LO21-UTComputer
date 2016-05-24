@@ -98,7 +98,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         x = temp1;
     }
     else{
-        pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
+        pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
         throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
     }
 
@@ -111,7 +111,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
             y = temp2;
         }
         else{
-            pile->push(Litteral::createLitteral(temp2->toString(), typeLitteral(temp2->toString())));
+            pile->push(Litteral::createLitteral(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\''))));
             pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
             throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
         }
@@ -135,7 +135,6 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         try{
             res = *y / *x;
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-            //HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERERERE
         }catch(ComputerException c){
             pile->setMessage(c.getInfo());
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));

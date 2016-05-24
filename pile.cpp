@@ -34,6 +34,7 @@ QStack<Litteral*>* Pile::getStack() {
     return &stack;
 }
 
+
 void Pile::push(Litteral *lit) {
     stack.push(lit);
     emit modificationEtat();
