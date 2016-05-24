@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>449</width>
-    <height>343</height>
+    <width>534</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,23 +34,21 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>391</width>
+     <width>491</width>
      <height>261</height>
     </rect>
    </property>
    <property name="columnCount">
-    <number>2</number>
+    <number>3</number>
    </property>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
    </attribute>
-   <attribute name="horizontalHeaderStretchLastSection">
-    <bool>true</bool>
-   </attribute>
+   <column/>
    <column/>
    <column/>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>

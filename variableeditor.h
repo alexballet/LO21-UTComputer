@@ -22,6 +22,7 @@ private:
 private slots:
     void newVariableSlot();
     void editVariableSlot(QTableWidgetItem*);
+    void deleteVariableSlot();
 };
 
 #endif // VARIABLEEDITOR_H
