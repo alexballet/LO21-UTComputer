@@ -102,6 +102,9 @@ void Controleur::parse(const QString& com) {
 }
 
 void Controleur::addMementoState(Memento* mem) {
+    if (currentMemento != mementoList.length()-1) { //if changing something after undos
+        mementoList.remove(currentMemento + 1, mementoList.length() - currentMemento - 1);
+    }
     mementoList.append(mem);
     currentMemento++;
     qDebug() << "State saved! CM:" << currentMemento;
@@ -111,18 +114,18 @@ void Controleur::undo() {
     if (currentMemento == 0) {
         throw ComputerException("On ne peut plus revenir en arriere!");
     }
-    qDebug() << "UNDO! CM:" << currentMemento;
     Pile* pile = Pile::getInstance();
     pile->reinstateMemento(mementoList[--currentMemento]);
+    qDebug() << "UNDO! CM:" << currentMemento;
 }
 
 void Controleur::redo() {
     if (currentMemento == mementoList.length()-1) {
         throw ComputerException("On ne peut plus revenir en avant!");
     }
-    qDebug() << "REDO! CM:" << currentMemento;
     Pile* pile = Pile::getInstance();
     pile->reinstateMemento(mementoList[++currentMemento]);
+    qDebug() << "REDO! CM:" << currentMemento;
 }
 
 
