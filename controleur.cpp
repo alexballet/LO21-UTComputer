@@ -13,7 +13,53 @@ void Controleur::parse(const QString& com) {
         return;
     }
 
-    QStringList words = com.split(' ', QString::SkipEmptyParts);
+    QStringList words;
+
+    //manual split
+    int i;
+    QString temp;
+    bool stop=false;
+    qDebug()<<com.length();
+    for(i=0;i<com.length();i++){
+        qDebug()<<1;
+        if(com.at(i)==' '){
+            if(temp!=""){
+                words.append(temp);
+                temp="";
+            }
+            qDebug()<<2;
+            while(com.at(i)==' ' && i!=com.length()-1){//get to first character or end of string
+                i++;
+                qDebug()<<"i : "<<i;
+            }
+            if(i==com.length()-1){
+                qDebug()<<4;
+                if(com.at(i)!=' ')
+                    temp.append(com.at(i));
+                if(temp!="")
+                    words.append(temp);
+                    temp="";
+                    stop=true;
+            }
+        }
+        if(!stop){
+            temp.append(com.at(i));
+            qDebug()<<5;
+            if(com.at(i)=='['){
+                do{
+                    temp.append(com.at(i));
+                    i++;
+                }while(com.at(i)!=']');
+                temp.append(com.at(i));
+                words.append(temp);
+                temp="";
+            }
+        }
+    }
+    if(temp!="")
+        words.append(temp);
+
+    qDebug()<<words;
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
@@ -123,7 +169,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         }
         else{
             pile->push(Litteral::createLitteral(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\''))));
-            pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
+            pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
             throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
         }
     }
@@ -329,7 +375,7 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
         x = temp1;
     }
     else{
-        pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
+        pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
         throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
     }
 
@@ -342,8 +388,8 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
             y = temp2;
         }
         else{
-            pile->push(Litteral::createLitteral(temp2->toString(), typeLitteral(temp2->toString())));
-            pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
+            pile->push(Litteral::createLitteral(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\''))));
+            pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
             throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
         }
     }
@@ -460,7 +506,7 @@ void Controleur::applyOperatorPile(const QString& op){
     if(op=="DUP"){
         try{
             Litteral *x = pile->top();
-            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
+            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
         }
         catch(ComputerException e){
             pile->setMessage(e.getInfo());
@@ -478,8 +524,8 @@ void Controleur::applyOperatorPile(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
-            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
+            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+            pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
@@ -495,8 +541,10 @@ void Controleur::applyOperatorPile(const QString& op){
             QString temp = p->toString().remove('[').remove(']');
             Controleur::getInstance()->parse(temp);
         }
-        else
+        else{
+            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
             throw ComputerException("Erreur : l'argument empilé n'est pas un programme");
+        }
     }
     else if(op=="STO"){
         if(pile->getStack()->length()>=2){
@@ -505,35 +553,45 @@ void Controleur::applyOperatorPile(const QString& op){
             Variable *varTemp = dynamic_cast<Variable*>(x);
             Programme *p2 = dynamic_cast<Programme*>(y);
             QString id = x->toString().remove('\'');
-
+            qDebug()<<"1";
+            qDebug()<<"programme : "<<y->toString();
             if(typeLitteral(y->toString())=="Programme"){
-                Programme *prog = ProgrammeMap::getInstance()->findProg(id);
+                QString strToSearch = x->toString().remove('\'');
+                qDebug()<<"2";
+                Programme *p = dynamic_cast<Programme*>(x);
+                if(p)
+                    strToSearch = p->getId();
+                qDebug()<<"3";
+                Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
+                qDebug()<<"4";
                 if(prog){
-                    qDebug()<<"1";
                     prog->setInstructions(p2->getInstructions());
-                    qDebug()<<"2";
+                    qDebug()<<p2->getInstructions();
                 }
                 else{
-                    qDebug()<<"3";
-                    qDebug()<<"4";
                     prog = new Programme(y, id);
-                    qDebug()<<"5";
                 }
                 pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
             }
             else{
-                Variable *var = VariableMap::getInstance()->findVar(x->toString());
+                QString strToSearch = x->toString().remove('\'');
+                Variable *v = dynamic_cast<Variable*>(x);
+                if(v)
+                    strToSearch = v->getId();
+                Variable *var = VariableMap::getInstance()->findVar(strToSearch);
                 if(var){
                     var->setValue(y);
+                    qDebug()<<"variable trouvée";
                 }
                 else{
                     var = new Variable(y, id);
                 }
-                pile->setMessage("Update : la valeur "+y->toString()+" est stockée dans "+id);
+                pile->setMessage("Update : la valeur "+y->toString()+" est stockée dans "+strToSearch);
             }
         }
-        else
+        else{
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        }
     }
 }
 

@@ -121,19 +121,19 @@ void QComputer::on_commande_returnPressed()
     QString c = ui->commande->text();
     // extraction of each element from the line
     //(we suppose that <space> is the field separator)
-    if(typeLitteral(c)=="Programme"){
+//    if(typeLitteral(c)=="Programme"){
         controleur->parse(c);
-    }
-    else{
-        QTextStream stream(&c);
-        QString com;
-        do {
-            stream >> com; // element extraction
-            // send the command to the controller
-            if (com != "")
-                controleur->parse(com);
-        }while (com != "");
-    }
+//    }
+//    else{
+//        QTextStream stream(&c);
+//        QString com;
+//        do {
+//            stream >> com; // element extraction
+//            // send the command to the controller
+//            if (com != "")
+//                controleur->parse(com);
+//        }while (com != "");
+//    }
     // empty the command line
     ui->commande->clear();
     emit pile->modificationEtat();
