@@ -1,6 +1,7 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 #include "litteral.h"
+#include "controleur.h"
 #include <QString>
 #include <QMap>
 #include <QList>

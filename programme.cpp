@@ -14,6 +14,15 @@ Programme::Programme(const QString& i): id("lel") {
     qDebug()<<"instructions : "<<instructions;
 }
 
+Programme::Programme(Litteral* lit, const QString s){
+    ProgrammeMap* progmap = ProgrammeMap::getInstance();
+    Programme *p = dynamic_cast<Programme*>(lit);
+    id = s;
+    instructions = p->instructions;
+    progmap->insertProg(id, this);
+    qDebug()<<"programme "<<id<<" inséré !";
+}
+
 QString Programme::getId() const {
     return id;
 }

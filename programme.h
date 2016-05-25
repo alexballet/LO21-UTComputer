@@ -2,8 +2,12 @@
 #define PROGRAMME_H
 
 #include "litteral.h"
+#include "controleur.h"
 #include <QVector>
+#include <QString>
 #include <QMap>
+#include <QList>
+#include <QTableWidgetItem>
 #include <QRegularExpressionMatch>
 
 class Programme : public Litteral {
@@ -13,6 +17,7 @@ private:
 public:
     Programme(QStringList i, QString id);
     Programme(const QString& i);
+    Programme(Litteral* lit, const QString id);
     QString getId() const;
     QString toString() const;
 };

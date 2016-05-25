@@ -6,7 +6,6 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QHBoxLayout>
-#include "controleur.h"
 
 VariableEditor::VariableEditor(QWidget *parent) :
     QDialog(parent),

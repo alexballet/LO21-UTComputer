@@ -38,6 +38,9 @@
      <height>261</height>
     </rect>
    </property>
+   <property name="alternatingRowColors">
+    <bool>false</bool>
+   </property>
    <property name="columnCount">
     <number>3</number>
    </property>

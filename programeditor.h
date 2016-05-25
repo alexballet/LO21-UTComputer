@@ -22,6 +22,9 @@ private:
 
 private slots:
     void newProgramSlot();
+    void editProgSlot(QTableWidgetItem* item);
+    void deleteProgSlot();
+    void editProgWindowSlot();
 };
 
 #endif // PROGRAMEDITOR_H

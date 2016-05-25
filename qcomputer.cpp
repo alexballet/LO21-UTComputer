@@ -29,7 +29,7 @@ QComputer::QComputer(QWidget *parent) :
     QMenu *editorsMenu = new QMenu("Editors");
     menuBar->addMenu(editorsMenu);
     QAction* actionVarEditor = editorsMenu->addAction("Variable editor");
-    editorsMenu->addAction("Program editor");
+    QAction* actionProgEditor = editorsMenu->addAction("Program editor");
 
     this->layout()->setMenuBar(menuBar);
 
@@ -37,6 +37,8 @@ QComputer::QComputer(QWidget *parent) :
     connect(actionOptions, SIGNAL(triggered()),this,SLOT(slotOptions()));
     //ouvrir l'editeur de variables
     connect(actionVarEditor, SIGNAL(triggered()),this,SLOT(slotVarEditor()));
+    //ouvrir l'editeur de programmes
+    connect(actionProgEditor, SIGNAL(triggered()),this,SLOT(slotProgEditor()));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     settings.setValue("Pile", pile->getMaxAffiche());
@@ -220,4 +222,10 @@ void QComputer::slotVarEditor() {
     VariableEditor varEditor;
     varEditor.setModal(true);
     varEditor.exec();
+}
+
+void QComputer::slotProgEditor() {
+    ProgramEditor progEditor;
+    progEditor.setModal(true);
+    progEditor.exec();
 }
