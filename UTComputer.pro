@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     options.cpp \
     variableeditor.cpp \
     programeditor.cpp \
-    programeditorwindow.cpp
+    programeditorwindow.cpp \
+    memento.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
@@ -40,7 +41,8 @@ HEADERS  += qcomputer.h \
     variableeditor.h \
     programeditor.h \
     operateur.h \
-    programeditorwindow.h
+    programeditorwindow.h \
+    memento.h
 
 FORMS    += qcomputer.ui \
     options.ui \

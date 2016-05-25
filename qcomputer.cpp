@@ -77,7 +77,8 @@ QComputer::QComputer(QWidget *parent) :
         connect(button, SIGNAL(released()), this, SLOT(editCommmande()));
     }
 
-
+    //set initial memento
+    Controleur::addMementoState(pile->createMemento());
 
     //disable keyboard
 
@@ -148,7 +149,7 @@ void QComputer::editCommmande(){
         emit ui->commande->returnPressed();
     }
     else{
-        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND"){
+        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND" && button->objectName() != "UNDO" && button->objectName() != "REDO"){
             if (button->text()=="_")
                 addedText = " ";
             else
@@ -167,6 +168,31 @@ void QComputer::editCommmande(){
             ui->commande->clear();
             return;
         }
+
+        if(button->text() == "UNDO") {
+            try {
+                Controleur::undo();
+            }
+            catch (ComputerException c) {
+                Pile* pile = Pile::getInstance();
+                pile->setMessage(c.getInfo());
+                refresh();
+            }
+            return;
+        }
+
+        if(button->text() == "REDO") {
+            try {
+                Controleur::redo();
+            }
+            catch (ComputerException c) {
+                Pile* pile = Pile::getInstance();
+                pile->setMessage(c.getInfo());
+                refresh();
+            }
+            return;
+        }
+
         ui->commande->setText(com+addedText);
     }
 }

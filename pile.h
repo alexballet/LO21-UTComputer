@@ -6,6 +6,7 @@
 #include <QStack>
 #include <QtCore/qmath.h>
 #include <typeinfo>
+#include "memento.h"
 #include "litteral.h"
 #include "atome.h"
 #include "controleur.h"
@@ -34,6 +35,9 @@ public:
     void push(Litteral* lit);
     Litteral* pop();
     Litteral* top() const;
+    //Memento
+    Memento* createMemento();
+    void reinstateMemento(Memento* mem);
 signals:
     void modificationEtat();
 };

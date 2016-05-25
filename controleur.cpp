@@ -3,6 +3,8 @@
 #include <QRegularExpressionMatch>
 
 Controleur* Controleur::instance = nullptr;
+QVector<Memento*> Controleur::mementoList;
+int Controleur::currentMemento = -1;
 
 void Controleur::parse(const QString& com) {
     Pile* pile = Pile::getInstance();
@@ -45,12 +47,38 @@ void Controleur::parse(const QString& com) {
             try {
                 pile->push(Litteral::createLitteral(word, type));
             }
-            catch (ComputerException e) {
-                pile->setMessage(e.getInfo());
+            catch (ComputerException c) {
+                pile->setMessage(c.getInfo());
             }
         }
+        addMementoState(pile->createMemento());
     }
 }
+
+void Controleur::addMementoState(Memento* mem) {
+    mementoList.append(mem);
+    currentMemento++;
+    qDebug() << "State saved! CM:" << currentMemento;
+}
+
+void Controleur::undo() {
+    if (currentMemento == 0) {
+        throw ComputerException("On ne peut plus revenir en arriere!");
+    }
+    qDebug() << "UNDO! CM:" << currentMemento;
+    Pile* pile = Pile::getInstance();
+    pile->reinstateMemento(mementoList[--currentMemento]);
+}
+
+void Controleur::redo() {
+    if (currentMemento == mementoList.length()-1) {
+        throw ComputerException("On ne peut plus revenir en avant!");
+    }
+    qDebug() << "REDO! CM:" << currentMemento;
+    Pile* pile = Pile::getInstance();
+    pile->reinstateMemento(mementoList[++currentMemento]);
+}
+
 
 QString typeLitteral(const QString& lit){
     if(isProgramme(lit)){
@@ -550,7 +578,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGs" || a=="UNDO" || a=="REDO" || a=="CLEAR" || a=="EVAL" || a=="STO";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO";
 }
 
 bool isOperator(const QString& a){

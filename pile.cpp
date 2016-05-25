@@ -55,3 +55,11 @@ Litteral* Pile::top() const{
         return stack.top();
 }
 
+Memento* Pile::createMemento() {
+    return new Memento(stack);
+}
+
+void Pile::reinstateMemento(Memento* mem) {
+    stack = mem->state;
+    emit modificationEtat();
+}
