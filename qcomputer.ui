@@ -502,9 +502,16 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_36">
+              <widget class="QPushButton" name="pushButton_38">
                <property name="text">
                 <string>IM</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_36">
+               <property name="text">
+                <string>STO</string>
                </property>
               </widget>
              </item>

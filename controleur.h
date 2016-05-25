@@ -9,6 +9,7 @@
 #include "atome.h"
 #include "pile.h"
 #include "operateur.h"
+#include "expression.h"
 
 class Controleur {
     static Controleur* instance;

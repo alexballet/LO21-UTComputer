@@ -466,7 +466,7 @@ void Controleur::applyOperatorPile(const QString& op){
             pile->setMessage(e.getInfo());
         }
     }
-    if(op=="DROP"){
+    else if(op=="DROP"){
         try{
             pile->pop();
         }
@@ -474,7 +474,7 @@ void Controleur::applyOperatorPile(const QString& op){
             pile->setMessage(e.getInfo());
         }
     }
-    if(op=="SWAP"){
+    else if(op=="SWAP"){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
@@ -484,11 +484,11 @@ void Controleur::applyOperatorPile(const QString& op){
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
-    if(op=="CLEAR"){
+    else if(op=="CLEAR"){
         while(!pile->getStack()->isEmpty())
             pile->pop();
     }
-    if(op=="EVAL"){
+    else if(op=="EVAL"){
         Litteral *x = pile->pop();
         Programme *p = dynamic_cast<Programme*>(x);
         if(p){
@@ -497,6 +497,43 @@ void Controleur::applyOperatorPile(const QString& op){
         }
         else
             throw ComputerException("Erreur : l'argument empilé n'est pas un programme");
+    }
+    else if(op=="STO"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            Variable *varTemp = dynamic_cast<Variable*>(x);
+            Programme *p2 = dynamic_cast<Programme*>(y);
+            QString id = x->toString().remove('\'');
+
+            if(typeLitteral(y->toString())=="Programme"){
+                Programme *prog = ProgrammeMap::getInstance()->findProg(id);
+                if(prog){
+                    qDebug()<<"1";
+                    prog->setInstructions(p2->getInstructions());
+                    qDebug()<<"2";
+                }
+                else{
+                    qDebug()<<"3";
+                    qDebug()<<"4";
+                    prog = new Programme(y, id);
+                    qDebug()<<"5";
+                }
+                pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
+            }
+            else{
+                Variable *var = VariableMap::getInstance()->findVar(x->toString());
+                if(var){
+                    var->setValue(y);
+                }
+                else{
+                    var = new Variable(y, id);
+                }
+                pile->setMessage("Update : la valeur "+y->toString()+" est stockée dans "+id);
+            }
+        }
+        else
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
     }
 }
 
@@ -513,7 +550,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGs" || a=="UNDO" || a=="REDO" || a=="CLEAR" || a=="EVAL";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGs" || a=="UNDO" || a=="REDO" || a=="CLEAR" || a=="EVAL" || a=="STO";
 }
 
 bool isOperator(const QString& a){

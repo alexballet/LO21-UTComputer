@@ -20,6 +20,8 @@ public:
     Programme(const QString& i);
     Programme(Litteral* lit, const QString id);
     QString getId() const;
+    void setInstructions(QStringList l);
+    QStringList getInstructions() const;
     QString toString() const;
 };
 

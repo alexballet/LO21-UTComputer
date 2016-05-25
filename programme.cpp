@@ -8,23 +8,35 @@ Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
     progmap->insertProg(id, this);
 }
 
-Programme::Programme(const QString& i): id("lel") {
+Programme::Programme(const QString& i): id("") {
     QString temp = i;
     instructions = temp.remove('[').remove(']').split(' ', QString::SkipEmptyParts);
     qDebug()<<"instructions : "<<instructions;
 }
 
 Programme::Programme(Litteral* lit, const QString s){
+    qDebug()<<"A";
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
     Programme *p = dynamic_cast<Programme*>(lit);
     id = s;
+    qDebug()<<"B";
     instructions = p->instructions;
+    qDebug()<<"C";
     progmap->insertProg(id, this);
+    qDebug()<<"D";
     qDebug()<<"programme "<<id<<" inséré !";
 }
 
 QString Programme::getId() const {
     return id;
+}
+
+QStringList Programme::getInstructions() const{
+    return instructions;
+}
+
+void Programme::setInstructions(QStringList l){
+    instructions = l;
 }
 
 QString Programme::toString() const {
