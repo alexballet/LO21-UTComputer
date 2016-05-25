@@ -3,6 +3,7 @@
 
 #include "litteral.h"
 #include "controleur.h"
+#include "programeditorwindow.h"
 #include <QVector>
 #include <QString>
 #include <QMap>

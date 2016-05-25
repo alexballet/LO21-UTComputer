@@ -113,5 +113,10 @@ void ProgramEditor::deleteProgSlot() {
 }
 
 void ProgramEditor::editProgWindowSlot(){
+    QObject* senderBtn = sender();
     qDebug()<<"ouverture fenetre edition programme";
+    ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
+    qDebug()<<"créé avec succès";
+    progEditorWindow->setModal(true);
+    progEditorWindow->exec();
 }
