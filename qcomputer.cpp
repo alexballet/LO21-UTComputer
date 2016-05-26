@@ -1,11 +1,5 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
-#include <QStringList>
-#include <QTableView>
-#include <QAction>
-#include <QTableWidgetItem>
-#include <QMenuBar>
-#include <QSettings>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -88,6 +82,13 @@ QComputer::QComputer(QWidget *parent) :
     ui->opLogiques->hide();
     ui->opNumeriques->hide();
     ui->opPile->hide();*/
+
+    //Undo and Redo
+    QShortcut* undo = new QShortcut(QKeySequence::Undo, this);
+    connect(undo, SIGNAL(activated()), ui->UNDO, SLOT(click()));
+
+    QShortcut* redo = new QShortcut(QKeySequence::Redo, this);
+    connect(undo, SIGNAL(activated()), ui->REDO, SLOT(click()));
 }
 
 QComputer::~QComputer()

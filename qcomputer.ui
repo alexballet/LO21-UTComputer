@@ -301,14 +301,14 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QPushButton" name="pushButton_12">
+              <widget class="QPushButton" name="UNDO">
                <property name="text">
                 <string>UNDO</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_13">
+              <widget class="QPushButton" name="REDO">
                <property name="text">
                 <string>REDO</string>
                </property>

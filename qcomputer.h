@@ -4,6 +4,13 @@
 #include <QWidget>
 #include <QDebug>
 #include <QVector>
+#include <QStringList>
+#include <QTableView>
+#include <QAction>
+#include <QTableWidgetItem>
+#include <QMenuBar>
+#include <QSettings>
+#include <QShortcut>
 #include "pile.h"
 #include "controleur.h"
 #include "options.h"
