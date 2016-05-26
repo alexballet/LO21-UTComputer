@@ -88,7 +88,7 @@ QComputer::QComputer(QWidget *parent) :
     connect(undo, SIGNAL(activated()), ui->UNDO, SLOT(click()));
 
     QShortcut* redo = new QShortcut(QKeySequence::Redo, this);
-    connect(undo, SIGNAL(activated()), ui->REDO, SLOT(click()));
+    connect(redo, SIGNAL(activated()), ui->REDO, SLOT(click()));
 }
 
 QComputer::~QComputer()
