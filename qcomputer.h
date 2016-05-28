@@ -4,10 +4,18 @@
 #include <QWidget>
 #include <QDebug>
 #include <QVector>
+#include <QStringList>
+#include <QTableView>
+#include <QAction>
+#include <QTableWidgetItem>
+#include <QMenuBar>
+#include <QSettings>
+#include <QShortcut>
 #include "pile.h"
 #include "controleur.h"
 #include "options.h"
 #include "variableeditor.h"
+#include "programeditor.h"
 //#include "computer.h"
 
 namespace Ui {
@@ -26,6 +34,7 @@ public slots:
     void on_commande_returnPressed();
     void slotOptions();
     void slotVarEditor();
+    void slotProgEditor();
 private slots:
     void editCommmande();
     void activerClavier(bool);

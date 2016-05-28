@@ -30,3 +30,11 @@ Litteral* Atome::getLitterale() const { //finds the corresponding litterale
     //else pour Expression
     return new Expression(id);
 }
+
+template<class T>
+bool isAtome(T& a){
+    Variable *c1 = dynamic_cast<Variable*>(&a);
+    Programme *c2 = dynamic_cast<Programme*>(&a);
+    Expression *c3 = dynamic_cast<Expression*>(&a);
+    return c1!=nullptr || c2!=nullptr || c3!=nullptr;
+}

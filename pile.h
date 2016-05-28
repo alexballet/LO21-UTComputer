@@ -6,6 +6,7 @@
 #include <QStack>
 #include <QtCore/qmath.h>
 #include <typeinfo>
+#include "memento.h"
 #include "litteral.h"
 #include "atome.h"
 #include "controleur.h"
@@ -31,8 +32,12 @@ public:
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
     QStack<Litteral*>* getStack();
-    void push(const QString& value, const QString& type); //push in stack
+    void push(Litteral* lit);
     Litteral* pop();
+    Litteral* top() const;
+    //Memento
+    Memento* createMemento();
+    void reinstateMemento(Memento* mem);
 signals:
     void modificationEtat();
 };

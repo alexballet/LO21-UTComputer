@@ -7,6 +7,7 @@
 
 class Litteral {
 public:
+    static Litteral* createLitteral(const QString& value, const QString& type);
     virtual QString toString() const = 0;
     template<class T>
     static Litteral& createLit(const T);
@@ -14,6 +15,10 @@ public:
     Litteral* operator -(Litteral& a);
     Litteral* operator *(Litteral& a);
     Litteral* operator /(Litteral& a);
+    Litteral* operator ==(Litteral& a);
+    Litteral* operator !=(Litteral& a);
+    Litteral* operator <(Litteral& a);
+    Litteral* operator >(Litteral& a);
 };
 
 class LitteralNumerique : public Litteral {
@@ -88,5 +93,28 @@ bool isRationnel(T& a);
 
 template<class T>
 bool isComplexe(T& a);
+
+//opérateurs numériques
+Litteral* div(Litteral& a, Litteral& b);
+Litteral* mod(Litteral& a, Litteral& b);
+Litteral* neg(Litteral& a);
+Litteral* num(Litteral& a);
+Litteral* den(Litteral& a);
+Litteral* createComplexe(Litteral& a, Litteral& b);
+Litteral* re(Litteral& a);
+Litteral* im(Litteral& a);
+Litteral* sin(Litteral& a);
+Litteral* cos(Litteral& a);
+Litteral* tan(Litteral& a);
+Litteral* arcSin(Litteral& a);
+Litteral* arcCos(Litteral& a);
+Litteral* arcTan(Litteral& a);
+Litteral* exp(Litteral& a);
+Litteral* ln(Litteral& a);
+
+//opérateurs logiques
+Litteral* andF(Litteral& a, Litteral& b);
+Litteral* orF(Litteral& a, Litteral& b);
+Litteral* notF(Litteral& a);
 
 #endif // LITTERAL_H

@@ -1,12 +1,18 @@
 #include "variable.h"
+#include "controleur.h"
 #include <QDebug>
 
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
-    VariableMap* varmap = VariableMap::getInstance();
-    varmap->insertVar(id, this);
+    if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
+        throw ComputerException("Variable ne peut pas avoir un nom");
+    }
+    else {
+        VariableMap* varmap = VariableMap::getInstance();
+        varmap->insertVar(id, this);
+    }
 }
 
-const Litteral* Variable::getValue() const {
+Litteral* Variable::getValue() const {
     return value;
 }
 
@@ -20,6 +26,12 @@ QString Variable::toString() const {
 
 void Variable::setValue(Litteral* v) {
     value = v;
+}
+
+template<class T>
+bool isVariable(T& a){
+    Variable *c = dynamic_cast<Variable*>(&a);
+    return c!=nullptr;
 }
 
 //Variable Map
@@ -66,7 +78,7 @@ unsigned int VariableMap::getCount() const {
     return map.count();
 }
 
-QMap<QString, Variable*>::const_iterator VariableMap::getIterator() const {
+QMap<QString, Variable*>::const_iterator VariableMap::getIteratorBegin() const {
     QMap<QString, Variable*>::const_iterator i = map.constBegin();
     return i;
 }

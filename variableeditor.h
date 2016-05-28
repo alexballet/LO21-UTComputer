@@ -20,6 +20,11 @@ public slots:
     void editVariable(QTableWidgetItem*);
 private:
     Ui::VariableEditor *ui;
+    void refreshTab();
+private slots:
+    void newVariableSlot();
+    void editVariableSlot(QTableWidgetItem*);
+    void deleteVariableSlot();
 };
 
 #endif // VARIABLEEDITOR_H

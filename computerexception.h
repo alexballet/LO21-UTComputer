@@ -8,6 +8,7 @@ class ComputerException {
     QString info;
 public:
     ComputerException(const QString& str);
+    ComputerException(const QString& str, const int n);
     QString getInfo() const { return info; }
 };
 

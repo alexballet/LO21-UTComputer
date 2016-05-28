@@ -14,4 +14,7 @@ public:
     Litteral* getLitterale() const;
 };
 
+template<class T>
+bool isAtome(T& a);
+
 #endif // ATOME_H

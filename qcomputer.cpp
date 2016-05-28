@@ -1,11 +1,5 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
-#include <QStringList>
-#include <QTableView>
-#include <QAction>
-#include <QTableWidgetItem>
-#include <QMenuBar>
-#include <QSettings>
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -29,7 +23,7 @@ QComputer::QComputer(QWidget *parent) :
     QMenu *editorsMenu = new QMenu("Editors");
     menuBar->addMenu(editorsMenu);
     QAction* actionVarEditor = editorsMenu->addAction("Variable editor");
-    editorsMenu->addAction("Program editor");
+    QAction* actionProgEditor = editorsMenu->addAction("Program editor");
 
     this->layout()->setMenuBar(menuBar);
 
@@ -37,6 +31,8 @@ QComputer::QComputer(QWidget *parent) :
     connect(actionOptions, SIGNAL(triggered()),this,SLOT(slotOptions()));
     //ouvrir l'editeur de variables
     connect(actionVarEditor, SIGNAL(triggered()),this,SLOT(slotVarEditor()));
+    //ouvrir l'editeur de programmes
+    connect(actionProgEditor, SIGNAL(triggered()),this,SLOT(slotProgEditor()));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     settings.setValue("Pile", pile->getMaxAffiche());
@@ -75,16 +71,24 @@ QComputer::QComputer(QWidget *parent) :
         connect(button, SIGNAL(released()), this, SLOT(editCommmande()));
     }
 
-
+    //set initial memento
+    Controleur::addMementoState(pile->createMemento());
 
     //disable keyboard
 
-    settings.setValue("Clavier",false);
-    this->setFixedSize(589,322);
+    settings.setValue("Clavier", true);
+    /*this->setFixedSize(589,322);
     ui->clavier->hide();
     ui->opLogiques->hide();
     ui->opNumeriques->hide();
-    ui->opPile->hide();
+    ui->opPile->hide();*/
+
+    //Undo and Redo
+    QShortcut* undo = new QShortcut(QKeySequence::Undo, this);
+    connect(undo, SIGNAL(activated()), ui->UNDO, SLOT(click()));
+
+    QShortcut* redo = new QShortcut(QKeySequence::Redo, this);
+    connect(redo, SIGNAL(activated()), ui->REDO, SLOT(click()));
 }
 
 QComputer::~QComputer()
@@ -119,14 +123,19 @@ void QComputer::on_commande_returnPressed()
     QString c = ui->commande->text();
     // extraction of each element from the line
     //(we suppose that <space> is the field separator)
-    QTextStream stream(&c);
-    QString com;
-    do {
-        stream >> com; // element extraction
-        // send the command to the controller
-        if (com != "")
-            controleur->parse(com);
-    }while (com != "");
+//    if(typeLitteral(c)=="Programme"){
+        controleur->parse(c);
+//    }
+//    else{
+//        QTextStream stream(&c);
+//        QString com;
+//        do {
+//            stream >> com; // element extraction
+//            // send the command to the controller
+//            if (com != "")
+//                controleur->parse(com);
+//        }while (com != "");
+//    }
     // empty the command line
     ui->commande->clear();
     emit pile->modificationEtat();
@@ -136,22 +145,57 @@ void QComputer::editCommmande(){
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
     QString addedText="";
-    if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND"){
-        if (button->text()=="_")
-            addedText = " ";
-        else
-            addedText = button->text();
-    }
-
-    if(button->text()=="<-"){
-        com.truncate(com.length()-1);
-        ui->commande->setText(com);
-    }
-    if(button->text()=="SEND"){
+    if((isOperatorNum(button->text()) && button->text()!= "/" && button->text()!= "$" && button->text()!= "-") || isOperatorLog(button->text()) || isOperatorPile(button->text())){
+        ui->commande->setText(com+button->text());
         emit ui->commande->returnPressed();
-        return;
     }
-    ui->commande->setText(com+addedText);
+    else{
+        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND" && button->objectName() != "UNDO" && button->objectName() != "REDO"){
+            if (button->text()=="_")
+                addedText = " ";
+            else
+                addedText = button->text();
+        }
+
+        if(button->text()=="<-"){
+            com.truncate(com.length()-1);
+            ui->commande->setText(com);
+        }
+        if(button->text()=="SEND"){
+            emit ui->commande->returnPressed();
+            return;
+        }
+        if(button->text()=="EMPTY"){
+            ui->commande->clear();
+            return;
+        }
+
+        if(button->text() == "UNDO") {
+            try {
+                Controleur::undo();
+            }
+            catch (ComputerException c) {
+                Pile* pile = Pile::getInstance();
+                pile->setMessage(c.getInfo());
+                refresh();
+            }
+            return;
+        }
+
+        if(button->text() == "REDO") {
+            try {
+                Controleur::redo();
+            }
+            catch (ComputerException c) {
+                Pile* pile = Pile::getInstance();
+                pile->setMessage(c.getInfo());
+                refresh();
+            }
+            return;
+        }
+
+        ui->commande->setText(com+addedText);
+    }
 }
 
 
@@ -205,4 +249,10 @@ void QComputer::slotVarEditor() {
     VariableEditor varEditor;
     varEditor.setModal(true);
     varEditor.exec();
+}
+
+void QComputer::slotProgEditor() {
+    ProgramEditor progEditor;
+    progEditor.setModal(true);
+    progEditor.exec();
 }
