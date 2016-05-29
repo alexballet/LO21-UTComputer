@@ -159,6 +159,16 @@ Litteral* Litteral::operator +(Litteral& a){
         LitteralNumerique *resIm = dynamic_cast<LitteralNumerique*>(pIm);
         return new Complexe(*resRe, *resIm);
     }
+    else if(isExpression(a) && isComplexe(*this)){//Complexe + Expression
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Expression *op2 = dynamic_cast<Expression*>(&a);
+        return new Expression("("+op1->getPRe()->toString()+"$"+op1->getPIm()->toString()+")"+"+"+"("+op2->getText()+")");
+    }
+    else if(isExpression(*this) && isComplexe(a)){//Expression + Complexe
+        Expression *op1 = dynamic_cast<Expression*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        return new Expression("("+op1->getText()+")"+"+"+"("+op2->getPRe()->toString()+"$"+op2->getPIm()->toString()+")");
+    }
     else if(isExpression(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Expression + LitteralNumerique
         Expression *op1 = dynamic_cast<Expression*>(this);
         Litteral *op2 = dynamic_cast<Litteral*>(&a);
@@ -250,6 +260,16 @@ Litteral* Litteral::operator -(Litteral& a){
         LitteralNumerique *resRe = dynamic_cast<LitteralNumerique*>(pRe);
         LitteralNumerique *resIm = dynamic_cast<LitteralNumerique*>(pIm);
         return new Complexe(*resRe, *resIm);
+    }
+    else if(isExpression(a) && isComplexe(*this)){//Complexe - Expression
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Expression *op2 = dynamic_cast<Expression*>(&a);
+        return new Expression("("+op1->getPRe()->toString()+"$"+op1->getPIm()->toString()+")"+"-"+"("+op2->getText()+")");
+    }
+    else if(isExpression(*this) && isComplexe(a)){//Expression - Complexe
+        Expression *op1 = dynamic_cast<Expression*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        return new Expression("("+op1->getText()+")"+"-"+"("+op2->getPRe()->toString()+"$"+op2->getPIm()->toString()+")");
     }
     else if(isExpression(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Expression - LitteralNumerique
         Expression *op1 = dynamic_cast<Expression*>(this);
@@ -351,6 +371,16 @@ Litteral* Litteral::operator *(Litteral& a){
         LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
         LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
         return new Complexe(*pRe2, *pIm2);
+    }
+    else if(isExpression(a) && isComplexe(*this)){//Complexe * Expression
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Expression *op2 = dynamic_cast<Expression*>(&a);
+        return new Expression("("+op1->getPRe()->toString()+"$"+op1->getPIm()->toString()+")"+"*"+"("+op2->getText()+")");
+    }
+    else if(isExpression(*this) && isComplexe(a)){//Expression * Complexe
+        Expression *op1 = dynamic_cast<Expression*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        return new Expression("("+op1->getText()+")"+"*"+"("+op2->getPRe()->toString()+"$"+op2->getPIm()->toString()+")");
     }
     else if(isExpression(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Expression * LitteralNumerique
         Expression *op1 = dynamic_cast<Expression*>(this);
@@ -470,6 +500,16 @@ Litteral* Litteral::operator /(Litteral& a){
         LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
         LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
         return new Complexe(*pRe2, *pIm2);
+    }
+    else if(isExpression(a) && isComplexe(*this)){//Complexe / Expression
+        Complexe *op1 = dynamic_cast<Complexe*>(this);
+        Expression *op2 = dynamic_cast<Expression*>(&a);
+        return new Expression("("+op1->getPRe()->toString()+"$"+op1->getPIm()->toString()+")"+"/"+"("+op2->getText()+")");
+    }
+    else if(isExpression(*this) && isComplexe(a)){//Expression / Complexe
+        Expression *op1 = dynamic_cast<Expression*>(this);
+        Complexe *op2 = dynamic_cast<Complexe*>(&a);
+        return new Expression("("+op1->getText()+")"+"/"+"("+op2->getPRe()->toString()+"$"+op2->getPIm()->toString()+")");
     }
     else if(isExpression(*this) && (isEntier(a) || isReel(a) || isRationnel(a))){//Expression / LitteralNumerique
         Expression *op1 = dynamic_cast<Expression*>(this);
