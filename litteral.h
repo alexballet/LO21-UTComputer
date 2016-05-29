@@ -2,6 +2,7 @@
 #define LITTERAL_H
 
 #include <QString>
+#include <QStack>
 #include <typeinfo>
 #include "computerexception.h"
 
@@ -93,6 +94,9 @@ bool isRationnel(T& a);
 
 template<class T>
 bool isComplexe(T& a);
+
+template<class T>
+bool isExpression(T& a);
 
 //opérateurs numériques
 Litteral* div(Litteral& a, Litteral& b);

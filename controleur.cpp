@@ -15,6 +15,12 @@ void Controleur::parse(const QString& com) {
         return;
     }
 
+    if(typeLitteral(com)=="Expression"){
+        QString comTemp = com;
+        pile->push(Litteral::createLitteral(comTemp.remove('\''), "Expression"));
+        return;
+    }
+
     QStringList words;
 
     //manual split
@@ -65,6 +71,17 @@ void Controleur::parse(const QString& com) {
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
+        Programme *p = ProgrammeMap::getInstance()->findProg(word);
+        if(p){
+            try{
+                pile->push(Litteral::createLitteral(word, type));
+                parse("EVAL");
+                return;
+            }
+            catch(ComputerException c){
+                pile->setMessage(c.getInfo());
+            }
+        }
         if(type=="OperatorNum"){
             try{
                 applyOperatorNum(word, opsNum.value(word));
@@ -134,6 +151,10 @@ QString typeLitteral(const QString& lit){
         qDebug()<<"typeLitteral : programme";
         return "Programme";
     }
+    if(isExpression(lit)){
+        qDebug()<<"typeLitteral : expression";
+        return "Expression";
+    }
     else if(isOperatorNum(lit)){
         return "OperatorNum";
     }
@@ -182,7 +203,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
     Variable *var1 = dynamic_cast<Variable*>(temp1);
     if(var1)
         x = var1->getValue();
-    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1)){
+    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1) || isExpression(*temp1)){
         x = temp1;
     }
     else{
@@ -195,7 +216,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         Variable *var2 = dynamic_cast<Variable*>(temp2);
         if(var2)
             y = var2->getValue();
-        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2)){
+        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2) || isExpression(*temp2)){
             y = temp2;
         }
         else{
@@ -567,14 +588,27 @@ void Controleur::applyOperatorPile(const QString& op){
     }
     else if(op=="EVAL"){
         Litteral *x = pile->pop();
-        Programme *p = dynamic_cast<Programme*>(x);
-        if(p){
-            QString temp = p->toString().remove('[').remove(']');
-            Controleur::getInstance()->parse(temp);
+        Expression *e = dynamic_cast<Expression*>(x);
+        if(e){
+            QString temp = e->toString().remove('\'');
+            Programme *p = ProgrammeMap::getInstance()->findProg(temp);
+            Variable *v = VariableMap::getInstance()->findVar(temp);
+            if(p || v){
+                parse(temp);
+            }
+            else{//if it's not a variable neither a program => it's an operation like '1+SIN(3-X)'
+                qDebug()<<"parsing expression";
+                QString exp = parseExpression(temp);
+                try{
+                    parse(exp);
+                }catch(ComputerException c){
+                    pile->setMessage(c.getInfo());
+                }
+            }
         }
         else{
             pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-            throw ComputerException("Erreur : l'argument empilé n'est pas un programme");
+            throw ComputerException("Erreur : l'argument empilé n'est pas une expression");
         }
     }
     else if(op=="STO"){
@@ -624,6 +658,51 @@ void Controleur::applyOperatorPile(const QString& op){
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
         }
     }
+    else if(op=="FORGET"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            Variable *varTemp = dynamic_cast<Variable*>(x);
+            QString id = x->toString().remove('\'');
+            qDebug()<<"1";
+            if(typeLitteral(x->toString())=="Programme"){
+                QString strToSearch = x->toString().remove('\'');
+                qDebug()<<"2";
+                Programme *p = dynamic_cast<Programme*>(x);
+                if(p)
+                    strToSearch = p->getId();
+                qDebug()<<"3";
+                Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
+                qDebug()<<"4";
+                if(prog){
+                    ProgrammeMap::getInstance()->deleteProg(strToSearch);
+                }
+                else{
+                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                    throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
+                }
+                pile->setMessage("Update : le programme "+strToSearch+" est oublié");
+            }
+            else{
+                QString strToSearch = x->toString().remove('\'');
+                Variable *v = dynamic_cast<Variable*>(x);
+                if(v)
+                    strToSearch = v->getId();
+                Variable *var = VariableMap::getInstance()->findVar(strToSearch);
+                if(var){
+                    VariableMap::getInstance()->deleteVar(strToSearch);
+                    qDebug()<<"variable trouvée";
+                }
+                else{
+                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                    throw ComputerException("Erreur : l'expression n'est pas une variable enregistrée");
+                }
+                pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
+            }
+        }
+        else{
+            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+        }
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -639,7 +718,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET";
 }
 
 bool isOperator(const QString& a){
