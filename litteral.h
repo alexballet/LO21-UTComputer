@@ -2,6 +2,7 @@
 #define LITTERAL_H
 
 #include <QString>
+#include <QStack>
 #include <typeinfo>
 #include "computerexception.h"
 

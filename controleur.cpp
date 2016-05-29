@@ -597,7 +597,9 @@ void Controleur::applyOperatorPile(const QString& op){
                 parse(temp);
             }
             else{//if it's not a variable neither a program => it's an operation like '1+SIN(3-X)'
-
+                qDebug()<<"parsing expression";
+                QString exp = parseExpression(temp);
+                parse(exp);
             }
         }
         else{
