@@ -13,4 +13,6 @@ public:
     QString toString() const;
 };
 
+bool isExpression(const QString& i);
+
 #endif // EXPRESSION_H

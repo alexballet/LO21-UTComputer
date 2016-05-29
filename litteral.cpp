@@ -62,19 +62,24 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
                 QString im = parts.at(1);
                 qDebug()<<"apres -> re : "<< re <<" | im : "<< im;
                 return new Complexe(re, im);
-         }
-        else if (type == "Atome") {
-            qDebug()<<"bla";
-            Atome* a = new Atome(value);
-            return a->getLitterale();
-         }
-        else if (type == "Programme") {
-            qDebug()<<"blu";
-            qDebug()<<value;
-            Programme* a = new Programme(value);
-            return a;
-        }
-
+    }
+    else if (type == "Atome") {
+        qDebug()<<"bla";
+        Atome* a = new Atome(value);
+        return a->getLitterale();
+    }
+    else if (type == "Programme") {
+        qDebug()<<"blu";
+        qDebug()<<value;
+        Programme* a = new Programme(value);
+        return a;
+    }
+    else if (type == "Expression") {
+        qDebug()<<"bli";
+        qDebug()<<value;
+        Expression* a = new Expression(value);
+        return a;
+    }
 }
 
 

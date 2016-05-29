@@ -11,3 +11,7 @@ QString Expression::getText() const {
 QString Expression::toString() const {
     return "'" + text + "'";
 }
+
+bool isExpression(const QString& i){
+    return i.at(0)=='\'' && i.at(i.length()-1)=='\'';
+}

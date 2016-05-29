@@ -15,6 +15,12 @@ void Controleur::parse(const QString& com) {
         return;
     }
 
+    if(typeLitteral(com)=="Expression"){
+        QString comTemp = com;
+        pile->push(Litteral::createLitteral(comTemp.remove('\''), "Expression"));
+        return;
+    }
+
     QStringList words;
 
     //manual split
@@ -65,6 +71,17 @@ void Controleur::parse(const QString& com) {
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
+        Programme *p = ProgrammeMap::getInstance()->findProg(word);
+        if(p){
+            try{
+                pile->push(Litteral::createLitteral(word, type));
+                parse("EVAL");
+                return;
+            }
+            catch(ComputerException c){
+                pile->setMessage(c.getInfo());
+            }
+        }
         if(type=="OperatorNum"){
             try{
                 applyOperatorNum(word, opsNum.value(word));
@@ -133,6 +150,10 @@ QString typeLitteral(const QString& lit){
     if(isProgramme(lit)){
         qDebug()<<"typeLitteral : programme";
         return "Programme";
+    }
+    if(isExpression(lit)){
+        qDebug()<<"typeLitteral : expression";
+        return "Expression";
     }
     else if(isOperatorNum(lit)){
         return "OperatorNum";
@@ -567,14 +588,21 @@ void Controleur::applyOperatorPile(const QString& op){
     }
     else if(op=="EVAL"){
         Litteral *x = pile->pop();
-        Programme *p = dynamic_cast<Programme*>(x);
-        if(p){
-            QString temp = p->toString().remove('[').remove(']');
-            Controleur::getInstance()->parse(temp);
+        Expression *e = dynamic_cast<Expression*>(x);
+        if(e){
+            QString temp = e->toString().remove('\'');
+            Programme *p = ProgrammeMap::getInstance()->findProg(temp);
+            Variable *v = VariableMap::getInstance()->findVar(temp);
+            if(p || v){
+                parse(temp);
+            }
+            else{//if it's not a variable neither a program => it's an operation like '1+SIN(3-X)'
+
+            }
         }
         else{
             pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-            throw ComputerException("Erreur : l'argument empilé n'est pas un programme");
+            throw ComputerException("Erreur : l'argument empilé n'est pas une expression");
         }
     }
     else if(op=="STO"){
