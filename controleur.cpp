@@ -624,6 +624,51 @@ void Controleur::applyOperatorPile(const QString& op){
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
         }
     }
+    else if(op=="FORGET"){
+        if(pile->getStack()->length()>=1){
+            Litteral *x = pile->pop();
+            Variable *varTemp = dynamic_cast<Variable*>(x);
+            QString id = x->toString().remove('\'');
+            qDebug()<<"1";
+            if(typeLitteral(x->toString())=="Programme"){
+                QString strToSearch = x->toString().remove('\'');
+                qDebug()<<"2";
+                Programme *p = dynamic_cast<Programme*>(x);
+                if(p)
+                    strToSearch = p->getId();
+                qDebug()<<"3";
+                Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
+                qDebug()<<"4";
+                if(prog){
+                    ProgrammeMap::getInstance()->deleteProg(strToSearch);
+                }
+                else{
+                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                    throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
+                }
+                pile->setMessage("Update : le programme "+strToSearch+" est oublié");
+            }
+            else{
+                QString strToSearch = x->toString().remove('\'');
+                Variable *v = dynamic_cast<Variable*>(x);
+                if(v)
+                    strToSearch = v->getId();
+                Variable *var = VariableMap::getInstance()->findVar(strToSearch);
+                if(var){
+                    VariableMap::getInstance()->deleteVar(strToSearch);
+                    qDebug()<<"variable trouvée";
+                }
+                else{
+                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                    throw ComputerException("Erreur : l'expression n'est pas une variable enregistrée");
+                }
+                pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
+            }
+        }
+        else{
+            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+        }
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -639,7 +684,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET";
 }
 
 bool isOperator(const QString& a){
