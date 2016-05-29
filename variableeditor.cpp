@@ -32,7 +32,6 @@ void VariableEditor::refreshTab() {
     QTableWidgetItem* item;
     int row = 0;
 
-    QTableWidgetItem* item;
     QWidget* pWidget;
     QPushButton* btn_delete;
     QHBoxLayout* pLayout;

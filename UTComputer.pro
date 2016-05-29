@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia sql
 
 TARGET = UTComputer
 TEMPLATE = app
@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     variableeditor.cpp \
     programeditor.cpp \
     programeditorwindow.cpp \
-    memento.cpp
+    memento.cpp \
+    dbmanager.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
@@ -42,7 +43,8 @@ HEADERS  += qcomputer.h \
     programeditor.h \
     operateur.h \
     programeditorwindow.h \
-    memento.h
+    memento.h \
+    dbmanager.h
 
 FORMS    += qcomputer.ui \
     options.ui \

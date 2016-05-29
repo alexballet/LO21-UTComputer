@@ -12,12 +12,14 @@ void Controleur::parse(const QString& com) {
     qDebug()<<typeLitteral(com);
     if(typeLitteral(com)=="Programme"){
         pile->push(Litteral::createLitteral(com, "Programme"));
+        addMementoState(pile->createMemento());
         return;
     }
 
     if(typeLitteral(com)=="Expression"){
         QString comTemp = com;
         pile->push(Litteral::createLitteral(comTemp.remove('\''), "Expression"));
+        addMementoState(pile->createMemento());
         return;
     }
 
@@ -123,6 +125,8 @@ void Controleur::addMementoState(Memento* mem) {
         mementoList.remove(currentMemento + 1, mementoList.length() - currentMemento - 1);
     }
     mementoList.append(mem);
+    DbManager* dbman = DbManager::getInstance();
+    dbman->savePile();
     currentMemento++;
     qDebug() << "State saved! CM:" << currentMemento;
 }

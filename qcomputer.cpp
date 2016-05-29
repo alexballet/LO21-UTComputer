@@ -1,5 +1,7 @@
 #include "qcomputer.h"
 #include "ui_qcomputer.h"
+#include "dbmanager.h"
+
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
@@ -74,14 +76,9 @@ QComputer::QComputer(QWidget *parent) :
     //set initial memento
     Controleur::addMementoState(pile->createMemento());
 
-    //disable keyboard
-
+    //keyboard enabled at start
     settings.setValue("Clavier", true);
-    /*this->setFixedSize(589,322);
-    ui->clavier->hide();
-    ui->opLogiques->hide();
-    ui->opNumeriques->hide();
-    ui->opPile->hide();*/
+    this->setFixedSize(589,776);
 
     //Undo and Redo
     QShortcut* undo = new QShortcut(QKeySequence::Undo, this);

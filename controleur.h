@@ -12,6 +12,7 @@
 #include "pile.h"
 #include "operateur.h"
 #include "expression.h"
+#include "dbmanager.h"
 
 
 class Controleur {
