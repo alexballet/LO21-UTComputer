@@ -203,7 +203,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
     Variable *var1 = dynamic_cast<Variable*>(temp1);
     if(var1)
         x = var1->getValue();
-    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1)){
+    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1) || isExpression(*temp1)){
         x = temp1;
     }
     else{
@@ -216,7 +216,7 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
         Variable *var2 = dynamic_cast<Variable*>(temp2);
         if(var2)
             y = var2->getValue();
-        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2)){
+        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2) || isExpression(*temp2)){
             y = temp2;
         }
         else{

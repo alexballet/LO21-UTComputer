@@ -95,6 +95,9 @@ bool isRationnel(T& a);
 template<class T>
 bool isComplexe(T& a);
 
+template<class T>
+bool isExpression(T& a);
+
 //opérateurs numériques
 Litteral* div(Litteral& a, Litteral& b);
 Litteral* mod(Litteral& a, Litteral& b);
