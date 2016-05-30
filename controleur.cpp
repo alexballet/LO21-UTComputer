@@ -77,7 +77,7 @@ void Controleur::parse(const QString& com) {
         if(p){
             try{
                 pile->push(Litteral::createLitteral(word, type));
-                parse("EVAL");
+                //parse("EVAL");
                 return;
             }
             catch(ComputerException c){
@@ -597,11 +597,11 @@ void Controleur::applyOperatorPile(const QString& op){
         Litteral *x = pile->pop();
         Expression *e = dynamic_cast<Expression*>(x);
         Programme *pTemp = dynamic_cast<Programme*>(x);
-        if(pTemp && pTemp->getId()==""){
+        if(pTemp){
             parse(x->toString().remove('[').remove(']'));
             return;
         }
-        if(e){
+        else if(e){
             QString temp = e->toString().remove('\'');
             Programme *p = ProgrammeMap::getInstance()->findProg(temp);
             Variable *v = VariableMap::getInstance()->findVar(temp);
@@ -646,6 +646,7 @@ void Controleur::applyOperatorPile(const QString& op){
                     qDebug()<<p2->getInstructions();
                 }
                 else{
+                    qDebug()<<"progId : "<<id;
                     prog = new Programme(y, id);
                 }
                 pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
