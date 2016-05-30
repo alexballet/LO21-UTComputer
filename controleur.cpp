@@ -116,6 +116,9 @@ void Controleur::parse(const QString& com) {
                 pile->setMessage(c.getInfo());
             }
         }
+        else{
+            pile->setMessage("Commande inconnue !");
+        }
         addMementoState(pile->createMemento());
     }
 }
@@ -180,7 +183,7 @@ QString typeLitteral(const QString& lit){
         qDebug()<<"rationnel";
         return "Rationnel";
     }
-    else if(lit.count('.') == 0 && (lit[0].isDigit() || (lit[0]=='-' && lit[1].isDigit()))){
+    else if(lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0]=='-' && lit[1].isDigit()))){
         qDebug()<<"entier";
         return "Entier";
     }
@@ -562,7 +565,7 @@ void Controleur::applyOperatorPile(const QString& op){
     if(op=="DUP"){
         try{
             Litteral *x = pile->top();
-            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
         }
         catch(ComputerException e){
             pile->setMessage(e.getInfo());
@@ -580,8 +583,8 @@ void Controleur::applyOperatorPile(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-            pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
+            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
         }
         else
             throw ComputerException("Erreur : 2 arguments empilés nécessaires");
@@ -707,6 +710,26 @@ void Controleur::applyOperatorPile(const QString& op){
             throw ComputerException("Erreur : 1 arguments empilés nécessaires");
         }
     }
+    else if(op=="UNDO"){
+        try {
+            Controleur::undo();
+        }
+        catch (ComputerException c) {
+            Pile* pile = Pile::getInstance();
+            pile->setMessage(c.getInfo());
+            emit pile->modificationEtat();
+        }
+    }
+    else if(op=="REDO"){
+        try {
+            Controleur::redo();
+        }
+        catch (ComputerException c) {
+            Pile* pile = Pile::getInstance();
+            pile->setMessage(c.getInfo());
+            emit pile->modificationEtat();
+        }
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -722,7 +745,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET" || a=="UNDO" || a=="REDO";
 }
 
 bool isOperator(const QString& a){

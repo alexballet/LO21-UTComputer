@@ -63,7 +63,7 @@ void VariableEditor::newVariableSlot() {
     const QString value = ui->lineEdit_2->text();
     if (name.isEmpty() || value.isEmpty()) {
         QMessageBox::critical(this, tr("Variable Editor"),
-                                       tr("Invalid input!"),
+                                       tr("Remplissez les champs"),
                                        QMessageBox::Ok);
         return;
     }
@@ -72,7 +72,7 @@ void VariableEditor::newVariableSlot() {
     }
     catch (ComputerException e) {
         QMessageBox::critical(this, tr("Variable Editor"),
-                                       tr("Invalid input!"),
+                                       tr(e.getInfo().toStdString().c_str()),
                                        QMessageBox::Ok);
         return;
     }

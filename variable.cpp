@@ -3,8 +3,12 @@
 #include <QDebug>
 
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
+    QString type = typeLitteral(id);
     if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
-        throw ComputerException("Variable ne peut pas avoir un nom");
+        throw ComputerException("Une variable ne peut pas avoir un nom d'opérateur !");
+    }
+    else if(type!="Atome"){
+        throw ComputerException("Une variable doit être un atome !");
     }
     else {
         VariableMap* varmap = VariableMap::getInstance();
