@@ -4,8 +4,17 @@
 
 //Programme
 Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
-    ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    progmap->insertProg(id, this);
+    QString type = typeLitteral(id);
+    if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
+        throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
+    }
+    else if(type!="Atome"){
+        throw ComputerException("Un programme doit être un atome !");
+    }
+    else {
+        ProgrammeMap* progmap = ProgrammeMap::getInstance();
+        progmap->insertProg(id, this);
+    }
 }
 
 Programme::Programme(const QString& i): id("") {
@@ -22,9 +31,17 @@ Programme::Programme(Litteral* lit, const QString s){
     qDebug()<<"B";
     instructions = p->instructions;
     qDebug()<<"C";
-    progmap->insertProg(id, this);
-    qDebug()<<"D";
-    qDebug()<<"programme "<<id<<" inséré !";
+    QString type = typeLitteral(id);
+    if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
+        throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
+    }
+    else if(type!="Atome"){
+        throw ComputerException("Un programme doit être un atome !");
+    }
+    else {
+        ProgrammeMap* progmap = ProgrammeMap::getInstance();
+        progmap->insertProg(id, this);
+    }
 }
 
 QString Programme::getId() const {
