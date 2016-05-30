@@ -51,3 +51,6 @@ FORMS    += qcomputer.ui \
     variableeditor.ui \
     programeditor.ui \
     programeditorwindow.ui
+
+RESOURCES += \
+    sounds.qrc
