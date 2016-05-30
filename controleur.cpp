@@ -744,7 +744,8 @@ void Controleur::applyOperatorPile(const QString& op){
                 Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
                 qDebug()<<"4";
                 if(prog){
-                    QObject* senderBtn;
+                    QObject* senderBtn = new QObject();
+                    qDebug()<<"5";
                     senderBtn->setObjectName(prog->getId());
                     qDebug()<<"ouverture fenetre edition programme";
                     ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
@@ -756,23 +757,11 @@ void Controleur::applyOperatorPile(const QString& op){
                     pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                     throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
                 }
-                pile->setMessage("Update : le programme "+strToSearch+" est oublié");
-            }
-            else if(v){
-                QString strToSearch = v->getId();
-                Variable *var = VariableMap::getInstance()->findVar(strToSearch);
-                if(var){
-                    VariableMap::getInstance()->deleteVar(strToSearch);
-                    qDebug()<<"variable trouvée";
-                }
-                else{
-                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                    throw ComputerException("Erreur : l'expression n'est pas une variable enregistrée");
-                }
-                pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
+                pile->setMessage("Update : le programme "+strToSearch+" est modifié");
             }
             else{
-                throw ComputerException("Erreur : la litterale empilée n'est ni un programme, ni une variable");
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                throw ComputerException("Erreur : la litterale empilée n'est pas un programme");
             }
         }
         else{
