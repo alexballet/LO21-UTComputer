@@ -114,7 +114,10 @@ void Controleur::parse(const QString& com) {
         else{
             pile->setMessage("Commande inconnue !");
         }
-        addMementoState(pile->createMemento());
+
+        if (word != "EVAL") {
+            addMementoState(pile->createMemento());
+        }
     }
 }
 

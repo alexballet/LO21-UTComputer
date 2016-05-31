@@ -15,6 +15,7 @@ QComputer::QComputer(QWidget *parent) :
     Pile* pile = Pile::getInstance();
     QSettings settings;
     ui->setupUi(this);
+
     if(RestoreContextWindow::getAnswer()==1){
         DbManager *dbman = DbManager::getInstance();
         dbman->setOptions();
@@ -22,12 +23,7 @@ QComputer::QComputer(QWidget *parent) :
         dbman->setVariables();
         dbman->setPrograms();
         pile->setMaxAffiche(settings.value("Pile").toUInt());
-        try {
 
-        }
-        catch (QString e) {
-            qDebug() << "Erreur:" << e;
-        }
         int state = settings.value("Clavier").toInt();
         if(state){
             ui->clavier->show();
@@ -55,10 +51,6 @@ QComputer::QComputer(QWidget *parent) :
         settings.setValue("Bip", true);
     }
 
-
-    //Pile* pile = Pile::getInstance();
-
-
     //menu bar
     QMenuBar* menuBar = new QMenuBar();
 
@@ -66,7 +58,7 @@ QComputer::QComputer(QWidget *parent) :
     QMenu *fileMenu = new QMenu("Fichiers");
     menuBar->addMenu(fileMenu);
     QAction* actionOptions = fileMenu->addAction("Options");
-    fileMenu->addAction("Exit");
+    QAction* actionExit = fileMenu->addAction("Exit");
 
     //Editors
     QMenu *editorsMenu = new QMenu("Editors");
@@ -82,6 +74,8 @@ QComputer::QComputer(QWidget *parent) :
     connect(actionVarEditor, SIGNAL(triggered()),this,SLOT(slotVarEditor()));
     //ouvrir l'editeur de programmes
     connect(actionProgEditor, SIGNAL(triggered()),this,SLOT(slotProgEditor()));
+    //quitter
+    connect(actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
