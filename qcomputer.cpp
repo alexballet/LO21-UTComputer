@@ -12,18 +12,52 @@ QComputer::QComputer(QWidget *parent) :
     restoreWindow->exec();
 
     while(RestoreContextWindow::getAnswer()==-1){}
-
+    Pile* pile = Pile::getInstance();
+    QSettings settings;
+    ui->setupUi(this);
     if(RestoreContextWindow::getAnswer()==1){
         DbManager *dbman = DbManager::getInstance();
+        dbman->setOptions();
         dbman->setPile();
         dbman->setVariables();
         dbman->setPrograms();
+        pile->setMaxAffiche(settings.value("Pile").toUInt());
+        try {
+
+        }
+        catch (QString e) {
+            qDebug() << "Erreur:" << e;
+        }
+        int state = settings.value("Clavier").toInt();
+        if(state){
+            ui->clavier->show();
+            ui->opLogiques->show();
+            ui->opNumeriques->show();
+            ui->opPile->show();
+            this->setFixedSize(589,776);
+        }
+        else{
+            ui->clavier->hide();
+            ui->opLogiques->hide();
+            ui->opNumeriques->hide();
+            ui->opPile->hide();
+            this->setFixedSize(589,322);
+        }
+
+    }
+    else {
+        pile->setMaxAffiche(4);
+        settings.setValue("Pile", 4);
+        //keyboard enabled at start
+        settings.setValue("Clavier", true);
+        this->setFixedSize(589,776);
+        //disable bip sound
+        settings.setValue("Bip", true);
     }
 
-    Pile* pile = Pile::getInstance();
-    QSettings settings;
 
-    ui->setupUi(this);
+    //Pile* pile = Pile::getInstance();
+
 
     //menu bar
     QMenuBar* menuBar = new QMenuBar();
@@ -50,7 +84,6 @@ QComputer::QComputer(QWidget *parent) :
     connect(actionProgEditor, SIGNAL(triggered()),this,SLOT(slotProgEditor()));
 
     ui->vuePile->setRowCount(pile->getMaxAffiche());
-    settings.setValue("Pile", pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
     ui->vuePile->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
 
@@ -89,13 +122,6 @@ QComputer::QComputer(QWidget *parent) :
     //set initial memento
     Controleur::addMementoState(pile->createMemento());
 
-    //keyboard enabled at start
-    settings.setValue("Clavier", true);
-    this->setFixedSize(589,776);
-
-    //disable bip sound
-    settings.setValue("Bip", true);
-
     //Undo and Redo
     QShortcut* undo = new QShortcut(QKeySequence::Undo, this);
     connect(undo, SIGNAL(activated()), ui->UNDO, SLOT(click()));
@@ -103,8 +129,9 @@ QComputer::QComputer(QWidget *parent) :
     QShortcut* redo = new QShortcut(QKeySequence::Redo, this);
     connect(redo, SIGNAL(activated()), ui->REDO, SLOT(click()));
 
-//    qDebug()<<QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
     refresh();
+    //foreach (const QString &str, settings.allKeys())
+    //    qDebug() << settings.value(str).toInt();
 }
 
 QComputer::~QComputer()
@@ -113,6 +140,7 @@ QComputer::~QComputer()
     dbman->savePile();
     dbman->saveVariables();
     dbman->savePrograms();
+    dbman->saveOptions();
     delete ui;
 }
 

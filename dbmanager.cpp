@@ -13,12 +13,14 @@ DbManager::DbManager() {
     if (!db.open())
         qDebug() << "OPEN ERROR";
     QSqlQuery q(db);
-    if(!db.tables().contains("pile") || !db.tables().contains("variables") || !db.tables().contains("programs")){
+    if(!db.tables().contains("pile") || !db.tables().contains("variables") || !db.tables().contains("programs") || !db.tables().contains("options")){
         q.exec("CREATE TABLE pile (id INTEGER PRIMARY KEY AUTOINCREMENT, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
         qDebug()<<q.lastError();
         q.exec("CREATE TABLE variables (id INTEGER PRIMARY KEY AUTOINCREMENT, nameVar VARCHAR NOT NULL, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
         qDebug()<<q.lastError();
         q.exec("CREATE TABLE programs (id INTEGER PRIMARY KEY AUTOINCREMENT, nameProg VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
+        qDebug()<<q.lastError();
+        q.exec("CREATE TABLE options (id INTEGER PRIMARY KEY AUTOINCREMENT, option VARCHAR NOT NULL, valeur INTEGER NOT NULL)");
         qDebug()<<q.lastError();
     }
 
@@ -119,6 +121,28 @@ void DbManager::savePrograms() {
     }
 }
 
+void DbManager::saveOptions() {
+    qDebug() << "SAVE OPTIONS!";
+
+    QSqlQuery q(db);
+    q.exec("DELETE FROM options");
+    qDebug()<<q.lastError();
+
+    QSqlQuery query(db);
+    query.clear();
+    query.prepare("INSERT INTO options (option, valeur)"
+                  "VALUES (?, ?)");
+
+    QSettings settings;
+    foreach (const QString &str, settings.allKeys()) {
+        query.addBindValue(str);
+        query.addBindValue(settings.value(str).toInt());
+        if (!query.exec()) {
+            qDebug() << query.lastError();
+        }
+    }
+}
+
 void DbManager::setPile(){
 
     qDebug() << "SET PILE!";
@@ -189,6 +213,28 @@ void DbManager::setPrograms(){
             qDebug() << "Lit: " << lit << "nomProg: " << id;
             Programme *prog = new Programme(Litteral::createLitteral(lit, typeLitteral(lit)), id);
             progMap->insertProg(id, prog);
+        }
+    }
+}
+
+void DbManager::setOptions(){
+
+    qDebug() << "SET OPTIONS!";
+
+    QSqlQuery query(db);
+    query.clear();
+    query.exec("SELECT * FROM options");
+    if (!query.exec())
+    {
+        qDebug() << query.lastError();
+    }
+    QSettings settings;
+    if( query.isSelect() ){
+        while (query.next()) {
+            QString option = query.value("option").toString();
+            int valeur = query.value("valeur").toInt();
+            qDebug() << "option: " << option << "valeur: " << valeur;
+            settings.setValue(option, valeur);
         }
     }
 }

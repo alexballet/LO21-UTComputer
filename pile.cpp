@@ -3,6 +3,10 @@
 
 Pile* Pile::instance = nullptr;
 
+Pile::Pile(): message(""), maxAffiche(0) {
+}
+
+
 Pile* Pile::getInstance() {
     if (!instance)
         instance = new Pile();
@@ -22,7 +26,7 @@ void Pile::setMessage(const QString& msg) {
     message = msg;
 }
 
-void Pile::setMaxAffiche(int i) {
+void Pile::setMaxAffiche(unsigned int i) {
     maxAffiche = i;
 }
 

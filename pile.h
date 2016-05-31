@@ -21,7 +21,7 @@ private:
     QString message;
     unsigned int maxAffiche;
 
-    Pile():message(""), maxAffiche(4){}
+    Pile();
 
     //disabling copy and assignment
     Pile& operator=(const Pile&) = delete;
@@ -31,7 +31,7 @@ public:
     static void libererInstance();
 
     QString getMessage() const;
-    void setMaxAffiche(int);
+    void setMaxAffiche(unsigned int);
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
     QStack<Litteral*>* getStack();
