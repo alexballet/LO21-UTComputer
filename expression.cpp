@@ -52,8 +52,7 @@ QString parseExpression(const QString& s){
     qDebug()<<infix;
     QString postfix = "";
     QStack<QString> stack;
-    int i;
-    for(int i=0; i<infix.length(); i++) {
+    for(int i = 0; i < infix.length(); i++) {
         qDebug()<<infix[i];
         bool isLongOperator = false;
         //we check if it's an operator composed by more than 1 QChar

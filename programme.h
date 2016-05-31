@@ -13,7 +13,7 @@
 
 class Programme : public Litteral {
 private:
-    QStringList instructions; //best solution?
+    QStringList instructions;
     QString id;
 public:
     Programme(QStringList i, QString id);

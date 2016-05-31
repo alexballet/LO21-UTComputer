@@ -119,7 +119,6 @@ void Controleur::addMementoState(Memento* mem) {
         mementoList.remove(currentMemento + 1, mementoList.length() - currentMemento - 1);
     }
     mementoList.append(mem);
-    DbManager* dbman = DbManager::getInstance();
     currentMemento++;
     qDebug() << "State saved! CM:" << currentMemento;
 }
@@ -617,7 +616,6 @@ void Controleur::applyOperatorPile(const QString& op){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();
-            Variable *varTemp = dynamic_cast<Variable*>(x);
             Programme *p2 = dynamic_cast<Programme*>(y);
             QString id = x->toString().remove('\'');
             qDebug()<<"1";
@@ -706,7 +704,6 @@ void Controleur::applyOperatorPile(const QString& op){
         if(pile->getStack()->length()>=1){
             Litteral *x = pile->pop();
             Programme *p = dynamic_cast<Programme*>(x);
-            Variable *v = dynamic_cast<Variable*>(x);
             if(p){
                 QString strToSearch = p->getId();
                 qDebug()<<"2";

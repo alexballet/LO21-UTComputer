@@ -25,7 +25,6 @@ Programme::Programme(const QString& i): id("") {
 
 Programme::Programme(Litteral* lit, const QString s){
     qDebug()<<"A";
-    ProgrammeMap* progmap = ProgrammeMap::getInstance();
     Programme *p = dynamic_cast<Programme*>(lit);
     id = s;
     qDebug()<<"B";

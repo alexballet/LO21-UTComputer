@@ -26,5 +26,5 @@ void ProgramEditorWindow::on_ProgramEditorWindow_accepted()
     QString temp = ui->progEdit->toPlainText().remove('[').remove(']').replace('\n', ' ');
     QStringList inst = temp.split(' ', QString::SkipEmptyParts);
     Programme* prog = progmap->findProg(progId);
-    prog = new Programme(inst, progId);
+    prog->setInstructions(inst);
 }
