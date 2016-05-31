@@ -100,8 +100,8 @@ void ProgramEditor::editProgSlot(QTableWidgetItem* item) {
     QString id = ui->progView->item(item->row(), 0)->text();
     QString value = item->text();
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    Programme* prog = progmap->findProg(id);
-    prog = new Programme(Litteral::createLitteral(value, typeLitteral(value)), id);
+    progmap->deleteProg(id);
+    new Programme(Litteral::createLitteral(value, typeLitteral(value)), id);
 }
 
 void ProgramEditor::deleteProgSlot() {

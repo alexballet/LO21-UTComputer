@@ -29,7 +29,7 @@ int RestoreContextWindow::getAnswer(){
     return answer;
 }
 
-void RestoreContextWindow::on_RestoreContextWindow_finished(int result)
+void RestoreContextWindow::on_RestoreContextWindow_finished()
 {
     answer=0;
 }

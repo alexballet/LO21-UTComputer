@@ -20,7 +20,7 @@ private slots:
 
     void on_restore_rejected();
 
-    void on_RestoreContextWindow_finished(int result);
+    void on_RestoreContextWindow_finished();
 
 private:
     Ui::RestoreContextWindow *ui;
