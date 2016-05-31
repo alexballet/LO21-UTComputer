@@ -8,7 +8,9 @@ int Controleur::currentMemento = -1;
 
 void Controleur::parse(const QString& com) {
     Pile* pile = Pile::getInstance();
+    qDebug()<<"test : "<<com;
     if(typeLitteral(com)=="Programme"){
+        qDebug()<<"test : "<<com;
         pile->push(Litteral::createLitteral(com, "Programme"));
         addMementoState(pile->createMemento());
         return;
@@ -48,6 +50,7 @@ void Controleur::parse(const QString& com) {
         if(!stop){
             temp.append(com.at(i));
             if(com.at(i)=='['){
+                i++;
                 do{
                     temp.append(com.at(i));
                     i++;
@@ -64,6 +67,7 @@ void Controleur::parse(const QString& com) {
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
+        qDebug()<<"test2 : "<<word;
         Programme *p = ProgrammeMap::getInstance()->findProg(word);
         if(p){
             try{
@@ -587,7 +591,21 @@ void Controleur::applyOperatorPile(const QString& op){
         Expression *e = dynamic_cast<Expression*>(x);
         Programme *pTemp = dynamic_cast<Programme*>(x);
         if(pTemp){
-            parse(x->toString().remove('[').remove(']'));
+            QString temp = x->toString();
+            qDebug()<<"before : "<<temp;
+            while(temp.at(0)==' ')
+                temp.remove(0,1);
+            if(temp.at(0)=='[')
+                temp.remove(0, 1);
+            qDebug()<<"after : "<<temp;
+            qDebug()<<temp.length();
+            while(temp.at(temp.length()-1)==' '){
+                temp.remove(temp.length()-1,1);
+            }
+            if(temp.at(temp.length()-1)==']')
+                temp.remove(temp.length()-1, 1);
+            qDebug()<<"after : "<<temp;
+            parse(temp);
             return;
         }
         else if(e){
