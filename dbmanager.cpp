@@ -11,12 +11,14 @@ DbManager::DbManager() {
     if (!db.open())
         qDebug() << "OPEN ERROR";
     QSqlQuery q(db);
-    q.exec("CREATE TABLE pile (id INTEGER PRIMARY KEY AUTOINCREMENT, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
-    qDebug()<<q.lastError();
-    q.exec("CREATE TABLE variables (id INTEGER PRIMARY KEY AUTOINCREMENT, nameVar VARCHAR NOT NULL, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
-    qDebug()<<q.lastError();
-    q.exec("CREATE TABLE programs (id INTEGER PRIMARY KEY AUTOINCREMENT, nameProg VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
-    qDebug()<<q.lastError();
+    if(!db.tables().contains("pile") || !db.tables().contains("variables") || !db.tables().contains("programs")){
+        q.exec("CREATE TABLE pile (id INTEGER PRIMARY KEY AUTOINCREMENT, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
+        qDebug()<<q.lastError();
+        q.exec("CREATE TABLE variables (id INTEGER PRIMARY KEY AUTOINCREMENT, nameVar VARCHAR NOT NULL, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
+        qDebug()<<q.lastError();
+        q.exec("CREATE TABLE programs (id INTEGER PRIMARY KEY AUTOINCREMENT, nameProg VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
+        qDebug()<<q.lastError();
+    }
 
 }
 
@@ -75,9 +77,9 @@ void DbManager::saveVariables() {
         QString name = i.key();
         QString type = typeLitteral(i.value()->getValue()->toString());
         QString lit = i.value()->toString();
+        query.addBindValue(name);
         query.addBindValue(type);
         query.addBindValue(lit);
-        query.addBindValue(name);
         if (!query.exec())
         {
             qDebug() << query.lastError();
@@ -105,12 +107,86 @@ void DbManager::savePrograms() {
     for (i = progMap->getIteratorBegin(); i != progMap->getIteratorEnd(); ++i) {
         QString name = i.key();
         QString lit = i.value()->toString();
-        query.addBindValue(lit);
         query.addBindValue(name);
+        query.addBindValue(lit);
         if (!query.exec())
         {
             qDebug() << query.lastError();
         }
         qDebug() << "Lit: " << lit << "nomProg: " << name;
+    }
+}
+
+void DbManager::setPile(){
+
+    qDebug() << "SET PILE!";
+
+    QSqlQuery query(db);
+    query.clear();
+    query.exec("SELECT * FROM pile");
+    if (!query.exec())
+    {
+        qDebug() << query.lastError();
+    }
+
+    Pile* pile = Pile::getInstance();
+
+    if( query.isSelect() ){
+        while (query.next()) {
+            QString type = query.value("typeLit").toString();
+            QString lit = query.value("lit").toString();
+            pile->push(Litteral::createLitteral(lit, type));
+        }
+    }
+}
+
+void DbManager::setVariables(){
+
+    qDebug() << "SET VARIABLES!";
+
+    QSqlQuery query(db);
+    query.clear();
+    query.exec("SELECT * FROM variables");
+    if (!query.exec())
+    {
+        qDebug() << query.lastError();
+    }
+
+    VariableMap* varMap = VariableMap::getInstance();
+
+    if( query.isSelect() ){
+        while (query.next()) {
+            QString id = query.value("nameVar").toString();
+            QString type = query.value("typeLit").toString();
+            QString lit = query.value("lit").toString();
+            qDebug() << "Type: " << type << "lit: " << lit << "nomVar: " << id;
+            Variable *var = new Variable(Litteral::createLitteral(lit, type), id);
+            varMap->insertVar(id, var);
+        }
+    }
+}
+
+void DbManager::setPrograms(){
+
+    qDebug() << "SET PROGRAMS!";
+
+    QSqlQuery query(db);
+    query.clear();
+    query.exec("SELECT * FROM programs");
+    if (!query.exec())
+    {
+        qDebug() << query.lastError();
+    }
+
+    ProgrammeMap* progMap = ProgrammeMap::getInstance();
+
+    if( query.isSelect() ){
+        while (query.next()) {
+            QString id = query.value("nameProg").toString();
+            QString lit = query.value("lit").toString();
+            qDebug() << "Lit: " << lit << "nomProg: " << id;
+            Programme *prog = new Programme(Litteral::createLitteral(lit, typeLitteral(lit)), id);
+            progMap->insertProg(id, prog);
+        }
     }
 }

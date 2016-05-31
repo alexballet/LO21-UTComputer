@@ -7,6 +7,11 @@ QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QComputer)
 {
+    DbManager *dbman = DbManager::getInstance();
+    dbman->setPile();
+    dbman->setVariables();
+    dbman->setPrograms();
+
     Pile* pile = Pile::getInstance();
     QSettings settings;
 
@@ -87,11 +92,16 @@ QComputer::QComputer(QWidget *parent) :
     QShortcut* redo = new QShortcut(QKeySequence::Redo, this);
     connect(redo, SIGNAL(activated()), ui->REDO, SLOT(click()));
 
-    qDebug()<<QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+//    qDebug()<<QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+    refresh();
 }
 
 QComputer::~QComputer()
 {
+    DbManager *dbman = DbManager::getInstance();
+    dbman->savePile();
+    dbman->saveVariables();
+    dbman->savePrograms();
     delete ui;
 }
 
@@ -253,3 +263,4 @@ void QComputer::slotProgEditor() {
     progEditor.setModal(true);
     progEditor.exec();
 }
+

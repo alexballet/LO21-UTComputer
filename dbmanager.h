@@ -16,6 +16,9 @@ public:
     void savePile();
     void saveVariables();
     void savePrograms();
+    void setPile();
+    void setVariables();
+    void setPrograms();
 };
 
 #endif // DBMANAGER_H

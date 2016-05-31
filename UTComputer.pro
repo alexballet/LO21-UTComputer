@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     programeditor.cpp \
     programeditorwindow.cpp \
     memento.cpp \
-    dbmanager.cpp
+    dbmanager.cpp \
+    restorecontextwindow.cpp
 
 HEADERS  += qcomputer.h \
     pile.h \
@@ -44,13 +45,15 @@ HEADERS  += qcomputer.h \
     operateur.h \
     programeditorwindow.h \
     memento.h \
-    dbmanager.h
+    dbmanager.h \
+    restorecontextwindow.h
 
 FORMS    += qcomputer.ui \
     options.ui \
     variableeditor.ui \
     programeditor.ui \
-    programeditorwindow.ui
+    programeditorwindow.ui \
+    restorecontextwindow.ui
 
 RESOURCES += \
     sounds.qrc

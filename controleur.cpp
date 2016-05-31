@@ -120,9 +120,6 @@ void Controleur::addMementoState(Memento* mem) {
     }
     mementoList.append(mem);
     DbManager* dbman = DbManager::getInstance();
-    dbman->savePile();
-    dbman->saveVariables();
-    dbman->savePrograms();
     currentMemento++;
     qDebug() << "State saved! CM:" << currentMemento;
 }
