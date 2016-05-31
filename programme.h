@@ -35,6 +35,9 @@ private:
     QMap<QString, Programme*> map;
     static ProgrammeMap* instance;
     ProgrammeMap();
+    //disabling copy and assignment
+    ProgrammeMap& operator=(const ProgrammeMap&) = delete;
+    ProgrammeMap (const ProgrammeMap&) = delete;
 public:
     static ProgrammeMap* getInstance();
     static void libererInstance();

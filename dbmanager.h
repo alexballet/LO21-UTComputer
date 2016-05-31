@@ -11,6 +11,9 @@ private:
     static DbManager* instance;
     QSqlDatabase db;
     DbManager();
+    //disabling copy and assignment
+    DbManager& operator=(const DbManager&) = delete;
+    DbManager (const DbManager&) = delete;
 public:
     static DbManager* getInstance();
     void savePile();
