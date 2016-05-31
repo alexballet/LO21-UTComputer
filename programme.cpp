@@ -5,10 +5,14 @@
 //Programme
 Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
     QString type = typeLitteral(id);
+    VariableMap* varmap = VariableMap::getInstance();
     if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
         throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
     }
-    else if(type!="Atome"){
+    else if(varmap->findVar(id)) {
+        throw ComputerException("Une variable avec le même nom existe deja!");
+    }
+    else if(type != "Atome"){
         throw ComputerException("Un programme doit être un atome !");
     }
     else {
@@ -20,21 +24,23 @@ Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
 Programme::Programme(const QString& i): id("") {
     QString temp = i;
     instructions = temp.remove('[').remove(']').split(' ', QString::SkipEmptyParts);
-    qDebug()<<"instructions : "<<instructions;
 }
 
-Programme::Programme(Litteral* lit, const QString s){
-    qDebug()<<"A";
+Programme::Programme(Litteral* lit, const QString s): id(s){
     Programme *p = dynamic_cast<Programme*>(lit);
-    id = s;
-    qDebug()<<"B";
     instructions = p->instructions;
-    qDebug()<<"C";
+
     QString type = typeLitteral(id);
+    VariableMap* varmap = VariableMap::getInstance();
+
     if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
         throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
     }
-    else if(type!="Atome"){
+    else if(varmap->findVar(id)) {
+        throw ComputerException("Une variable avec le même nom existe deja!");
+    }
+    else if(type != "Atome"){
+        qDebug()<< "TYPYPPYPYPE:" << type << "id: " << id;
         throw ComputerException("Un programme doit être un atome !");
     }
     else {

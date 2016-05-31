@@ -11,7 +11,7 @@ private:
 public:
     ComputerException(const QString& str);
     ComputerException(const QString& str, const int n);
-    QString getInfo() const { return info; }
+    QString getInfo() const;
 };
 
 #endif // COMPUTEREXCEPTION_H
