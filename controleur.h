@@ -22,7 +22,9 @@ private:
     Controleur() {} //private constructor to forbid instantiation
     static QVector<Memento*> mementoList;
     static int currentMemento;
-    //INTERDIRE LA RECOPIE AUSSI
+    //disabling copy and assignment
+    Controleur& operator=(const Controleur&) = delete;
+    Controleur (const Controleur&) = delete;
 public:
     static Controleur* getInstance();
     void parse(const QString& com);//calls Pile::push() with a string argument for the type to push

@@ -27,7 +27,9 @@ private:
     QMap<QString, Variable*> map;
     static VariableMap* instance;
     VariableMap();
-    //interdire la recopie et l affectation des singletons
+    //disabling copy and assignment
+    VariableMap& operator=(const VariableMap&) = delete;
+    VariableMap (const VariableMap&) = delete;
 public:
     static VariableMap* getInstance();
     static void libererInstance();

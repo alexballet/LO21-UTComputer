@@ -23,6 +23,9 @@ private:
 
     Pile():message(""), maxAffiche(4){}
 
+    //disabling copy and assignment
+    Pile& operator=(const Pile&) = delete;
+    Pile (const Pile&) = delete;
 public:
     static Pile* getInstance();
     static void libererInstance();
