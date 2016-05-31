@@ -7,10 +7,18 @@ QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QComputer)
 {
-    DbManager *dbman = DbManager::getInstance();
-    dbman->setPile();
-    dbman->setVariables();
-    dbman->setPrograms();
+    RestoreContextWindow *restoreWindow = new RestoreContextWindow();
+    restoreWindow->setModal(true);
+    restoreWindow->exec();
+
+    while(RestoreContextWindow::getAnswer()==-1){}
+
+    if(RestoreContextWindow::getAnswer()==1){
+        DbManager *dbman = DbManager::getInstance();
+        dbman->setPile();
+        dbman->setVariables();
+        dbman->setPrograms();
+    }
 
     Pile* pile = Pile::getInstance();
     QSettings settings;

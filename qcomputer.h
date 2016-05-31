@@ -17,7 +17,7 @@
 #include "options.h"
 #include "variableeditor.h"
 #include "programeditor.h"
-//#include "computer.h"
+#include "restorecontextwindow.h"
 
 namespace Ui {
     class QComputer;
