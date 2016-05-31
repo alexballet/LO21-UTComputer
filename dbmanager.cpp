@@ -1,11 +1,13 @@
 #include "dbmanager.h"
 #include <QDebug>
+#include <QCoreApplication>
 
 DbManager* DbManager::instance = nullptr;
 
 DbManager::DbManager() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString path = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).length()-1]+"utcomputer.db";
+
+    QString path = QCoreApplication::applicationDirPath()+"/utcomputer.db";
     qDebug() << path;
     db.setDatabaseName(path);
     if (!db.open())
