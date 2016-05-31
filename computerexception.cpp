@@ -21,3 +21,7 @@ void ComputerException::playBeep() const {
     player->setVolume(50);
     player->play();
 }
+
+QString ComputerException::getInfo() const {
+    return info;
+}

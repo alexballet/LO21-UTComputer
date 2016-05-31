@@ -67,7 +67,6 @@ void ProgramEditor::refreshTab() {
         pWidget1->setLayout(pLayout1);
         ui->progView->setCellWidget(row++, 2, pWidget1);
         connect(btn_delete, SIGNAL(pressed()), this, SLOT(deleteProgSlot()));
-        //ui->variableView->setItem(row++, 2, new QTableWidgetItem())
     }
     connect(ui->progView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editProgSlot(QTableWidgetItem*)));
 }
@@ -77,7 +76,7 @@ void ProgramEditor::newProgramSlot() {
     const QString id = ui->lineEditProg->text();
     if (id.isEmpty()) {
         QMessageBox::critical(this, tr("Program Editor"),
-                                       tr("Invalid input!"),
+                                       tr("Remplissez le nom!"),
                                        QMessageBox::Ok);
         return;
     }
@@ -86,13 +85,13 @@ void ProgramEditor::newProgramSlot() {
     }
     catch (ComputerException e) {
         QMessageBox::critical(this, tr("Program Editor"),
-                                       tr("Invalid input!"),
+                                       tr(e.getInfo().toStdString().c_str()),
                                        QMessageBox::Ok);
         return;
     }
-    qDebug()<<"refreshing...";
+    //qDebug()<<"refreshing...";
     refreshTab();
-    qDebug()<<"new prog : "<<id;
+    //qDebug()<<"new prog : "<<id;
 }
 
 void ProgramEditor::editProgSlot(QTableWidgetItem* item) {
@@ -113,9 +112,9 @@ void ProgramEditor::deleteProgSlot() {
 
 void ProgramEditor::editProgWindowSlot(){
     QObject* senderBtn = sender();
-    qDebug()<<"ouverture fenetre edition programme";
+    //qDebug()<<"ouverture fenetre edition programme";
     ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
-    qDebug()<<"créé avec succès";
+    //qDebug()<<"créé avec succès";
     progEditorWindow->setModal(true);
     progEditorWindow->exec();
 }

@@ -4,11 +4,15 @@
 
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
     QString type = typeLitteral(id);
+    ProgrammeMap* progmap = ProgrammeMap::getInstance();
     if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
         throw ComputerException("Une variable ne peut pas avoir un nom d'opérateur !");
     }
-    else if(type!="Atome"){
+    else if(type != "Atome"){
         throw ComputerException("Une variable doit être un atome !");
+    }
+    else if(progmap->findProg(id)) {
+        throw ComputerException("Un programme avec le même nom existe deja!");
     }
     else {
         VariableMap* varmap = VariableMap::getInstance();
