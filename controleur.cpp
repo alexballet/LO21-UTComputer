@@ -173,7 +173,7 @@ QString typeLitteral(const QString& lit){
         qDebug()<<"rationnel";
         return "Rationnel";
     }
-    else if(lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0]=='-' && lit[1].isDigit()))){
+    else if(lit=="0" || (lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0]=='-' && lit[1].isDigit())))){
         //qDebug()<<"entier";
         return "Entier";
     }

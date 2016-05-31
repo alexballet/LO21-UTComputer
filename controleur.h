@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDebug>
 #include <QVector>
+#include <QSettings>
 #include "litteral.h"
 #include "programme.h"
 #include "variable.h"

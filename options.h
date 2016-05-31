@@ -18,6 +18,8 @@ public:
 private slots:
     void activerClavierOpt(bool);
     void setMaxAfficheSlot(int);
+    void activerBipOpt(bool);
+
 signals:
     void activerClavierSig(bool);
     void setMaxAfficheSig(int);
