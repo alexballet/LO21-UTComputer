@@ -78,6 +78,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
         Expression* a = new Expression(valueTemp.remove('\''));
         return a;
     }
+    throw ComputerException("type inconnu !");
 }
 
 
@@ -181,6 +182,7 @@ Litteral* Litteral::operator +(Litteral& a){
         Expression *op2 = dynamic_cast<Expression*>(this);
         return new Expression("("+op2->getText()+")"+"+"+"("+op1->getText()+")");
     }
+    throw ComputerException("operation impossible !");
 }
 
 Litteral* Litteral::operator -(Litteral& a){
@@ -283,6 +285,7 @@ Litteral* Litteral::operator -(Litteral& a){
         Expression *op2 = dynamic_cast<Expression*>(this);
         return new Expression("("+op2->getText()+")"+"-"+"("+op1->getText()+")");
     }
+    throw ComputerException("operation impossible !");
 }
 
 Litteral* Litteral::operator *(Litteral& a){
@@ -394,6 +397,7 @@ Litteral* Litteral::operator *(Litteral& a){
         Expression *op2 = dynamic_cast<Expression*>(this);
         return new Expression("("+op2->getText()+")"+"*"+"("+op1->getText()+")");
     }
+    throw ComputerException("operation impossible !");
 }
 
 Litteral* Litteral::operator /(Litteral& a){
@@ -523,6 +527,7 @@ Litteral* Litteral::operator /(Litteral& a){
         Expression *op2 = dynamic_cast<Expression*>(this);
         return new Expression("("+op2->getText()+")"+"/"+"("+op1->getText()+")");
     }
+    throw ComputerException("operation impossible !");
 }
 
 Litteral* Litteral::operator ==(Litteral& a){

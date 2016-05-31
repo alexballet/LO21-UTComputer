@@ -120,6 +120,9 @@ QString parseExpression(const QString& s){
                 i--;
             }
         }
+        if(infix[i]==',')
+            postfix.append(' ');
+
         qDebug()<<"stack :"<<stack;
     }
 

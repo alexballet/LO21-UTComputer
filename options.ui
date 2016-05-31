@@ -35,14 +35,21 @@
      <x>10</x>
      <y>10</y>
      <width>326</width>
-     <height>80</height>
+     <height>101</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QRadioButton" name="activerClavier">
+     <widget class="QCheckBox" name="activerClavier">
       <property name="text">
        <string>Activer Clavier</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="activerBip">
+      <property name="text">
+       <string>Activer bip sonore</string>
       </property>
      </widget>
     </item>

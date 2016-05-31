@@ -1,11 +1,15 @@
 #include "computerexception.h"
 
 ComputerException::ComputerException(const QString &str): info(str) {
-    playBeep();
+    QSettings settings;
+    if(settings.value("Bip")==true)
+        playBeep();
 }
 
 ComputerException::ComputerException(const QString &str, const int n){
-    playBeep();
+    QSettings settings;
+    if(settings.value("Bip")==true)
+        playBeep();
     QStringList l = str.split('$', QString::KeepEmptyParts);
     qDebug()<<l;
     info = l.at(0) + QString::number(n) + l.at(1);

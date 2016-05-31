@@ -2,6 +2,7 @@
 #define COMPUTEREXCEPTION_H
 
 #include <QString>
+#include <QSettings>
 #include <QMediaPlayer>
 
 class ComputerException {

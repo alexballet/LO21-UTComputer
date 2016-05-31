@@ -93,6 +93,9 @@ QComputer::QComputer(QWidget *parent) :
     settings.setValue("Clavier", true);
     this->setFixedSize(589,776);
 
+    //disable bip sound
+    settings.setValue("Bip", true);
+
     //Undo and Redo
     QShortcut* undo = new QShortcut(QKeySequence::Undo, this);
     connect(undo, SIGNAL(activated()), ui->UNDO, SLOT(click()));
