@@ -86,6 +86,8 @@ QComputer::QComputer(QWidget *parent) :
 
     QShortcut* redo = new QShortcut(QKeySequence::Redo, this);
     connect(redo, SIGNAL(activated()), ui->REDO, SLOT(click()));
+
+    qDebug()<<QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
 }
 
 QComputer::~QComputer()
@@ -147,7 +149,7 @@ void QComputer::editCommmande(){
         emit ui->commande->returnPressed();
     }
     else{
-        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND"){
+        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND" && button->objectName() != "UNDO" && button->objectName() != "REDO"){
             if (button->text()=="_")
                 addedText = " ";
             else
@@ -164,6 +166,28 @@ void QComputer::editCommmande(){
         }
         if(button->text()=="EMPTY"){
             ui->commande->clear();
+            return;
+        }
+        if(button->text()=="UNDO"){
+            try {
+                Controleur::undo();
+            }
+            catch (ComputerException c) {
+                Pile* pile = Pile::getInstance();
+                pile->setMessage(c.getInfo());
+                refresh();
+            }
+            return;
+        }
+        if(button->text()=="REDO"){
+            try {
+                Controleur::redo();
+            }
+            catch (ComputerException c) {
+                Pile* pile = Pile::getInstance();
+                pile->setMessage(c.getInfo());
+                refresh();
+            }
             return;
         }
 

@@ -10,6 +10,7 @@
 #include <QTableWidgetItem>
 #include <QMenuBar>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QShortcut>
 #include "pile.h"
 #include "controleur.h"

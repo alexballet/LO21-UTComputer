@@ -23,7 +23,8 @@ ProgramEditorWindow::~ProgramEditorWindow()
 void ProgramEditorWindow::on_ProgramEditorWindow_accepted()
 {
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    QStringList inst = ui->progEdit->toPlainText().remove('[').remove(']').split(' ', QString::SkipEmptyParts);
+    QString temp = ui->progEdit->toPlainText().remove('[').remove(']').replace('\n', ' ');
+    QStringList inst = temp.split(' ', QString::SkipEmptyParts);
     Programme* prog = progmap->findProg(progId);
     prog = new Programme(inst, progId);
 }

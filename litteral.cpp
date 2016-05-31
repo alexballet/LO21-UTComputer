@@ -42,7 +42,6 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
             }
             else{ //parts = [pRe,"+",pIm"i"]
                 QStringList partsTemp = value.split(' ', QString::KeepEmptyParts);
-                qDebug()<<"avant -> re : "<<partsTemp.at(0)<<partsTemp.at(1)<<" | im : "<<partsTemp.at(2);
                 if(partsTemp.at(2) == "0i"){//if it's not a complexe
                     return new Entier(partsTemp.at(0).toInt());
                 }
@@ -57,10 +56,8 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
                 temp2.append(temp);
                 parts.append(temp2);
             }
-                qDebug()<<parts;
                 QString re = parts.at(0);
                 QString im = parts.at(1);
-                qDebug()<<"apres -> re : "<< re <<" | im : "<< im;
                 return new Complexe(re, im);
     }
     else if (type == "Atome") {

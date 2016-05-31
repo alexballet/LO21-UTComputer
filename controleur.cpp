@@ -8,8 +8,6 @@ int Controleur::currentMemento = -1;
 
 void Controleur::parse(const QString& com) {
     Pile* pile = Pile::getInstance();
-    qDebug()<<"parsed : "<<com;
-    qDebug()<<typeLitteral(com);
     if(typeLitteral(com)=="Programme"){
         pile->push(Litteral::createLitteral(com, "Programme"));
         addMementoState(pile->createMemento());
@@ -29,21 +27,16 @@ void Controleur::parse(const QString& com) {
     int i;
     QString temp;
     bool stop=false;
-    qDebug()<<com.length();
     for(i=0;i<com.length();i++){
-        qDebug()<<1;
         if(com.at(i)==' '){
             if(temp!=""){
                 words.append(temp);
                 temp="";
             }
-            qDebug()<<2;
             while(com.at(i)==' ' && i!=com.length()-1){//get to first character or end of string
                 i++;
-                qDebug()<<"i : "<<i;
             }
             if(i==com.length()-1){
-                qDebug()<<4;
                 if(com.at(i)!=' ')
                     temp.append(com.at(i));
                 if(temp!="")
@@ -54,7 +47,6 @@ void Controleur::parse(const QString& com) {
         }
         if(!stop){
             temp.append(com.at(i));
-            qDebug()<<5;
             if(com.at(i)=='['){
                 do{
                     temp.append(com.at(i));
@@ -69,7 +61,6 @@ void Controleur::parse(const QString& com) {
     if(temp!="")
         words.append(temp);
 
-    qDebug()<<words;
 
     foreach (QString word, words) {
         QString type = typeLitteral(word);
@@ -130,6 +121,8 @@ void Controleur::addMementoState(Memento* mem) {
     mementoList.append(mem);
     DbManager* dbman = DbManager::getInstance();
     dbman->savePile();
+    dbman->saveVariables();
+    dbman->savePrograms();
     currentMemento++;
     qDebug() << "State saved! CM:" << currentMemento;
 }
@@ -184,7 +177,7 @@ QString typeLitteral(const QString& lit){
         return "Rationnel";
     }
     else if(lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0]=='-' && lit[1].isDigit()))){
-        qDebug()<<"entier";
+        //qDebug()<<"entier";
         return "Entier";
     }
     else {
@@ -712,26 +705,6 @@ void Controleur::applyOperatorPile(const QString& op){
             throw ComputerException("Erreur : 1 arguments empilés nécessaires");
         }
     }
-    else if(op=="UNDO"){
-        try {
-            Controleur::undo();
-        }
-        catch (ComputerException c) {
-            Pile* pile = Pile::getInstance();
-            pile->setMessage(c.getInfo());
-            emit pile->modificationEtat();
-        }
-    }
-    else if(op=="REDO"){
-        try {
-            Controleur::redo();
-        }
-        catch (ComputerException c) {
-            Pile* pile = Pile::getInstance();
-            pile->setMessage(c.getInfo());
-            emit pile->modificationEtat();
-        }
-    }
     else if(op=="EDIT"){
         if(pile->getStack()->length()>=1){
             Litteral *x = pile->pop();
@@ -784,7 +757,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET" || a=="UNDO" || a=="REDO" || a=="EDIT";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET" || a=="EDIT";
 }
 
 bool isOperator(const QString& a){

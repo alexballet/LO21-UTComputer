@@ -3,6 +3,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QStandardPaths>
 #include "pile.h"
 
 class DbManager {
@@ -13,6 +14,8 @@ private:
 public:
     static DbManager* getInstance();
     void savePile();
+    void saveVariables();
+    void savePrograms();
 };
 
 #endif // DBMANAGER_H

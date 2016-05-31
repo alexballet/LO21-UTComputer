@@ -75,10 +75,6 @@ bool isProgramme(T& a){
 }
 
 bool isProgramme(const QString& i){
-    qDebug()<<"tout : "<<i;
-    qDebug()<<"premier : "<<i.at(0);
-    qDebug()<<"taille : "<<i.length();
-    qDebug()<<"dernier : "<<i.at(i.length()-1);
     return i.at(0)=='[' && i.at(i.length()-1)==']';
 }
 
