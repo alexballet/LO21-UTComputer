@@ -1,0 +1,6 @@
+<map id="LitteralNumerique" name="LitteralNumerique">
+<area shape="rect" id="node3" href="$class_entier.html" title="Entier" alt="" coords="5,155,61,181"/>
+<area shape="rect" id="node4" href="$class_rationnel.html" title="Rationnel" alt="" coords="85,155,163,181"/>
+<area shape="rect" id="node5" href="$class_reel.html" title="Reel" alt="" coords="187,155,237,181"/>
+<area shape="rect" id="node2" href="$class_litteral.html" title="Litteral" alt="" coords="93,5,155,32"/>
+</map>

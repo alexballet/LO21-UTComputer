@@ -1,0 +1,11 @@
+<map id="Litteral" name="Litteral">
+<area shape="rect" id="node2" href="$class_atome.html" title="The Atome class. " alt="" coords="5,80,65,107"/>
+<area shape="rect" id="node3" href="$class_complexe.html" title="Complexe" alt="" coords="89,80,171,107"/>
+<area shape="rect" id="node4" href="$class_expression.html" title="Expression" alt="" coords="195,80,281,107"/>
+<area shape="rect" id="node5" href="$class_litteral_numerique.html" title="LitteralNumerique" alt="" coords="305,80,429,107"/>
+<area shape="rect" id="node9" href="$class_programme.html" title="Programme" alt="" coords="453,80,543,107"/>
+<area shape="rect" id="node10" href="$class_variable.html" title="Variable" alt="" coords="567,80,637,107"/>
+<area shape="rect" id="node6" href="$class_entier.html" title="Entier" alt="" coords="249,155,305,181"/>
+<area shape="rect" id="node7" href="$class_rationnel.html" title="Rationnel" alt="" coords="329,155,406,181"/>
+<area shape="rect" id="node8" href="$class_reel.html" title="Reel" alt="" coords="431,155,480,181"/>
+</map>
