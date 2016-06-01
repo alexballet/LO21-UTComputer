@@ -717,6 +717,7 @@ void Controleur::applyOperatorPile(const QString& op){
                 pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
             }
             else{
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 throw ComputerException("Erreur : la litterale empilée n'est ni un programme, ni une variable");
             }
         }
