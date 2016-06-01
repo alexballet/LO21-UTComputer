@@ -26,7 +26,7 @@ class VariableMap {
 private:
     QMap<QString, Variable*> map;
     static VariableMap* instance;
-    VariableMap();
+    VariableMap(){}
     //disabling copy and assignment
     VariableMap& operator=(const VariableMap&) = delete;
     VariableMap (const VariableMap&) = delete;

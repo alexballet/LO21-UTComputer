@@ -6,7 +6,7 @@
 Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
     QString type = typeLitteral(id);
     VariableMap* varmap = VariableMap::getInstance();
-    if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
+    if (isOperator(id)) {
         throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
     }
     else if(varmap->findVar(id)) {
@@ -28,14 +28,11 @@ Programme::Programme(const QString& i): id("") {
             temp.remove(0,1);
         if(temp.at(0)=='[')
             temp.remove(0, 1);
-        qDebug()<<"after : "<<temp;
-        qDebug()<<temp.length();
         while(temp.at(temp.length()-1)==' '){
             temp.remove(temp.length()-1,1);
         }
         if(temp.at(temp.length()-1)==']')
             temp.remove(temp.length()-1, 1);
-        qDebug()<<"after : "<<temp;
     }
     instructions = temp.split(' ', QString::SkipEmptyParts);
 }
@@ -54,7 +51,6 @@ Programme::Programme(Litteral* lit, const QString s): id(s){
         throw ComputerException("Une variable avec le même nom existe deja!");
     }
     else if(type != "Atome"){
-        qDebug()<< "TYPYPPYPYPE:" << type << "id: " << id;
         throw ComputerException("Un programme doit être un atome !");
     }
     else {
@@ -98,9 +94,6 @@ bool isProgramme(const QString& i){
 }
 
 //ProgrammeMap
-ProgrammeMap::ProgrammeMap() {
-
-}
 
 ProgrammeMap* ProgrammeMap::instance = nullptr;
 
@@ -117,7 +110,6 @@ void ProgrammeMap::libererInstance() {
 
 Programme* ProgrammeMap::findProg(QString id) const {
     if (map.contains(id)){
-        qDebug() << "found!";
         return map.value(id);
     }
     return nullptr;

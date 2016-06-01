@@ -19,6 +19,7 @@ public:
 
 bool isExpression(const QString& i);
 
+//parsing functions (infix to postfix)
 QString parseExpression(const QString& s);
 bool isHigher(QString a, QString b);
 int order(QString op);

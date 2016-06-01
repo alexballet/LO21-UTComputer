@@ -7,6 +7,7 @@ QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QComputer)
 {
+
     ui->setupUi(this);
 
     restoreContext();
@@ -61,9 +62,9 @@ void QComputer::refresh(){
         ui->vuePile->item(i,0)->setText("");
 
     // update
-    QVectorIterator<Litteral*> it(*pile->getStack());
-    for(it.toBack() ; it.hasPrevious() && nb<pile->getMaxAffiche(); nb++){
-        ui->vuePile->item(pile->getMaxAffiche()-1-nb,0)->setText(it.previous()->toString());
+    QStack<Litteral*>::const_iterator it;
+    for(it=pile->getIteratorBegin() ; it!=pile->getIteratorEnd() && nb<pile->getMaxAffiche(); nb++, ++it){
+        ui->vuePile->item(pile->getMaxAffiche()-1-nb,0)->setText((*it)->toString());
     }
 }
 
@@ -207,16 +208,22 @@ void QComputer::slotProgEditor() {
 }
 
 void QComputer::restoreContext(){
-    RestoreContextWindow *restoreWindow = new RestoreContextWindow();
-    restoreWindow->setModal(true);
-    restoreWindow->exec();
 
-    while(RestoreContextWindow::getAnswer()==-1){}
+    QMessageBox messageBox(QMessageBox::Question, tr("Restaurer contexte"),
+                                   tr("Voulez-vous restaurer la dernière session ?"),
+                                   QMessageBox::Yes | QMessageBox::No);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Oui"));
+    messageBox.setButtonText(QMessageBox::No, tr("Non"));
+
+    int ret = messageBox.exec();
+
     Pile* pile = Pile::getInstance();
     QSettings settings;
 
-
-    if(RestoreContextWindow::getAnswer()==1){
+    switch (ret) {
+      case QMessageBox::Yes:
+    {
         DbManager *dbman = DbManager::getInstance();
         dbman->setOptions();
         dbman->setPile();
@@ -240,9 +247,10 @@ void QComputer::restoreContext(){
             ui->opPile->hide();
             this->setFixedSize(589,322);
         }
-
+        break;
     }
-    else {
+    case QMessageBox::No:
+    {
         pile->setMaxAffiche(4);
         settings.setValue("Pile", 4);
 
@@ -252,6 +260,11 @@ void QComputer::restoreContext(){
 
         //disable bip sound
         settings.setValue("Bip", true);
+        break;
+    }
+      default:
+          qDebug()<<"leeeel";
+          break;
     }
 }
 

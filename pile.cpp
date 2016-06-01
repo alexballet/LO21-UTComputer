@@ -34,11 +34,6 @@ unsigned int Pile::getMaxAffiche() const {
     return maxAffiche;
 }
 
-QStack<Litteral*>* Pile::getStack() {
-    return &stack;
-}
-
-
 void Pile::push(Litteral *lit) {
     stack.push(lit);
     emit modificationEtat();
@@ -57,6 +52,24 @@ Litteral* Pile::top() const{
         throw ComputerException("Erreur : Pile vide");
     else
         return stack.top();
+}
+
+int Pile::getLength() const{
+    return stack.length();
+}
+
+bool Pile::isEmpty(){
+    return stack.isEmpty();
+}
+
+QStack<Litteral*>::const_iterator Pile::getIteratorBegin() const{
+    QStack<Litteral*>::const_iterator i = stack.constBegin();
+    return i;
+}
+
+QStack<Litteral*>::const_iterator Pile::getIteratorEnd() const{
+    QStack<Litteral*>::const_iterator i = stack.constEnd();
+    return i;
 }
 
 Memento* Pile::createMemento() {

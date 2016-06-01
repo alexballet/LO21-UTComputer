@@ -34,7 +34,8 @@ class ProgrammeMap {
 private:
     QMap<QString, Programme*> map;
     static ProgrammeMap* instance;
-    ProgrammeMap();
+    ProgrammeMap(){}
+
     //disabling copy and assignment
     ProgrammeMap& operator=(const ProgrammeMap&) = delete;
     ProgrammeMap (const ProgrammeMap&) = delete;

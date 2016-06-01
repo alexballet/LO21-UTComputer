@@ -6,11 +6,14 @@ Options::Options(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Options)
 {
-
     ui->setupUi(this);
+
+    //connectiong radioButtons and dial
     connect(ui->activerClavier, SIGNAL(toggled(bool)), this, SLOT(activerClavierOpt(bool)));
     connect(ui->activerBip, SIGNAL(toggled(bool)), this, SLOT(activerBipOpt(bool)));
     connect(ui->dial, SIGNAL(valueChanged(int)), this, SLOT(setMaxAfficheSlot(int)));
+
+    //recovering settings values
     QSettings settings;
     ui->activerClavier->setChecked(settings.value("Clavier").toBool());
     ui->activerBip->setChecked(settings.value("Bip").toBool());

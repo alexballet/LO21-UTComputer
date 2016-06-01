@@ -22,6 +22,7 @@ private:
     Controleur() {} //private constructor to forbid instantiation
     static QVector<Memento*> mementoList;
     static int currentMemento;
+
     //disabling copy and assignment
     Controleur& operator=(const Controleur&) = delete;
     Controleur (const Controleur&) = delete;
@@ -32,6 +33,7 @@ public:
     void applyOperatorNum(const QString& op, const int nbOp);
     void applyOperatorLog(const QString& op, const int nbOp);
     void applyOperatorPile(const QString& op);
+
     //taking care of memento
     static void addMementoState(Memento* mem);
     static void undo();

@@ -34,10 +34,15 @@ public:
     void setMaxAffiche(unsigned int);
     void setMessage(const QString& msg);
     unsigned int getMaxAffiche() const;
-    QStack<Litteral*>* getStack();
     void push(Litteral* lit);
+    int getLength() const;
+    bool isEmpty();
     Litteral* pop();
     Litteral* top() const;
+
+    QStack<Litteral*>::const_iterator getIteratorBegin() const;
+    QStack<Litteral*>::const_iterator getIteratorEnd() const;
+
     //Memento
     Memento* createMemento();
     void reinstateMemento(Memento* mem);

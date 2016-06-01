@@ -22,8 +22,59 @@ ProgramEditor::~ProgramEditor()
 
 void ProgramEditor::refreshTab() {
     disconnect(ui->progView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editProgSlot(QTableWidgetItem*)));
+
+    setTab();
+
+    connect(ui->progView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editProgSlot(QTableWidgetItem*)));
+}
+
+
+void ProgramEditor::newProgramSlot() {
+    const QString id = ui->lineEditProg->text();
+    if (id.isEmpty()) {
+        QMessageBox::critical(this, tr("Program Editor"),
+                                       tr("Remplissez le nom!"),
+                                       QMessageBox::Ok);
+        return;
+    }
+    try {
+        new Programme(Litteral::createLitteral("", "Programme"), id.toUpper());
+    }
+    catch (ComputerException e) {
+        QMessageBox::critical(this, tr("Program Editor"),
+                                       tr(e.getInfo().toStdString().c_str()),
+                                       QMessageBox::Ok);
+        return;
+    }
+    refreshTab();
+}
+
+void ProgramEditor::editProgSlot(QTableWidgetItem* item) {
+    QString id = ui->progView->item(item->row(), 0)->text();
+    QString value = item->text();
+    ProgrammeMap* progmap = ProgrammeMap::getInstance();
+    progmap->deleteProg(id);
+    new Programme(Litteral::createLitteral(value, typeLitteral(value)), id);
+}
+
+void ProgramEditor::deleteProgSlot() {
+    QObject* senderBtn = sender();
+    ProgrammeMap* progmap = ProgrammeMap::getInstance();
+    progmap->deleteProg(senderBtn->objectName());
+    refreshTab();
+}
+
+void ProgramEditor::editProgWindowSlot(){
+    QObject* senderBtn = sender();
+    ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
+    progEditorWindow->setModal(true);
+    progEditorWindow->exec();
+}
+
+void ProgramEditor::setTab(){
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
 
+    //reset progView
     ui->progView->setRowCount(progmap->getCount());
     ui->progView->setHorizontalHeaderLabels(QStringList() << "Nom" << "Edit");
     ui->progView->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
@@ -39,7 +90,6 @@ void ProgramEditor::refreshTab() {
     QPushButton* btn_edit;
     QHBoxLayout* pLayout2;
     for (i = progmap->getIteratorBegin(); i != progmap->getIteratorEnd(); ++i) {
-        qDebug()<<"key : "<<i.key();
         item = new QTableWidgetItem(i.key());
         item->setFlags(item->flags() ^ Qt::ItemIsEditable); //Name column read only
         ui->progView->setItem(row, 0, item);
@@ -70,53 +120,4 @@ void ProgramEditor::refreshTab() {
         ui->progView->setCellWidget(row++, 2, pWidget1);
         connect(btn_delete, SIGNAL(pressed()), this, SLOT(deleteProgSlot()));
     }
-    connect(ui->progView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editProgSlot(QTableWidgetItem*)));
-}
-
-
-void ProgramEditor::newProgramSlot() {
-    const QString id = ui->lineEditProg->text();
-    if (id.isEmpty()) {
-        QMessageBox::critical(this, tr("Program Editor"),
-                                       tr("Remplissez le nom!"),
-                                       QMessageBox::Ok);
-        return;
-    }
-    try {
-        new Programme(Litteral::createLitteral("", "Programme"), id.toUpper());
-    }
-    catch (ComputerException e) {
-        QMessageBox::critical(this, tr("Program Editor"),
-                                       tr(e.getInfo().toStdString().c_str()),
-                                       QMessageBox::Ok);
-        return;
-    }
-    //qDebug()<<"refreshing...";
-    refreshTab();
-    //qDebug()<<"new prog : "<<id;
-}
-
-void ProgramEditor::editProgSlot(QTableWidgetItem* item) {
-    qDebug() << "EditProgSlot";
-    QString id = ui->progView->item(item->row(), 0)->text();
-    QString value = item->text();
-    ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    progmap->deleteProg(id);
-    new Programme(Litteral::createLitteral(value, typeLitteral(value)), id);
-}
-
-void ProgramEditor::deleteProgSlot() {
-    QObject* senderBtn = sender();
-    ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    progmap->deleteProg(senderBtn->objectName());
-    refreshTab();
-}
-
-void ProgramEditor::editProgWindowSlot(){
-    QObject* senderBtn = sender();
-    //qDebug()<<"ouverture fenetre edition programme";
-    ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
-    //qDebug()<<"créé avec succès";
-    progEditorWindow->setModal(true);
-    progEditorWindow->exec();
 }

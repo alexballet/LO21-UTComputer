@@ -19,6 +19,7 @@ public:
 private:
     Ui::ProgramEditor *ui;
     void refreshTab();
+    void setTab();
 
 private slots:
     void newProgramSlot();

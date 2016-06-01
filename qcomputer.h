@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QVector>
 #include <QStringList>
+#include <QMessageBox>
 #include <QTableView>
 #include <QAction>
 #include <QTableWidgetItem>
@@ -17,13 +18,12 @@
 #include "options.h"
 #include "variableeditor.h"
 #include "programeditor.h"
-#include "restorecontextwindow.h"
 
 namespace Ui {
     class QComputer;
 }
 
-class QComputer : public QWidget //changer en QMainWindow? pour utiliser direct QMenuBar
+class QComputer : public QWidget
 {
     Q_OBJECT
 

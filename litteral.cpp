@@ -27,6 +27,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
     else if (type == "Rationnel") {
         QStringList parts = value.split('/', QString::KeepEmptyParts);
         Rationnel* rationnel = new Rationnel(parts.at(0).toInt(), parts.at(1).toInt());
+
         //converting into Entier, if possible
         if(rationnel->getDenominateur().getValue() == 1 || rationnel->getNumerateur().getValue() == 0){
             return new Entier(rationnel->getNumerateur().getValue());
@@ -61,19 +62,14 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
                 return new Complexe(re, im);
     }
     else if (type == "Atome") {
-        qDebug()<<"bla";
         Atome* a = new Atome(value);
         return a->getLitterale();
     }
     else if (type == "Programme") {
-        qDebug()<<"blu";
-        qDebug()<<value;
         Programme* a = new Programme(value);
         return a;
     }
     else if (type == "Expression") {
-        qDebug()<<"bli";
-        qDebug()<<value;
         QString valueTemp = value;
         Expression* a = new Expression(valueTemp.remove('\''));
         return a;
@@ -364,9 +360,6 @@ Litteral* Litteral::operator *(Litteral& a){
         Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
         Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
         Litteral *pRe1 = *(*op2pIm * *op1pIm) - *(*op2pRe * *op1pRe);
-        qDebug()<<(*op2pRe * *op1pRe)->toString();
-        qDebug()<<(*op2pIm * *op1pIm)->toString();
-        qDebug()<<(*(*op2pRe * *op1pRe) - *(*op2pIm * *op1pIm))->toString();
         Litteral *pIm1 = *(*op1pRe * *op2pIm) + *(*op1pIm * *op2pRe);
         LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
         LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
@@ -463,7 +456,6 @@ Litteral* Litteral::operator /(Litteral& a){
         Litteral *invOp1PReTemp = *op1pRe / *(*(*op1pRe * *op1pRe) + *(*op1pIm * *op1pIm));
         Entier *e = new Entier(-1);
         Litteral *invOp1PImTemp = *e * *(*op1pIm / *(*(*op1pRe * *op1pRe) + *(*op1pIm * *op1pIm)));
-        qDebug()<<(*op1pIm / *(*(*op1pRe * *op1pRe) + *(*op1pIm * *op1pIm)));
         Litteral *pRe1 = *op2 * *invOp1PReTemp;
         Litteral *pIm1 = *op2 * *invOp1PImTemp;
         LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
@@ -494,9 +486,6 @@ Litteral* Litteral::operator /(Litteral& a){
         Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
         Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
         Litteral *pRe1 = *(*(*op1pRe * *op2pRe) + *(*op1pIm * *op2pIm)) / *(*(*op2pRe * *op2pRe) + *(*op2pIm * *op2pIm));
-        qDebug()<<(*op2pRe * *op1pRe)->toString();
-        qDebug()<<(*op2pIm * *op1pIm)->toString();
-        qDebug()<<(*(*op2pRe * *op1pRe) - *(*op2pIm * *op1pIm))->toString();
         Litteral *pIm1 = *(*(*op1pIm * *op2pRe) - *(*op1pRe * *op2pIm)) / *(*(*op2pRe * *op2pRe) + *(*op2pIm * *op2pIm));
         LitteralNumerique *pRe2 = dynamic_cast<LitteralNumerique*>(pRe1);
         LitteralNumerique *pIm2 = dynamic_cast<LitteralNumerique*>(pIm1);
@@ -534,7 +523,6 @@ Litteral* Litteral::operator ==(Litteral& a){
     if(isEntier(*this) && isEntier(a)){//Entier = Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
-        qDebug()<<"bli";
         if(op1->getValue()==op2->getValue())
             return new Entier(1);
         else

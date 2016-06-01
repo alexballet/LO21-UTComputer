@@ -43,9 +43,6 @@ bool isVariable(T& a){
 }
 
 //Variable Map
-VariableMap::VariableMap() {
-
-}
 
 VariableMap* VariableMap::instance = nullptr;
 
