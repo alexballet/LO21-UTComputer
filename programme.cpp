@@ -23,18 +23,20 @@ Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
 
 Programme::Programme(const QString& i): id("") {
     QString temp = i;
-    while(temp.at(0)==' ')
-        temp.remove(0,1);
-    if(temp.at(0)=='[')
-        temp.remove(0, 1);
-    qDebug()<<"after : "<<temp;
-    qDebug()<<temp.length();
-    while(temp.at(temp.length()-1)==' '){
-        temp.remove(temp.length()-1,1);
+    if(temp!=""){
+        while(temp.at(0)==' ')
+            temp.remove(0,1);
+        if(temp.at(0)=='[')
+            temp.remove(0, 1);
+        qDebug()<<"after : "<<temp;
+        qDebug()<<temp.length();
+        while(temp.at(temp.length()-1)==' '){
+            temp.remove(temp.length()-1,1);
+        }
+        if(temp.at(temp.length()-1)==']')
+            temp.remove(temp.length()-1, 1);
+        qDebug()<<"after : "<<temp;
     }
-    if(temp.at(temp.length()-1)==']')
-        temp.remove(temp.length()-1, 1);
-    qDebug()<<"after : "<<temp;
     instructions = temp.split(' ', QString::SkipEmptyParts);
 }
 

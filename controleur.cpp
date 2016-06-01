@@ -596,18 +596,20 @@ void Controleur::applyOperatorPile(const QString& op){
         if(pTemp){
             QString temp = x->toString();
             qDebug()<<"before : "<<temp;
-            while(temp.at(0)==' ')
-                temp.remove(0,1);
-            if(temp.at(0)=='[')
-                temp.remove(0, 1);
-            qDebug()<<"after : "<<temp;
-            qDebug()<<temp.length();
-            while(temp.at(temp.length()-1)==' '){
-                temp.remove(temp.length()-1,1);
+            if(temp!=""){
+                while(temp.at(0)==' ')
+                    temp.remove(0,1);
+                if(temp.at(0)=='[')
+                    temp.remove(0, 1);
+                qDebug()<<"after : "<<temp;
+                qDebug()<<temp.length();
+                while(temp.at(temp.length()-1)==' '){
+                    temp.remove(temp.length()-1,1);
+                }
+                if(temp.at(temp.length()-1)==']')
+                    temp.remove(temp.length()-1, 1);
+                qDebug()<<"after : "<<temp;
             }
-            if(temp.at(temp.length()-1)==']')
-                temp.remove(temp.length()-1, 1);
-            qDebug()<<"after : "<<temp;
             parse(temp);
             return;
         }

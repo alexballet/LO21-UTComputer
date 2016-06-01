@@ -344,7 +344,7 @@
        <item>
         <widget class="QGroupBox" name="opNumeriques">
          <property name="title">
-          <string>Opérateurs numériques</string>
+          <string>Opérateurs numériques et conditionnels</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -354,13 +354,16 @@
            <rect>
             <x>0</x>
             <y>20</y>
-            <width>565</width>
+            <width>613</width>
             <height>130</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <property name="spacing">
             <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>51</number>
            </property>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -474,6 +477,13 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
+              <widget class="QPushButton" name="pushButton_79">
+               <property name="text">
+                <string>STO</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="pushButton_31">
                <property name="text">
                 <string>LN</string>
@@ -511,7 +521,7 @@
              <item>
               <widget class="QPushButton" name="pushButton_36">
                <property name="text">
-                <string>STO</string>
+                <string>FORGET</string>
                </property>
               </widget>
              </item>
