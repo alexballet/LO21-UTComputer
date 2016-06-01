@@ -16,8 +16,6 @@ class VariableEditor : public QDialog
 public:
     explicit VariableEditor(QWidget *parent = 0);
     ~VariableEditor();
-public slots:
-    void editVariable(QTableWidgetItem*);
 private:
     Ui::VariableEditor *ui;
     void refreshTab();

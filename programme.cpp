@@ -124,9 +124,7 @@ Programme* ProgrammeMap::findProg(QString id) const {
 }
 
 void ProgrammeMap::deleteProg(QString id) {
-    //try
     map.remove(id);
-    //catch
 }
 
 void ProgrammeMap::insertProg(QString id, Programme* prog) {

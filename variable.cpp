@@ -62,16 +62,13 @@ void VariableMap::libererInstance() {
 
 Variable* VariableMap::findVar(QString id) const {
     if (map.contains(id)){
-        qDebug() << "found!";
         return map.value(id);
     }
     return nullptr;
 }
 
 void VariableMap::deleteVar(QString id) {
-    //try
     map.remove(id);
-    //catch
 }
 
 void VariableMap::insertVar(QString id, Variable* var) {
@@ -79,7 +76,7 @@ void VariableMap::insertVar(QString id, Variable* var) {
 }
 
 void VariableMap::setVar(QString id, QString value) {
-    map.value(id)->setValue(new Entier(value.toInt())); //ONLY ENTIER
+    map.value(id)->setValue(Litteral::createLitteral(value, typeLitteral(value)));
 }
 
 unsigned int VariableMap::getCount() const {

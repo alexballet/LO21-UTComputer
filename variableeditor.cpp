@@ -27,6 +27,8 @@ void VariableEditor::refreshTab() {
 
     ui->variableView->setRowCount(varmap->getCount());
     ui->variableView->setHorizontalHeaderLabels(QStringList() << "Variable" << "Valeur" << "Supprimer");
+    ui->variableView->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
+    ui->variableView->horizontalHeader()->setSectionResizeMode (QHeaderView::Fixed);
 
     QMap<QString, Variable*>::const_iterator i;
     QTableWidgetItem* item;
@@ -81,12 +83,10 @@ void VariableEditor::newVariableSlot() {
 
 void VariableEditor::editVariableSlot(QTableWidgetItem* item) {
     qDebug() << "EditVarSlot";
-    QString id = ui->variableView->item(item->row(), 0)->text();
     QString value = item->text();
     VariableMap* varmap = VariableMap::getInstance();
-    Variable* var = varmap->findVar(id);
-    var->setValue(Litteral::createLitteral(value, typeLitteral(value)));
-
+    QString id = ui->variableView->item(item->row(), 0)->text();
+    varmap->setVar(id, value);
 }
 
 void VariableEditor::deleteVariableSlot() {
@@ -96,8 +96,3 @@ void VariableEditor::deleteVariableSlot() {
     refreshTab();
 }
 
-void VariableEditor::editVariable(QTableWidgetItem* item) {
-    VariableMap* varmap = VariableMap::getInstance();
-    QString id = ui->variableView->item(item->row(), 0)->text();
-    varmap->setVar(id, item->text());
-}

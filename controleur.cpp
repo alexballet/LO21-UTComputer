@@ -7,6 +7,8 @@ QVector<Memento*> Controleur::mementoList;
 int Controleur::currentMemento = -1;
 
 void Controleur::parse(const QString& com) {
+    if(com=="")
+        throw ComputerException("La ligne de commande est vide !");
     Pile* pile = Pile::getInstance();
     qDebug()<<"test : "<<com;
     if(typeLitteral(com)=="Programme"){
@@ -86,6 +88,7 @@ void Controleur::parse(const QString& com) {
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
             }
+            lastOp=word;
         }
         else if(type=="OperatorLog"){
             try{
@@ -95,6 +98,7 @@ void Controleur::parse(const QString& com) {
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
             }
+            lastOp=word;
         }
         else if(type=="OperatorPile"){
             try{
@@ -103,6 +107,7 @@ void Controleur::parse(const QString& com) {
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
             }
+            lastOp=word;
         }
         else if(type != "Inconnu") {
             try {
@@ -761,6 +766,28 @@ void Controleur::applyOperatorPile(const QString& op){
         }
     }
     else if(op=="IFT"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            Programme *p = dynamic_cast<Programme*>(x);
+            if(isEntier(*y) && p){
+                Entier *e = dynamic_cast<Entier*>(y);
+                if(e->getValue()!=0){
+                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                    parse("EVAL");
+                }
+            }
+            else{
+                pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                throw ComputerException("Erreur : l'opérateur IFT s'applique sur un Entier et un Programme");
+            }
+        }
+        else{
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        }
+    }
+    else if(op=="LASTOP"){
         if(pile->getStack()->length()>=2){
             Litteral *x = pile->pop();
             Litteral *y = pile->pop();

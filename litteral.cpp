@@ -1033,9 +1033,6 @@ QString Entier::toString() const {
     return QString::number(value);
 }
 
-Entier* Entier::createLit(const int v){
-    return new Entier(v);
-}
 
 bool Entier::operator<(const int& a) const{
     return value<a;
@@ -1057,10 +1054,6 @@ Entier& Entier::operator= (const Entier& e) {
 
 QString Reel::toString() const {
     return QString::number(value);
-}
-
-Reel* Reel::createLit(const double v){
-    return new Reel(v);
 }
 
 bool Reel::operator<(const int& a) const{

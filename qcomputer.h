@@ -44,6 +44,9 @@ private slots:
 
 private:
     Ui::QComputer *ui;
+    void restoreContext();
+    void initMenuBar();
+    void initPile();
 };
 
 #endif // QCOMPUTER_H

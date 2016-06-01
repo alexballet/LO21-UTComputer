@@ -25,6 +25,7 @@ private:
     //disabling copy and assignment
     Controleur& operator=(const Controleur&) = delete;
     Controleur (const Controleur&) = delete;
+    QString lastOp;
 public:
     static Controleur* getInstance();
     void parse(const QString& com);//calls Pile::push() with a string argument for the type to push

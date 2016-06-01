@@ -10,8 +10,6 @@ class Litteral {
 public:
     static Litteral* createLitteral(const QString& value, const QString& type);
     virtual QString toString() const = 0;
-    template<class T>
-    static Litteral& createLit(const T);
     Litteral* operator +(Litteral& a);
     Litteral* operator -(Litteral& a);
     Litteral* operator *(Litteral& a);
@@ -40,7 +38,6 @@ public:
     Entier& operator= (const Entier& e);
     bool operator<(const int& a) const;
     bool operator>(const int& a) const;
-    static Entier* createLit(const int v);
 };
 
 class Reel : public LitteralNumerique {
@@ -53,7 +50,6 @@ public:
     QString toString() const;
     bool operator<(const int& a) const;
     bool operator>(const int& a) const;
-    static Reel* createLit(const double v);
 };
 
 class Rationnel : public LitteralNumerique {
@@ -69,7 +65,6 @@ public:
     void simplifier();
     bool operator<(const int& a) const;
     bool operator>(const int& a) const;
-    static Rationnel* createLit(const int n, const int d);
 };
 
 class Complexe : public Litteral {

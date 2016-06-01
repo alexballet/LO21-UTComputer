@@ -26,6 +26,8 @@ void ProgramEditor::refreshTab() {
 
     ui->progView->setRowCount(progmap->getCount());
     ui->progView->setHorizontalHeaderLabels(QStringList() << "Nom" << "Edit");
+    ui->progView->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
+    ui->progView->horizontalHeader()->setSectionResizeMode (QHeaderView::Fixed);
 
     QMap<QString, Programme*>::const_iterator i;
     int row = 0;
