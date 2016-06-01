@@ -4,10 +4,17 @@
 #include "variable.h"
 #include <QString>
 
+/*!
+ * \brief The Atome class
+ */
 class Atome : public Litteral {
 private:
     QString id;
 public:
+    /*!
+     * \brief Constructor of Atome class
+     * \param id - QString to initialize the id of the Atome object
+     */
     Atome(QString id);
     QString getId() const;
     QString toString() const;
