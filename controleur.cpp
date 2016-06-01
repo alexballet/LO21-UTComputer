@@ -89,7 +89,8 @@ void Controleur::parse(const QString& com) {
         }
         else if(type=="OperatorLog"){
             try{
-                applyOperatorNum(word, opsLog.value(word));
+                qDebug()<<"applying opLog";
+                applyOperatorLog(word, opsLog.value(word));
             }
             catch(ComputerException c){
                 pile->setMessage(c.getInfo());
@@ -758,7 +759,28 @@ void Controleur::applyOperatorPile(const QString& op){
             throw ComputerException("Erreur : 1 arguments empilés nécessaires");
         }
     }
-
+    else if(op=="IFT"){
+        if(pile->getStack()->length()>=2){
+            Litteral *x = pile->pop();
+            Litteral *y = pile->pop();
+            Programme *p = dynamic_cast<Programme*>(x);
+            if(isEntier(*y) && p){
+                Entier *e = dynamic_cast<Entier*>(y);
+                if(e->getValue()!=0){
+                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                    parse("EVAL");
+                }
+            }
+            else{
+                pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                throw ComputerException("Erreur : l'opérateur IFT s'applique sur un Entier et un Programme");
+            }
+        }
+        else{
+            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        }
+    }
 }
 
 Controleur* Controleur::getInstance() {
@@ -774,7 +796,7 @@ bool isOperatorLog(const QString& a){
     return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET" || a=="EDIT";
+    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET" || a=="EDIT" || a=="IFT";
 }
 
 bool isOperator(const QString& a){

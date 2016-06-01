@@ -219,7 +219,7 @@
           </size>
          </property>
          <property name="title">
-          <string>Opérateurs de pile</string>
+          <string>Opérateurs de pile et conditionnels</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -301,6 +301,13 @@
               <number>0</number>
              </property>
              <item>
+              <widget class="QPushButton" name="EVAL_2">
+               <property name="text">
+                <string>IFT</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="UNDO">
                <property name="text">
                 <string>UNDO</string>
@@ -344,7 +351,7 @@
        <item>
         <widget class="QGroupBox" name="opNumeriques">
          <property name="title">
-          <string>Opérateurs numériques et conditionnels</string>
+          <string>Opérateurs numériques</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
