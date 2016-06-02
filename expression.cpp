@@ -17,21 +17,11 @@ bool isExpression(const QString& i){
 }
 
 bool isChar(QChar a) {
-    if (a.isLetterOrNumber())
-        return true;
-    else
-        return false;
+    return a.isLetterOrNumber();
 }
 
-bool isPartOperand(QChar a, QString s, int i){
-    if(a=='-' && (i==0 || isOperator(QString(s[i-1]))))
-        return true;
-    else if(a=='$')
-        return true;
-    else if(a=='.'){
-        return true;
-    }
-    return false;
+bool isPartOperand(QChar a){
+    return a=='$' || a=='.';
 }
 
 int order(QString op) {
@@ -39,6 +29,10 @@ int order(QString op) {
         return 1;
     else if(op=="*" || "/")
         return 2;
+    else if(isOperatorLog(op))
+        return 3;
+    else if(op=="NEG")
+        return 4;
     else
         return 0;
 }
@@ -66,12 +60,14 @@ QString parseExpression(const QString& s){
             isLongOperator=true;
         }
         //if operand
-        if(!isLongOperator && (isChar(infix[i]) || isPartOperand(infix[i], infix, i))) {
+        if(!isLongOperator && (isChar(infix[i]) || isPartOperand(infix[i]))) {
             postfix.append(infix[i]);
         }
         //if operator
         else if(isOperator(QString(infix[i])) || isLongOperator || infix[i]=='(' || infix[i]==')') {
             QString op = QString(infix[i]);
+            if(infix[i]=='-' && (i==0 || isOperator(QString(infix[i-1]))))
+                op = "NEG";
             if(isLongOperator)
                 op=opTemp;
             postfix.append(' ');
@@ -96,7 +92,7 @@ QString parseExpression(const QString& s){
                 stack.pop();
                 }
                 else {
-                    //pop until tos has lesser precedence or tos is null.
+                    //pop until has lesser precedence or is null.
                     while(!stack.isEmpty() && isHigher(*(stack.end()-1),op) && *(stack.end()-1)!="(") {
                         if(*(stack.end()-1)!="(" && *(stack.end()-1)!=")"){//not appending ( and )
                             postfix.append(*(stack.end()-1));
