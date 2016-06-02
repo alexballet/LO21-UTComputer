@@ -40,4 +40,16 @@ static const QMap<QString, int> opsLog{
     {"NOT", 1}
     };
 
+static const QMap<QString, int> opsPile{
+    {"DUP", 0},
+    {"SWAP", 2},
+    {"LASTOP", 0},
+    {"CLEAR", 0},
+    {"EVAL", 1},
+    {"STO", 2},
+    {"FORGET", 1},
+    {"EDIT", 1},
+    {"IFT", 2}
+    };
+
 #endif // OPERATEUR_H

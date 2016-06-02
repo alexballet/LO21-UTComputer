@@ -538,11 +538,35 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp){
     }
 }
 
-void Controleur::applyOperatorPile(const QString& op){
+void Controleur::applyOperatorPile(const QString& op, const int nbOp){
     Pile *pile = Pile::getInstance();
+    Litteral *x;
+    Litteral *y;
+    if(nbOp!=0){
+        if(pile->getLength()<nbOp)
+            throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
+        Litteral *temp1 = pile->pop();
+        Variable *var1 = dynamic_cast<Variable*>(temp1);
+        if(var1)
+            x = var1->getValue();
+        else {
+            x = temp1;
+        }
+
+        if(nbOp==2){
+            Litteral *temp2 = pile->pop();
+            Variable *var2 = dynamic_cast<Variable*>(temp2);
+            if(var2)
+                y = var2->getValue();
+            else {
+                y = temp2;
+            }
+        }
+    }
+
     if(op=="DUP"){
         try{
-            Litteral *x = pile->top();
+            x = pile->top();
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
         }
         catch(ComputerException e){
@@ -558,21 +582,14 @@ void Controleur::applyOperatorPile(const QString& op){
         }
     }
     else if(op=="SWAP"){
-        if(pile->getLength()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
-            pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
-        }
-        else
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+        pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
+        pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
     }
     else if(op=="CLEAR"){
         while(!pile->isEmpty())
             pile->pop();
     }
     else if(op=="EVAL"){
-        Litteral *x = pile->pop();
         Expression *e = dynamic_cast<Expression*>(x);
         Programme *pTemp = dynamic_cast<Programme*>(x);
         if(pTemp){
@@ -613,131 +630,105 @@ void Controleur::applyOperatorPile(const QString& op){
         }
     }
     else if(op=="STO"){
-        if(pile->getLength()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Programme *p2 = dynamic_cast<Programme*>(y);
-            QString id = x->toString().remove('\'');
-            if(typeLitteral(y->toString())=="Programme"){
-                QString strToSearch = x->toString().remove('\'');
-                Programme *p = dynamic_cast<Programme*>(x);
-                if(p)
-                    strToSearch = p->getId();
-                Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
-                if(prog){
-                    prog->setInstructions(p2->getInstructions());
-                }
-                else{
-                    prog = new Programme(y, id);
-                }
-                pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
+        Programme *p2 = dynamic_cast<Programme*>(y);
+        QString id = x->toString().remove('\'');
+        if(typeLitteral(y->toString())=="Programme"){
+            QString strToSearch = x->toString().remove('\'');
+            Programme *p = dynamic_cast<Programme*>(x);
+            if(p)
+                strToSearch = p->getId();
+            Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
+            if(prog){
+                prog->setInstructions(p2->getInstructions());
             }
             else{
-                QString strToSearch = x->toString().remove('\'');
-                Variable *v = dynamic_cast<Variable*>(x);
-                if(v)
-                    strToSearch = v->getId();
-                Variable *var = VariableMap::getInstance()->findVar(strToSearch);
-                if(var){
-                    var->setValue(y);
-                }
-                else{
-                    var = new Variable(y, id);
-                }
-                pile->setMessage("Update : la valeur "+y->toString()+" est stockée dans "+strToSearch);
+                prog = new Programme(y, id);
             }
+            pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
         }
         else{
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+            QString strToSearch = x->toString().remove('\'');
+            Variable *v = dynamic_cast<Variable*>(x);
+            if(v)
+                strToSearch = v->getId();
+            Variable *var = VariableMap::getInstance()->findVar(strToSearch);
+            if(var){
+                var->setValue(y);
+            }
+            else{
+                var = new Variable(y, id);
+            }
+            pile->setMessage("Update : la valeur "+y->toString()+" est stockée dans "+strToSearch);
         }
     }
     else if(op=="FORGET"){
-        if(pile->getLength()>=1){
-            Litteral *x = pile->pop();
-            Programme *p = dynamic_cast<Programme*>(x);
-            Variable *v = dynamic_cast<Variable*>(x);
-            if(p){
-                QString strToSearch = p->getId();
-                Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
-                if(prog){
-                    ProgrammeMap::getInstance()->deleteProg(strToSearch);
-                }
-                else{
-                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                    throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
-                }
-                pile->setMessage("Update : le programme "+strToSearch+" est oublié");
-            }
-            else if(v){
-                QString strToSearch = v->getId();
-                Variable *var = VariableMap::getInstance()->findVar(strToSearch);
-                if(var){
-                    VariableMap::getInstance()->deleteVar(strToSearch);
-                }
-                else{
-                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                    throw ComputerException("Erreur : l'expression n'est pas une variable enregistrée");
-                }
-                pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
+        Programme *p = dynamic_cast<Programme*>(x);
+        Variable *v = dynamic_cast<Variable*>(x);
+        if(p){
+            QString strToSearch = p->getId();
+            Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
+            if(prog){
+                ProgrammeMap::getInstance()->deleteProg(strToSearch);
             }
             else{
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                throw ComputerException("Erreur : la litterale empilée n'est ni un programme, ni une variable");
+                throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
             }
+            pile->setMessage("Update : le programme "+strToSearch+" est oublié");
+        }
+        else if(v){
+            QString strToSearch = v->getId();
+            Variable *var = VariableMap::getInstance()->findVar(strToSearch);
+            if(var){
+                VariableMap::getInstance()->deleteVar(strToSearch);
+            }
+            else{
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                throw ComputerException("Erreur : l'expression n'est pas une variable enregistrée");
+            }
+            pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
         }
         else{
-            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+            throw ComputerException("Erreur : la litterale empilée n'est ni un programme, ni une variable");
         }
     }
     else if(op=="EDIT"){
-        if(pile->getLength()>=1){
-            Litteral *x = pile->pop();
-            Programme *p = dynamic_cast<Programme*>(x);
-            if(p){
-                QString strToSearch = p->getId();
-                Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
-                if(prog){
-                    QObject* senderBtn = new QObject();
-                    senderBtn->setObjectName(prog->getId());
-                    ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
-                    progEditorWindow->setModal(true);
-                    progEditorWindow->exec();
-                }
-                else{
-                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                    throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
-                }
-                pile->setMessage("Update : le programme "+strToSearch+" est modifié");
+        Programme *p = dynamic_cast<Programme*>(x);
+        if(p){
+            QString strToSearch = p->getId();
+            Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
+            if(prog){
+                QObject* senderBtn = new QObject();
+                senderBtn->setObjectName(prog->getId());
+                ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
+                progEditorWindow->setModal(true);
+                progEditorWindow->exec();
             }
             else{
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                throw ComputerException("Erreur : la litterale empilée n'est pas un programme");
+                throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
             }
+            pile->setMessage("Update : le programme "+strToSearch+" est modifié");
         }
         else{
-            throw ComputerException("Erreur : 1 arguments empilés nécessaires");
+            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+            throw ComputerException("Erreur : la litterale empilée n'est pas un programme");
         }
     }
     else if(op=="IFT"){
-        if(pile->getLength()>=2){
-            Litteral *x = pile->pop();
-            Litteral *y = pile->pop();
-            Programme *p = dynamic_cast<Programme*>(x);
-            if(isEntier(*y) && p){
-                Entier *e = dynamic_cast<Entier*>(y);
-                if(e->getValue()!=0){
-                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                    parse("EVAL");
-                }
-            }
-            else{
-                pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+        Programme *p = dynamic_cast<Programme*>(x);
+        if(isEntier(*y) && p){
+            Entier *e = dynamic_cast<Entier*>(y);
+            if(e->getValue()!=0){
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-                throw ComputerException("Erreur : l'opérateur IFT s'applique sur un Entier et un Programme");
+                parse("EVAL");
             }
         }
         else{
-            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
+            pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+            pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+            throw ComputerException("Erreur : l'opérateur IFT s'applique sur un Entier et un Programme");
         }
     }
     else if(op=="LASTOP"){
@@ -756,7 +747,7 @@ void Controleur::applyOperator(const QString& op){
     else if(isOperatorNum(op))
         applyOperatorNum(op, opsNum.value(op));
     else
-        applyOperatorPile(op);
+        applyOperatorPile(op, opsPile.value(op));
 }
 
 Controleur* Controleur::getInstance() {
@@ -767,13 +758,13 @@ Controleur* Controleur::getInstance() {
 }
 
 bool isOperatorNum(const QString& a){
-    return a=="+" || a=="-" || a=="*" || a=="/" || a=="DIV" || a=="MOD" || a=="NEG" || a=="NUM" || a=="DEN" || a=="$" || a=="RE" || a=="IM" || a=="SIN" || a=="COS" || a=="TAN" || a=="ARCSIN" || a=="ARCCOS" || a=="ARCTAN" || a=="EXP" || a=="LN";
+    return opsNum.contains(a);
 }
 bool isOperatorLog(const QString& a){
-    return a=="=" || a=="!=" || a=="<=" || a==">=" || a=="<" || a==">" || a=="AND" || a=="OR" || a=="NOT";
+    return opsLog.contains(a);
 }
 bool isOperatorPile(const QString& a){
-    return a=="DUP" || a=="DROP" || a=="SWAP" || a=="LASTOP" || a=="LASTARGS" || a=="CLEAR" || a=="EVAL" || a=="STO" || a=="FORGET" || a=="EDIT" || a=="IFT";
+    return opsPile.contains(a);
 }
 
 bool isOperator(const QString& a){

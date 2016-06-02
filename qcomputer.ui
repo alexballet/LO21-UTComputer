@@ -280,13 +280,6 @@
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_11">
-               <property name="text">
-                <string>LASTARGS</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
            <item>

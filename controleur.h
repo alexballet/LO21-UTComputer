@@ -60,7 +60,7 @@ public:
     /*!
      * \brief Method that parses a QString to isolate the expressions to form Litteral objects or execute operators.
      * If it's a Programme or an Expression, it creates the associated Litteral and pushes it in the Pile.
-     * Otherwise, it means it's one or a series of different Litterals. It splits the com parameter and analyses each one independently.
+     * Otherwise, it means it's one or a series of different Litterals. It splits the com parameter and analyzes each one independently.
      * \param com - QString to parse.
      */
     void parse(const QString& com);
@@ -77,22 +77,59 @@ public:
      */
     void process(const QString word);
     /*!
-     * \brief applyOperatorNum
-     * \param op
-     * \param nbOp
+     * \brief Method that applies a numeric operator, poping nbOp Litteral objects from the Pile.
+     * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
+     * \param op - id of the operator to apply.
+     * \param nbOp - number of operands needed to apply the operator.
      */
     void applyOperatorNum(const QString& op, const int nbOp);
+    /*!
+     * \brief Method that applies a logical operator, poping nbOp Litteral objects from the Pile.
+     * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
+     * \param op - id of the operator to apply.
+     * \param nbOp - number of operands needed to apply the operator.
+     */
     void applyOperatorLog(const QString& op, const int nbOp);
-    void applyOperatorPile(const QString& op);
+    /*!
+     * \brief Method that applies a Pile operator, poping nbOp Litteral objects from the Pile.
+     * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
+     * \param op - id of the operator to apply.
+     * \param nbOp - number of operands needed to apply the operator.
+     */
+    void applyOperatorPile(const QString& op, const int nbOp);
+    /*!
+     * \brief Method that calls the apply method associated with the type of the operator.
+     * \param op - id of the operator to apply.
+     */
     void applyOperator(const QString& op);
 
     //taking care of memento
+    /*!
+     * \brief Method that adds the Memento state mem to mementoList. Called each time an expression is processed.
+     * \param mem - Memento state to add.
+     */
     static void addMementoState(Memento* mem);
+    /*!
+     * \brief Method that reinstate the previous Memento state.
+     */
     static void undo();
+    /*!
+     * \brief Method that reinstate the next Memento state.
+     */
     static void redo();
 };
 
+/*!
+ * \brief Function that analyzes the QString to determine it's type. It is used in order to create a new Litteral object from a QString.
+ * \param lit - QString to analyze.
+ * \return Returns the type of the analyzed QString. E.g : typeLitteral("[ 2 DUP +]") -> "Programme".
+ */
 QString typeLitteral(const QString& lit);
+/*!
+ * \brief Checks if the QString corresponds to a numeric operator
+ * \param a
+ * \return
+ */
 bool isOperatorNum(const QString& a);
 bool isOperatorLog(const QString& a);
 bool isOperatorPile(const QString& a);
