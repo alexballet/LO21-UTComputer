@@ -60,7 +60,6 @@ void QComputer::refresh(){
     // delete everything
     for(unsigned int i=0; i<pile->getMaxAffiche(); i++)
         ui->vuePile->item(i,0)->setText("");
-    qDebug()<<pile->getMaxAffiche();
     // update
     QStack<Litteral*>::const_iterator it;
     for(it=pile->getIteratorEnd()-1 ; it!=pile->getIteratorBegin()-1 && nb<pile->getMaxAffiche(); nb++, --it){
@@ -263,7 +262,6 @@ void QComputer::restoreContext(){
         break;
     }
       default:
-          qDebug()<<"leeeel";
           break;
     }
 }

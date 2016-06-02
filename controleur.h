@@ -126,13 +126,32 @@ public:
  */
 QString typeLitteral(const QString& lit);
 /*!
- * \brief Checks if the QString corresponds to a numeric operator
- * \param a
- * \return
+ * \brief Checks if the QString corresponds to a numeric operator.
+ * Searches for the parameter a in the QMap opsNum, containing all the numeric operators and their arity.
+ * \param a - QString to check.
+ * \return Return true if a is a numeric operator, false if it's not.
  */
 bool isOperatorNum(const QString& a);
+/*!
+ * \brief Checks if the QString corresponds to a logical operator.
+ * Searches for the parameter a in the QMap opsLog, containing all the logical operators and their arity.
+ * \param a - QString to check.
+ * \return Return true if a is a logical operator, false if it's not.
+ */
 bool isOperatorLog(const QString& a);
+/*!
+ * \brief Checks if the QString corresponds to a Pile operator.
+ * Searches for the parameter a in the QMap opsPile, containing all the Pile operators and their arity.
+ * \param a - QString to check.
+ * \return Return true if a is a Pile operator, false if it's not.
+ */
 bool isOperatorPile(const QString& a);
+/*!
+ * \brief Checks if the QString corresponds to an operator.
+ * Checks if the parameter a is a numeric operator, a logical operator or a Pile operator.
+ * \param a - QString to check.
+ * \return Return true if a is numeric operator, a logical operator or a Pile operator, false if it's none of them.
+ */
 bool isOperator(const QString& a);
 
 #endif // CONTROLEUR_H
