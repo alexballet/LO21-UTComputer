@@ -42,7 +42,6 @@ private:
      */
     static int currentMemento;
 
-    //disabling copy and assignment
     /*!
      * \brief Disabling the assignment possibility between Controleur objects.
      */

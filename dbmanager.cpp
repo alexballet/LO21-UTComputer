@@ -12,7 +12,7 @@ DbManager::DbManager() {
     if (!db.open())
         qDebug() << "OPEN ERROR";
     QSqlQuery query(db);
-    if(!db.tables().contains("pile") || !db.tables().contains("variables") || !db.tables().contains("programs") || !db.tables().contains("options")){
+    if(!db.tables().contains("pile") && !db.tables().contains("variables") && !db.tables().contains("programs") && !db.tables().contains("options")){
         query.exec("CREATE TABLE pile (id INTEGER PRIMARY KEY AUTOINCREMENT, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
         qDebug()<<query.lastError();
         query.exec("CREATE TABLE variables (id INTEGER PRIMARY KEY AUTOINCREMENT, nameVar VARCHAR NOT NULL, typeLit VARCHAR NOT NULL, lit VARCHAR NOT NULL)");
@@ -209,7 +209,7 @@ void DbManager::setOptions(){
     if( query.isSelect() ){
         while (query.next()) {
             QString option = query.value("option").toString();
-            int valeur = query.value("valeur").toInt();
+            int valeur = query.value("value").toInt();
             settings.setValue(option, valeur);
         }
     }
