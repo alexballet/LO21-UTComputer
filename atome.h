@@ -5,7 +5,7 @@
 #include <QString>
 
 /*!
- * \brief The Atome class
+ * \brief The Atome class represents
  */
 class Atome : public Litteral {
 private:

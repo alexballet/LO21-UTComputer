@@ -26,6 +26,7 @@ private:
     //disabling copy and assignment
     Controleur& operator=(const Controleur&) = delete;
     Controleur (const Controleur&) = delete;
+
     QString lastOp;
 public:
     static Controleur* getInstance();

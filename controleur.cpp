@@ -194,14 +194,15 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
     Litteral *x;
     Litteral *y;
     Variable *var1 = dynamic_cast<Variable*>(temp1);
-    if(var1)
+    if(var1){
         x = var1->getValue();
+    }
     else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1) || isExpression(*temp1)){
         x = temp1;
     }
     else{
-        pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
-        throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
+        pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
+        throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme ou atome");
     }
 
     if(nbOp==2){
@@ -213,9 +214,9 @@ void Controleur::applyOperatorNum(const QString& op, const int nbOp){
             y = temp2;
         }
         else{
-            pile->push(Litteral::createLitteral(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\''))));
-            pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
-            throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme");
+            pile->push(Litteral::createLitteral(temp2->toString(), typeLitteral(temp2->toString())));
+            pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
+            throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme ou atome");
         }
     }
 
@@ -749,32 +750,19 @@ void Controleur::applyOperatorPile(const QString& op){
         }
     }
     else if(op=="LASTOP"){
-//        if(pile->getLength()>=2){
-//            Litteral *x = pile->pop();
-//            Litteral *y = pile->pop();
-//            Programme *p = dynamic_cast<Programme*>(x);
-//            if(isEntier(*y) && p){
-//                Entier *e = dynamic_cast<Entier*>(y);
-//                if(e->getValue()!=0){
-//                    pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-//                    parse("EVAL");
-//                }
-//            }
-//            else{
-//                pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
-//                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
-//                throw ComputerException("Erreur : l'opérateur IFT s'applique sur un Entier et un Programme");
-//            }
-//        }
-//        else{
-//            throw ComputerException("Erreur : 2 arguments empilés nécessaires");
-//        }
+        if(lastOp!="" && lastOp!="LASTOP"){
+            parse(lastOp);
+        }
+        else{
+            throw ComputerException("Erreur : Il n'y a pas de dernier opérateur");
+        }
     }
 }
 
 Controleur* Controleur::getInstance() {
-    if(!instance)
+    if(!instance){
         instance = new Controleur();
+    }
     return instance;
 }
 

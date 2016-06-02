@@ -4,7 +4,9 @@
 #include <QString>
 #include <QSettings>
 #include <QMediaPlayer>
-
+/*!
+ * \brief The ComputerException class
+ */
 class ComputerException {
 private:
     QString info;

@@ -1228,4 +1228,11 @@ bool isExpression(T& a){
     return c!=nullptr;
 }
 
+template<class T>
+bool isAtome(T& a){
+    Atome *c = dynamic_cast<Atome*>(&a);
+    return c!=nullptr;
+}
+
+
 

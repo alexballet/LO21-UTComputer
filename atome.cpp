@@ -27,6 +27,6 @@ Litteral* Atome::getLitterale() const { //finds the corresponding litterale
     lit = progmap->findProg(id);
     if (lit)
         return lit;
-    //else pour Expression
-    return new Expression(id);
+    //else pour Atome
+    return new Atome(id);
 }

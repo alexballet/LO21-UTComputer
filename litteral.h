@@ -93,6 +93,9 @@ bool isComplexe(T& a);
 template<class T>
 bool isExpression(T& a);
 
+template<class T>
+bool isAtome(T& a);
+
 //opérateurs numériques
 Litteral* div(Litteral& a, Litteral& b);
 Litteral* mod(Litteral& a, Litteral& b);
