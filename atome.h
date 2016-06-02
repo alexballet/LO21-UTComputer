@@ -5,10 +5,13 @@
 #include <QString>
 
 /*!
- * \brief The Atome class represents
+ * \brief The Atome class can represent a Variable or Atome identifier, or an operator.
  */
 class Atome : public Litteral {
 private:
+    /*!
+     * \brief Defines and represents the Atome object.
+     */
     QString id;
 public:
     /*!
@@ -26,18 +29,18 @@ public:
      * \return Returns a QString composed of the id attribute.
      *
      * This method is used to display the Atome object in the QTableWidget of the mainWindow.
-     * The method creates a QString composed by the id put between two simple quotes.
-     * E.g. the Atome X becomes 'X'.
+     * The method creates a QString from the id.
+     * E.g. : the Atome X becomes "X".
      */
     QString toString() const;
     /*!
      * \brief Checks if the Atome is used as a Variable or a Programme.
-     * \return If the Atome is used as a Variable or a Programme, it returns it's value. Otherwise, it returns a new Expression.
+     * \return If the Atome is used as a Variable or a Programme, it returns it's value. Otherwise, it returns the Atome.
      *
      * This method searches for the Atome id attribute in VariableMap and ProgrammeMap.
      * If it finds the id in VariableMap, it returns the Variable.
      * If it finds ths id in ProgrammeMap, it returns the Programme.
-     * If it doesn't find it, it returns a new Expression composed of the id attribute.
+     * If it doesn't find it, it returns the Atome.
      */
     Litteral* getLitterale() const;
 };

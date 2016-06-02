@@ -23,9 +23,16 @@ void Controleur::parse(const QString& com) {
         return;
     }
 
+    QStringList words = manualSplit(com);
+
+    foreach (QString word, words) {
+        process(word);
+    }
+}
+
+QStringList Controleur::manualSplit(const QString& com){
     QStringList words;
 
-    //manual split
     int i;
     QString temp;
     bool stop=false;
@@ -64,61 +71,45 @@ void Controleur::parse(const QString& com) {
     if(temp!="")
         words.append(temp);
 
+    return words;
+}
 
-    foreach (QString word, words) {
-        QString type = typeLitteral(word);
-        Programme *p = ProgrammeMap::getInstance()->findProg(word);
-        if(p){
-            try{
-                pile->push(Litteral::createLitteral(word, type));
-                return;
-            }
-            catch(ComputerException c){
-                pile->setMessage(c.getInfo());
-            }
+void Controleur::process(const QString word){
+    QString type = typeLitteral(word);
+    Pile* pile = Pile::getInstance();
+    Programme *p = ProgrammeMap::getInstance()->findProg(word);
+    if(p){
+        try{
+            pile->push(Litteral::createLitteral(word, type));
+            return;
         }
-        if(type=="OperatorNum"){
-            try{
-                applyOperatorNum(word, opsNum.value(word));
-            }
-            catch(ComputerException c){
-                pile->setMessage(c.getInfo());
-            }
-            lastOp=word;
+        catch(ComputerException c){
+            pile->setMessage(c.getInfo());
         }
-        else if(type=="OperatorLog"){
-            try{
-                applyOperatorLog(word, opsLog.value(word));
-            }
-            catch(ComputerException c){
-                pile->setMessage(c.getInfo());
-            }
-            lastOp=word;
+    }
+    else if(isOperator(word)){
+        try{
+            applyOperator(word);
         }
-        else if(type=="OperatorPile"){
-            try{
-                applyOperatorPile(word);
-            }
-            catch(ComputerException c){
-                pile->setMessage(c.getInfo());
-            }
-            lastOp=word;
+        catch(ComputerException c){
+            pile->setMessage(c.getInfo());
         }
-        else if(type != "Inconnu") {
-            try {
-                pile->push(Litteral::createLitteral(word, type));
-            }
-            catch (ComputerException c) {
-                pile->setMessage(c.getInfo());
-            }
+        lastOp=word;
+    }
+    else if(type != "Inconnu") {
+        try {
+            pile->push(Litteral::createLitteral(word, type));
         }
-        else{
-            pile->setMessage("Commande inconnue !");
+        catch (ComputerException c) {
+            pile->setMessage(c.getInfo());
         }
+    }
+    else{
+        pile->setMessage("Commande inconnue !");
+    }
 
-        if (word != "EVAL") {
-            addMementoState(pile->createMemento());
-        }
+    if (word != "EVAL") {
+        addMementoState(pile->createMemento());
     }
 }
 
@@ -757,6 +748,15 @@ void Controleur::applyOperatorPile(const QString& op){
             throw ComputerException("Erreur : Il n'y a pas de dernier opérateur");
         }
     }
+}
+
+void Controleur::applyOperator(const QString& op){
+    if(isOperatorLog(op))
+        applyOperatorLog(op, opsLog.value(op));
+    else if(isOperatorNum(op))
+        applyOperatorNum(op, opsNum.value(op));
+    else
+        applyOperatorPile(op);
 }
 
 Controleur* Controleur::getInstance() {
