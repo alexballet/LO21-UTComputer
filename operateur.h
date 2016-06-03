@@ -49,7 +49,8 @@ static const QMap<QString, int> opsPile{
     {"STO", 2},
     {"FORGET", 1},
     {"EDIT", 1},
-    {"IFT", 2}
+    {"IFT", 2},
+    {"DROP", 0}
     };
 
 #endif // OPERATEUR_H
