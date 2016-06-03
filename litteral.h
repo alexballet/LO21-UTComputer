@@ -5,10 +5,23 @@
 #include <QStack>
 #include <typeinfo>
 #include "computerexception.h"
-
+/*!
+ * \brief The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method.
+ */
 class Litteral {
 public:
+    /*!
+     * \brief Factory method used to instanciate any type of Litteral.
+     * This method parses the value parameter depending on the type parameter, then initializes a new Litteral with the parsed value.
+     * \param value - the value of the Litteral to instanciate.
+     * \param type - the type of the Litteral to instanciate.
+     * \return Return a pointer to the instanciated Litteral object.
+     */
     static Litteral* createLitteral(const QString& value, const QString& type);
+    /*!
+     * \brief Pure virtual method to be defined in the child classes.
+     * Used to display any Litteral as a QString into the Pile.
+     */
     virtual QString toString() const = 0;
     Litteral* operator +(Litteral& a);
     Litteral* operator -(Litteral& a);
