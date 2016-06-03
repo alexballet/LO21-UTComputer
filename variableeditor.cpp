@@ -22,6 +22,7 @@ VariableEditor::~VariableEditor()
 }
 
 void VariableEditor::refreshTab() {
+    //disconnect prevents the sending of itemChanged signal when generating the table
     disconnect(ui->variableView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editVariableSlot(QTableWidgetItem*)));
     VariableMap* varmap = VariableMap::getInstance();
 
@@ -35,13 +36,16 @@ void VariableEditor::refreshTab() {
     int row = 0;
 
     QWidget* pWidget;
-    QPushButton* btn_delete;
-    QHBoxLayout* pLayout;
+    QPushButton* btn_delete; //delete button for each row
+    QHBoxLayout* pLayout; //used to stretch the button so as it fills the cell
     for (i = varmap->getIteratorBegin(); i != varmap->getIteratorEnd(); ++i) {
         item = new QTableWidgetItem(i.key());
-        item->setFlags(item->flags() ^ Qt::ItemIsEditable); //Name column read only
+        item->setFlags(item->flags() ^ Qt::ItemIsEditable); //Name column is read only
+        //name
         ui->variableView->setItem(row, 0, item);
+        //value
         ui->variableView->setItem(row, 1, new QTableWidgetItem(i.value()->toString()));
+        //delete button
         pWidget = new QWidget();
         btn_delete = new QPushButton();
         btn_delete->setText("-");
@@ -54,8 +58,8 @@ void VariableEditor::refreshTab() {
         pWidget->setLayout(pLayout);
         ui->variableView->setCellWidget(row++, 2, pWidget);
         connect(btn_delete, SIGNAL(pressed()), this, SLOT(deleteVariableSlot()));
-        //ui->variableView->setItem(row++, 2, new QTableWidgetItem())
     }
+    //reconnect the signal
     connect(ui->variableView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editVariableSlot(QTableWidgetItem*)));
 
 }
@@ -63,16 +67,16 @@ void VariableEditor::refreshTab() {
 void VariableEditor::newVariableSlot() {
     const QString name = ui->lineEdit->text();
     const QString value = ui->lineEdit_2->text();
-    if (name.isEmpty() || value.isEmpty()) {
+    if (name.isEmpty() || value.isEmpty()) { //if fields are empty
         QMessageBox::critical(this, tr("Variable Editor"),
-                                       tr("Remplissez les champs"),
+                                       tr("Remplissez les champs!"),
                                        QMessageBox::Ok);
         return;
     }
     try {
         new Variable(Litteral::createLitteral(value, typeLitteral(value)), name.toUpper());
     }
-    catch (ComputerException e) {
+    catch (ComputerException e) { //if fields are incorrect
         QMessageBox::critical(this, tr("Variable Editor"),
                                        tr(e.getInfo().toStdString().c_str()),
                                        QMessageBox::Ok);
@@ -84,7 +88,7 @@ void VariableEditor::newVariableSlot() {
 void VariableEditor::editVariableSlot(QTableWidgetItem* item) {
     QString value = item->text();
     VariableMap* varmap = VariableMap::getInstance();
-    QString id = ui->variableView->item(item->row(), 0)->text();
+    QString id = ui->variableView->item(item->row(), 0)->text(); //getting the id from column 0
     varmap->setVar(id, value);
 }
 
