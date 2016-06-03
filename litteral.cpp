@@ -63,6 +63,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
     }
     else if (type == "Atome") {
         Atome* a = new Atome(value);
+        qDebug()<<"bli";
         return a->getLitterale();
     }
     else if (type == "Programme") {
