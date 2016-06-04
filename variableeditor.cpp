@@ -86,9 +86,9 @@ void VariableEditor::newVariableSlot() {
 }
 
 void VariableEditor::editVariableSlot(QTableWidgetItem* item) {
+    QString id = ui->variableView->item(item->row(), 0)->text(); //getting the id from column 0
     QString value = item->text();
     VariableMap* varmap = VariableMap::getInstance();
-    QString id = ui->variableView->item(item->row(), 0)->text(); //getting the id from column 0
     varmap->setVar(id, value);
 }
 
