@@ -63,6 +63,7 @@ Litteral* Litteral::createLitteral(const QString& value, const QString& type) {
     }
     else if (type == "Atome") {
         Atome* a = new Atome(value);
+        qDebug()<<"bli";
         return a->getLitterale();
     }
     else if (type == "Programme") {
@@ -1035,11 +1036,6 @@ double Reel::getValue() const {
     return value;
 }
 
-Entier& Entier::operator= (const Entier& e) {
-    value = e.value;
-    return *this;
-}
-
 QString Reel::toString() const {
     return QString::number(value);
 }
@@ -1227,12 +1223,3 @@ bool isExpression(T& a){
     Expression *c = dynamic_cast<Expression*>(&a);
     return c!=nullptr;
 }
-
-template<class T>
-bool isAtome(T& a){
-    Atome *c = dynamic_cast<Atome*>(&a);
-    return c!=nullptr;
-}
-
-
-

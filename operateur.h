@@ -35,8 +35,8 @@ static const QMap<QString, int> opsLog{
     {">", 2},
     {">=", 2},
     {"<=", 2},
-    {"AND", 1},
-    {"OR", 1},
+    {"AND", 2},
+    {"OR", 2},
     {"NOT", 1}
     };
 
@@ -49,7 +49,8 @@ static const QMap<QString, int> opsPile{
     {"STO", 2},
     {"FORGET", 1},
     {"EDIT", 1},
-    {"IFT", 2}
+    {"IFT", 2},
+    {"DROP", 0}
     };
 
 #endif // OPERATEUR_H

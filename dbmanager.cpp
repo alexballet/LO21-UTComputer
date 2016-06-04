@@ -209,7 +209,7 @@ void DbManager::setOptions(){
     if( query.isSelect() ){
         while (query.next()) {
             QString option = query.value("option").toString();
-            int valeur = query.value("value").toInt();
+            int valeur = query.value("valeur").toInt();
             settings.setValue(option, valeur);
         }
     }

@@ -545,22 +545,9 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp){
     if(nbOp!=0){
         if(pile->getLength()<nbOp)
             throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
-        Litteral *temp1 = pile->pop();
-        Variable *var1 = dynamic_cast<Variable*>(temp1);
-        if(var1)
-            x = var1->getValue();
-        else {
-            x = temp1;
-        }
-
+        x = pile->pop();
         if(nbOp==2){
-            Litteral *temp2 = pile->pop();
-            Variable *var2 = dynamic_cast<Variable*>(temp2);
-            if(var2)
-                y = var2->getValue();
-            else {
-                y = temp2;
-            }
+            y = pile->pop();
         }
     }
 
@@ -648,9 +635,12 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp){
         }
         else{
             QString strToSearch = x->toString().remove('\'');
-            Variable *v = dynamic_cast<Variable*>(x);
-            if(v)
-                strToSearch = v->getId();
+            Variable *a = dynamic_cast<Variable*>(x);
+            if(a){
+                qDebug()<<"bla";
+                strToSearch = a->getId();
+            }
+            qDebug()<<strToSearch;
             Variable *var = VariableMap::getInstance()->findVar(strToSearch);
             if(var){
                 var->setValue(y);
