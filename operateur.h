@@ -35,8 +35,8 @@ static const QMap<QString, int> opsLog{
     {">", 2},
     {">=", 2},
     {"<=", 2},
-    {"AND", 1},
-    {"OR", 1},
+    {"AND", 2},
+    {"OR", 2},
     {"NOT", 1}
     };
 
