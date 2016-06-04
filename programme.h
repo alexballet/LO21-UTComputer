@@ -38,12 +38,6 @@ public:
      */
     Programme(const QString& i);
     /*!
-     * \brief Used by the Controleur to create a named Programme from an unnamed one.
-     * \param lit is the unnamed program.
-     * \param id is the program's name.
-     */
-    Programme(Litteral* lit, const QString id);
-    /*!
      * \brief Id getter.
      * \return Program's name.
      */
