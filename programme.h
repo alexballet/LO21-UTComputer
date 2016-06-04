@@ -49,6 +49,11 @@ public:
      */
     QString getId() const;
     /*!
+     * \brief Id setter.
+     * \param s is the new id.
+     */
+    void setId(const QString& s);
+    /*!
      * \brief Instructions setter.
      * \param Program's new instructions
      */
