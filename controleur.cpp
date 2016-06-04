@@ -587,10 +587,15 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp) {
     } else if(op == "STO") {
         Programme *p2 = dynamic_cast<Programme*>(y);
         QString id = x->toString().remove('\'');
-
+        Atome *a = dynamic_cast<Atome*>(x);
         if(typeLitteral(y->toString()) == "Programme") {
             QString strToSearch = x->toString().remove('\'');
             Programme *p = dynamic_cast<Programme*>(x);
+            if(!p && !a){
+                pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                throw ComputerException("Un programme doit être un atome !");
+            }
 
             if(p)
                 strToSearch = p->getId();
@@ -608,10 +613,16 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp) {
             pile->setMessage("Update : la valeur " + prog->toString() + " est stockée dans " + prog->getId());
         } else {
             QString strToSearch = x->toString().remove('\'');
-            Variable *a = dynamic_cast<Variable*>(x);
+            Variable *v = dynamic_cast<Variable*>(x);
 
-            if(a) {
-                strToSearch = a->getId();
+            if(!v && !a){
+                pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
+                pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
+                throw ComputerException("Une variable doit être un atome !");
+            }
+
+            if(v) {
+                strToSearch = v->getId();
             }
 
             Variable *var = VariableMap::getInstance()->findVar(strToSearch);
