@@ -1,0 +1,115 @@
+\documentclass[titlepage]{article}
+%\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{listings} %code
+\usepackage{graphicx} %images
+\usepackage[export]{adjustbox} %images
+\usepackage{comment} %commentaires longs
+\excludecomment{toex}
+\usepackage{fullpage} %marges
+\usepackage[usenames,dvipsnames]{xcolor} %couleurs
+%\usepackage{tikz}
+%\usepackage{mathrsfs}
+%\usetikzlibrary{arrows}
+
+\definecolor{bg}{HTML}{FFFFEE}
+\lstset{language=C++,backgroundcolor=\color{bg},frame=single,showspaces=false,basicstyle=\ttfamily,literate={"}{\textquotedbl}1,literate={'}{\textquotesingle}1,keywordstyle=\color{NavyBlue}, breaklines=true,showstringspaces=false,commentstyle=\color{VioletRed},rulecolor=\color{black},otherkeywords={},literate=%
+                {é}{{\'e}}{1}%
+               {è}{{\`e}}{1}%
+               {à}{{\`a}}{1}%
+                {ç}{{\c{c}}}{1}%
+                {œ}{{\oe}}{1}%
+                {ù}{{\`u}}{1}%
+                {É}{{\'E}}{1}%
+                {È}{{\`E}}{1}%
+                {À}{{\`A}}{1}%
+                {Ç}{{\c{C}}}{1}%
+                {Œ}{{\OE}}{1}%
+                {Ê}{{\^E}}{1}%
+                {ê}{{\^e}}{1}%
+                {î}{{\^i}}{1}%
+                {ô}{{\^o}}{1}%
+                {û}{{\^u}}{1}%
+                {ë}{{\¨{e}}}1
+                {û}{{\^{u}}}1
+                {â}{{\^{a}}}1
+                {Â}{{\^{A}}}1
+                {Î}{{\^{I}}}1}
+
+
+\usepackage{titlesec}
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\makeatletter
+\def\toclevel@subsubsubsection{4}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\makeatother
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\definecolor{RoyalRed}{RGB}{157,16, 45}
+\titleformat{\section}
+%%%%%%%%%%%%%
+{\normalfont\LARGE\sffamily}{\underline{Part \thesection :} }{1em}{}
+%%%%%%%%%%%%%
+
+
+
+%\titleformat*{\section}{\color{RoyalRed}{\thesection}{1em}
+%\usepackage{sectsty}
+%\sectionfont{\LARGE\color{RoyalRed}\fontfamily{mdugm}}
+
+
+\begin{document}
+\title{LO21 project report: Calculator from the future}
+\author{Alexandre Ballet, Anton Ippolitov (GI02)}
+\date{P16}
+\maketitle
+
+\tableofcontents
+
+\begin{abstract}
+Dans ce rapport nous allons présenter notre application développée dans le cadre de l'UV LO21. Une calculatrice révolutionnaire et innovante qui simplifera votre vie quotidienne.
+\end{abstract}
+
+\section{Very interesting}
+\subsection{Règles du Blackjack}
+C\texttt{++} code sample:
+\begin{lstlisting}
+void QComputer::refresh(){
+    Pile* pile = Pile::getInstance();
+
+    // the message
+    ui->message->setText(pile->getMessage());
+
+    unsigned int nb = 0;
+    // delete everything
+    for(unsigned int i=0; i<pile->getMaxAffiche(); i++)
+        ui->vuePile->item(i,0)->setText("");
+    // update
+    QStack<Litteral*>::const_iterator it;
+    for(it=pile->getIteratorEnd()-1 ; it!=pile->getIteratorBegin()-1 && nb<pile->getMaxAffiche(); nb++, --it){
+        ui->vuePile->item(pile->getMaxAffiche()-nb-1,0)->setText((*it)->toString());
+    }
+}
+\end{lstlisting}
+
+\subsection{La stratégie de base}
+
+\subsection{Comptage des cartes}
+
+\section{LEL}
+
+
+\end{document}
