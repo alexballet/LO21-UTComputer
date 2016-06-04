@@ -130,35 +130,14 @@ In this report, we will present our application developped for the L021 course. 
 
     \subsection{VariableMap and ProgrammeMap}
 
-    \textit{Variable} objects are stored in a \textit{QMap} attribute of a singleton \textit{VariableMap} class. This means that the research of a \textit{Variable} object has a complexity in O(1).\\
-    \textit{Programme} objects are stored in a \textit{QMap} attribute of a singleton \textit{ProgrammeMap} class. Like \textit{VariableMap}, the research of a \textit{Programme} object has a complexity in O(1).
+    \textit{Variable} objects are stored in a \textit{QMap<QString, Variable*>} attribute of a singleton \textit{VariableMap} class. This means that the research and the deletion of a \textit{Variable} object has a complexity in O(Log(n)). We can then find, edit and delete \textit{Variable} objects efficiently from their id.
+    \textit{Programme} objects are stored in a \textit{QMap<QString, Programme*>} attribute of a singleton \textit{ProgrammeMap} class. Like \textit{VariableMap}, the research and deletion of a \textit{Programme} object has a complexity in O(Log(n)).
 
     \subsection{ComputerException}
 
     Every error occuring in \textit{UTComputer} is managed by the \textit{ComputerException} class. Each time a \textit{ComputerException} object is created, the message of the \textit{Pile} instance is updated and displayed in the \textit{QComputer} interface.
 
-
-C\texttt{++} code sample:
-\begin{lstlisting}
-void QComputer::refresh(){
-    Pile* pile = Pile::getInstance();
-
-    // the message
-    ui->message->setText(pile->getMessage());
-
-    unsigned int nb = 0;
-    // delete everything
-    for(unsigned int i=0; i<pile->getMaxAffiche(); i++)
-        ui->vuePile->item(i,0)->setText("");
-    // update
-    QStack<Litteral*>::const_iterator it;
-    for(it=pile->getIteratorEnd()-1 ; it!=pile->getIteratorBegin()-1 && nb<pile->getMaxAffiche(); nb++, --it){
-        ui->vuePile->item(pile->getMaxAffiche()-nb-1,0)->setText((*it)->toString());
-    }
-}
-\end{lstlisting}
-
-
+\newpage
 \section{LEL}
 
 
