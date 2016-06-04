@@ -190,7 +190,8 @@ void DbManager::setPrograms(){
         while (query.next()) {
             QString id = query.value("nameProg").toString();
             QString lit = query.value("lit").toString();
-            Programme *prog = new Programme(Litteral::createLitteral(lit, typeLitteral(lit)), id);
+            Programme *prog = new Programme(lit);
+            prog->setId(id);
             progMap->insertProg(id, prog);
         }
     }

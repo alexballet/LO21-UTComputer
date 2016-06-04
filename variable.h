@@ -13,38 +13,38 @@
 class Variable : public Litteral {
 private:
     /*!
-     * \brief The variable's value is another Litteral
+     * \brief The variable's value is another Litteral.
      */
     Litteral* value;
     /*!
-     * \brief Unique name used to identify the variable
+     * \brief Unique name used to identify the variable.
      */
     QString id;
 public:
     /*!
-     * \brief Checks whether the variable's name is correct and adds the variable to the VariableMap
-     * \param v is the value
-     * \param id is the variable's name
+     * \brief Checks whether the variable's name is correct and adds the variable to the VariableMap.
+     * \param v is the value.
+     * \param id is the variable's name.
      */
     Variable(Litteral* v, QString id);
     /*!
-     * \brief Value getter
-     * \return Variable's value
+     * \brief Value getter.
+     * \return Variable's value.
      */
     Litteral* getValue() const;
     /*!
-     * \brief Id getter
-     * \return Variable's name
+     * \brief Id getter.
+     * \return Variable's name.
      */
     QString getId() const;
     /*!
-     * \brief Variable's value is displayed for the user
-     * \return value->toString()
+     * \brief Returns the Variable's value in a QString format.
+     * \return value->toString().
      */
     QString toString() const;
     /*!
-     * \brief Value setter
-     * \param v is the new value
+     * \brief Value setter.
+     * \param v is the new value.
      */
     void setValue(Litteral* v);
 };
@@ -52,14 +52,14 @@ public:
 
 template<class T>
 /*!
- * \brief Tests whether an object is a Variable
- * \param a is the test object
- * \return True or False
+ * \brief Tests whether an object is a Variable.
+ * \param a is the test object.
+ * \return True or False.
  */
 bool isVariable(T& a);
 
 /*!
- * \brief VariableMap is a singleton containing a QMap with all variables
+ * \brief VariableMap is a singleton containing a QMap with all variables.
  */
 class VariableMap {
 private:
@@ -81,53 +81,53 @@ private:
      */
     VariableMap& operator=(const VariableMap&) = delete;
     /*!
-     * \brief Disables the copy constructor
+     * \brief Disables the copy constructor.
      */
     VariableMap (const VariableMap&) = delete;
 public:
     /*!
-     * \brief Singleton getter
-     * \return VariableMap instance
+     * \brief Singleton getter.
+     * \return VariableMap instance.
      */
     static VariableMap* getInstance();
     /*!
-     * \brief Deletes the VariableMap instance
+     * \brief Deletes the VariableMap instance.
      */
     static void libererInstance();
     /*!
-     * \brief Checks whether a Variable with the specified id exisits
+     * \brief Checks whether a Variable with the specified id exisits.
      * \param id of the variable
-     * \return Variable pointer if it exists, nullptr if it doesn't
+     * \return Variable pointer if it exists, nullptr if it doesn't.
      */
     Variable* findVar(QString id) const;
     /*!
-     * \brief Deletes a Variable with the specified id
-     * \param id of the variable to delete
+     * \brief Deletes a Variable with the specified id.
+     * \param id of the variable to delete.
      */
     void deleteVar(QString id);
     /*!
-     * \brief Inserts a new Variable in the QMap
+     * \brief Inserts a new Variable in the QMap.
      * \param id of the Variable
-     * \param var is the pointer to the Variable
-     * If the id corresponds to the id of an exisiting Variable, its value is overriden
+     * \param var is the pointer to the Variable.
+     * If the id corresponds to the id of an exisiting Variable, its value is overriden.
      */
     void insertVar(QString id, Variable* var);
     /*!
-     * \brief Creates a corresponding Litteral object using Litteral Factory then sets the value of the Variable identified by id to this object
+     * \brief Creates a corresponding Litteral object using Litteral Factory then sets the value of the Variable identified by id to this object.
      * \param id of the Variable
      * \param value
      */
     void setVar(QString id, QString value);
     /*!
-     * \brief Returns the count of existing variables
+     * \brief Returns the count of existing variables.
      */
     unsigned int getCount() const;
     /*!
-     * \brief Returns a const iterator pointing at the beginning of the QMap
+     * \brief Returns a const iterator pointing at the beginning of the QMap.
      */
     QMap<QString, Variable*>::const_iterator getIteratorBegin() const;
     /*!
-     * \brief Returns a const iterator pointing at the end of the QMap
+     * \brief Returns a const iterator pointing at the end of the QMap.
      */
     QMap<QString, Variable*>::const_iterator getIteratorEnd() const;
 };

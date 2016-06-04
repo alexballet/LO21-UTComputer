@@ -17,11 +17,11 @@ class VariableEditor : public QDialog {
 
 public:
     /*!
-     * \brief VariableEditor constructor, sets up the ui
+     * \brief VariableEditor constructor, sets up the ui.
      */
     explicit VariableEditor(QWidget *parent = 0);
     /*!
-      \brief VariableEditor destructor, deletes the ui
+      \brief VariableEditor destructor, deletes the ui.
     */
     ~VariableEditor();
 private:
@@ -30,17 +30,17 @@ private:
      */
     Ui::VariableEditor *ui;
     /*!
-     * \brief Refreshes the TableWidget that lists all variables
+     * \brief Refreshes the TableWidget that lists all variables.
      */
     void refreshTab();
 private slots:
     /*!
-     * \brief Verifies user input and creates a new variable
-     * Uses Litteral factory to parse the input, create a corresponding Litteral object, then adds it to VariableMap
+     * \brief Verifies user input and creates a new variable.
+     * Uses Litteral factory to parse the input, create a corresponding Litteral object, then adds it to VariableMap.
      */
     void newVariableSlot();
     /*!
-     * \brief Lets the user edit a variable directly in the TableWidget
+     * \brief Lets the user edit a variable directly in the TableWidget.
      */
     void editVariableSlot(QTableWidgetItem*);
     /*!

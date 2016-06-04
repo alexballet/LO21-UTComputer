@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>calculette_icon_top_Zrm_icon.ico</file>
+    </qresource>
+</RCC>

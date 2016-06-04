@@ -3,7 +3,7 @@
 #include <QDebug>
 
 //Programme
-Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
+Programme::Programme(const QStringList i, const QString& id): instructions(i), id(id) {
     QString type = typeLitteral(id);
     VariableMap* varmap = VariableMap::getInstance();
     if (isOperator(id)) {
@@ -35,28 +35,6 @@ Programme::Programme(const QString& i): id("") {
             temp.remove(temp.length()-1, 1);
     }
     instructions = temp.split(' ', QString::SkipEmptyParts);
-}
-
-Programme::Programme(Litteral* lit, const QString s): id(s){
-    Programme *p = dynamic_cast<Programme*>(lit);
-    instructions = p->instructions;
-
-    QString type = typeLitteral(id);
-    VariableMap* varmap = VariableMap::getInstance();
-
-    if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
-        throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
-    }
-    else if(varmap->findVar(id)) {
-        throw ComputerException("Une variable avec le même nom existe deja!");
-    }
-    else if(type != "Atome"){
-        throw ComputerException("Un programme doit être un atome !");
-    }
-    else {
-        ProgrammeMap* progmap = ProgrammeMap::getInstance();
-        progmap->insertProg(id, this);
-    }
 }
 
 QString Programme::getId() const {

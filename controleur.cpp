@@ -639,10 +639,8 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp){
             QString strToSearch = x->toString().remove('\'');
             Variable *a = dynamic_cast<Variable*>(x);
             if(a){
-                qDebug()<<"bla";
                 strToSearch = a->getId();
             }
-            qDebug()<<strToSearch;
             Variable *var = VariableMap::getInstance()->findVar(strToSearch);
             if(var){
                 var->setValue(y);
