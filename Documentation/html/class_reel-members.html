@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_reel.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +105,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Reel Member List</div>  </div>
@@ -91,27 +113,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_reel.html">Reel</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>createLitteral</b>(const QString &amp;value, const QString &amp;type) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getValue</b>() const  (defined in <a class="el" href="class_reel.html">Reel</a>)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator!=</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator*</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator+</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator-</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator/</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator&lt;</b>(const int &amp;a) const  (defined in <a class="el" href="class_reel.html">Reel</a>)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator&lt;</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator==</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator&gt;</b>(const int &amp;a) const  (defined in <a class="el" href="class_reel.html">Reel</a>)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator&gt;</b>(Litteral &amp;a) (defined in <a class="el" href="class_litteral.html">Litteral</a>)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Reel</b>(double v) (defined in <a class="el" href="class_reel.html">Reel</a>)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>Reel</b>(const QString &amp;s) (defined in <a class="el" href="class_reel.html">Reel</a>)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>toString</b>() const  (defined in <a class="el" href="class_reel.html">Reel</a>)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_litteral.html#a391a130ecf7af141b10595f3780d8d55">createLitteral</a>(const QString &amp;value, const QString &amp;type)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_reel.html#a658e55154bd915eca195ac377163fa60">getValue</a>() const </td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_litteral.html#a8f9601a8f5fac803660ca3dfc4796978">operator!=</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_litteral.html#a9baea156139298a88f48813bfbe6d098">operator*</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_litteral.html#a07d728d317969cf4f659d474365b48f7">operator+</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_litteral.html#a2e5a14857e8111f65eb537cbc611fc3e">operator-</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_litteral.html#ac18e3fe351fd08e87805f60eedda3fc5">operator/</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_reel.html#ae1a621bbb6d5150960ca92f3328b2ab2">operator&lt;</a>(const int &amp;a) const </td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_litteral.html#aab2fb8c55e3cf3a946257bbeaa55c132">Litteral::operator&lt;</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_litteral.html#a2fdd47690152da3986efb42c4e4f062a">operator==</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_reel.html#a3412243bd2e4d3c0afa7d6a43e130717">operator&gt;</a>(const int &amp;a) const </td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_litteral.html#ac9bcdc121d1bdd90796ad1cdaed0462a">Litteral::operator&gt;</a>(Litteral &amp;a)</td><td class="entry"><a class="el" href="class_litteral.html">Litteral</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_reel.html#ac9ba9224fd485b4771b8f60a7fc81b5a">Reel</a>(double v)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_reel.html#aa44af559ad39232b46771a245e39172e">Reel</a>(const QString &amp;s)</td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_reel.html#a990e8324822ba3dbc64fc7ff727411e2">toString</a>() const </td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_reel.html#a4e6ed65e78f7666cf57ae878cf02f4c8">value</a></td><td class="entry"><a class="el" href="class_reel.html">Reel</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

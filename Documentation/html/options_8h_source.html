@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -63,15 +71,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('options_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,45 +108,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">options.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef OPTIONS_H</span></div>
+<a href="options_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef OPTIONS_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define OPTIONS_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDialog&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_ui.html">Ui</a> {</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="namespace_ui.html">    6</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_ui.html">Ui</a> {</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span><a class="code" href="class_options.html">Options</a>;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_options.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_options.html">Options</a> : <span class="keyword">public</span> QDialog</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_options.html">Options</a>(QWidget *parent = 0);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    ~<a class="code" href="class_options.html">Options</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> activerClavierOpt(<span class="keywordtype">bool</span>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> setMaxAfficheSlot(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> activerBipOpt(<span class="keywordtype">bool</span>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;signals:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> activerClavierSig(<span class="keywordtype">bool</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> setMaxAfficheSig(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_options.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_options.html">Options</a> : <span class="keyword">public</span> QDialog</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_options.html#a87403ad1d6bd9ae2b54af860bb0f0952">Options</a>(QWidget *parent = 0);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_options.html#a86ddb85b183f8b58af5481f30a42fa92">~Options</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Ui::Options *ui;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif // OPTIONS_H</span></div>
-<div class="ttc" id="class_options_html"><div class="ttname"><a href="class_options.html">Options</a></div><div class="ttdef"><b>Definition:</b> options.h:10</div></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_options.html#a831d55d3e4dc5039f34a20e40bd312a1">activerClavierOpt</a>(<span class="keywordtype">bool</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_options.html#aa8d0140b51d2ca3d8b7be81cf03099bd">setMaxAfficheSlot</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_options.html#a3fc35225c63e54c814b13856e7fd2504">activerBipOpt</a>(<span class="keywordtype">bool</span>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;signals:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_options.html#a9693856d26681c1362d51c111a611984">activerClavierSig</a>(<span class="keywordtype">bool</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_options.html#a486b1c87a1b8650825980befa748ace4">setMaxAfficheSig</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_options.html#ab372f812aa8c6c15edac512ab136f40a">   55</a></span>&#160;    Ui::Options *<a class="code" href="class_options.html#ab372f812aa8c6c15edac512ab136f40a">ui</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif // OPTIONS_H</span></div>
+<div class="ttc" id="class_options_html_a87403ad1d6bd9ae2b54af860bb0f0952"><div class="ttname"><a href="class_options.html#a87403ad1d6bd9ae2b54af860bb0f0952">Options::Options</a></div><div class="ttdeci">Options(QWidget *parent=0)</div><div class="ttdoc">Options constructor, sets up the ui, connects all signals. </div><div class="ttdef"><b>Definition:</b> options.cpp:5</div></div>
+<div class="ttc" id="class_options_html_ab372f812aa8c6c15edac512ab136f40a"><div class="ttname"><a href="class_options.html#ab372f812aa8c6c15edac512ab136f40a">Options::ui</a></div><div class="ttdeci">Ui::Options * ui</div><div class="ttdoc">ui for Qt Designer </div><div class="ttdef"><b>Definition:</b> options.h:55</div></div>
+<div class="ttc" id="class_options_html"><div class="ttname"><a href="class_options.html">Options</a></div><div class="ttdoc">Window where the user can change app settings. </div><div class="ttdef"><b>Definition:</b> options.h:13</div></div>
 <div class="ttc" id="namespace_ui_html"><div class="ttname"><a href="namespace_ui.html">Ui</a></div><div class="ttdef"><b>Definition:</b> options.h:6</div></div>
+<div class="ttc" id="class_options_html_a486b1c87a1b8650825980befa748ace4"><div class="ttname"><a href="class_options.html#a486b1c87a1b8650825980befa748ace4">Options::setMaxAfficheSig</a></div><div class="ttdeci">void setMaxAfficheSig(int)</div></div>
+<div class="ttc" id="class_options_html_a9693856d26681c1362d51c111a611984"><div class="ttname"><a href="class_options.html#a9693856d26681c1362d51c111a611984">Options::activerClavierSig</a></div><div class="ttdeci">void activerClavierSig(bool)</div></div>
+<div class="ttc" id="class_options_html_a86ddb85b183f8b58af5481f30a42fa92"><div class="ttname"><a href="class_options.html#a86ddb85b183f8b58af5481f30a42fa92">Options::~Options</a></div><div class="ttdeci">~Options()</div><div class="ttdoc">Options destructor, deletes the ui. </div><div class="ttdef"><b>Definition:</b> options.cpp:23</div></div>
+<div class="ttc" id="class_options_html_aa8d0140b51d2ca3d8b7be81cf03099bd"><div class="ttname"><a href="class_options.html#aa8d0140b51d2ca3d8b7be81cf03099bd">Options::setMaxAfficheSlot</a></div><div class="ttdeci">void setMaxAfficheSlot(int)</div><div class="ttdoc">Slot called when the user modifies the dial. The dial controls the number of values displayed in the ...</div><div class="ttdef"><b>Definition:</b> options.cpp:34</div></div>
+<div class="ttc" id="class_options_html_a3fc35225c63e54c814b13856e7fd2504"><div class="ttname"><a href="class_options.html#a3fc35225c63e54c814b13856e7fd2504">Options::activerBipOpt</a></div><div class="ttdeci">void activerBipOpt(bool)</div><div class="ttdoc">Slot called when the user modifies the activerBip checkbox. The QSettings object is updated...</div><div class="ttdef"><b>Definition:</b> options.cpp:40</div></div>
+<div class="ttc" id="class_options_html_a831d55d3e4dc5039f34a20e40bd312a1"><div class="ttname"><a href="class_options.html#a831d55d3e4dc5039f34a20e40bd312a1">Options::activerClavierOpt</a></div><div class="ttdeci">void activerClavierOpt(bool)</div><div class="ttdoc">Slot called when the user modifies the activerClavier checkbox. The QSettings object is updated and a...</div><div class="ttdef"><b>Definition:</b> options.cpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="options_8h.html">options.h</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_pile.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +105,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Pile Member List</div>  </div>
@@ -91,28 +113,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_pile.html">Pile</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>createMemento</b>() (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getInstance</b>() (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getIteratorBegin</b>() const  (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getIteratorEnd</b>() const  (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getLength</b>() const  (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getMaxAffiche</b>() const  (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getMessage</b>() const  (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>isEmpty</b>() (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>libererInstance</b>() (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>modificationEtat</b>() (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">signal</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>pop</b>() (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>push</b>(Litteral *lit) (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>reinstateMemento</b>(Memento *mem) (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>setMaxAffiche</b>(unsigned int) (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setMessage</b>(const QString &amp;msg) (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>top</b>() const  (defined in <a class="el" href="class_pile.html">Pile</a>)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#a723c09b1c8f22378e43c27988f824a03">createMemento</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#abd0c2d4d26d9aaf1ee6e0b86149dcfe3">getInstance</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#a1fbe64c87add3e77603ef6ec6298e131">getIteratorBegin</a>() const </td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#a2cc0321da936d613abe487c8e107b1f8">getIteratorEnd</a>() const </td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#aa52e6887c08408ea9708863ec1e269f4">getLength</a>() const </td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#aa74a5dbcbd71e97de482498f0de88c3f">getMaxAffiche</a>() const </td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#ab04b223738a2fa12b627b138a9c102ed">getMessage</a>() const </td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#a842e7e9976e544ba1ba3336da2f80d9b">instance</a></td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#ac8dedfaa7bd03de18c6c707afb55b83d">isEmpty</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#ac3868cf82736d86edfe47034393bbd76">libererInstance</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#a077ae8a4b32ce89db548768ded870ce3">maxAffiche</a></td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#a6a5dd4f3899cf54b3379a27c273b538e">message</a></td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#ac55a0afb626baffd1019567cbaa7f4b2">modificationEtat</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">signal</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#aa147d35a0f223fc5b1daad0b5659e96b">operator=</a>(const Pile &amp;)=delete</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#ab44e927107b28f5f3ac7697d10e0a739">Pile</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#a38b4d485b551f8f5fe2e4bbfa2803b99">Pile</a>(const Pile &amp;)=delete</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#ac1426b97b771b85b8758be83c70c845c">pop</a>()</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#aac9c31a5029044d51c9d9ed481e0ab53">push</a>(Litteral *lit)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#a5db1fa6a34f113457e28525466e789b0">reinstateMemento</a>(Memento *mem)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#a1051f4c60b5d8f37038f5ca0735165a7">setMaxAffiche</a>(unsigned int)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#a606ebb5aac49ba282a34c9787965a509">setMessage</a>(const QString &amp;msg)</td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_pile.html#a3877b676b1639c5f84860dbdd85cf094">stack</a></td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_pile.html#aa11624b7ca832d36079b9e30ee59037a">top</a>() const </td><td class="entry"><a class="el" href="class_pile.html">Pile</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

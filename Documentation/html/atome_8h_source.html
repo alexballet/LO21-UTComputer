@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -63,15 +71,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('atome_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,35 +108,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">atome.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ATOME_H</span></div>
+<a href="atome_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ATOME_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ATOME_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;litteral.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;variable.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="litteral_8h.html">litteral.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="variable_8h.html">variable.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_atome.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_atome.html">Atome</a> : <span class="keyword">public</span> <a class="code" href="class_litteral.html">Litteral</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    QString id;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_atome.html#ac9c19f03753cac7a89417d2046d6f89f">Atome</a>(QString <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QString getId() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QString toString() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* getLitterale() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">bool</span> isAtome(T&amp; a);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif // ATOME_H</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_atome.html#ab234c37fc41f3f5fc12d90ed76a59fd3">   15</a></span>&#160;    QString <a class="code" href="class_atome.html#ab234c37fc41f3f5fc12d90ed76a59fd3">id</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_atome.html#ac9c19f03753cac7a89417d2046d6f89f">Atome</a>(QString <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    QString <a class="code" href="class_atome.html#a16d4062cb9edc6a97b4bfdd09b127b04">getId</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QString <a class="code" href="class_atome.html#a23b8203b3859a7f4dbfca1abe271e151">toString</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* <a class="code" href="class_atome.html#aa8dcf071050799ceb5c9fff17f81afa3">getLitterale</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif // ATOME_H</span></div>
 <div class="ttc" id="class_atome_html_ac9c19f03753cac7a89417d2046d6f89f"><div class="ttname"><a href="class_atome.html#ac9c19f03753cac7a89417d2046d6f89f">Atome::Atome</a></div><div class="ttdeci">Atome(QString id)</div><div class="ttdoc">Constructor of Atome class. </div><div class="ttdef"><b>Definition:</b> atome.cpp:7</div></div>
-<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdef"><b>Definition:</b> litteral.h:9</div></div>
-<div class="ttc" id="class_atome_html"><div class="ttname"><a href="class_atome.html">Atome</a></div><div class="ttdoc">The Atome class. </div><div class="ttdef"><b>Definition:</b> atome.h:10</div></div>
+<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdoc">The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. </div><div class="ttdef"><b>Definition:</b> litteral.h:11</div></div>
+<div class="ttc" id="class_atome_html_a23b8203b3859a7f4dbfca1abe271e151"><div class="ttname"><a href="class_atome.html#a23b8203b3859a7f4dbfca1abe271e151">Atome::toString</a></div><div class="ttdeci">QString toString() const </div><div class="ttdoc">Displays the Atome object as a QString using its id attribute. </div><div class="ttdef"><b>Definition:</b> atome.cpp:15</div></div>
+<div class="ttc" id="class_atome_html_aa8dcf071050799ceb5c9fff17f81afa3"><div class="ttname"><a href="class_atome.html#aa8dcf071050799ceb5c9fff17f81afa3">Atome::getLitterale</a></div><div class="ttdeci">Litteral * getLitterale() const </div><div class="ttdoc">Checks if the Atome is used as a Variable or a Programme. </div><div class="ttdef"><b>Definition:</b> atome.cpp:19</div></div>
+<div class="ttc" id="class_atome_html_ab234c37fc41f3f5fc12d90ed76a59fd3"><div class="ttname"><a href="class_atome.html#ab234c37fc41f3f5fc12d90ed76a59fd3">Atome::id</a></div><div class="ttdeci">QString id</div><div class="ttdoc">Defines and represents the Atome object. </div><div class="ttdef"><b>Definition:</b> atome.h:15</div></div>
+<div class="ttc" id="litteral_8h_html"><div class="ttname"><a href="litteral_8h.html">litteral.h</a></div></div>
+<div class="ttc" id="variable_8h_html"><div class="ttname"><a href="variable_8h.html">variable.h</a></div></div>
+<div class="ttc" id="class_atome_html"><div class="ttname"><a href="class_atome.html">Atome</a></div><div class="ttdoc">The Atome class can represent a Variable or Atome identifier, or an operator. </div><div class="ttdef"><b>Definition:</b> atome.h:10</div></div>
+<div class="ttc" id="class_atome_html_a16d4062cb9edc6a97b4bfdd09b127b04"><div class="ttname"><a href="class_atome.html#a16d4062cb9edc6a97b4bfdd09b127b04">Atome::getId</a></div><div class="ttdeci">QString getId() const </div><div class="ttdoc">Accessor of the id attribute. </div><div class="ttdef"><b>Definition:</b> atome.cpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="atome_8h.html">atome.h</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

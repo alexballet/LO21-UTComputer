@@ -1,0 +1,30 @@
+<map id="computerexception.h" name="computerexception.h">
+<area shape="rect" id="node2" href="$litteral_8h.html" title="litteral.h" alt="" coords="688,80,756,107"/>
+<area shape="rect" id="node29" href="$computerexception_8cpp.html" title="computerexception.cpp" alt="" coords="781,80,938,107"/>
+<area shape="rect" id="node3" href="$atome_8h.html" title="atome.h" alt="" coords="651,155,721,181"/>
+<area shape="rect" id="node5" href="$controleur_8h.html" title="controleur.h" alt="" coords="661,229,751,256"/>
+<area shape="rect" id="node6" href="$variable_8h.html" title="variable.h" alt="" coords="432,304,511,331"/>
+<area shape="rect" id="node13" href="$programme_8h.html" title="programme.h" alt="" coords="586,304,685,331"/>
+<area shape="rect" id="node19" href="$pile_8h.html" title="pile.h" alt="" coords="989,304,1042,331"/>
+<area shape="rect" id="node23" href="$expression_8h.html" title="expression.h" alt="" coords="311,304,407,331"/>
+<area shape="rect" id="node26" href="$litteral_8cpp.html" title="litteral.cpp" alt="" coords="1066,304,1149,331"/>
+<area shape="rect" id="node27" href="$memento_8h.html" title="memento.h" alt="" coords="796,155,883,181"/>
+<area shape="rect" id="node4" href="$atome_8cpp.html" title="atome.cpp" alt="" coords="141,379,223,405"/>
+<area shape="rect" id="node8" href="$qcomputer_8h.html" title="qcomputer.h" alt="" coords="896,453,991,480"/>
+<area shape="rect" id="node12" href="$variable_8cpp.html" title="variable.cpp" alt="" coords="383,379,475,405"/>
+<area shape="rect" id="node18" href="$programme_8cpp.html" title="programme.cpp" alt="" coords="815,379,927,405"/>
+<area shape="rect" id="node25" href="$controleur_8cpp.html" title="controleur.cpp" alt="" coords="810,304,914,331"/>
+<area shape="rect" id="node7" href="$variableeditor_8h.html" title="variableeditor.h" alt="" coords="248,379,359,405"/>
+<area shape="rect" id="node11" href="$variableeditor_8cpp.html" title="variableeditor.cpp" alt="" coords="241,453,365,480"/>
+<area shape="rect" id="node9" href="$main_8cpp.html" title="main.cpp" alt="" coords="891,528,966,555"/>
+<area shape="rect" id="node10" href="$qcomputer_8cpp.html" title="qcomputer.cpp" alt="" coords="991,528,1099,555"/>
+<area shape="rect" id="node14" href="$programeditorwindow_8h.html" title="programeditorwindow.h" alt="" coords="499,379,655,405"/>
+<area shape="rect" id="node16" href="$programeditor_8h.html" title="programeditor.h" alt="" coords="679,379,791,405"/>
+<area shape="rect" id="node15" href="$programeditorwindow_8cpp.html" title="programeditorwindow.cpp" alt="" coords="483,453,654,480"/>
+<area shape="rect" id="node17" href="$programeditor_8cpp.html" title="programeditor.cpp" alt="" coords="679,453,805,480"/>
+<area shape="rect" id="node20" href="$dbmanager_8h.html" title="dbmanager.h" alt="" coords="1053,379,1151,405"/>
+<area shape="rect" id="node22" href="$pile_8cpp.html" title="pile.cpp" alt="" coords="1175,379,1242,405"/>
+<area shape="rect" id="node21" href="$dbmanager_8cpp.html" title="dbmanager.cpp" alt="" coords="1083,453,1193,480"/>
+<area shape="rect" id="node24" href="$expression_8cpp.html" title="expression.cpp" alt="" coords="5,379,116,405"/>
+<area shape="rect" id="node28" href="$memento_8cpp.html" title="memento.cpp" alt="" coords="877,229,978,256"/>
+</map>

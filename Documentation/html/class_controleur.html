@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_controleur.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,57 +105,592 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_controleur-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Controleur Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> class parses and executes the user input. It also manages the <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> object and is a singleton.  
+ <a href="class_controleur.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="controleur_8h_source.html">controleur.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Controleur:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_controleur__coll__graph.png" border="0" usemap="#_controleur_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab29d71e348f95bb5e23727b17aeda09e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab29d71e348f95bb5e23727b17aeda09e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>parse</b> (const QString &amp;com)</td></tr>
+<tr class="memitem:ab29d71e348f95bb5e23727b17aeda09e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#ab29d71e348f95bb5e23727b17aeda09e">parse</a> (const QString &amp;com)</td></tr>
+<tr class="memdesc:ab29d71e348f95bb5e23727b17aeda09e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that parses a QString to isolate the expressions to form <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects or execute operators. If it's a <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> or an <a class="el" href="class_expression.html" title="The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation. ">Expression</a>, it creates the associated <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> and pushes it in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. Otherwise, it means it's one or a series of different Litterals. It splits the com parameter and analyzes each one independently.  <a href="#ab29d71e348f95bb5e23727b17aeda09e">More...</a><br /></td></tr>
 <tr class="separator:ab29d71e348f95bb5e23727b17aeda09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe2d79714276ebe3384c1ce9afc069ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe2d79714276ebe3384c1ce9afc069ad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyOperatorNum</b> (const QString &amp;op, const int nbOp)</td></tr>
+<tr class="memitem:ad9ec590e46af5252d60c20a258557112"><td class="memItemLeft" align="right" valign="top">QStringList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#ad9ec590e46af5252d60c20a258557112">manualSplit</a> (const QString &amp;com)</td></tr>
+<tr class="memdesc:ad9ec590e46af5252d60c20a258557112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that splits a QString into different expressions to be executed by the execute() method.  <a href="#ad9ec590e46af5252d60c20a258557112">More...</a><br /></td></tr>
+<tr class="separator:ad9ec590e46af5252d60c20a258557112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa36b71321bdebf6d2ce86cc1b33434a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#aa36b71321bdebf6d2ce86cc1b33434a2">process</a> (const QString word)</td></tr>
+<tr class="memdesc:aa36b71321bdebf6d2ce86cc1b33434a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that processes an expression. If it's an operator, it applies it. Otherwise, it's a <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> and it pushes it in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>.  <a href="#aa36b71321bdebf6d2ce86cc1b33434a2">More...</a><br /></td></tr>
+<tr class="separator:aa36b71321bdebf6d2ce86cc1b33434a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe2d79714276ebe3384c1ce9afc069ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#afe2d79714276ebe3384c1ce9afc069ad">applyOperatorNum</a> (const QString &amp;op, const int nbOp)</td></tr>
+<tr class="memdesc:afe2d79714276ebe3384c1ce9afc069ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that applies a numeric operator, poping nbOp <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. If there is enough <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> and if the operation is possible between those types of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects, it applies the operator.  <a href="#afe2d79714276ebe3384c1ce9afc069ad">More...</a><br /></td></tr>
 <tr class="separator:afe2d79714276ebe3384c1ce9afc069ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a1d90c9bce664cf2ab7aa24f13cdeaa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a1d90c9bce664cf2ab7aa24f13cdeaa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyOperatorLog</b> (const QString &amp;op, const int nbOp)</td></tr>
+<tr class="memitem:a8a1d90c9bce664cf2ab7aa24f13cdeaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a8a1d90c9bce664cf2ab7aa24f13cdeaa">applyOperatorLog</a> (const QString &amp;op, const int nbOp)</td></tr>
+<tr class="memdesc:a8a1d90c9bce664cf2ab7aa24f13cdeaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that applies a logical operator, poping nbOp <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. If there is enough <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> and if the operation is possible between those types of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects, it applies the operator.  <a href="#a8a1d90c9bce664cf2ab7aa24f13cdeaa">More...</a><br /></td></tr>
 <tr class="separator:a8a1d90c9bce664cf2ab7aa24f13cdeaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8321062b4b64c98a671bf43523c07b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8321062b4b64c98a671bf43523c07b72"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyOperatorPile</b> (const QString &amp;op)</td></tr>
-<tr class="separator:a8321062b4b64c98a671bf43523c07b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59c733ebe0a6581e2dc0c8abcf5a9087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a59c733ebe0a6581e2dc0c8abcf5a9087">applyOperatorPile</a> (const QString &amp;op, const int nbOp)</td></tr>
+<tr class="memdesc:a59c733ebe0a6581e2dc0c8abcf5a9087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that applies a <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> operator, poping nbOp <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. If there is enough <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> and if the operation is possible between those types of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects, it applies the operator.  <a href="#a59c733ebe0a6581e2dc0c8abcf5a9087">More...</a><br /></td></tr>
+<tr class="separator:a59c733ebe0a6581e2dc0c8abcf5a9087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935349890389f974449af07969d7db38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a935349890389f974449af07969d7db38">applyOperator</a> (const QString &amp;op)</td></tr>
+<tr class="memdesc:a935349890389f974449af07969d7db38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that calls the apply method associated with the type of the operator.  <a href="#a935349890389f974449af07969d7db38">More...</a><br /></td></tr>
+<tr class="separator:a935349890389f974449af07969d7db38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1f74824181591a46c0aa4b4a9f73903e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f74824181591a46c0aa4b4a9f73903e"></a>
-static <a class="el" href="class_controleur.html">Controleur</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+<tr class="memitem:a1f74824181591a46c0aa4b4a9f73903e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_controleur.html">Controleur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a1f74824181591a46c0aa4b4a9f73903e">getInstance</a> ()</td></tr>
+<tr class="memdesc:a1f74824181591a46c0aa4b4a9f73903e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to access the <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> singleton.  <a href="#a1f74824181591a46c0aa4b4a9f73903e">More...</a><br /></td></tr>
 <tr class="separator:a1f74824181591a46c0aa4b4a9f73903e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe7fc8d171b85f56fd4a7ab91522adcd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe7fc8d171b85f56fd4a7ab91522adcd"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>addMementoState</b> (<a class="el" href="class_memento.html">Memento</a> *mem)</td></tr>
+<tr class="memitem:afe7fc8d171b85f56fd4a7ab91522adcd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#afe7fc8d171b85f56fd4a7ab91522adcd">addMementoState</a> (<a class="el" href="class_memento.html">Memento</a> *mem)</td></tr>
+<tr class="memdesc:afe7fc8d171b85f56fd4a7ab91522adcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that adds the <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state mem to mementoList. Called each time an expression is processed.  <a href="#afe7fc8d171b85f56fd4a7ab91522adcd">More...</a><br /></td></tr>
 <tr class="separator:afe7fc8d171b85f56fd4a7ab91522adcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b92e95d717c10ba1d9c7b3c12d423ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b92e95d717c10ba1d9c7b3c12d423ea"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>undo</b> ()</td></tr>
+<tr class="memitem:a5b92e95d717c10ba1d9c7b3c12d423ea"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a5b92e95d717c10ba1d9c7b3c12d423ea">undo</a> ()</td></tr>
+<tr class="memdesc:a5b92e95d717c10ba1d9c7b3c12d423ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that reinstate the previous <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state.  <a href="#a5b92e95d717c10ba1d9c7b3c12d423ea">More...</a><br /></td></tr>
 <tr class="separator:a5b92e95d717c10ba1d9c7b3c12d423ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebf13244a238c69f14b52ba5d9dca386"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebf13244a238c69f14b52ba5d9dca386"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>redo</b> ()</td></tr>
+<tr class="memitem:aebf13244a238c69f14b52ba5d9dca386"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#aebf13244a238c69f14b52ba5d9dca386">redo</a> ()</td></tr>
+<tr class="memdesc:aebf13244a238c69f14b52ba5d9dca386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that reinstate the next <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state.  <a href="#aebf13244a238c69f14b52ba5d9dca386">More...</a><br /></td></tr>
 <tr class="separator:aebf13244a238c69f14b52ba5d9dca386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a2b3859d8cb6bd1c0407be722962470bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a2b3859d8cb6bd1c0407be722962470bd">Controleur</a> ()</td></tr>
+<tr class="memdesc:a2b3859d8cb6bd1c0407be722962470bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> constructor to forbid instanciation by any other way than using the <a class="el" href="class_controleur.html#a1f74824181591a46c0aa4b4a9f73903e" title="Method to access the Controleur singleton. ">getInstance()</a> method.  <a href="#a2b3859d8cb6bd1c0407be722962470bd">More...</a><br /></td></tr>
+<tr class="separator:a2b3859d8cb6bd1c0407be722962470bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b062fef709b2689e8c2d98a72e34889"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_controleur.html">Controleur</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a2b062fef709b2689e8c2d98a72e34889">operator=</a> (const <a class="el" href="class_controleur.html">Controleur</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a2b062fef709b2689e8c2d98a72e34889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disabling the assignment possibility between <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> objects.  <a href="#a2b062fef709b2689e8c2d98a72e34889">More...</a><br /></td></tr>
+<tr class="separator:a2b062fef709b2689e8c2d98a72e34889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe0f64d82d789bdce028be773c8ec6a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#afe0f64d82d789bdce028be773c8ec6a6">Controleur</a> (const <a class="el" href="class_controleur.html">Controleur</a> &amp;)=delete</td></tr>
+<tr class="memdesc:afe0f64d82d789bdce028be773c8ec6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disabling the copy constructor of the <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> class.  <a href="#afe0f64d82d789bdce028be773c8ec6a6">More...</a><br /></td></tr>
+<tr class="separator:afe0f64d82d789bdce028be773c8ec6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a0b5c0b055e70386d783721f616af0e00"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a0b5c0b055e70386d783721f616af0e00">lastOp</a></td></tr>
+<tr class="memdesc:a0b5c0b055e70386d783721f616af0e00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute storing the last operator used. Usefull for the LASTOP operator.  <a href="#a0b5c0b055e70386d783721f616af0e00">More...</a><br /></td></tr>
+<tr class="separator:a0b5c0b055e70386d783721f616af0e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a0bd871a2401ca4d240b460f07d2db349"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_controleur.html">Controleur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a0bd871a2401ca4d240b460f07d2db349">instance</a> = nullptr</td></tr>
+<tr class="memdesc:a0bd871a2401ca4d240b460f07d2db349"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the unique instance of the Controler object.  <a href="#a0bd871a2401ca4d240b460f07d2db349">More...</a><br /></td></tr>
+<tr class="separator:a0bd871a2401ca4d240b460f07d2db349"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72f632a4500691e638a216f5f857f99a"><td class="memItemLeft" align="right" valign="top">static QVector&lt; <a class="el" href="class_memento.html">Memento</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a72f632a4500691e638a216f5f857f99a">mementoList</a></td></tr>
+<tr class="memdesc:a72f632a4500691e638a216f5f857f99a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to the <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> objects created.  <a href="#a72f632a4500691e638a216f5f857f99a">More...</a><br /></td></tr>
+<tr class="separator:a72f632a4500691e638a216f5f857f99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ce36ae9be85fb6a2282dea372cc1de2"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_controleur.html#a5ce36ae9be85fb6a2282dea372cc1de2">currentMemento</a> = -1</td></tr>
+<tr class="memdesc:a5ce36ae9be85fb6a2282dea372cc1de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the current <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state (in the mementoList).  <a href="#a5ce36ae9be85fb6a2282dea372cc1de2">More...</a><br /></td></tr>
+<tr class="separator:a5ce36ae9be85fb6a2282dea372cc1de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> class parses and executes the user input. It also manages the <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> object and is a singleton. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a2b3859d8cb6bd1c0407be722962470bd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Controleur::Controleur </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> constructor to forbid instanciation by any other way than using the <a class="el" href="class_controleur.html#a1f74824181591a46c0aa4b4a9f73903e" title="Method to access the Controleur singleton. ">getInstance()</a> method. </p>
+
+</div>
+</div>
+<a class="anchor" id="afe0f64d82d789bdce028be773c8ec6a6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Controleur::Controleur </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_controleur.html">Controleur</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disabling the copy constructor of the <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> class. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="afe7fc8d171b85f56fd4a7ab91522adcd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::addMementoState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_memento.html">Memento</a> *&#160;</td>
+          <td class="paramname"><em>mem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method that adds the <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state mem to mementoList. Called each time an expression is processed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mem</td><td>- <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a935349890389f974449af07969d7db38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::applyOperator </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that calls the apply method associated with the type of the operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td>- id of the operator to apply. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8a1d90c9bce664cf2ab7aa24f13cdeaa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::applyOperatorLog </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nbOp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that applies a logical operator, poping nbOp <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. If there is enough <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> and if the operation is possible between those types of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects, it applies the operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td>- id of the operator to apply. </td></tr>
+    <tr><td class="paramname">nbOp</td><td>- number of operands needed to apply the operator. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afe2d79714276ebe3384c1ce9afc069ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::applyOperatorNum </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nbOp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that applies a numeric operator, poping nbOp <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. If there is enough <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> and if the operation is possible between those types of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects, it applies the operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td>- id of the operator to apply. </td></tr>
+    <tr><td class="paramname">nbOp</td><td>- number of operands needed to apply the operator. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a59c733ebe0a6581e2dc0c8abcf5a9087"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::applyOperatorPile </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nbOp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that applies a <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> operator, poping nbOp <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. If there is enough <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> and if the operation is possible between those types of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects, it applies the operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td>- id of the operator to apply. </td></tr>
+    <tr><td class="paramname">nbOp</td><td>- number of operands needed to apply the operator. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1f74824181591a46c0aa4b4a9f73903e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_controleur.html">Controleur</a> * Controleur::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method to access the <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> singleton. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> singleton. If the singleton is not instanciated yet, it returns a new <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a>. Otherwise, it returns the <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> instance. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad9ec590e46af5252d60c20a258557112"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QStringList Controleur::manualSplit </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>com</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that splits a QString into different expressions to be executed by the execute() method. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">com</td><td>- QString to split. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2b062fef709b2689e8c2d98a72e34889"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_controleur.html">Controleur</a>&amp; Controleur::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_controleur.html">Controleur</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disabling the assignment possibility between <a class="el" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ...">Controleur</a> objects. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab29d71e348f95bb5e23727b17aeda09e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::parse </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>com</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that parses a QString to isolate the expressions to form <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects or execute operators. If it's a <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> or an <a class="el" href="class_expression.html" title="The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation. ">Expression</a>, it creates the associated <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> and pushes it in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. Otherwise, it means it's one or a series of different Litterals. It splits the com parameter and analyzes each one independently. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">com</td><td>- QString to parse. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa36b71321bdebf6d2ce86cc1b33434a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::process </td>
+          <td>(</td>
+          <td class="paramtype">const QString&#160;</td>
+          <td class="paramname"><em>word</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that processes an expression. If it's an operator, it applies it. Otherwise, it's a <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> and it pushes it in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">word</td><td>- QString to process. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aebf13244a238c69f14b52ba5d9dca386"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::redo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method that reinstate the next <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5b92e95d717c10ba1d9c7b3c12d423ea"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controleur::undo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method that reinstate the previous <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a5ce36ae9be85fb6a2282dea372cc1de2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Controleur::currentMemento = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index of the current <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> state (in the mementoList). </p>
+
+</div>
+</div>
+<a class="anchor" id="a0bd871a2401ca4d240b460f07d2db349"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_controleur.html">Controleur</a> * Controleur::instance = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the unique instance of the Controler object. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0b5c0b055e70386d783721f616af0e00"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString Controleur::lastOp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Attribute storing the last operator used. Usefull for the LASTOP operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a72f632a4500691e638a216f5f857f99a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector&lt; <a class="el" href="class_memento.html">Memento</a> * &gt; Controleur::mementoList</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Vector of pointers to the <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> objects created. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="controleur_8h_source.html">controleur.h</a></li>
-<li>controleur.cpp</li>
+<li><a class="el" href="controleur_8cpp.html">controleur.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_controleur.html">Controleur</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

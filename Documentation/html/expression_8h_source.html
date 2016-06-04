@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -63,15 +71,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('expression_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,43 +108,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">expression.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef EXPRESSION_H</span></div>
+<a href="expression_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef EXPRESSION_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define EXPRESSION_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;litteral.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;controleur.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="litteral_8h.html">litteral.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="controleur_8h.html">controleur.h</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QTextStream&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QChar&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QStack&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_expression.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_expression.html">Expression</a> : <span class="keyword">public</span> <a class="code" href="class_litteral.html">Litteral</a> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QString text;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_expression.html">Expression</a>(QString t);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    QString getText() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QString toString() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">bool</span> isExpression(<span class="keyword">const</span> QString&amp; i);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//parsing functions (infix to postfix)</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;QString parseExpression(<span class="keyword">const</span> QString&amp; s);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">bool</span> isHigher(QString a, QString b);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">int</span> order(QString op);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">bool</span> isChar(QChar a);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">bool</span> isPartOperand(QChar a, QString s, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif // EXPRESSION_H</span></div>
-<div class="ttc" id="class_expression_html"><div class="ttname"><a href="class_expression.html">Expression</a></div><div class="ttdef"><b>Definition:</b> expression.h:11</div></div>
-<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdef"><b>Definition:</b> litteral.h:9</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_expression.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_expression.html">Expression</a> : <span class="keyword">public</span> <a class="code" href="class_litteral.html">Litteral</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_expression.html#af7abeb58dcfe3f2f875234f907d8021b">   18</a></span>&#160;    QString <a class="code" href="class_expression.html#af7abeb58dcfe3f2f875234f907d8021b">text</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_expression.html#a54db1aa56fa9f9177054d0e86aaacb1a">Expression</a>(QString t);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QString <a class="code" href="class_expression.html#aa9ceaabba9ec92bc594ce794431d6370">getText</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QString <a class="code" href="class_expression.html#a60e6e305cdd8e878df2e3081ae15a4d0">toString</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="expression_8h.html#a71d7671260b872d5256af83450fa882f">isExpression</a>(<span class="keyword">const</span> QString&amp; i);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//parsing functions (infix to postfix)</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span>QString <a class="code" href="expression_8h.html#a58d598d0fbb942f25acdee1f6e7cf83d">parseExpression</a>(<span class="keyword">const</span> QString&amp; s);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="expression_8h.html#a621672790abe48e6b3c572389828836f">isHigher</a>(QString a, QString b);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">int</span> <a class="code" href="expression_8h.html#a949d642df10d403325a0f92fa5437971">order</a>(QString op);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="expression_8h.html#a028513b9d9382bdb9f1e441ffcd430f4">isChar</a>(QChar a);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="expression_8h.html#a9d520dcda4e1cd9b7b52571761f6968b">isPartOperand</a>(QChar a);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif // EXPRESSION_H</span></div>
+<div class="ttc" id="controleur_8h_html"><div class="ttname"><a href="controleur_8h.html">controleur.h</a></div></div>
+<div class="ttc" id="class_expression_html_a54db1aa56fa9f9177054d0e86aaacb1a"><div class="ttname"><a href="class_expression.html#a54db1aa56fa9f9177054d0e86aaacb1a">Expression::Expression</a></div><div class="ttdeci">Expression(QString t)</div><div class="ttdoc">Expression Constructor. If the parameter t is already in the expression form (e.g : &#39;X DUP&#39;)...</div><div class="ttdef"><b>Definition:</b> expression.cpp:3</div></div>
+<div class="ttc" id="class_expression_html"><div class="ttname"><a href="class_expression.html">Expression</a></div><div class="ttdoc">The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation. </div><div class="ttdef"><b>Definition:</b> expression.h:13</div></div>
+<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdoc">The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. </div><div class="ttdef"><b>Definition:</b> litteral.h:11</div></div>
+<div class="ttc" id="expression_8h_html_a028513b9d9382bdb9f1e441ffcd430f4"><div class="ttname"><a href="expression_8h.html#a028513b9d9382bdb9f1e441ffcd430f4">isChar</a></div><div class="ttdeci">bool isChar(QChar a)</div><div class="ttdoc">Checks if the QChar is not a symbol. </div><div class="ttdef"><b>Definition:</b> expression.cpp:19</div></div>
+<div class="ttc" id="expression_8h_html_a621672790abe48e6b3c572389828836f"><div class="ttname"><a href="expression_8h.html#a621672790abe48e6b3c572389828836f">isHigher</a></div><div class="ttdeci">bool isHigher(QString a, QString b)</div><div class="ttdoc">Checks if an operator a has a higher priority than b. </div><div class="ttdef"><b>Definition:</b> expression.cpp:40</div></div>
+<div class="ttc" id="litteral_8h_html"><div class="ttname"><a href="litteral_8h.html">litteral.h</a></div></div>
+<div class="ttc" id="expression_8h_html_a58d598d0fbb942f25acdee1f6e7cf83d"><div class="ttname"><a href="expression_8h.html#a58d598d0fbb942f25acdee1f6e7cf83d">parseExpression</a></div><div class="ttdeci">QString parseExpression(const QString &amp;s)</div><div class="ttdoc">Function that parses an Expression previously considered as an operation. It uses the algorithm "infi...</div><div class="ttdef"><b>Definition:</b> expression.cpp:45</div></div>
+<div class="ttc" id="expression_8h_html_a71d7671260b872d5256af83450fa882f"><div class="ttname"><a href="expression_8h.html#a71d7671260b872d5256af83450fa882f">isExpression</a></div><div class="ttdeci">bool isExpression(const QString &amp;i)</div><div class="ttdoc">Checks whether the parameter is an Expression. Checks if the parameter i starts and ends with a simpl...</div><div class="ttdef"><b>Definition:</b> expression.cpp:15</div></div>
+<div class="ttc" id="expression_8h_html_a949d642df10d403325a0f92fa5437971"><div class="ttname"><a href="expression_8h.html#a949d642df10d403325a0f92fa5437971">order</a></div><div class="ttdeci">int order(QString op)</div><div class="ttdoc">Gets the priority of an operator. </div><div class="ttdef"><b>Definition:</b> expression.cpp:27</div></div>
+<div class="ttc" id="class_expression_html_aa9ceaabba9ec92bc594ce794431d6370"><div class="ttname"><a href="class_expression.html#aa9ceaabba9ec92bc594ce794431d6370">Expression::getText</a></div><div class="ttdeci">QString getText() const </div><div class="ttdoc">Accessor of the text attribute. </div><div class="ttdef"><b>Definition:</b> expression.cpp:7</div></div>
+<div class="ttc" id="class_expression_html_af7abeb58dcfe3f2f875234f907d8021b"><div class="ttname"><a href="class_expression.html#af7abeb58dcfe3f2f875234f907d8021b">Expression::text</a></div><div class="ttdeci">QString text</div><div class="ttdoc">Attribute storing the expression. </div><div class="ttdef"><b>Definition:</b> expression.h:18</div></div>
+<div class="ttc" id="class_expression_html_a60e6e305cdd8e878df2e3081ae15a4d0"><div class="ttname"><a href="class_expression.html#a60e6e305cdd8e878df2e3081ae15a4d0">Expression::toString</a></div><div class="ttdeci">QString toString() const </div><div class="ttdoc">Method used to display the text attribute in the Pile instance. </div><div class="ttdef"><b>Definition:</b> expression.cpp:11</div></div>
+<div class="ttc" id="expression_8h_html_a9d520dcda4e1cd9b7b52571761f6968b"><div class="ttname"><a href="expression_8h.html#a9d520dcda4e1cd9b7b52571761f6968b">isPartOperand</a></div><div class="ttdeci">bool isPartOperand(QChar a)</div><div class="ttdoc">Checks if the QChar is a independent symbol or is part of the operand. E.g : &#39;.&#39; and &#39;$&#39; are part of ...</div><div class="ttdef"><b>Definition:</b> expression.cpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="expression_8h.html">expression.h</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

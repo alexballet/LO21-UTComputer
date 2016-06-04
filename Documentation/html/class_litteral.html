@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_litteral.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +105,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -92,60 +114,343 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Litteral Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The abstract <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> class is the parent class (and factory) of <a class="el" href="class_litteral_numerique.html" title="The abstract LitteralNumerique class is the parent class of Entier, Reel and Rationnel. ">LitteralNumerique</a>, <a class="el" href="class_complexe.html" title="The Complexe class is used to represent a complex value. It stores 2 LitteralNumerique objects (Entie...">Complexe</a>, <a class="el" href="class_atome.html" title="The Atome class can represent a Variable or Atome identifier, or an operator. ">Atome</a>, <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> and <a class="el" href="class_programme.html" title="Programme class. ">Programme</a>. It declares all the virtual operators and the <a class="el" href="class_litteral.html#ada6a5431818b6120337670cc8f46fed5" title="Pure virtual method to be defined in the child classes. Used to display any Litteral as a QString int...">toString()</a> method.  
+ <a href="class_litteral.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="litteral_8h_source.html">litteral.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Litteral:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_litteral__inherit__graph.png" border="0" usemap="#_litteral_inherit__map" alt="Inheritance graph"/></div>
 <map name="_litteral_inherit__map" id="_litteral_inherit__map">
-<area shape="rect" id="node2" href="class_atome.html" title="The Atome class. " alt="" coords="5,80,65,107"/><area shape="rect" id="node3" href="class_complexe.html" title="Complexe" alt="" coords="89,80,171,107"/><area shape="rect" id="node4" href="class_expression.html" title="Expression" alt="" coords="195,80,281,107"/><area shape="rect" id="node5" href="class_litteral_numerique.html" title="LitteralNumerique" alt="" coords="305,80,429,107"/><area shape="rect" id="node9" href="class_programme.html" title="Programme" alt="" coords="453,80,543,107"/><area shape="rect" id="node10" href="class_variable.html" title="Variable" alt="" coords="567,80,637,107"/><area shape="rect" id="node6" href="class_entier.html" title="Entier" alt="" coords="249,155,305,181"/><area shape="rect" id="node7" href="class_rationnel.html" title="Rationnel" alt="" coords="329,155,406,181"/><area shape="rect" id="node8" href="class_reel.html" title="Reel" alt="" coords="431,155,480,181"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<area shape="rect" id="node2" href="class_atome.html" title="The Atome class can represent a Variable or Atome identifier, or an operator. " alt="" coords="5,80,65,107"/><area shape="rect" id="node3" href="class_complexe.html" title="The Complexe class is used to represent a complex value. It stores 2 LitteralNumerique objects (Entie..." alt="" coords="89,80,171,107"/><area shape="rect" id="node4" href="class_expression.html" title="The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation. " alt="" coords="195,80,281,107"/><area shape="rect" id="node5" href="class_litteral_numerique.html" title="The abstract LitteralNumerique class is the parent class of Entier, Reel and Rationnel. " alt="" coords="305,80,429,107"/><area shape="rect" id="node9" href="class_programme.html" title="Programme class. " alt="" coords="453,80,543,107"/><area shape="rect" id="node10" href="class_variable.html" title="Variable class. " alt="" coords="567,80,637,107"/><area shape="rect" id="node6" href="class_entier.html" title="The Entier class contains an integer value. " alt="" coords="249,155,305,181"/><area shape="rect" id="node7" href="class_rationnel.html" title="The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store ..." alt="" coords="329,155,406,181"/><area shape="rect" id="node8" href="class_reel.html" title="The Reel class contains a double value. " alt="" coords="431,155,480,181"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ada6a5431818b6120337670cc8f46fed5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada6a5431818b6120337670cc8f46fed5"></a>
-virtual QString&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> () const =0</td></tr>
+<tr class="memitem:ada6a5431818b6120337670cc8f46fed5"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#ada6a5431818b6120337670cc8f46fed5">toString</a> () const =0</td></tr>
+<tr class="memdesc:ada6a5431818b6120337670cc8f46fed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual method to be defined in the child classes. Used to display any <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> as a QString into the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>.  <a href="#ada6a5431818b6120337670cc8f46fed5">More...</a><br /></td></tr>
 <tr class="separator:ada6a5431818b6120337670cc8f46fed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07d728d317969cf4f659d474365b48f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07d728d317969cf4f659d474365b48f7"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator+</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:a07d728d317969cf4f659d474365b48f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#a07d728d317969cf4f659d474365b48f7">operator+</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:a07d728d317969cf4f659d474365b48f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to sum <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#a07d728d317969cf4f659d474365b48f7">More...</a><br /></td></tr>
 <tr class="separator:a07d728d317969cf4f659d474365b48f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e5a14857e8111f65eb537cbc611fc3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e5a14857e8111f65eb537cbc611fc3e"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:a2e5a14857e8111f65eb537cbc611fc3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#a2e5a14857e8111f65eb537cbc611fc3e">operator-</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:a2e5a14857e8111f65eb537cbc611fc3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to substract <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#a2e5a14857e8111f65eb537cbc611fc3e">More...</a><br /></td></tr>
 <tr class="separator:a2e5a14857e8111f65eb537cbc611fc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9baea156139298a88f48813bfbe6d098"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9baea156139298a88f48813bfbe6d098"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:a9baea156139298a88f48813bfbe6d098"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#a9baea156139298a88f48813bfbe6d098">operator*</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:a9baea156139298a88f48813bfbe6d098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to multiply <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#a9baea156139298a88f48813bfbe6d098">More...</a><br /></td></tr>
 <tr class="separator:a9baea156139298a88f48813bfbe6d098"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac18e3fe351fd08e87805f60eedda3fc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac18e3fe351fd08e87805f60eedda3fc5"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator/</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:ac18e3fe351fd08e87805f60eedda3fc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#ac18e3fe351fd08e87805f60eedda3fc5">operator/</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:ac18e3fe351fd08e87805f60eedda3fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to divide <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#ac18e3fe351fd08e87805f60eedda3fc5">More...</a><br /></td></tr>
 <tr class="separator:ac18e3fe351fd08e87805f60eedda3fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fdd47690152da3986efb42c4e4f062a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2fdd47690152da3986efb42c4e4f062a"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:a2fdd47690152da3986efb42c4e4f062a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#a2fdd47690152da3986efb42c4e4f062a">operator==</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:a2fdd47690152da3986efb42c4e4f062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check if two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects are equal to each other.  <a href="#a2fdd47690152da3986efb42c4e4f062a">More...</a><br /></td></tr>
 <tr class="separator:a2fdd47690152da3986efb42c4e4f062a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f9601a8f5fac803660ca3dfc4796978"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f9601a8f5fac803660ca3dfc4796978"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:a8f9601a8f5fac803660ca3dfc4796978"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#a8f9601a8f5fac803660ca3dfc4796978">operator!=</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:a8f9601a8f5fac803660ca3dfc4796978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to check if two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects are different to each other.  <a href="#a8f9601a8f5fac803660ca3dfc4796978">More...</a><br /></td></tr>
 <tr class="separator:a8f9601a8f5fac803660ca3dfc4796978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab2fb8c55e3cf3a946257bbeaa55c132"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab2fb8c55e3cf3a946257bbeaa55c132"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:aab2fb8c55e3cf3a946257bbeaa55c132"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#aab2fb8c55e3cf3a946257bbeaa55c132">operator&lt;</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:aab2fb8c55e3cf3a946257bbeaa55c132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to compare two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#aab2fb8c55e3cf3a946257bbeaa55c132">More...</a><br /></td></tr>
 <tr class="separator:aab2fb8c55e3cf3a946257bbeaa55c132"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9bcdc121d1bdd90796ad1cdaed0462a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9bcdc121d1bdd90796ad1cdaed0462a"></a>
-<a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;</b> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memitem:ac9bcdc121d1bdd90796ad1cdaed0462a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#ac9bcdc121d1bdd90796ad1cdaed0462a">operator&gt;</a> (<a class="el" href="class_litteral.html">Litteral</a> &amp;a)</td></tr>
+<tr class="memdesc:ac9bcdc121d1bdd90796ad1cdaed0462a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to compare two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#ac9bcdc121d1bdd90796ad1cdaed0462a">More...</a><br /></td></tr>
 <tr class="separator:ac9bcdc121d1bdd90796ad1cdaed0462a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a391a130ecf7af141b10595f3780d8d55"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a391a130ecf7af141b10595f3780d8d55"></a>
-static <a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>createLitteral</b> (const QString &amp;value, const QString &amp;type)</td></tr>
+<tr class="memitem:a391a130ecf7af141b10595f3780d8d55"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_litteral.html">Litteral</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_litteral.html#a391a130ecf7af141b10595f3780d8d55">createLitteral</a> (const QString &amp;value, const QString &amp;type)</td></tr>
+<tr class="memdesc:a391a130ecf7af141b10595f3780d8d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory method used to instanciate any type of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a>. This method parses the value parameter depending on the type parameter, then initializes a new <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> with the parsed value.  <a href="#a391a130ecf7af141b10595f3780d8d55">More...</a><br /></td></tr>
 <tr class="separator:a391a130ecf7af141b10595f3780d8d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The abstract <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> class is the parent class (and factory) of <a class="el" href="class_litteral_numerique.html" title="The abstract LitteralNumerique class is the parent class of Entier, Reel and Rationnel. ">LitteralNumerique</a>, <a class="el" href="class_complexe.html" title="The Complexe class is used to represent a complex value. It stores 2 LitteralNumerique objects (Entie...">Complexe</a>, <a class="el" href="class_atome.html" title="The Atome class can represent a Variable or Atome identifier, or an operator. ">Atome</a>, <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> and <a class="el" href="class_programme.html" title="Programme class. ">Programme</a>. It declares all the virtual operators and the <a class="el" href="class_litteral.html#ada6a5431818b6120337670cc8f46fed5" title="Pure virtual method to be defined in the child classes. Used to display any Litteral as a QString int...">toString()</a> method. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a391a130ecf7af141b10595f3780d8d55"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::createLitteral </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Factory method used to instanciate any type of <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a>. This method parses the value parameter depending on the type parameter, then initializes a new <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> with the parsed value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>- the value of the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to instanciate. </td></tr>
+    <tr><td class="paramname">type</td><td>- the type of the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to instanciate. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Return a pointer to the instanciated <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8f9601a8f5fac803660ca3dfc4796978"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to check if two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects are different to each other. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to compare to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects are different, false if they're equal. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9baea156139298a88f48813bfbe6d098"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to multiply <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to multiply to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the multiplication of the two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a07d728d317969cf4f659d474365b48f7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to sum <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to sum to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the sum of the two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2e5a14857e8111f65eb537cbc611fc3e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to substract <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to substract to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the substraction of the two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects : this - a </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac18e3fe351fd08e87805f60eedda3fc5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator/ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to divide <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- Divisor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns the division of the two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects : this / a; </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aab2fb8c55e3cf3a946257bbeaa55c132"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to compare two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to compare to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if this &lt; a are equal, false if this &gt; a. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2fdd47690152da3986efb42c4e4f062a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to check if two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects are equal to each other. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to compare to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects are equal, false if they're different. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac9bcdc121d1bdd90796ad1cdaed0462a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_litteral.html">Litteral</a> * Litteral::operator&gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_litteral.html">Litteral</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method to compare two <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>- <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> to compare to the current object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if this &gt; a are equal, false if this &lt; a. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ada6a5431818b6120337670cc8f46fed5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual QString Litteral::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pure virtual method to be defined in the child classes. Used to display any <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> as a QString into the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a>. </p>
+
+<p>Implemented in <a class="el" href="class_complexe.html#a327fd83ec9743fb43c5d47831d8ed45c">Complexe</a>, <a class="el" href="class_rationnel.html#a41bc89d21ce161818f67ccfe296766c0">Rationnel</a>, <a class="el" href="class_reel.html#a990e8324822ba3dbc64fc7ff727411e2">Reel</a>, <a class="el" href="class_entier.html#aa960356dfeae8af6dfa2cd25136a1a6f">Entier</a>, <a class="el" href="class_litteral_numerique.html#aeaecfe3d84444e702b645698f752d931">LitteralNumerique</a>, <a class="el" href="class_programme.html#ae786507789a19121851be725e9bb1495">Programme</a>, <a class="el" href="class_variable.html#a5be619e4e7d834663be275b88fa4c5f3">Variable</a>, <a class="el" href="class_atome.html#a23b8203b3859a7f4dbfca1abe271e151">Atome</a>, and <a class="el" href="class_expression.html#a60e6e305cdd8e878df2e3081ae15a4d0">Expression</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="litteral_8h_source.html">litteral.h</a></li>
-<li>litteral.cpp</li>
+<li><a class="el" href="litteral_8cpp.html">litteral.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_litteral.html">Litteral</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

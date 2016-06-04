@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_variable_map.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,62 +105,449 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_variable_map-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">VariableMap Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> is a singleton containing a QMap with all variables.  
+ <a href="class_variable_map.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="variable_8h_source.html">variable.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for VariableMap:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_variable_map__coll__graph.png" border="0" usemap="#_variable_map_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac86bcdcff2541e0b5348c62a929289a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac86bcdcff2541e0b5348c62a929289a3"></a>
-<a class="el" href="class_variable.html">Variable</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>findVar</b> (QString id) const </td></tr>
+<tr class="memitem:ac86bcdcff2541e0b5348c62a929289a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable.html">Variable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#ac86bcdcff2541e0b5348c62a929289a3">findVar</a> (QString id) const </td></tr>
+<tr class="memdesc:ac86bcdcff2541e0b5348c62a929289a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> with the specified id exisits.  <a href="#ac86bcdcff2541e0b5348c62a929289a3">More...</a><br /></td></tr>
 <tr class="separator:ac86bcdcff2541e0b5348c62a929289a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac435dbede2dec38476769320a0a7f442"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac435dbede2dec38476769320a0a7f442"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteVar</b> (QString id)</td></tr>
+<tr class="memitem:ac435dbede2dec38476769320a0a7f442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#ac435dbede2dec38476769320a0a7f442">deleteVar</a> (QString id)</td></tr>
+<tr class="memdesc:ac435dbede2dec38476769320a0a7f442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> with the specified id.  <a href="#ac435dbede2dec38476769320a0a7f442">More...</a><br /></td></tr>
 <tr class="separator:ac435dbede2dec38476769320a0a7f442"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99d11605a386225423e876e0e8062d0b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99d11605a386225423e876e0e8062d0b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>insertVar</b> (QString id, <a class="el" href="class_variable.html">Variable</a> *var)</td></tr>
+<tr class="memitem:a99d11605a386225423e876e0e8062d0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a99d11605a386225423e876e0e8062d0b">insertVar</a> (QString id, <a class="el" href="class_variable.html">Variable</a> *var)</td></tr>
+<tr class="memdesc:a99d11605a386225423e876e0e8062d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> in the QMap.  <a href="#a99d11605a386225423e876e0e8062d0b">More...</a><br /></td></tr>
 <tr class="separator:a99d11605a386225423e876e0e8062d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19c21036d83e549e304d0b7759499500"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19c21036d83e549e304d0b7759499500"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVar</b> (QString id, QString value)</td></tr>
+<tr class="memitem:a19c21036d83e549e304d0b7759499500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a19c21036d83e549e304d0b7759499500">setVar</a> (QString id, QString value)</td></tr>
+<tr class="memdesc:a19c21036d83e549e304d0b7759499500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a corresponding <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object using <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> Factory then sets the value of the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> identified by id to this object.  <a href="#a19c21036d83e549e304d0b7759499500">More...</a><br /></td></tr>
 <tr class="separator:a19c21036d83e549e304d0b7759499500"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1051f3b5128bb8c00e54babe54ea7d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1051f3b5128bb8c00e54babe54ea7d8"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getCount</b> () const </td></tr>
+<tr class="memitem:aa1051f3b5128bb8c00e54babe54ea7d8"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#aa1051f3b5128bb8c00e54babe54ea7d8">getCount</a> () const </td></tr>
+<tr class="memdesc:aa1051f3b5128bb8c00e54babe54ea7d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the count of existing variables.  <a href="#aa1051f3b5128bb8c00e54babe54ea7d8">More...</a><br /></td></tr>
 <tr class="separator:aa1051f3b5128bb8c00e54babe54ea7d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebac451964043ed552db903ee8bc36da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebac451964043ed552db903ee8bc36da"></a>
-QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;<br class="typebreak" />
-::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>getIteratorBegin</b> () const </td></tr>
+<tr class="memitem:aebac451964043ed552db903ee8bc36da"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;<br class="typebreak" />
+::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#aebac451964043ed552db903ee8bc36da">getIteratorBegin</a> () const </td></tr>
+<tr class="memdesc:aebac451964043ed552db903ee8bc36da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const iterator pointing at the beginning of the QMap.  <a href="#aebac451964043ed552db903ee8bc36da">More...</a><br /></td></tr>
 <tr class="separator:aebac451964043ed552db903ee8bc36da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07ecf6d6d7b5176fc66fe561efdfb3e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07ecf6d6d7b5176fc66fe561efdfb3e7"></a>
-QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;<br class="typebreak" />
-::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>getIteratorEnd</b> () const </td></tr>
+<tr class="memitem:a07ecf6d6d7b5176fc66fe561efdfb3e7"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;<br class="typebreak" />
+::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a07ecf6d6d7b5176fc66fe561efdfb3e7">getIteratorEnd</a> () const </td></tr>
+<tr class="memdesc:a07ecf6d6d7b5176fc66fe561efdfb3e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const iterator pointing at the end of the QMap.  <a href="#a07ecf6d6d7b5176fc66fe561efdfb3e7">More...</a><br /></td></tr>
 <tr class="separator:a07ecf6d6d7b5176fc66fe561efdfb3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:acc040a4a590cc5409773b5a82e465345"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc040a4a590cc5409773b5a82e465345"></a>
-static <a class="el" href="class_variable_map.html">VariableMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+<tr class="memitem:acc040a4a590cc5409773b5a82e465345"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_variable_map.html">VariableMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#acc040a4a590cc5409773b5a82e465345">getInstance</a> ()</td></tr>
+<tr class="memdesc:acc040a4a590cc5409773b5a82e465345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton getter.  <a href="#acc040a4a590cc5409773b5a82e465345">More...</a><br /></td></tr>
 <tr class="separator:acc040a4a590cc5409773b5a82e465345"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c40a5fca5c6aef62a045644c749b69c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c40a5fca5c6aef62a045644c749b69c"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>libererInstance</b> ()</td></tr>
+<tr class="memitem:a0c40a5fca5c6aef62a045644c749b69c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a0c40a5fca5c6aef62a045644c749b69c">libererInstance</a> ()</td></tr>
+<tr class="memdesc:a0c40a5fca5c6aef62a045644c749b69c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance.  <a href="#a0c40a5fca5c6aef62a045644c749b69c">More...</a><br /></td></tr>
 <tr class="separator:a0c40a5fca5c6aef62a045644c749b69c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a11e9f1f27f6817f1a77ea94e4185c6e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a11e9f1f27f6817f1a77ea94e4185c6e9">VariableMap</a> ()</td></tr>
+<tr class="memdesc:a11e9f1f27f6817f1a77ea94e4185c6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#a11e9f1f27f6817f1a77ea94e4185c6e9">More...</a><br /></td></tr>
+<tr class="separator:a11e9f1f27f6817f1a77ea94e4185c6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9650cf0111e3389682913a1c3890da06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_variable_map.html">VariableMap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a9650cf0111e3389682913a1c3890da06">operator=</a> (const <a class="el" href="class_variable_map.html">VariableMap</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a9650cf0111e3389682913a1c3890da06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the assignment possibility between <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> objects.  <a href="#a9650cf0111e3389682913a1c3890da06">More...</a><br /></td></tr>
+<tr class="separator:a9650cf0111e3389682913a1c3890da06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1db2b66b556e9a348f3209d0c3b10d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a8e1db2b66b556e9a348f3209d0c3b10d">VariableMap</a> (const <a class="el" href="class_variable_map.html">VariableMap</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a8e1db2b66b556e9a348f3209d0c3b10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the copy constructor.  <a href="#a8e1db2b66b556e9a348f3209d0c3b10d">More...</a><br /></td></tr>
+<tr class="separator:a8e1db2b66b556e9a348f3209d0c3b10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a0b7e9a6f90c8e0035c3bcdd49aca49bc"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#a0b7e9a6f90c8e0035c3bcdd49aca49bc">map</a></td></tr>
+<tr class="memdesc:a0b7e9a6f90c8e0035c3bcdd49aca49bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">A QMap where all variables are stored. They are identified by their id.  <a href="#a0b7e9a6f90c8e0035c3bcdd49aca49bc">More...</a><br /></td></tr>
+<tr class="separator:a0b7e9a6f90c8e0035c3bcdd49aca49bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:acb76ecc13625eb691f1791ca00b4f1c9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_variable_map.html">VariableMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_variable_map.html#acb76ecc13625eb691f1791ca00b4f1c9">instance</a> = nullptr</td></tr>
+<tr class="memdesc:acb76ecc13625eb691f1791ca00b4f1c9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance used for the Singleton design pattern.  <a href="#acb76ecc13625eb691f1791ca00b4f1c9">More...</a><br /></td></tr>
+<tr class="separator:acb76ecc13625eb691f1791ca00b4f1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> is a singleton containing a QMap with all variables. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a11e9f1f27f6817f1a77ea94e4185c6e9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VariableMap::VariableMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8e1db2b66b556e9a348f3209d0c3b10d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">VariableMap::VariableMap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_variable_map.html">VariableMap</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ac435dbede2dec38476769320a0a7f442"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VariableMap::deleteVar </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes a <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> with the specified id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the variable to delete. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac86bcdcff2541e0b5348c62a929289a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable.html">Variable</a> * VariableMap::findVar </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether a <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> with the specified id exisits. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the variable </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_variable.html" title="Variable class. ">Variable</a> pointer if it exists, nullptr if it doesn't. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa1051f3b5128bb8c00e54babe54ea7d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int VariableMap::getCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the count of existing variables. </p>
+
+</div>
+</div>
+<a class="anchor" id="acc040a4a590cc5409773b5a82e465345"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable_map.html">VariableMap</a> * VariableMap::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Singleton getter. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aebac451964043ed552db903ee8bc36da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;::const_iterator VariableMap::getIteratorBegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a const iterator pointing at the beginning of the QMap. </p>
+
+</div>
+</div>
+<a class="anchor" id="a07ecf6d6d7b5176fc66fe561efdfb3e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMap&lt; QString, <a class="el" href="class_variable.html">Variable</a> * &gt;::const_iterator VariableMap::getIteratorEnd </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a const iterator pointing at the end of the QMap. </p>
+
+</div>
+</div>
+<a class="anchor" id="a99d11605a386225423e876e0e8062d0b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VariableMap::insertVar </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_variable.html">Variable</a> *&#160;</td>
+          <td class="paramname"><em>var</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inserts a new <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> in the QMap. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> </td></tr>
+    <tr><td class="paramname">var</td><td>is the pointer to the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a>. If the id corresponds to the id of an exisiting <a class="el" href="class_variable.html" title="Variable class. ">Variable</a>, its value is overriden. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0c40a5fca5c6aef62a045644c749b69c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VariableMap::libererInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes the <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9650cf0111e3389682913a1c3890da06"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable_map.html">VariableMap</a>&amp; VariableMap::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_variable_map.html">VariableMap</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the assignment possibility between <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> objects. </p>
+
+</div>
+</div>
+<a class="anchor" id="a19c21036d83e549e304d0b7759499500"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VariableMap::setVar </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a corresponding <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object using <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> Factory then sets the value of the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> identified by id to this object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> </td></tr>
+    <tr><td class="paramname">value</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="acb76ecc13625eb691f1791ca00b4f1c9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_variable_map.html">VariableMap</a> * VariableMap::instance = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance used for the Singleton design pattern. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0b7e9a6f90c8e0035c3bcdd49aca49bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMap&lt;QString, <a class="el" href="class_variable.html">Variable</a>*&gt; VariableMap::map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A QMap where all variables are stored. They are identified by their id. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="variable_8h_source.html">variable.h</a></li>
-<li>variable.cpp</li>
+<li><a class="el" href="variable_8cpp.html">variable.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_variable_map.html">VariableMap</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

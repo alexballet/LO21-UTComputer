@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -72,15 +80,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li><a href="#index_a"><span>a</span></a></li>
+      <li><a href="#index_c"><span>c</span></a></li>
+      <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
+      <li><a href="#index_g"><span>g</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_l"><span>l</span></a></li>
+      <li><a href="#index_m"><span>m</span></a></li>
+      <li><a href="#index_n"><span>n</span></a></li>
+      <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
+      <li><a href="#index_q"><span>q</span></a></li>
+      <li><a href="#index_r"><span>r</span></a></li>
+      <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_u"><span>u</span></a></li>
+      <li><a href="#index_v"><span>v</span></a></li>
+      <li class="current"><a href="#index_~"><span>~</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,17 +137,477 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="contents">
-&#160;<ul>
+&#160;
+
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>activerBipOpt()
+: <a class="el" href="class_options.html#a3fc35225c63e54c814b13856e7fd2504">Options</a>
+</li>
+<li>activerClavier()
+: <a class="el" href="class_q_computer.html#ad0f0f26a827191b26516e0f2e48007b9">QComputer</a>
+</li>
+<li>activerClavierOpt()
+: <a class="el" href="class_options.html#a831d55d3e4dc5039f34a20e40bd312a1">Options</a>
+</li>
+<li>activerClavierSig()
+: <a class="el" href="class_options.html#a9693856d26681c1362d51c111a611984">Options</a>
+</li>
+<li>addMementoState()
+: <a class="el" href="class_controleur.html#afe7fc8d171b85f56fd4a7ab91522adcd">Controleur</a>
+</li>
+<li>applyOperator()
+: <a class="el" href="class_controleur.html#a935349890389f974449af07969d7db38">Controleur</a>
+</li>
+<li>applyOperatorLog()
+: <a class="el" href="class_controleur.html#a8a1d90c9bce664cf2ab7aa24f13cdeaa">Controleur</a>
+</li>
+<li>applyOperatorNum()
+: <a class="el" href="class_controleur.html#afe2d79714276ebe3384c1ce9afc069ad">Controleur</a>
+</li>
+<li>applyOperatorPile()
+: <a class="el" href="class_controleur.html#a59c733ebe0a6581e2dc0c8abcf5a9087">Controleur</a>
+</li>
 <li>Atome()
 : <a class="el" href="class_atome.html#ac9c19f03753cac7a89417d2046d6f89f">Atome</a>
 </li>
 </ul>
+
+
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>Complexe()
+: <a class="el" href="class_complexe.html#a4ee4e8a0641ab7d332348284eca68508">Complexe</a>
+</li>
+<li>ComputerException()
+: <a class="el" href="class_computer_exception.html#aea9044481c793b72351f4e17abf96ebc">ComputerException</a>
+</li>
+<li>Controleur()
+: <a class="el" href="class_controleur.html#afe0f64d82d789bdce028be773c8ec6a6">Controleur</a>
+</li>
+<li>createLitteral()
+: <a class="el" href="class_litteral.html#a391a130ecf7af141b10595f3780d8d55">Litteral</a>
+</li>
+<li>createMemento()
+: <a class="el" href="class_pile.html#a723c09b1c8f22378e43c27988f824a03">Pile</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DbManager()
+: <a class="el" href="class_db_manager.html#a0d16cf5bba931362e6c581eb1b5ba66a">DbManager</a>
+</li>
+<li>deleteProg()
+: <a class="el" href="class_programme_map.html#aaadcff14c7d83add4d79b5c5cae86897">ProgrammeMap</a>
+</li>
+<li>deleteProgSlot()
+: <a class="el" href="class_program_editor.html#a6842c10d3ece192bf7a0630ef2b747c7">ProgramEditor</a>
+</li>
+<li>deleteVar()
+: <a class="el" href="class_variable_map.html#ac435dbede2dec38476769320a0a7f442">VariableMap</a>
+</li>
+<li>deleteVariableSlot()
+: <a class="el" href="class_variable_editor.html#ac53e0bbb680f5f5dec5ffe92a871ca77">VariableEditor</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>editCommmande()
+: <a class="el" href="class_q_computer.html#a2aa8d5d0d16e46dc4ca06792b9353504">QComputer</a>
+</li>
+<li>editProgWindowSlot()
+: <a class="el" href="class_program_editor.html#aae5fc79726704a210f99f1362ac1128c">ProgramEditor</a>
+</li>
+<li>editVariableSlot()
+: <a class="el" href="class_variable_editor.html#a0f2b1b0c326a247c7e8437d275fc9c6e">VariableEditor</a>
+</li>
+<li>Entier()
+: <a class="el" href="class_entier.html#a778672cb4b285a4b69b683f1c27a1340">Entier</a>
+</li>
+<li>Expression()
+: <a class="el" href="class_expression.html#a54db1aa56fa9f9177054d0e86aaacb1a">Expression</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>findProg()
+: <a class="el" href="class_programme_map.html#aeb51b0ff1fa4155fca2904eae67b00c2">ProgrammeMap</a>
+</li>
+<li>findVar()
+: <a class="el" href="class_variable_map.html#ac86bcdcff2541e0b5348c62a929289a3">VariableMap</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>getCount()
+: <a class="el" href="class_programme_map.html#a28b318ad8c49f4e4e90817bc1eb24cad">ProgrammeMap</a>
+, <a class="el" href="class_variable_map.html#aa1051f3b5128bb8c00e54babe54ea7d8">VariableMap</a>
+</li>
+<li>getDenominateur()
+: <a class="el" href="class_rationnel.html#a0767898772d13dba20969e2372f8feb4">Rationnel</a>
+</li>
+<li>getId()
+: <a class="el" href="class_atome.html#a16d4062cb9edc6a97b4bfdd09b127b04">Atome</a>
+, <a class="el" href="class_programme.html#a114f75c285d8e93d6bb0c282a6e9a455">Programme</a>
+, <a class="el" href="class_variable.html#ad637767fe5e8c13c0aaef8c1cf91eeeb">Variable</a>
+</li>
+<li>getInfo()
+: <a class="el" href="class_computer_exception.html#af14ef49599c53fed0ad494671fa1558e">ComputerException</a>
+</li>
+<li>getInstance()
+: <a class="el" href="class_controleur.html#a1f74824181591a46c0aa4b4a9f73903e">Controleur</a>
+, <a class="el" href="class_db_manager.html#ad0b76eab48407a9293133a48062db9da">DbManager</a>
+, <a class="el" href="class_pile.html#abd0c2d4d26d9aaf1ee6e0b86149dcfe3">Pile</a>
+, <a class="el" href="class_programme_map.html#a1468a35fb42cee397a9fa5362f692c26">ProgrammeMap</a>
+, <a class="el" href="class_variable_map.html#acc040a4a590cc5409773b5a82e465345">VariableMap</a>
+</li>
+<li>getInstructions()
+: <a class="el" href="class_programme.html#a0d0965a6e45bb418975b08eacc07a7c6">Programme</a>
+</li>
+<li>getIteratorBegin()
+: <a class="el" href="class_pile.html#a1fbe64c87add3e77603ef6ec6298e131">Pile</a>
+, <a class="el" href="class_programme_map.html#aefaf302f6811dd49689d9812f01d4dd4">ProgrammeMap</a>
+, <a class="el" href="class_variable_map.html#aebac451964043ed552db903ee8bc36da">VariableMap</a>
+</li>
+<li>getIteratorEnd()
+: <a class="el" href="class_pile.html#a2cc0321da936d613abe487c8e107b1f8">Pile</a>
+, <a class="el" href="class_programme_map.html#a0b6d2023302b50fbbd494f5f057ef1ec">ProgrammeMap</a>
+, <a class="el" href="class_variable_map.html#a07ecf6d6d7b5176fc66fe561efdfb3e7">VariableMap</a>
+</li>
+<li>getLength()
+: <a class="el" href="class_pile.html#aa52e6887c08408ea9708863ec1e269f4">Pile</a>
+</li>
+<li>getLitterale()
+: <a class="el" href="class_atome.html#aa8dcf071050799ceb5c9fff17f81afa3">Atome</a>
+</li>
+<li>getMaxAffiche()
+: <a class="el" href="class_pile.html#aa74a5dbcbd71e97de482498f0de88c3f">Pile</a>
+</li>
+<li>getMessage()
+: <a class="el" href="class_pile.html#ab04b223738a2fa12b627b138a9c102ed">Pile</a>
+</li>
+<li>getNumerateur()
+: <a class="el" href="class_rationnel.html#a8170d1ec816c050c9f07898eceed9674">Rationnel</a>
+</li>
+<li>getPIm()
+: <a class="el" href="class_complexe.html#a3aacbc82d105838277a8f1b045893c27">Complexe</a>
+</li>
+<li>getPRe()
+: <a class="el" href="class_complexe.html#abb77442f48cddf3fed5385261a7f1cdb">Complexe</a>
+</li>
+<li>getText()
+: <a class="el" href="class_expression.html#aa9ceaabba9ec92bc594ce794431d6370">Expression</a>
+</li>
+<li>getValue()
+: <a class="el" href="class_entier.html#a7c5d9df29b71909a0aabe72d1d167be9">Entier</a>
+, <a class="el" href="class_reel.html#a658e55154bd915eca195ac377163fa60">Reel</a>
+, <a class="el" href="class_variable.html#a8fd78c36a2f51a3d448d64316d28580c">Variable</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>initMenuBar()
+: <a class="el" href="class_q_computer.html#aa5520d8cc2f6a71d9aa77bb0b829766d">QComputer</a>
+</li>
+<li>initPile()
+: <a class="el" href="class_q_computer.html#a6faf6e11e530cb9ae8037ab35c8cdb7d">QComputer</a>
+</li>
+<li>insertProg()
+: <a class="el" href="class_programme_map.html#aa1d6373baf1bb4274fe3d5b49f24424b">ProgrammeMap</a>
+</li>
+<li>insertVar()
+: <a class="el" href="class_variable_map.html#a99d11605a386225423e876e0e8062d0b">VariableMap</a>
+</li>
+<li>isEmpty()
+: <a class="el" href="class_pile.html#ac8dedfaa7bd03de18c6c707afb55b83d">Pile</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
+<li>libererInstance()
+: <a class="el" href="class_pile.html#ac3868cf82736d86edfe47034393bbd76">Pile</a>
+, <a class="el" href="class_programme_map.html#ab7b54810d5cf85feadc30be1a361bae8">ProgrammeMap</a>
+, <a class="el" href="class_variable_map.html#a0c40a5fca5c6aef62a045644c749b69c">VariableMap</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
+<li>manualSplit()
+: <a class="el" href="class_controleur.html#ad9ec590e46af5252d60c20a258557112">Controleur</a>
+</li>
+<li>Memento()
+: <a class="el" href="class_memento.html#a73a077f50515ddc454b629ded7ab1028">Memento</a>
+</li>
+<li>modificationEtat()
+: <a class="el" href="class_pile.html#ac55a0afb626baffd1019567cbaa7f4b2">Pile</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>newProgramSlot()
+: <a class="el" href="class_program_editor.html#abd64071cd836df89a6df000bfa00434c">ProgramEditor</a>
+</li>
+<li>newVariableSlot()
+: <a class="el" href="class_variable_editor.html#a081a21c7d598058c37d20b531c83c4dc">VariableEditor</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>on_commande_returnPressed()
+: <a class="el" href="class_q_computer.html#a4337e2788cce233cc090d72e586a3a20">QComputer</a>
+</li>
+<li>on_ProgramEditorWindow_accepted()
+: <a class="el" href="class_program_editor_window.html#a3e187c178c96a31c4b43796463ffc803">ProgramEditorWindow</a>
+</li>
+<li>operator!=()
+: <a class="el" href="class_litteral.html#a8f9601a8f5fac803660ca3dfc4796978">Litteral</a>
+</li>
+<li>operator*()
+: <a class="el" href="class_litteral.html#a9baea156139298a88f48813bfbe6d098">Litteral</a>
+</li>
+<li>operator+()
+: <a class="el" href="class_litteral.html#a07d728d317969cf4f659d474365b48f7">Litteral</a>
+</li>
+<li>operator-()
+: <a class="el" href="class_litteral.html#a2e5a14857e8111f65eb537cbc611fc3e">Litteral</a>
+</li>
+<li>operator/()
+: <a class="el" href="class_litteral.html#ac18e3fe351fd08e87805f60eedda3fc5">Litteral</a>
+</li>
+<li>operator&lt;()
+: <a class="el" href="class_entier.html#a30b44600e357587b5e81a95ca86a74e2">Entier</a>
+, <a class="el" href="class_litteral.html#aab2fb8c55e3cf3a946257bbeaa55c132">Litteral</a>
+, <a class="el" href="class_litteral_numerique.html#a6fc481d088f401c033b48bbc2d4afe70">LitteralNumerique</a>
+, <a class="el" href="class_rationnel.html#ab4202e9202565689ba9f3c3702caff38">Rationnel</a>
+, <a class="el" href="class_reel.html#ae1a621bbb6d5150960ca92f3328b2ab2">Reel</a>
+</li>
+<li>operator=()
+: <a class="el" href="class_controleur.html#a2b062fef709b2689e8c2d98a72e34889">Controleur</a>
+, <a class="el" href="class_db_manager.html#a01c7aed0f8c8de940c1dd602e401abe1">DbManager</a>
+, <a class="el" href="class_pile.html#aa147d35a0f223fc5b1daad0b5659e96b">Pile</a>
+, <a class="el" href="class_programme_map.html#ae204c5ae875c83bb67735cf92d578c5b">ProgrammeMap</a>
+, <a class="el" href="class_variable_map.html#a9650cf0111e3389682913a1c3890da06">VariableMap</a>
+</li>
+<li>operator==()
+: <a class="el" href="class_litteral.html#a2fdd47690152da3986efb42c4e4f062a">Litteral</a>
+</li>
+<li>operator&gt;()
+: <a class="el" href="class_entier.html#a41d806df9498f9d495ca516652b90795">Entier</a>
+, <a class="el" href="class_litteral.html#ac9bcdc121d1bdd90796ad1cdaed0462a">Litteral</a>
+, <a class="el" href="class_litteral_numerique.html#a6f9dec6ab4d7924851cf5e78db500b3c">LitteralNumerique</a>
+, <a class="el" href="class_rationnel.html#a194ce175aa2864f4c15ede5443ebab78">Rationnel</a>
+, <a class="el" href="class_reel.html#a3412243bd2e4d3c0afa7d6a43e130717">Reel</a>
+</li>
+<li>Options()
+: <a class="el" href="class_options.html#a87403ad1d6bd9ae2b54af860bb0f0952">Options</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>parse()
+: <a class="el" href="class_controleur.html#ab29d71e348f95bb5e23727b17aeda09e">Controleur</a>
+</li>
+<li>Pile()
+: <a class="el" href="class_pile.html#ab44e927107b28f5f3ac7697d10e0a739">Pile</a>
+</li>
+<li>playBeep()
+: <a class="el" href="class_computer_exception.html#a1d4b96e7775f6b2d4aa0d1e2fc672dbd">ComputerException</a>
+</li>
+<li>pop()
+: <a class="el" href="class_pile.html#ac1426b97b771b85b8758be83c70c845c">Pile</a>
+</li>
+<li>process()
+: <a class="el" href="class_controleur.html#aa36b71321bdebf6d2ce86cc1b33434a2">Controleur</a>
+</li>
+<li>ProgramEditor()
+: <a class="el" href="class_program_editor.html#a45fd386eea7530b50db9207595a3bd17">ProgramEditor</a>
+</li>
+<li>ProgramEditorWindow()
+: <a class="el" href="class_program_editor_window.html#ac544bab8424183dcea5f5bc1a280c7d3">ProgramEditorWindow</a>
+</li>
+<li>Programme()
+: <a class="el" href="class_programme.html#a321438b974bff03eb8e880068ed17d28">Programme</a>
+</li>
+<li>ProgrammeMap()
+: <a class="el" href="class_programme_map.html#acfb75f2f2b1a260bd707076514a7c807">ProgrammeMap</a>
+</li>
+<li>push()
+: <a class="el" href="class_pile.html#aac9c31a5029044d51c9d9ed481e0ab53">Pile</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_q"></a>- q -</h3><ul>
+<li>QComputer()
+: <a class="el" href="class_q_computer.html#a3a71a18fabd57942cf0d85a916d31624">QComputer</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>Rationnel()
+: <a class="el" href="class_rationnel.html#a38fd7be3f71d2034feaa7f40c12484d9">Rationnel</a>
+</li>
+<li>redo()
+: <a class="el" href="class_controleur.html#aebf13244a238c69f14b52ba5d9dca386">Controleur</a>
+</li>
+<li>Reel()
+: <a class="el" href="class_reel.html#ac9ba9224fd485b4771b8f60a7fc81b5a">Reel</a>
+</li>
+<li>refresh()
+: <a class="el" href="class_q_computer.html#a511996271d43631e5296f62becc2962a">QComputer</a>
+</li>
+<li>refreshTab()
+: <a class="el" href="class_program_editor.html#aad17587426c040754fa1aa74b3403509">ProgramEditor</a>
+, <a class="el" href="class_variable_editor.html#afe56fd67f83b77fe172199c4561013d4">VariableEditor</a>
+</li>
+<li>reinstateMemento()
+: <a class="el" href="class_pile.html#a5db1fa6a34f113457e28525466e789b0">Pile</a>
+</li>
+<li>restoreContext()
+: <a class="el" href="class_q_computer.html#aeee8df87f59ae88aa95534c5865d87da">QComputer</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
+<li>saveOptions()
+: <a class="el" href="class_db_manager.html#a4f1055147ee92e7fae77b88d6f7a8147">DbManager</a>
+</li>
+<li>savePile()
+: <a class="el" href="class_db_manager.html#a2aa95c302a20944e7e67365899fd7698">DbManager</a>
+</li>
+<li>savePrograms()
+: <a class="el" href="class_db_manager.html#a398605410d1f7a13d137d25ec566d099">DbManager</a>
+</li>
+<li>saveVariables()
+: <a class="el" href="class_db_manager.html#a4ce74e2789235de748cf626fd5475ffa">DbManager</a>
+</li>
+<li>setId()
+: <a class="el" href="class_programme.html#a72eb1ab9171877e17306f2eb6a80d0bd">Programme</a>
+</li>
+<li>setInstructions()
+: <a class="el" href="class_programme.html#abaed8bde5eb48914fd1907c581489eac">Programme</a>
+</li>
+<li>setMaxAffiche()
+: <a class="el" href="class_pile.html#a1051f4c60b5d8f37038f5ca0735165a7">Pile</a>
+, <a class="el" href="class_q_computer.html#a5b8ea347bdf3a058c6cc5d45fff2a623">QComputer</a>
+</li>
+<li>setMaxAfficheSig()
+: <a class="el" href="class_options.html#a486b1c87a1b8650825980befa748ace4">Options</a>
+</li>
+<li>setMaxAfficheSlot()
+: <a class="el" href="class_options.html#aa8d0140b51d2ca3d8b7be81cf03099bd">Options</a>
+</li>
+<li>setMessage()
+: <a class="el" href="class_pile.html#a606ebb5aac49ba282a34c9787965a509">Pile</a>
+</li>
+<li>setOptions()
+: <a class="el" href="class_db_manager.html#a43cd06ed542dec7209a773139e686232">DbManager</a>
+</li>
+<li>setPile()
+: <a class="el" href="class_db_manager.html#ae409f7f1c75f235827edbd9e08437938">DbManager</a>
+</li>
+<li>setPrograms()
+: <a class="el" href="class_db_manager.html#ae783f700470041d148e8c1ab0e5af059">DbManager</a>
+</li>
+<li>setValue()
+: <a class="el" href="class_variable.html#a614c5283349ec858a057f802b9003cbd">Variable</a>
+</li>
+<li>setVar()
+: <a class="el" href="class_variable_map.html#a19c21036d83e549e304d0b7759499500">VariableMap</a>
+</li>
+<li>setVariables()
+: <a class="el" href="class_db_manager.html#a26d15866e130aae46b2cbd17290fae05">DbManager</a>
+</li>
+<li>simplifier()
+: <a class="el" href="class_rationnel.html#a12ee060e5fca5f4291b222983d727268">Rationnel</a>
+</li>
+<li>slotOptions()
+: <a class="el" href="class_q_computer.html#aa5e98046cb11cd93f77e37d894a0ef0e">QComputer</a>
+</li>
+<li>slotProgEditor()
+: <a class="el" href="class_q_computer.html#aeaa70dbed86fa95dd58c9e504486c767">QComputer</a>
+</li>
+<li>slotVarEditor()
+: <a class="el" href="class_q_computer.html#a08cec3375f5167955d4c8f3f4926985e">QComputer</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>top()
+: <a class="el" href="class_pile.html#aa11624b7ca832d36079b9e30ee59037a">Pile</a>
+</li>
+<li>toString()
+: <a class="el" href="class_atome.html#a23b8203b3859a7f4dbfca1abe271e151">Atome</a>
+, <a class="el" href="class_complexe.html#a327fd83ec9743fb43c5d47831d8ed45c">Complexe</a>
+, <a class="el" href="class_entier.html#aa960356dfeae8af6dfa2cd25136a1a6f">Entier</a>
+, <a class="el" href="class_expression.html#a60e6e305cdd8e878df2e3081ae15a4d0">Expression</a>
+, <a class="el" href="class_litteral.html#ada6a5431818b6120337670cc8f46fed5">Litteral</a>
+, <a class="el" href="class_litteral_numerique.html#aeaecfe3d84444e702b645698f752d931">LitteralNumerique</a>
+, <a class="el" href="class_programme.html#ae786507789a19121851be725e9bb1495">Programme</a>
+, <a class="el" href="class_rationnel.html#a41bc89d21ce161818f67ccfe296766c0">Rationnel</a>
+, <a class="el" href="class_reel.html#a990e8324822ba3dbc64fc7ff727411e2">Reel</a>
+, <a class="el" href="class_variable.html#a5be619e4e7d834663be275b88fa4c5f3">Variable</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
+<li>undo()
+: <a class="el" href="class_controleur.html#a5b92e95d717c10ba1d9c7b3c12d423ea">Controleur</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
+<li>Variable()
+: <a class="el" href="class_variable.html#a7d2a2b0c49b75aaf10f69ac5671738ff">Variable</a>
+</li>
+<li>VariableEditor()
+: <a class="el" href="class_variable_editor.html#af2df024e0d0d75542514c4c6630244bc">VariableEditor</a>
+</li>
+<li>VariableMap()
+: <a class="el" href="class_variable_map.html#a11e9f1f27f6817f1a77ea94e4185c6e9">VariableMap</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_~"></a>- ~ -</h3><ul>
+<li>~Options()
+: <a class="el" href="class_options.html#a86ddb85b183f8b58af5481f30a42fa92">Options</a>
+</li>
+<li>~ProgramEditor()
+: <a class="el" href="class_program_editor.html#a2910182eba59eae39d7e624179eccbdc">ProgramEditor</a>
+</li>
+<li>~ProgramEditorWindow()
+: <a class="el" href="class_program_editor_window.html#a36f90af5917db0392ea2eb3f6134c913">ProgramEditorWindow</a>
+</li>
+<li>~QComputer()
+: <a class="el" href="class_q_computer.html#a25f37c722703136785a4334f395fed73">QComputer</a>
+</li>
+<li>~VariableEditor()
+: <a class="el" href="class_variable_editor.html#a7e6be89d3984ae46b57e2486381e99c5">VariableEditor</a>
+</li>
+</ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

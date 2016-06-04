@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_programme_map.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +105,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">ProgrammeMap Member List</div>  </div>
@@ -91,20 +113,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_programme_map.html">ProgrammeMap</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>deleteProg</b>(QString id) (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>findProg</b>(QString id) const  (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getCount</b>() const  (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getInstance</b>() (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getIteratorBegin</b>() const  (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>getIteratorEnd</b>() const  (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>insertProg</b>(QString id, Programme *prog) (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>libererInstance</b>() (defined in <a class="el" href="class_programme_map.html">ProgrammeMap</a>)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#aaadcff14c7d83add4d79b5c5cae86897">deleteProg</a>(QString id)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_programme_map.html#aeb51b0ff1fa4155fca2904eae67b00c2">findProg</a>(QString id) const </td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#a28b318ad8c49f4e4e90817bc1eb24cad">getCount</a>() const </td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_programme_map.html#a1468a35fb42cee397a9fa5362f692c26">getInstance</a>()</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#aefaf302f6811dd49689d9812f01d4dd4">getIteratorBegin</a>() const </td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_programme_map.html#a0b6d2023302b50fbbd494f5f057ef1ec">getIteratorEnd</a>() const </td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#aa1d6373baf1bb4274fe3d5b49f24424b">insertProg</a>(QString id, Programme *prog)</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_programme_map.html#a5e24af1b7a89205c7d0ac041ab95acdb">instance</a></td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#ab7b54810d5cf85feadc30be1a361bae8">libererInstance</a>()</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_programme_map.html#a263085e1994387259aeb32dce0831837">map</a></td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#ae204c5ae875c83bb67735cf92d578c5b">operator=</a>(const ProgrammeMap &amp;)=delete</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_programme_map.html#acfb75f2f2b1a260bd707076514a7c807">ProgrammeMap</a>()</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_programme_map.html#a852b3a7911e703940f8c9c11e6e5b1ea">ProgrammeMap</a>(const ProgrammeMap &amp;)=delete</td><td class="entry"><a class="el" href="class_programme_map.html">ProgrammeMap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

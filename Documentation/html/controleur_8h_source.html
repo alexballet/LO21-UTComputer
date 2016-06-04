@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -63,15 +71,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('controleur_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,63 +108,100 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">controleur.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CONTROLEUR_H</span></div>
+<a href="controleur_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CONTROLEUR_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CONTROLEUR_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QVector&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QSettings&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;litteral.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;programme.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;variable.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;atome.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;memento.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;pile.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;operateur.h&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;expression.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;dbmanager.h&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QStringList&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="litteral_8h.html">litteral.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="programme_8h.html">programme.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="variable_8h.html">variable.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="atome_8h.html">atome.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="memento_8h.html">memento.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pile_8h.html">pile.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="operateur_8h.html">operateur.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="expression_8h.html">expression.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="dbmanager_8h.html">dbmanager.h</a>&quot;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_controleur.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_controleur.html">Controleur</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_controleur.html">Controleur</a>* instance;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_controleur.html">Controleur</a>() {} <span class="comment">//private constructor to forbid instantiation</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">static</span> QVector&lt;Memento*&gt; mementoList;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> currentMemento;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">//disabling copy and assignment</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_controleur.html">Controleur</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_controleur.html">Controleur</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_controleur.html">Controleur</a> (<span class="keyword">const</span> <a class="code" href="class_controleur.html">Controleur</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    QString lastOp;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_controleur.html">Controleur</a>* getInstance();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> parse(<span class="keyword">const</span> QString&amp; com);<span class="comment">//calls Pile::push() with a string argument for the type to push</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> applyOperatorNum(<span class="keyword">const</span> QString&amp; op, <span class="keyword">const</span> <span class="keywordtype">int</span> nbOp);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> applyOperatorLog(<span class="keyword">const</span> QString&amp; op, <span class="keyword">const</span> <span class="keywordtype">int</span> nbOp);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> applyOperatorPile(<span class="keyword">const</span> QString&amp; op);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">//taking care of memento</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> addMementoState(<a class="code" href="class_memento.html">Memento</a>* mem);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> undo();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> redo();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;QString typeLitteral(<span class="keyword">const</span> QString&amp; lit);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">bool</span> isOperatorNum(<span class="keyword">const</span> QString&amp; a);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">bool</span> isOperatorLog(<span class="keyword">const</span> QString&amp; a);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">bool</span> isOperatorPile(<span class="keyword">const</span> QString&amp; a);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">bool</span> isOperator(<span class="keyword">const</span> QString&amp; a);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif // CONTROLEUR_H</span></div>
-<div class="ttc" id="class_memento_html"><div class="ttname"><a href="class_memento.html">Memento</a></div><div class="ttdef"><b>Definition:</b> memento.h:6</div></div>
-<div class="ttc" id="class_controleur_html"><div class="ttname"><a href="class_controleur.html">Controleur</a></div><div class="ttdef"><b>Definition:</b> controleur.h:19</div></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_controleur.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_controleur.html">Controleur</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_controleur.html#a0b5c0b055e70386d783721f616af0e00">   27</a></span>&#160;    QString <a class="code" href="class_controleur.html#a0b5c0b055e70386d783721f616af0e00">lastOp</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_controleur.html#a0bd871a2401ca4d240b460f07d2db349">   31</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="class_controleur.html">Controleur</a>* <a class="code" href="class_controleur.html#a0bd871a2401ca4d240b460f07d2db349">instance</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_controleur.html#a2b3859d8cb6bd1c0407be722962470bd">   35</a></span>&#160;    <a class="code" href="class_controleur.html#a2b3859d8cb6bd1c0407be722962470bd">Controleur</a>() {}</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_controleur.html#a72f632a4500691e638a216f5f857f99a">   39</a></span>&#160;    <span class="keyword">static</span> QVector&lt;Memento*&gt; <a class="code" href="class_controleur.html#a72f632a4500691e638a216f5f857f99a">mementoList</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_controleur.html#a5ce36ae9be85fb6a2282dea372cc1de2">   43</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_controleur.html#a5ce36ae9be85fb6a2282dea372cc1de2">currentMemento</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="class_controleur.html">Controleur</a>&amp; <a class="code" href="class_controleur.html#a2b062fef709b2689e8c2d98a72e34889">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_controleur.html">Controleur</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_controleur.html#a2b3859d8cb6bd1c0407be722962470bd">Controleur</a> (<span class="keyword">const</span> <a class="code" href="class_controleur.html">Controleur</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_controleur.html">Controleur</a>* <a class="code" href="class_controleur.html#a1f74824181591a46c0aa4b4a9f73903e">getInstance</a>();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#ab29d71e348f95bb5e23727b17aeda09e">parse</a>(<span class="keyword">const</span> QString&amp; com);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    QStringList <a class="code" href="class_controleur.html#ad9ec590e46af5252d60c20a258557112">manualSplit</a>(<span class="keyword">const</span> QString&amp; com);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#aa36b71321bdebf6d2ce86cc1b33434a2">process</a>(<span class="keyword">const</span> QString word);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#afe2d79714276ebe3384c1ce9afc069ad">applyOperatorNum</a>(<span class="keyword">const</span> QString&amp; op, <span class="keyword">const</span> <span class="keywordtype">int</span> nbOp);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#a8a1d90c9bce664cf2ab7aa24f13cdeaa">applyOperatorLog</a>(<span class="keyword">const</span> QString&amp; op, <span class="keyword">const</span> <span class="keywordtype">int</span> nbOp);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#a59c733ebe0a6581e2dc0c8abcf5a9087">applyOperatorPile</a>(<span class="keyword">const</span> QString&amp; op, <span class="keyword">const</span> <span class="keywordtype">int</span> nbOp);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#a935349890389f974449af07969d7db38">applyOperator</a>(<span class="keyword">const</span> QString&amp; op);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">//taking care of memento</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#afe7fc8d171b85f56fd4a7ab91522adcd">addMementoState</a>(<a class="code" href="class_memento.html">Memento</a>* mem);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#a5b92e95d717c10ba1d9c7b3c12d423ea">undo</a>();</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_controleur.html#aebf13244a238c69f14b52ba5d9dca386">redo</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;QString <a class="code" href="controleur_8h.html#a30600f68128570db00e7c9988d80cf71">typeLitteral</a>(<span class="keyword">const</span> QString&amp; lit);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="controleur_8h.html#abef6a0dcb0d0bb32e30a5dc5e701687f">isOperatorNum</a>(<span class="keyword">const</span> QString&amp; a);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="controleur_8h.html#a98e94e6aaba74d258a84433db4d7cd0f">isOperatorLog</a>(<span class="keyword">const</span> QString&amp; a);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="controleur_8h.html#afdac2b60a30845643ef238c58353c20a">isOperatorPile</a>(<span class="keyword">const</span> QString&amp; a);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="controleur_8h.html#a5ff426fb206e37068f6f997897baec33">isOperator</a>(<span class="keyword">const</span> QString&amp; a);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#endif // CONTROLEUR_H</span></div>
+<div class="ttc" id="class_controleur_html_ad9ec590e46af5252d60c20a258557112"><div class="ttname"><a href="class_controleur.html#ad9ec590e46af5252d60c20a258557112">Controleur::manualSplit</a></div><div class="ttdeci">QStringList manualSplit(const QString &amp;com)</div><div class="ttdoc">Method that splits a QString into different expressions to be executed by the execute() method...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:33</div></div>
+<div class="ttc" id="class_controleur_html_a0b5c0b055e70386d783721f616af0e00"><div class="ttname"><a href="class_controleur.html#a0b5c0b055e70386d783721f616af0e00">Controleur::lastOp</a></div><div class="ttdeci">QString lastOp</div><div class="ttdoc">Attribute storing the last operator used. Usefull for the LASTOP operator. </div><div class="ttdef"><b>Definition:</b> controleur.h:27</div></div>
+<div class="ttc" id="class_controleur_html_afe7fc8d171b85f56fd4a7ab91522adcd"><div class="ttname"><a href="class_controleur.html#afe7fc8d171b85f56fd4a7ab91522adcd">Controleur::addMementoState</a></div><div class="ttdeci">static void addMementoState(Memento *mem)</div><div class="ttdoc">Method that adds the Memento state mem to mementoList. Called each time an expression is processed...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:116</div></div>
+<div class="ttc" id="memento_8h_html"><div class="ttname"><a href="memento_8h.html">memento.h</a></div></div>
+<div class="ttc" id="class_controleur_html_afe2d79714276ebe3384c1ce9afc069ad"><div class="ttname"><a href="class_controleur.html#afe2d79714276ebe3384c1ce9afc069ad">Controleur::applyOperatorNum</a></div><div class="ttdeci">void applyOperatorNum(const QString &amp;op, const int nbOp)</div><div class="ttdoc">Method that applies a numeric operator, poping nbOp Litteral objects from the Pile. If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:180</div></div>
+<div class="ttc" id="class_controleur_html_a5b92e95d717c10ba1d9c7b3c12d423ea"><div class="ttname"><a href="class_controleur.html#a5b92e95d717c10ba1d9c7b3c12d423ea">Controleur::undo</a></div><div class="ttdeci">static void undo()</div><div class="ttdoc">Method that reinstate the previous Memento state. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:124</div></div>
+<div class="ttc" id="dbmanager_8h_html"><div class="ttname"><a href="dbmanager_8h.html">dbmanager.h</a></div></div>
+<div class="ttc" id="class_memento_html"><div class="ttname"><a href="class_memento.html">Memento</a></div><div class="ttdoc">The Memento class stores states of the Pile instance, each time the Pile instance is modified...</div><div class="ttdef"><b>Definition:</b> memento.h:9</div></div>
+<div class="ttc" id="controleur_8h_html_a30600f68128570db00e7c9988d80cf71"><div class="ttname"><a href="controleur_8h.html#a30600f68128570db00e7c9988d80cf71">typeLitteral</a></div><div class="ttdeci">QString typeLitteral(const QString &amp;lit)</div><div class="ttdoc">Function that analyzes the QString to determine it&#39;s type. It is used in order to create a new Litter...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:141</div></div>
+<div class="ttc" id="class_controleur_html_ab29d71e348f95bb5e23727b17aeda09e"><div class="ttname"><a href="class_controleur.html#ab29d71e348f95bb5e23727b17aeda09e">Controleur::parse</a></div><div class="ttdeci">void parse(const QString &amp;com)</div><div class="ttdoc">Method that parses a QString to isolate the expressions to form Litteral objects or execute operators...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:9</div></div>
+<div class="ttc" id="atome_8h_html"><div class="ttname"><a href="atome_8h.html">atome.h</a></div></div>
+<div class="ttc" id="controleur_8h_html_afdac2b60a30845643ef238c58353c20a"><div class="ttname"><a href="controleur_8h.html#afdac2b60a30845643ef238c58353c20a">isOperatorPile</a></div><div class="ttdeci">bool isOperatorPile(const QString &amp;a)</div><div class="ttdoc">Checks if the QString corresponds to a Pile operator. Searches for the parameter a in the QMap opsPil...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:756</div></div>
+<div class="ttc" id="controleur_8h_html_abef6a0dcb0d0bb32e30a5dc5e701687f"><div class="ttname"><a href="controleur_8h.html#abef6a0dcb0d0bb32e30a5dc5e701687f">isOperatorNum</a></div><div class="ttdeci">bool isOperatorNum(const QString &amp;a)</div><div class="ttdoc">Checks if the QString corresponds to a numeric operator. Searches for the parameter a in the QMap ops...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:750</div></div>
+<div class="ttc" id="programme_8h_html"><div class="ttname"><a href="programme_8h.html">programme.h</a></div></div>
+<div class="ttc" id="class_controleur_html_a8a1d90c9bce664cf2ab7aa24f13cdeaa"><div class="ttname"><a href="class_controleur.html#a8a1d90c9bce664cf2ab7aa24f13cdeaa">Controleur::applyOperatorLog</a></div><div class="ttdeci">void applyOperatorLog(const QString &amp;op, const int nbOp)</div><div class="ttdoc">Method that applies a logical operator, poping nbOp Litteral objects from the Pile. If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:401</div></div>
+<div class="ttc" id="class_controleur_html_a0bd871a2401ca4d240b460f07d2db349"><div class="ttname"><a href="class_controleur.html#a0bd871a2401ca4d240b460f07d2db349">Controleur::instance</a></div><div class="ttdeci">static Controleur * instance</div><div class="ttdoc">Pointer to the unique instance of the Controler object. </div><div class="ttdef"><b>Definition:</b> controleur.h:31</div></div>
+<div class="ttc" id="expression_8h_html"><div class="ttname"><a href="expression_8h.html">expression.h</a></div></div>
+<div class="ttc" id="class_controleur_html"><div class="ttname"><a href="class_controleur.html">Controleur</a></div><div class="ttdoc">The Controleur class parses and executes the user input. It also manages the Memento object and is a ...</div><div class="ttdef"><b>Definition:</b> controleur.h:22</div></div>
+<div class="ttc" id="class_controleur_html_aa36b71321bdebf6d2ce86cc1b33434a2"><div class="ttname"><a href="class_controleur.html#aa36b71321bdebf6d2ce86cc1b33434a2">Controleur::process</a></div><div class="ttdeci">void process(const QString word)</div><div class="ttdoc">Method that processes an expression. If it&#39;s an operator, it applies it. Otherwise, it&#39;s a Litteral and it pushes it in the Pile. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:77</div></div>
+<div class="ttc" id="operateur_8h_html"><div class="ttname"><a href="operateur_8h.html">operateur.h</a></div></div>
+<div class="ttc" id="class_controleur_html_a72f632a4500691e638a216f5f857f99a"><div class="ttname"><a href="class_controleur.html#a72f632a4500691e638a216f5f857f99a">Controleur::mementoList</a></div><div class="ttdeci">static QVector&lt; Memento * &gt; mementoList</div><div class="ttdoc">Vector of pointers to the Memento objects created. </div><div class="ttdef"><b>Definition:</b> controleur.h:39</div></div>
+<div class="ttc" id="class_controleur_html_a935349890389f974449af07969d7db38"><div class="ttname"><a href="class_controleur.html#a935349890389f974449af07969d7db38">Controleur::applyOperator</a></div><div class="ttdeci">void applyOperator(const QString &amp;op)</div><div class="ttdoc">Method that calls the apply method associated with the type of the operator. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:734</div></div>
+<div class="ttc" id="litteral_8h_html"><div class="ttname"><a href="litteral_8h.html">litteral.h</a></div></div>
+<div class="ttc" id="controleur_8h_html_a5ff426fb206e37068f6f997897baec33"><div class="ttname"><a href="controleur_8h.html#a5ff426fb206e37068f6f997897baec33">isOperator</a></div><div class="ttdeci">bool isOperator(const QString &amp;a)</div><div class="ttdoc">Checks if the QString corresponds to an operator. Checks if the parameter a is a numeric operator...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:760</div></div>
+<div class="ttc" id="class_controleur_html_a59c733ebe0a6581e2dc0c8abcf5a9087"><div class="ttname"><a href="class_controleur.html#a59c733ebe0a6581e2dc0c8abcf5a9087">Controleur::applyOperatorPile</a></div><div class="ttdeci">void applyOperatorPile(const QString &amp;op, const int nbOp)</div><div class="ttdoc">Method that applies a Pile operator, poping nbOp Litteral objects from the Pile. If there is enough L...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:541</div></div>
+<div class="ttc" id="controleur_8h_html_a98e94e6aaba74d258a84433db4d7cd0f"><div class="ttname"><a href="controleur_8h.html#a98e94e6aaba74d258a84433db4d7cd0f">isOperatorLog</a></div><div class="ttdeci">bool isOperatorLog(const QString &amp;a)</div><div class="ttdoc">Checks if the QString corresponds to a logical operator. Searches for the parameter a in the QMap ops...</div><div class="ttdef"><b>Definition:</b> controleur.cpp:753</div></div>
+<div class="ttc" id="pile_8h_html"><div class="ttname"><a href="pile_8h.html">pile.h</a></div></div>
+<div class="ttc" id="variable_8h_html"><div class="ttname"><a href="variable_8h.html">variable.h</a></div></div>
+<div class="ttc" id="class_controleur_html_a1f74824181591a46c0aa4b4a9f73903e"><div class="ttname"><a href="class_controleur.html#a1f74824181591a46c0aa4b4a9f73903e">Controleur::getInstance</a></div><div class="ttdeci">static Controleur * getInstance()</div><div class="ttdoc">Method to access the Controleur singleton. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:743</div></div>
+<div class="ttc" id="class_controleur_html_a2b3859d8cb6bd1c0407be722962470bd"><div class="ttname"><a href="class_controleur.html#a2b3859d8cb6bd1c0407be722962470bd">Controleur::Controleur</a></div><div class="ttdeci">Controleur()</div><div class="ttdoc">Private Controleur constructor to forbid instanciation by any other way than using the getInstance() ...</div><div class="ttdef"><b>Definition:</b> controleur.h:35</div></div>
+<div class="ttc" id="class_controleur_html_a5ce36ae9be85fb6a2282dea372cc1de2"><div class="ttname"><a href="class_controleur.html#a5ce36ae9be85fb6a2282dea372cc1de2">Controleur::currentMemento</a></div><div class="ttdeci">static int currentMemento</div><div class="ttdoc">Index of the current Memento state (in the mementoList). </div><div class="ttdef"><b>Definition:</b> controleur.h:43</div></div>
+<div class="ttc" id="class_controleur_html_a2b062fef709b2689e8c2d98a72e34889"><div class="ttname"><a href="class_controleur.html#a2b062fef709b2689e8c2d98a72e34889">Controleur::operator=</a></div><div class="ttdeci">Controleur &amp; operator=(const Controleur &amp;)=delete</div><div class="ttdoc">Disabling the assignment possibility between Controleur objects. </div></div>
+<div class="ttc" id="class_controleur_html_aebf13244a238c69f14b52ba5d9dca386"><div class="ttname"><a href="class_controleur.html#aebf13244a238c69f14b52ba5d9dca386">Controleur::redo</a></div><div class="ttdeci">static void redo()</div><div class="ttdoc">Method that reinstate the next Memento state. </div><div class="ttdef"><b>Definition:</b> controleur.cpp:132</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="controleur_8h.html">controleur.h</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

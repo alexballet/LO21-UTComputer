@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -69,12 +77,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('hierarchy.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -93,51 +115,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><table border="0" cellspacing="10" cellpadding="0">
 <tr><td><img src="inherit_graph_0.png" border="0" alt="" usemap="#_computer_exception"/>
 <map name="_computer_exception" id="_computer_exception">
-<area shape="rect" id="node1" href="class_computer_exception.html" title="ComputerException" alt="" coords="5,5,143,32"/></map>
+<area shape="rect" id="node1" href="class_computer_exception.html" title="The ComputerException class manages to catch all the exceptions of the UTComputer. " alt="" coords="5,5,143,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_1.png" border="0" alt="" usemap="#_controleur"/>
 <map name="_controleur" id="_controleur">
-<area shape="rect" id="node1" href="class_controleur.html" title="Controleur" alt="" coords="5,5,88,32"/></map>
+<area shape="rect" id="node1" href="class_controleur.html" title="The Controleur class parses and executes the user input. It also manages the Memento object and is a ..." alt="" coords="5,5,88,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_2.png" border="0" alt="" usemap="#_db_manager"/>
 <map name="_db_manager" id="_db_manager">
-<area shape="rect" id="node1" href="class_db_manager.html" title="DbManager" alt="" coords="5,5,95,32"/></map>
+<area shape="rect" id="node1" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. " alt="" coords="5,5,95,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_3.png" border="0" alt="" usemap="#_litteral"/>
 <map name="_litteral" id="_litteral">
-<area shape="rect" id="node1" href="class_litteral.html" title="Litteral" alt="" coords="5,132,67,159"/><area shape="rect" id="node2" href="class_atome.html" title="The Atome class. " alt="" coords="147,5,207,32"/><area shape="rect" id="node3" href="class_complexe.html" title="Complexe" alt="" coords="136,56,217,83"/><area shape="rect" id="node4" href="class_expression.html" title="Expression" alt="" coords="133,107,220,133"/><area shape="rect" id="node5" href="class_litteral_numerique.html" title="LitteralNumerique" alt="" coords="115,157,239,184"/><area shape="rect" id="node9" href="class_programme.html" title="Programme" alt="" coords="132,208,221,235"/><area shape="rect" id="node10" href="class_variable.html" title="Variable" alt="" coords="142,259,211,285"/><area shape="rect" id="node6" href="class_entier.html" title="Entier" alt="" coords="297,107,353,133"/><area shape="rect" id="node7" href="class_rationnel.html" title="Rationnel" alt="" coords="287,157,364,184"/><area shape="rect" id="node8" href="class_reel.html" title="Reel" alt="" coords="301,208,350,235"/></map>
+<area shape="rect" id="node1" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. " alt="" coords="5,132,67,159"/><area shape="rect" id="node2" href="class_atome.html" title="The Atome class can represent a Variable or Atome identifier, or an operator. " alt="" coords="147,5,207,32"/><area shape="rect" id="node3" href="class_complexe.html" title="The Complexe class is used to represent a complex value. It stores 2 LitteralNumerique objects (Entie..." alt="" coords="136,56,217,83"/><area shape="rect" id="node4" href="class_expression.html" title="The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation. " alt="" coords="133,107,220,133"/><area shape="rect" id="node5" href="class_litteral_numerique.html" title="The abstract LitteralNumerique class is the parent class of Entier, Reel and Rationnel. " alt="" coords="115,157,239,184"/><area shape="rect" id="node9" href="class_programme.html" title="Programme class. " alt="" coords="132,208,221,235"/><area shape="rect" id="node10" href="class_variable.html" title="Variable class. " alt="" coords="142,259,211,285"/><area shape="rect" id="node6" href="class_entier.html" title="The Entier class contains an integer value. " alt="" coords="297,107,353,133"/><area shape="rect" id="node7" href="class_rationnel.html" title="The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store ..." alt="" coords="287,157,364,184"/><area shape="rect" id="node8" href="class_reel.html" title="The Reel class contains a double value. " alt="" coords="301,208,350,235"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_4.png" border="0" alt="" usemap="#_memento"/>
 <map name="_memento" id="_memento">
-<area shape="rect" id="node1" href="class_memento.html" title="Memento" alt="" coords="5,5,81,32"/></map>
+<area shape="rect" id="node1" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified..." alt="" coords="5,5,81,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_5.png" border="0" alt="" usemap="#_options"/>
 <map name="_options" id="_options">
-<area shape="rect" id="node2" href="class_options.html" title="Options" alt="" coords="165,5,232,32"/><area shape="rect" id="node3" href="class_program_editor.html" title="ProgramEditor" alt="" coords="146,56,251,83"/><area shape="rect" id="node4" href="class_program_editor_window.html" title="ProgramEditorWindow" alt="" coords="123,107,275,133"/><area shape="rect" id="node5" href="class_variable_editor.html" title="VariableEditor" alt="" coords="147,157,250,184"/></map>
+<area shape="rect" id="node2" href="class_options.html" title="Window where the user can change app settings. " alt="" coords="165,5,232,32"/><area shape="rect" id="node3" href="class_program_editor.html" title="Window for adding, deleting and editing programs. " alt="" coords="146,56,251,83"/><area shape="rect" id="node4" href="class_program_editor_window.html" title="Small window where the user can edit a program. " alt="" coords="123,107,275,133"/><area shape="rect" id="node5" href="class_variable_editor.html" title="Window for adding, deleting and editing variables. " alt="" coords="147,157,250,184"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_6.png" border="0" alt="" usemap="#_pile"/>
 <map name="_pile" id="_pile">
-<area shape="rect" id="node2" href="class_pile.html" title="Pile" alt="" coords="124,5,168,32"/></map>
+<area shape="rect" id="node2" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. " alt="" coords="124,5,168,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_7.png" border="0" alt="" usemap="#_programme_map"/>
 <map name="_programme_map" id="_programme_map">
-<area shape="rect" id="node1" href="class_programme_map.html" title="ProgrammeMap" alt="" coords="5,5,120,32"/></map>
+<area shape="rect" id="node1" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. " alt="" coords="5,5,120,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_8.png" border="0" alt="" usemap="#_q_computer"/>
 <map name="_q_computer" id="_q_computer">
-<area shape="rect" id="node2" href="class_q_computer.html" title="QComputer" alt="" coords="127,5,216,32"/></map>
+<area shape="rect" id="node2" href="class_q_computer.html" title="Main class, controls the main window. " alt="" coords="127,5,216,32"/></map>
 </td></tr>
 <tr><td><img src="inherit_graph_9.png" border="0" alt="" usemap="#_variable_map"/>
 <map name="_variable_map" id="_variable_map">
-<area shape="rect" id="node1" href="class_variable_map.html" title="VariableMap" alt="" coords="5,5,100,32"/></map>
+<area shape="rect" id="node1" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. " alt="" coords="5,5,100,32"/></map>
 </td></tr>
 </table>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

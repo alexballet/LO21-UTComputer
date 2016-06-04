@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_memento.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,39 +105,124 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_memento-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Memento Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> class stores states of the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance, each time the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance is modified. It is used for the UNDO and REDO operators.  
+ <a href="class_memento.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="memento_8h_source.html">memento.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a73a077f50515ddc454b629ded7ab1028"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73a077f50515ddc454b629ded7ab1028"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Memento</b> (QStack&lt; <a class="el" href="class_litteral.html">Litteral</a> * &gt; s)</td></tr>
+<tr class="memitem:a73a077f50515ddc454b629ded7ab1028"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memento.html#a73a077f50515ddc454b629ded7ab1028">Memento</a> (QStack&lt; <a class="el" href="class_litteral.html">Litteral</a> * &gt; s)</td></tr>
+<tr class="memdesc:a73a077f50515ddc454b629ded7ab1028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor of <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a>.  <a href="#a73a077f50515ddc454b629ded7ab1028">More...</a><br /></td></tr>
 <tr class="separator:a73a077f50515ddc454b629ded7ab1028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a36f0b778864eec3375f06ad6a95a8781"><td class="memItemLeft" align="right" valign="top">QStack&lt; <a class="el" href="class_litteral.html">Litteral</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memento.html#a36f0b778864eec3375f06ad6a95a8781">state</a></td></tr>
+<tr class="memdesc:a36f0b778864eec3375f06ad6a95a8781"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance stack's state, containing all the pushed <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects.  <a href="#a36f0b778864eec3375f06ad6a95a8781">More...</a><br /></td></tr>
+<tr class="separator:a36f0b778864eec3375f06ad6a95a8781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a77806361379cf369e95d2b4346c7e28a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77806361379cf369e95d2b4346c7e28a"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>Pile</b></td></tr>
+<tr class="memitem:a77806361379cf369e95d2b4346c7e28a"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_memento.html#a77806361379cf369e95d2b4346c7e28a">Pile</a></td></tr>
 <tr class="separator:a77806361379cf369e95d2b4346c7e28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a> class stores states of the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance, each time the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance is modified. It is used for the UNDO and REDO operators. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a73a077f50515ddc454b629ded7ab1028"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Memento::Memento </td>
+          <td>(</td>
+          <td class="paramtype">QStack&lt; <a class="el" href="class_litteral.html">Litteral</a> * &gt;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor of <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">State</td><td>of the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance stack, to initialize the state attribute. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a class="anchor" id="a77806361379cf369e95d2b4346c7e28a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="class_pile.html">Pile</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a36f0b778864eec3375f06ad6a95a8781"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QStack&lt;<a class="el" href="class_litteral.html">Litteral</a>*&gt; Memento::state</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance stack's state, containing all the pushed <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="memento_8h_source.html">memento.h</a></li>
-<li>memento.cpp</li>
+<li><a class="el" href="memento_8cpp.html">memento.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_memento.html">Memento</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

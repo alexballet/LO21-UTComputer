@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_q_computer.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,61 +105,458 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-slots">Private Slots</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_q_computer-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">QComputer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Main class, controls the main window.  
+ <a href="class_q_computer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="qcomputer_8h_source.html">qcomputer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for QComputer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_q_computer__inherit__graph.png" border="0" usemap="#_q_computer_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for QComputer:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_q_computer__coll__graph.png" border="0" usemap="#_q_computer_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr class="memitem:a511996271d43631e5296f62becc2962a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a511996271d43631e5296f62becc2962a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()</td></tr>
+<tr class="memitem:a511996271d43631e5296f62becc2962a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a511996271d43631e5296f62becc2962a">refresh</a> ()</td></tr>
+<tr class="memdesc:a511996271d43631e5296f62becc2962a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refreshes the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> tableWidget. Called every time the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> object is modified.  <a href="#a511996271d43631e5296f62becc2962a">More...</a><br /></td></tr>
 <tr class="separator:a511996271d43631e5296f62becc2962a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4337e2788cce233cc090d72e586a3a20"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4337e2788cce233cc090d72e586a3a20"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>on_commande_returnPressed</b> ()</td></tr>
+<tr class="memitem:a4337e2788cce233cc090d72e586a3a20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a4337e2788cce233cc090d72e586a3a20">on_commande_returnPressed</a> ()</td></tr>
+<tr class="memdesc:a4337e2788cce233cc090d72e586a3a20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes user input from the command line. Activated by pressing Enter or by clicking on the SEND button.  <a href="#a4337e2788cce233cc090d72e586a3a20">More...</a><br /></td></tr>
 <tr class="separator:a4337e2788cce233cc090d72e586a3a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5e98046cb11cd93f77e37d894a0ef0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa5e98046cb11cd93f77e37d894a0ef0e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>slotOptions</b> ()</td></tr>
+<tr class="memitem:aa5e98046cb11cd93f77e37d894a0ef0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#aa5e98046cb11cd93f77e37d894a0ef0e">slotOptions</a> ()</td></tr>
+<tr class="memdesc:aa5e98046cb11cd93f77e37d894a0ef0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the options window. Connects all signals from this window to <a class="el" href="class_q_computer.html" title="Main class, controls the main window. ">QComputer</a> slots.  <a href="#aa5e98046cb11cd93f77e37d894a0ef0e">More...</a><br /></td></tr>
 <tr class="separator:aa5e98046cb11cd93f77e37d894a0ef0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08cec3375f5167955d4c8f3f4926985e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08cec3375f5167955d4c8f3f4926985e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>slotVarEditor</b> ()</td></tr>
+<tr class="memitem:a08cec3375f5167955d4c8f3f4926985e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a08cec3375f5167955d4c8f3f4926985e">slotVarEditor</a> ()</td></tr>
+<tr class="memdesc:a08cec3375f5167955d4c8f3f4926985e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> Editor window.  <a href="#a08cec3375f5167955d4c8f3f4926985e">More...</a><br /></td></tr>
 <tr class="separator:a08cec3375f5167955d4c8f3f4926985e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaa70dbed86fa95dd58c9e504486c767"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeaa70dbed86fa95dd58c9e504486c767"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>slotProgEditor</b> ()</td></tr>
+<tr class="memitem:aeaa70dbed86fa95dd58c9e504486c767"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#aeaa70dbed86fa95dd58c9e504486c767">slotProgEditor</a> ()</td></tr>
+<tr class="memdesc:aeaa70dbed86fa95dd58c9e504486c767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens the Program Editor window.  <a href="#aeaa70dbed86fa95dd58c9e504486c767">More...</a><br /></td></tr>
 <tr class="separator:aeaa70dbed86fa95dd58c9e504486c767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3a71a18fabd57942cf0d85a916d31624"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a71a18fabd57942cf0d85a916d31624"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>QComputer</b> (QWidget *parent=0)</td></tr>
+<tr class="memitem:a3a71a18fabd57942cf0d85a916d31624"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a3a71a18fabd57942cf0d85a916d31624">QComputer</a> (QWidget *parent=0)</td></tr>
+<tr class="memdesc:a3a71a18fabd57942cf0d85a916d31624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor responsible for initializing the ui and app options Asks the user whether he wants to restore the previous context. Then initializes the settings, the menu bar, the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> tableWidget, connects signals and sets the initial <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a>.  <a href="#a3a71a18fabd57942cf0d85a916d31624">More...</a><br /></td></tr>
 <tr class="separator:a3a71a18fabd57942cf0d85a916d31624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25f37c722703136785a4334f395fed73"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a25f37c722703136785a4334f395fed73">~QComputer</a> ()</td></tr>
+<tr class="memdesc:a25f37c722703136785a4334f395fed73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the context into a SQLite DB then deletes the ui.  <a href="#a25f37c722703136785a4334f395fed73">More...</a><br /></td></tr>
+<tr class="separator:a25f37c722703136785a4334f395fed73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
+Private Slots</h2></td></tr>
+<tr class="memitem:a2aa8d5d0d16e46dc4ca06792b9353504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a2aa8d5d0d16e46dc4ca06792b9353504">editCommmande</a> ()</td></tr>
+<tr class="memdesc:a2aa8d5d0d16e46dc4ca06792b9353504"><td class="mdescLeft">&#160;</td><td class="mdescRight">All buttons are connected to this slot. Displays the button's text in the command line or directly performs an action (for example for UNDO/REDO buttons or the SEND button)  <a href="#a2aa8d5d0d16e46dc4ca06792b9353504">More...</a><br /></td></tr>
+<tr class="separator:a2aa8d5d0d16e46dc4ca06792b9353504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0f0f26a827191b26516e0f2e48007b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#ad0f0f26a827191b26516e0f2e48007b9">activerClavier</a> (bool)</td></tr>
+<tr class="memdesc:ad0f0f26a827191b26516e0f2e48007b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows or hides the keyboard. Controlled by a signal sent from the <a class="el" href="class_options.html" title="Window where the user can change app settings. ">Options</a> window.  <a href="#ad0f0f26a827191b26516e0f2e48007b9">More...</a><br /></td></tr>
+<tr class="separator:ad0f0f26a827191b26516e0f2e48007b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8ea347bdf3a058c6cc5d45fff2a623"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a5b8ea347bdf3a058c6cc5d45fff2a623">setMaxAffiche</a> (int)</td></tr>
+<tr class="memdesc:a5b8ea347bdf3a058c6cc5d45fff2a623"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifies the number of items displayed in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> tableWidget and refreshes the view. Controlled by a signal sent from the <a class="el" href="class_options.html" title="Window where the user can change app settings. ">Options</a> window.  <a href="#a5b8ea347bdf3a058c6cc5d45fff2a623">More...</a><br /></td></tr>
+<tr class="separator:a5b8ea347bdf3a058c6cc5d45fff2a623"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aeee8df87f59ae88aa95534c5865d87da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#aeee8df87f59ae88aa95534c5865d87da">restoreContext</a> ()</td></tr>
+<tr class="memdesc:aeee8df87f59ae88aa95534c5865d87da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays a dialog asking a user whether he wants to restore the previous context. Called from the constructor. If the users answers yes, <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> values, variables, programs and settings are loaded from the SQLite DB. If the user answers no, default values are used (Pile-&gt;maxAffiche = 4, keyboard active)  <a href="#aeee8df87f59ae88aa95534c5865d87da">More...</a><br /></td></tr>
+<tr class="separator:aeee8df87f59ae88aa95534c5865d87da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5520d8cc2f6a71d9aa77bb0b829766d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#aa5520d8cc2f6a71d9aa77bb0b829766d">initMenuBar</a> ()</td></tr>
+<tr class="memdesc:aa5520d8cc2f6a71d9aa77bb0b829766d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the menu bar and connects all menu bar actions to correct slots. Called from the constructor.  <a href="#aa5520d8cc2f6a71d9aa77bb0b829766d">More...</a><br /></td></tr>
+<tr class="separator:aa5520d8cc2f6a71d9aa77bb0b829766d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6faf6e11e530cb9ae8037ab35c8cdb7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#a6faf6e11e530cb9ae8037ab35c8cdb7d">initPile</a> ()</td></tr>
+<tr class="memdesc:a6faf6e11e530cb9ae8037ab35c8cdb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the tableWidget displaying all <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> items. Called from the constructor.  <a href="#a6faf6e11e530cb9ae8037ab35c8cdb7d">More...</a><br /></td></tr>
+<tr class="separator:a6faf6e11e530cb9ae8037ab35c8cdb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab7727a735ba07b5e82962682908b428d"><td class="memItemLeft" align="right" valign="top">Ui::QComputer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_computer.html#ab7727a735ba07b5e82962682908b428d">ui</a></td></tr>
+<tr class="memdesc:ab7727a735ba07b5e82962682908b428d"><td class="mdescLeft">&#160;</td><td class="mdescRight">ui for Qt Designer  <a href="#ab7727a735ba07b5e82962682908b428d">More...</a><br /></td></tr>
+<tr class="separator:ab7727a735ba07b5e82962682908b428d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main class, controls the main window. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a3a71a18fabd57942cf0d85a916d31624"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QComputer::QComputer </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor responsible for initializing the ui and app options Asks the user whether he wants to restore the previous context. Then initializes the settings, the menu bar, the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> tableWidget, connects signals and sets the initial <a class="el" href="class_memento.html" title="The Memento class stores states of the Pile instance, each time the Pile instance is modified...">Memento</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="a25f37c722703136785a4334f395fed73"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QComputer::~QComputer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Saves the context into a SQLite DB then deletes the ui. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad0f0f26a827191b26516e0f2e48007b9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::activerClavier </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shows or hides the keyboard. Controlled by a signal sent from the <a class="el" href="class_options.html" title="Window where the user can change app settings. ">Options</a> window. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2aa8d5d0d16e46dc4ca06792b9353504"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::editCommmande </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>All buttons are connected to this slot. Displays the button's text in the command line or directly performs an action (for example for UNDO/REDO buttons or the SEND button) </p>
+
+</div>
+</div>
+<a class="anchor" id="aa5520d8cc2f6a71d9aa77bb0b829766d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::initMenuBar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the menu bar and connects all menu bar actions to correct slots. Called from the constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6faf6e11e530cb9ae8037ab35c8cdb7d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::initPile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes the tableWidget displaying all <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> items. Called from the constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4337e2788cce233cc090d72e586a3a20"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::on_commande_returnPressed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Processes user input from the command line. Activated by pressing Enter or by clicking on the SEND button. </p>
+
+</div>
+</div>
+<a class="anchor" id="a511996271d43631e5296f62becc2962a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::refresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refreshes the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> tableWidget. Called every time the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> object is modified. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeee8df87f59ae88aa95534c5865d87da"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::restoreContext </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Displays a dialog asking a user whether he wants to restore the previous context. Called from the constructor. If the users answers yes, <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> values, variables, programs and settings are loaded from the SQLite DB. If the user answers no, default values are used (Pile-&gt;maxAffiche = 4, keyboard active) </p>
+
+</div>
+</div>
+<a class="anchor" id="a5b8ea347bdf3a058c6cc5d45fff2a623"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::setMaxAffiche </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Modifies the number of items displayed in the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> tableWidget and refreshes the view. Controlled by a signal sent from the <a class="el" href="class_options.html" title="Window where the user can change app settings. ">Options</a> window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>is the new number of items </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa5e98046cb11cd93f77e37d894a0ef0e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::slotOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Opens the options window. Connects all signals from this window to <a class="el" href="class_q_computer.html" title="Main class, controls the main window. ">QComputer</a> slots. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeaa70dbed86fa95dd58c9e504486c767"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::slotProgEditor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Opens the Program Editor window. </p>
+
+</div>
+</div>
+<a class="anchor" id="a08cec3375f5167955d4c8f3f4926985e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QComputer::slotVarEditor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Opens the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> Editor window. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="ab7727a735ba07b5e82962682908b428d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ui::QComputer* QComputer::ui</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ui for Qt Designer </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="qcomputer_8h_source.html">qcomputer.h</a></li>
-<li>qcomputer.cpp</li>
+<li><a class="el" href="qcomputer_8cpp.html">qcomputer.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_q_computer.html">QComputer</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

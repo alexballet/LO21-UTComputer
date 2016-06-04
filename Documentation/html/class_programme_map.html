@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_programme_map.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,59 +105,411 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_programme_map-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ProgrammeMap Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> is a singleton containing a QMap with all named programs.  
+ <a href="class_programme_map.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="programme_8h_source.html">programme.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for ProgrammeMap:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_programme_map__coll__graph.png" border="0" usemap="#_programme_map_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aeb51b0ff1fa4155fca2904eae67b00c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb51b0ff1fa4155fca2904eae67b00c2"></a>
-<a class="el" href="class_programme.html">Programme</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>findProg</b> (QString id) const </td></tr>
+<tr class="memitem:aeb51b0ff1fa4155fca2904eae67b00c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_programme.html">Programme</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#aeb51b0ff1fa4155fca2904eae67b00c2">findProg</a> (QString id) const </td></tr>
+<tr class="memdesc:aeb51b0ff1fa4155fca2904eae67b00c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> with the specified id exisits.  <a href="#aeb51b0ff1fa4155fca2904eae67b00c2">More...</a><br /></td></tr>
 <tr class="separator:aeb51b0ff1fa4155fca2904eae67b00c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaadcff14c7d83add4d79b5c5cae86897"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaadcff14c7d83add4d79b5c5cae86897"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteProg</b> (QString id)</td></tr>
+<tr class="memitem:aaadcff14c7d83add4d79b5c5cae86897"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#aaadcff14c7d83add4d79b5c5cae86897">deleteProg</a> (QString id)</td></tr>
+<tr class="memdesc:aaadcff14c7d83add4d79b5c5cae86897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> with the specified id.  <a href="#aaadcff14c7d83add4d79b5c5cae86897">More...</a><br /></td></tr>
 <tr class="separator:aaadcff14c7d83add4d79b5c5cae86897"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1d6373baf1bb4274fe3d5b49f24424b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa1d6373baf1bb4274fe3d5b49f24424b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>insertProg</b> (QString id, <a class="el" href="class_programme.html">Programme</a> *prog)</td></tr>
+<tr class="memitem:aa1d6373baf1bb4274fe3d5b49f24424b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#aa1d6373baf1bb4274fe3d5b49f24424b">insertProg</a> (QString id, <a class="el" href="class_programme.html">Programme</a> *prog)</td></tr>
+<tr class="memdesc:aa1d6373baf1bb4274fe3d5b49f24424b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> in the QMap.  <a href="#aa1d6373baf1bb4274fe3d5b49f24424b">More...</a><br /></td></tr>
 <tr class="separator:aa1d6373baf1bb4274fe3d5b49f24424b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28b318ad8c49f4e4e90817bc1eb24cad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28b318ad8c49f4e4e90817bc1eb24cad"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getCount</b> () const </td></tr>
+<tr class="memitem:a28b318ad8c49f4e4e90817bc1eb24cad"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#a28b318ad8c49f4e4e90817bc1eb24cad">getCount</a> () const </td></tr>
+<tr class="memdesc:a28b318ad8c49f4e4e90817bc1eb24cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the count of existing programs.  <a href="#a28b318ad8c49f4e4e90817bc1eb24cad">More...</a><br /></td></tr>
 <tr class="separator:a28b318ad8c49f4e4e90817bc1eb24cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefaf302f6811dd49689d9812f01d4dd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefaf302f6811dd49689d9812f01d4dd4"></a>
-QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;<br class="typebreak" />
-::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>getIteratorBegin</b> () const </td></tr>
+<tr class="memitem:aefaf302f6811dd49689d9812f01d4dd4"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;<br class="typebreak" />
+::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#aefaf302f6811dd49689d9812f01d4dd4">getIteratorBegin</a> () const </td></tr>
+<tr class="memdesc:aefaf302f6811dd49689d9812f01d4dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const iterator pointing at the beginning of the QMap.  <a href="#aefaf302f6811dd49689d9812f01d4dd4">More...</a><br /></td></tr>
 <tr class="separator:aefaf302f6811dd49689d9812f01d4dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b6d2023302b50fbbd494f5f057ef1ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b6d2023302b50fbbd494f5f057ef1ec"></a>
-QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;<br class="typebreak" />
-::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>getIteratorEnd</b> () const </td></tr>
+<tr class="memitem:a0b6d2023302b50fbbd494f5f057ef1ec"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;<br class="typebreak" />
+::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#a0b6d2023302b50fbbd494f5f057ef1ec">getIteratorEnd</a> () const </td></tr>
+<tr class="memdesc:a0b6d2023302b50fbbd494f5f057ef1ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a const iterator pointing at the end of the QMap.  <a href="#a0b6d2023302b50fbbd494f5f057ef1ec">More...</a><br /></td></tr>
 <tr class="separator:a0b6d2023302b50fbbd494f5f057ef1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1468a35fb42cee397a9fa5362f692c26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1468a35fb42cee397a9fa5362f692c26"></a>
-static <a class="el" href="class_programme_map.html">ProgrammeMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+<tr class="memitem:a1468a35fb42cee397a9fa5362f692c26"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_programme_map.html">ProgrammeMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#a1468a35fb42cee397a9fa5362f692c26">getInstance</a> ()</td></tr>
+<tr class="memdesc:a1468a35fb42cee397a9fa5362f692c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton getter.  <a href="#a1468a35fb42cee397a9fa5362f692c26">More...</a><br /></td></tr>
 <tr class="separator:a1468a35fb42cee397a9fa5362f692c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7b54810d5cf85feadc30be1a361bae8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7b54810d5cf85feadc30be1a361bae8"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>libererInstance</b> ()</td></tr>
+<tr class="memitem:ab7b54810d5cf85feadc30be1a361bae8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#ab7b54810d5cf85feadc30be1a361bae8">libererInstance</a> ()</td></tr>
+<tr class="memdesc:ab7b54810d5cf85feadc30be1a361bae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance.  <a href="#ab7b54810d5cf85feadc30be1a361bae8">More...</a><br /></td></tr>
 <tr class="separator:ab7b54810d5cf85feadc30be1a361bae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:acfb75f2f2b1a260bd707076514a7c807"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#acfb75f2f2b1a260bd707076514a7c807">ProgrammeMap</a> ()</td></tr>
+<tr class="memdesc:acfb75f2f2b1a260bd707076514a7c807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#acfb75f2f2b1a260bd707076514a7c807">More...</a><br /></td></tr>
+<tr class="separator:acfb75f2f2b1a260bd707076514a7c807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae204c5ae875c83bb67735cf92d578c5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_programme_map.html">ProgrammeMap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#ae204c5ae875c83bb67735cf92d578c5b">operator=</a> (const <a class="el" href="class_programme_map.html">ProgrammeMap</a> &amp;)=delete</td></tr>
+<tr class="memdesc:ae204c5ae875c83bb67735cf92d578c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the assignment possibility between <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> objects.  <a href="#ae204c5ae875c83bb67735cf92d578c5b">More...</a><br /></td></tr>
+<tr class="separator:ae204c5ae875c83bb67735cf92d578c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a852b3a7911e703940f8c9c11e6e5b1ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#a852b3a7911e703940f8c9c11e6e5b1ea">ProgrammeMap</a> (const <a class="el" href="class_programme_map.html">ProgrammeMap</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a852b3a7911e703940f8c9c11e6e5b1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the copy constructor.  <a href="#a852b3a7911e703940f8c9c11e6e5b1ea">More...</a><br /></td></tr>
+<tr class="separator:a852b3a7911e703940f8c9c11e6e5b1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a263085e1994387259aeb32dce0831837"><td class="memItemLeft" align="right" valign="top">QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#a263085e1994387259aeb32dce0831837">map</a></td></tr>
+<tr class="memdesc:a263085e1994387259aeb32dce0831837"><td class="mdescLeft">&#160;</td><td class="mdescRight">A QMap where all programs are stored. They are identified by their id.  <a href="#a263085e1994387259aeb32dce0831837">More...</a><br /></td></tr>
+<tr class="separator:a263085e1994387259aeb32dce0831837"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a5e24af1b7a89205c7d0ac041ab95acdb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_programme_map.html">ProgrammeMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_programme_map.html#a5e24af1b7a89205c7d0ac041ab95acdb">instance</a> = nullptr</td></tr>
+<tr class="memdesc:a5e24af1b7a89205c7d0ac041ab95acdb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance used for the Singleton design pattern.  <a href="#a5e24af1b7a89205c7d0ac041ab95acdb">More...</a><br /></td></tr>
+<tr class="separator:a5e24af1b7a89205c7d0ac041ab95acdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> is a singleton containing a QMap with all named programs. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="acfb75f2f2b1a260bd707076514a7c807"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ProgrammeMap::ProgrammeMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="a852b3a7911e703940f8c9c11e6e5b1ea"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ProgrammeMap::ProgrammeMap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_programme_map.html">ProgrammeMap</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the copy constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aaadcff14c7d83add4d79b5c5cae86897"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgrammeMap::deleteProg </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deletes a <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> with the specified id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the program to delete. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aeb51b0ff1fa4155fca2904eae67b00c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_programme.html">Programme</a> * ProgrammeMap::findProg </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether a <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> with the specified id exisits. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the program </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_programme.html" title="Programme class. ">Programme</a> pointer if it exists, nullptr if it doesn't. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a28b318ad8c49f4e4e90817bc1eb24cad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int ProgrammeMap::getCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the count of existing programs. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1468a35fb42cee397a9fa5362f692c26"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_programme_map.html">ProgrammeMap</a> * ProgrammeMap::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Singleton getter. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aefaf302f6811dd49689d9812f01d4dd4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;::const_iterator ProgrammeMap::getIteratorBegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a const iterator pointing at the beginning of the QMap. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0b6d2023302b50fbbd494f5f057ef1ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMap&lt; QString, <a class="el" href="class_programme.html">Programme</a> * &gt;::const_iterator ProgrammeMap::getIteratorEnd </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a const iterator pointing at the end of the QMap. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa1d6373baf1bb4274fe3d5b49f24424b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgrammeMap::insertProg </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_programme.html">Programme</a> *&#160;</td>
+          <td class="paramname"><em>prog</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inserts a new <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> in the QMap. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>of the program </td></tr>
+    <tr><td class="paramname">prog</td><td>is the pointer to the program. If the id corresponds to the id of an exisiting <a class="el" href="class_programme.html" title="Programme class. ">Programme</a>, its value is overriden. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ab7b54810d5cf85feadc30be1a361bae8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgrammeMap::libererInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deletes the <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae204c5ae875c83bb67735cf92d578c5b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_programme_map.html">ProgrammeMap</a>&amp; ProgrammeMap::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_programme_map.html">ProgrammeMap</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the assignment possibility between <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> objects. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a5e24af1b7a89205c7d0ac041ab95acdb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_programme_map.html">ProgrammeMap</a> * ProgrammeMap::instance = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance used for the Singleton design pattern. </p>
+
+</div>
+</div>
+<a class="anchor" id="a263085e1994387259aeb32dce0831837"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QMap&lt;QString, <a class="el" href="class_programme.html">Programme</a>*&gt; ProgrammeMap::map</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A QMap where all programs are stored. They are identified by their id. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="programme_8h_source.html">programme.h</a></li>
-<li>programme.cpp</li>
+<li><a class="el" href="programme_8cpp.html">programme.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_programme_map.html">ProgrammeMap</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

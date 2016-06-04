@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$class_options.html" title="Options" alt="" coords="165,5,232,32"/>
-<area shape="rect" id="node3" href="$class_program_editor.html" title="ProgramEditor" alt="" coords="146,56,251,83"/>
-<area shape="rect" id="node4" href="$class_program_editor_window.html" title="ProgramEditorWindow" alt="" coords="123,107,275,133"/>
-<area shape="rect" id="node5" href="$class_variable_editor.html" title="VariableEditor" alt="" coords="147,157,250,184"/>
+<area shape="rect" id="node2" href="$class_options.html" title="Window where the user can change app settings. " alt="" coords="165,5,232,32"/>
+<area shape="rect" id="node3" href="$class_program_editor.html" title="Window for adding, deleting and editing programs. " alt="" coords="146,56,251,83"/>
+<area shape="rect" id="node4" href="$class_program_editor_window.html" title="Small window where the user can edit a program. " alt="" coords="123,107,275,133"/>
+<area shape="rect" id="node5" href="$class_variable_editor.html" title="Window for adding, deleting and editing variables. " alt="" coords="147,157,250,184"/>
 </map>

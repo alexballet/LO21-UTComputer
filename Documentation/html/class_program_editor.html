@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_program_editor.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,42 +105,250 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-slots">Private Slots</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_program_editor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ProgramEditor Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Window for adding, deleting and editing programs.  
+ <a href="class_program_editor.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="programeditor_8h_source.html">programeditor.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ProgramEditor:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_program_editor__inherit__graph.png" border="0" usemap="#_program_editor_inherit__map" alt="Inheritance graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for ProgramEditor:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_program_editor__coll__graph.png" border="0" usemap="#_program_editor_coll__map" alt="Collaboration graph"/></div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a45fd386eea7530b50db9207595a3bd17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45fd386eea7530b50db9207595a3bd17"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ProgramEditor</b> (QWidget *parent=0)</td></tr>
+<tr class="memitem:a45fd386eea7530b50db9207595a3bd17"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#a45fd386eea7530b50db9207595a3bd17">ProgramEditor</a> (QWidget *parent=0)</td></tr>
+<tr class="memdesc:a45fd386eea7530b50db9207595a3bd17"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_program_editor.html" title="Window for adding, deleting and editing programs. ">ProgramEditor</a> constructor, sets up the ui.  <a href="#a45fd386eea7530b50db9207595a3bd17">More...</a><br /></td></tr>
 <tr class="separator:a45fd386eea7530b50db9207595a3bd17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2910182eba59eae39d7e624179eccbdc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#a2910182eba59eae39d7e624179eccbdc">~ProgramEditor</a> ()</td></tr>
+<tr class="memdesc:a2910182eba59eae39d7e624179eccbdc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_program_editor.html" title="Window for adding, deleting and editing programs. ">ProgramEditor</a> destructor, deletes the ui.  <a href="#a2910182eba59eae39d7e624179eccbdc">More...</a><br /></td></tr>
+<tr class="separator:a2910182eba59eae39d7e624179eccbdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
+Private Slots</h2></td></tr>
+<tr class="memitem:abd64071cd836df89a6df000bfa00434c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#abd64071cd836df89a6df000bfa00434c">newProgramSlot</a> ()</td></tr>
+<tr class="memdesc:abd64071cd836df89a6df000bfa00434c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies user input and creates a new empty program.  <a href="#abd64071cd836df89a6df000bfa00434c">More...</a><br /></td></tr>
+<tr class="separator:abd64071cd836df89a6df000bfa00434c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6842c10d3ece192bf7a0630ef2b747c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#a6842c10d3ece192bf7a0630ef2b747c7">deleteProgSlot</a> ()</td></tr>
+<tr class="memdesc:a6842c10d3ece192bf7a0630ef2b747c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the user delete a program. This slot is connected to all delete buttons in the 3rd column.  <a href="#a6842c10d3ece192bf7a0630ef2b747c7">More...</a><br /></td></tr>
+<tr class="separator:a6842c10d3ece192bf7a0630ef2b747c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae5fc79726704a210f99f1362ac1128c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#aae5fc79726704a210f99f1362ac1128c">editProgWindowSlot</a> ()</td></tr>
+<tr class="memdesc:aae5fc79726704a210f99f1362ac1128c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a new <a class="el" href="class_program_editor_window.html" title="Small window where the user can edit a program. ">ProgramEditorWindow</a> that lets the user edit the program. This slot is connected to all edit buttons in the 2nd column.  <a href="#aae5fc79726704a210f99f1362ac1128c">More...</a><br /></td></tr>
+<tr class="separator:aae5fc79726704a210f99f1362ac1128c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aad17587426c040754fa1aa74b3403509"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#aad17587426c040754fa1aa74b3403509">refreshTab</a> ()</td></tr>
+<tr class="memdesc:aad17587426c040754fa1aa74b3403509"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refreshes the TableWidget that lists all programs.  <a href="#aad17587426c040754fa1aa74b3403509">More...</a><br /></td></tr>
+<tr class="separator:aad17587426c040754fa1aa74b3403509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aac8938fc982fd5716b38dc5b2c8ea426"><td class="memItemLeft" align="right" valign="top">Ui::ProgramEditor *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_program_editor.html#aac8938fc982fd5716b38dc5b2c8ea426">ui</a></td></tr>
+<tr class="memdesc:aac8938fc982fd5716b38dc5b2c8ea426"><td class="mdescLeft">&#160;</td><td class="mdescRight">ui for Qt Designer  <a href="#aac8938fc982fd5716b38dc5b2c8ea426">More...</a><br /></td></tr>
+<tr class="separator:aac8938fc982fd5716b38dc5b2c8ea426"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Window for adding, deleting and editing programs. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a45fd386eea7530b50db9207595a3bd17"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ProgramEditor::ProgramEditor </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_program_editor.html" title="Window for adding, deleting and editing programs. ">ProgramEditor</a> constructor, sets up the ui. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2910182eba59eae39d7e624179eccbdc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ProgramEditor::~ProgramEditor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_program_editor.html" title="Window for adding, deleting and editing programs. ">ProgramEditor</a> destructor, deletes the ui. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a6842c10d3ece192bf7a0630ef2b747c7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgramEditor::deleteProgSlot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lets the user delete a program. This slot is connected to all delete buttons in the 3rd column. </p>
+
+</div>
+</div>
+<a class="anchor" id="aae5fc79726704a210f99f1362ac1128c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgramEditor::editProgWindowSlot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Opens a new <a class="el" href="class_program_editor_window.html" title="Small window where the user can edit a program. ">ProgramEditorWindow</a> that lets the user edit the program. This slot is connected to all edit buttons in the 2nd column. </p>
+
+</div>
+</div>
+<a class="anchor" id="abd64071cd836df89a6df000bfa00434c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgramEditor::newProgramSlot </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifies user input and creates a new empty program. </p>
+
+</div>
+</div>
+<a class="anchor" id="aad17587426c040754fa1aa74b3403509"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ProgramEditor::refreshTab </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Refreshes the TableWidget that lists all programs. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="aac8938fc982fd5716b38dc5b2c8ea426"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ui::ProgramEditor* ProgramEditor::ui</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ui for Qt Designer </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="programeditor_8h_source.html">programeditor.h</a></li>
-<li>programeditor.cpp</li>
+<li><a class="el" href="programeditor_8cpp.html">programeditor.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_program_editor.html">ProgramEditor</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

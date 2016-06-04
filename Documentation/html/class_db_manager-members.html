@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_db_manager.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +105,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">DbManager Member List</div>  </div>
@@ -91,21 +113,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_db_manager.html">DbManager</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getInstance</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>saveOptions</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>savePile</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>savePrograms</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>saveVariables</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>setOptions</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setPile</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>setPrograms</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setVariables</b>() (defined in <a class="el" href="class_db_manager.html">DbManager</a>)</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#a9bbc0ad3003674b8e5e71783e5067f7f">db</a></td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#a0d16cf5bba931362e6c581eb1b5ba66a">DbManager</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#a8dd83f5043068dea2126918cff641a11">DbManager</a>(const DbManager &amp;)=delete</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#ad0b76eab48407a9293133a48062db9da">getInstance</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#aa419595b8a9649e4c337e6d3bd3f3a0d">instance</a></td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">private</span><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#a01c7aed0f8c8de940c1dd602e401abe1">operator=</a>(const DbManager &amp;)=delete</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#a4f1055147ee92e7fae77b88d6f7a8147">saveOptions</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#a2aa95c302a20944e7e67365899fd7698">savePile</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#a398605410d1f7a13d137d25ec566d099">savePrograms</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#a4ce74e2789235de748cf626fd5475ffa">saveVariables</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#a43cd06ed542dec7209a773139e686232">setOptions</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#ae409f7f1c75f235827edbd9e08437938">setPile</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_db_manager.html#ae783f700470041d148e8c1ab0e5af059">setPrograms</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_db_manager.html#a26d15866e130aae46b2cbd17290fae05">setVariables</a>()</td><td class="entry"><a class="el" href="class_db_manager.html">DbManager</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

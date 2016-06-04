@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,12 +76,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_db_manager.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,60 +105,388 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="class_db_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">DbManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer.  
+ <a href="class_db_manager.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="dbmanager_8h_source.html">dbmanager.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for DbManager:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_db_manager__coll__graph.png" border="0" usemap="#_db_manager_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2aa95c302a20944e7e67365899fd7698"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2aa95c302a20944e7e67365899fd7698"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>savePile</b> ()</td></tr>
+<tr class="memitem:a2aa95c302a20944e7e67365899fd7698"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a2aa95c302a20944e7e67365899fd7698">savePile</a> ()</td></tr>
+<tr class="memdesc:a2aa95c302a20944e7e67365899fd7698"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that saves the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects pushed into the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance. It clears the "pile" table and copies the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance into the "pile" table.  <a href="#a2aa95c302a20944e7e67365899fd7698">More...</a><br /></td></tr>
 <tr class="separator:a2aa95c302a20944e7e67365899fd7698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ce74e2789235de748cf626fd5475ffa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ce74e2789235de748cf626fd5475ffa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>saveVariables</b> ()</td></tr>
+<tr class="memitem:a4ce74e2789235de748cf626fd5475ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a4ce74e2789235de748cf626fd5475ffa">saveVariables</a> ()</td></tr>
+<tr class="memdesc:a4ce74e2789235de748cf626fd5475ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that saves the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects into the database. It clears the "variables" table and copies the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects from <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> into the "variables" table.  <a href="#a4ce74e2789235de748cf626fd5475ffa">More...</a><br /></td></tr>
 <tr class="separator:a4ce74e2789235de748cf626fd5475ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a398605410d1f7a13d137d25ec566d099"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a398605410d1f7a13d137d25ec566d099"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>savePrograms</b> ()</td></tr>
+<tr class="memitem:a398605410d1f7a13d137d25ec566d099"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a398605410d1f7a13d137d25ec566d099">savePrograms</a> ()</td></tr>
+<tr class="memdesc:a398605410d1f7a13d137d25ec566d099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that saves the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objets into the database. It clears the "programs" table and copies the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objects from <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> into the "programs" table.  <a href="#a398605410d1f7a13d137d25ec566d099">More...</a><br /></td></tr>
 <tr class="separator:a398605410d1f7a13d137d25ec566d099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f1055147ee92e7fae77b88d6f7a8147"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f1055147ee92e7fae77b88d6f7a8147"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>saveOptions</b> ()</td></tr>
+<tr class="memitem:a4f1055147ee92e7fae77b88d6f7a8147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a4f1055147ee92e7fae77b88d6f7a8147">saveOptions</a> ()</td></tr>
+<tr class="memdesc:a4f1055147ee92e7fae77b88d6f7a8147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that saves the settings into the database. It clears the "options" table and copies the values from the global Setting object into the "options" table.  <a href="#a4f1055147ee92e7fae77b88d6f7a8147">More...</a><br /></td></tr>
 <tr class="separator:a4f1055147ee92e7fae77b88d6f7a8147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae409f7f1c75f235827edbd9e08437938"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae409f7f1c75f235827edbd9e08437938"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPile</b> ()</td></tr>
+<tr class="memitem:ae409f7f1c75f235827edbd9e08437938"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#ae409f7f1c75f235827edbd9e08437938">setPile</a> ()</td></tr>
+<tr class="memdesc:ae409f7f1c75f235827edbd9e08437938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that recovers the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects pushed from the database. It pushes the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the "pile" table into the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance.  <a href="#ae409f7f1c75f235827edbd9e08437938">More...</a><br /></td></tr>
 <tr class="separator:ae409f7f1c75f235827edbd9e08437938"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26d15866e130aae46b2cbd17290fae05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26d15866e130aae46b2cbd17290fae05"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setVariables</b> ()</td></tr>
+<tr class="memitem:a26d15866e130aae46b2cbd17290fae05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a26d15866e130aae46b2cbd17290fae05">setVariables</a> ()</td></tr>
+<tr class="memdesc:a26d15866e130aae46b2cbd17290fae05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that recovers the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects from the database. It inserts the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects from the "variables" table into the <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance.  <a href="#a26d15866e130aae46b2cbd17290fae05">More...</a><br /></td></tr>
 <tr class="separator:a26d15866e130aae46b2cbd17290fae05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae783f700470041d148e8c1ab0e5af059"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae783f700470041d148e8c1ab0e5af059"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPrograms</b> ()</td></tr>
+<tr class="memitem:ae783f700470041d148e8c1ab0e5af059"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#ae783f700470041d148e8c1ab0e5af059">setPrograms</a> ()</td></tr>
+<tr class="memdesc:ae783f700470041d148e8c1ab0e5af059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that recovers the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objects from the database. It inserts the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objects from the "program" table into the <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance.  <a href="#ae783f700470041d148e8c1ab0e5af059">More...</a><br /></td></tr>
 <tr class="separator:ae783f700470041d148e8c1ab0e5af059"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43cd06ed542dec7209a773139e686232"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43cd06ed542dec7209a773139e686232"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOptions</b> ()</td></tr>
+<tr class="memitem:a43cd06ed542dec7209a773139e686232"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a43cd06ed542dec7209a773139e686232">setOptions</a> ()</td></tr>
+<tr class="memdesc:a43cd06ed542dec7209a773139e686232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that recovers the settings from the database. It updates the settings with the values from the "options" table.  <a href="#a43cd06ed542dec7209a773139e686232">More...</a><br /></td></tr>
 <tr class="separator:a43cd06ed542dec7209a773139e686232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ad0b76eab48407a9293133a48062db9da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0b76eab48407a9293133a48062db9da"></a>
-static <a class="el" href="class_db_manager.html">DbManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+<tr class="memitem:ad0b76eab48407a9293133a48062db9da"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_db_manager.html">DbManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#ad0b76eab48407a9293133a48062db9da">getInstance</a> ()</td></tr>
+<tr class="memdesc:ad0b76eab48407a9293133a48062db9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to access the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> singleton.  <a href="#ad0b76eab48407a9293133a48062db9da">More...</a><br /></td></tr>
 <tr class="separator:ad0b76eab48407a9293133a48062db9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0d16cf5bba931362e6c581eb1b5ba66a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a0d16cf5bba931362e6c581eb1b5ba66a">DbManager</a> ()</td></tr>
+<tr class="memdesc:a0d16cf5bba931362e6c581eb1b5ba66a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> constructor to forbid instanciation by any other way than using the <a class="el" href="class_db_manager.html#ad0b76eab48407a9293133a48062db9da" title="Method to access the DbManager singleton. ">getInstance()</a> method. It initializes the SQLite database, open the .bd file (creates a new one if it doesn't exist) and creates the "pile", "variables", "programs" and "options" tables if they do not exist. The "pile" table has 3 columns : id (the serial number), typeLit (the type of the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object) and lit (the QString representation of the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object). E.g : 1 | <a class="el" href="class_rationnel.html" title="The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store ...">Rationnel</a> | 3/4 The "variables" table has 4 columns : id, nameVar (the identificator of the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> object), typeLit and lit. E.g : 2 | X | <a class="el" href="class_reel.html" title="The Reel class contains a double value. ">Reel</a> | 5.34 The "programs" table has 3 columns : id, nameProg (the identificator of the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> object) and lit. E.g : 3 | FOO | [2 DUP +] The "options" table has 3 columns : id, option (the name of the option) and valeur (the value of the option). E.g : 4 | <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> | 5.  <a href="#a0d16cf5bba931362e6c581eb1b5ba66a">More...</a><br /></td></tr>
+<tr class="separator:a0d16cf5bba931362e6c581eb1b5ba66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c7aed0f8c8de940c1dd602e401abe1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_db_manager.html">DbManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a01c7aed0f8c8de940c1dd602e401abe1">operator=</a> (const <a class="el" href="class_db_manager.html">DbManager</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a01c7aed0f8c8de940c1dd602e401abe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disabling the assignment possibility between <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> objects.  <a href="#a01c7aed0f8c8de940c1dd602e401abe1">More...</a><br /></td></tr>
+<tr class="separator:a01c7aed0f8c8de940c1dd602e401abe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dd83f5043068dea2126918cff641a11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a8dd83f5043068dea2126918cff641a11">DbManager</a> (const <a class="el" href="class_db_manager.html">DbManager</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a8dd83f5043068dea2126918cff641a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disabling the copy constructor of the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> class.  <a href="#a8dd83f5043068dea2126918cff641a11">More...</a><br /></td></tr>
+<tr class="separator:a8dd83f5043068dea2126918cff641a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9bbc0ad3003674b8e5e71783e5067f7f"><td class="memItemLeft" align="right" valign="top">QSqlDatabase&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#a9bbc0ad3003674b8e5e71783e5067f7f">db</a></td></tr>
+<tr class="memdesc:a9bbc0ad3003674b8e5e71783e5067f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">QSqlDatabase of UTComputer.  <a href="#a9bbc0ad3003674b8e5e71783e5067f7f">More...</a><br /></td></tr>
+<tr class="separator:a9bbc0ad3003674b8e5e71783e5067f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:aa419595b8a9649e4c337e6d3bd3f3a0d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_db_manager.html">DbManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_db_manager.html#aa419595b8a9649e4c337e6d3bd3f3a0d">instance</a> = nullptr</td></tr>
+<tr class="memdesc:aa419595b8a9649e4c337e6d3bd3f3a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the unique instance of the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> object.  <a href="#aa419595b8a9649e4c337e6d3bd3f3a0d">More...</a><br /></td></tr>
+<tr class="separator:aa419595b8a9649e4c337e6d3bd3f3a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a0d16cf5bba931362e6c581eb1b5ba66a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DbManager::DbManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Private <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> constructor to forbid instanciation by any other way than using the <a class="el" href="class_db_manager.html#ad0b76eab48407a9293133a48062db9da" title="Method to access the DbManager singleton. ">getInstance()</a> method. It initializes the SQLite database, open the .bd file (creates a new one if it doesn't exist) and creates the "pile", "variables", "programs" and "options" tables if they do not exist. The "pile" table has 3 columns : id (the serial number), typeLit (the type of the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object) and lit (the QString representation of the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> object). E.g : 1 | <a class="el" href="class_rationnel.html" title="The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store ...">Rationnel</a> | 3/4 The "variables" table has 4 columns : id, nameVar (the identificator of the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> object), typeLit and lit. E.g : 2 | X | <a class="el" href="class_reel.html" title="The Reel class contains a double value. ">Reel</a> | 5.34 The "programs" table has 3 columns : id, nameProg (the identificator of the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> object) and lit. E.g : 3 | FOO | [2 DUP +] The "options" table has 3 columns : id, option (the name of the option) and valeur (the value of the option). E.g : 4 | <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> | 5. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8dd83f5043068dea2126918cff641a11"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DbManager::DbManager </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_db_manager.html">DbManager</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disabling the copy constructor of the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> class. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad0b76eab48407a9293133a48062db9da"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_db_manager.html">DbManager</a> * DbManager::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Method to access the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> singleton. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> singleton. If the singleton is not instanciated yet, it returns a new <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a>. Otherwise, it returns the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> instance. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a01c7aed0f8c8de940c1dd602e401abe1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_db_manager.html">DbManager</a>&amp; DbManager::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_db_manager.html">DbManager</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disabling the assignment possibility between <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> objects. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4f1055147ee92e7fae77b88d6f7a8147"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::saveOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that saves the settings into the database. It clears the "options" table and copies the values from the global Setting object into the "options" table. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2aa95c302a20944e7e67365899fd7698"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::savePile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that saves the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects pushed into the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance. It clears the "pile" table and copies the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance into the "pile" table. </p>
+
+</div>
+</div>
+<a class="anchor" id="a398605410d1f7a13d137d25ec566d099"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::savePrograms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that saves the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objets into the database. It clears the "programs" table and copies the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objects from <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> into the "programs" table. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4ce74e2789235de748cf626fd5475ffa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::saveVariables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that saves the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects into the database. It clears the "variables" table and copies the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects from <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> into the "variables" table. </p>
+
+</div>
+</div>
+<a class="anchor" id="a43cd06ed542dec7209a773139e686232"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::setOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that recovers the settings from the database. It updates the settings with the values from the "options" table. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae409f7f1c75f235827edbd9e08437938"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::setPile </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that recovers the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects pushed from the database. It pushes the <a class="el" href="class_litteral.html" title="The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. ">Litteral</a> objects from the "pile" table into the <a class="el" href="class_pile.html" title="Singleton containing the stack with all Litteral objects pointers. ">Pile</a> instance. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae783f700470041d148e8c1ab0e5af059"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::setPrograms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that recovers the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objects from the database. It inserts the <a class="el" href="class_programme.html" title="Programme class. ">Programme</a> objects from the "program" table into the <a class="el" href="class_programme_map.html" title="ProgrammeMap is a singleton containing a QMap with all named programs. ">ProgrammeMap</a> instance. </p>
+
+</div>
+</div>
+<a class="anchor" id="a26d15866e130aae46b2cbd17290fae05"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DbManager::setVariables </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method that recovers the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects from the database. It inserts the <a class="el" href="class_variable.html" title="Variable class. ">Variable</a> objects from the "variables" table into the <a class="el" href="class_variable_map.html" title="VariableMap is a singleton containing a QMap with all variables. ">VariableMap</a> instance. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a9bbc0ad3003674b8e5e71783e5067f7f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QSqlDatabase DbManager::db</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>QSqlDatabase of UTComputer. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa419595b8a9649e4c337e6d3bd3f3a0d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_db_manager.html">DbManager</a> * DbManager::instance = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pointer to the unique instance of the <a class="el" href="class_db_manager.html" title="The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer. ">DbManager</a> object. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="dbmanager_8h_source.html">dbmanager.h</a></li>
-<li>dbmanager.cpp</li>
+<li><a class="el" href="dbmanager_8cpp.html">dbmanager.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_db_manager.html">DbManager</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

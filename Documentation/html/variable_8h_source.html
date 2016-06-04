@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -63,15 +71,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('variable_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,61 +108,89 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">variable.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VARIABLE_H</span></div>
+<a href="variable_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef VARIABLE_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define VARIABLE_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;litteral.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;controleur.h&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="litteral_8h.html">litteral.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="controleur_8h.html">controleur.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QMap&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QList&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QTableWidgetItem&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_variable.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_variable.html">Variable</a> : <span class="keyword">public</span> <a class="code" href="class_litteral.html">Litteral</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* value;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    QString id;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_variable.html">Variable</a>(<a class="code" href="class_litteral.html">Litteral</a>* v, QString <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* getValue() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    QString getId() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    QString toString() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> setValue(<a class="code" href="class_litteral.html">Litteral</a>* v);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">bool</span> isVariable(T&amp; a);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_variable_map.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_variable_map.html">VariableMap</a> {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    QMap&lt;QString, Variable*&gt; map;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_variable_map.html">VariableMap</a>* instance;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_variable_map.html">VariableMap</a>(){}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//disabling copy and assignment</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_variable_map.html">VariableMap</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_variable_map.html">VariableMap</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_variable_map.html">VariableMap</a> (<span class="keyword">const</span> <a class="code" href="class_variable_map.html">VariableMap</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_variable_map.html">VariableMap</a>* getInstance();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> libererInstance();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_variable.html">Variable</a>* findVar(QString <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> deleteVar(QString <span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> insertVar(QString <span class="keywordtype">id</span>, <a class="code" href="class_variable.html">Variable</a>* var);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> setVar(QString <span class="keywordtype">id</span>, QString value);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getCount() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    QMap&lt;QString, Variable*&gt;::const_iterator getIteratorBegin() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    QMap&lt;QString, Variable*&gt;::const_iterator getIteratorEnd() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif // VARIABLE_H</span></div>
-<div class="ttc" id="class_variable_map_html"><div class="ttname"><a href="class_variable_map.html">VariableMap</a></div><div class="ttdef"><b>Definition:</b> variable.h:25</div></div>
-<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdef"><b>Definition:</b> litteral.h:9</div></div>
-<div class="ttc" id="class_variable_html"><div class="ttname"><a href="class_variable.html">Variable</a></div><div class="ttdef"><b>Definition:</b> variable.h:10</div></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_variable.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_variable.html">Variable</a> : <span class="keyword">public</span> <a class="code" href="class_litteral.html">Litteral</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_variable.html#a74d35c150ed7a1f0efb345052097b078">   18</a></span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* <a class="code" href="class_variable.html#a74d35c150ed7a1f0efb345052097b078">value</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_variable.html#a027da58eea3adae122889c2033fc634b">   22</a></span>&#160;    QString <a class="code" href="class_variable.html#a027da58eea3adae122889c2033fc634b">id</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_variable.html#a7d2a2b0c49b75aaf10f69ac5671738ff">Variable</a>(<a class="code" href="class_litteral.html">Litteral</a>* v, QString <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* <a class="code" href="class_variable.html#a8fd78c36a2f51a3d448d64316d28580c">getValue</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    QString <a class="code" href="class_variable.html#ad637767fe5e8c13c0aaef8c1cf91eeeb">getId</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QString <a class="code" href="class_variable.html#a5be619e4e7d834663be275b88fa4c5f3">toString</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_variable.html#a614c5283349ec858a057f802b9003cbd">setValue</a>(<a class="code" href="class_litteral.html">Litteral</a>* v);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="variable_8h.html#a13fb5f39333343cd62f9bc6c962f74f0">isVariable</a>(T&amp; a);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_variable_map.html">   64</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_variable_map.html">VariableMap</a> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_variable_map.html#a0b7e9a6f90c8e0035c3bcdd49aca49bc">   69</a></span>&#160;    QMap&lt;QString, Variable*&gt; <a class="code" href="class_variable_map.html#a0b7e9a6f90c8e0035c3bcdd49aca49bc">map</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_variable_map.html#acb76ecc13625eb691f1791ca00b4f1c9">   73</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="class_variable_map.html">VariableMap</a>* <a class="code" href="class_variable_map.html#acb76ecc13625eb691f1791ca00b4f1c9">instance</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_variable_map.html#a11e9f1f27f6817f1a77ea94e4185c6e9">   77</a></span>&#160;    <a class="code" href="class_variable_map.html#a11e9f1f27f6817f1a77ea94e4185c6e9">VariableMap</a>(){}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">//disabling copy and assignment</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span>    <a class="code" href="class_variable_map.html">VariableMap</a>&amp; <a class="code" href="class_variable_map.html#a9650cf0111e3389682913a1c3890da06">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_variable_map.html">VariableMap</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="class_variable_map.html#a11e9f1f27f6817f1a77ea94e4185c6e9">VariableMap</a> (<span class="keyword">const</span> <a class="code" href="class_variable_map.html">VariableMap</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_variable_map.html">VariableMap</a>* <a class="code" href="class_variable_map.html#acc040a4a590cc5409773b5a82e465345">getInstance</a>();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_variable_map.html#a0c40a5fca5c6aef62a045644c749b69c">libererInstance</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="class_variable.html">Variable</a>* <a class="code" href="class_variable_map.html#ac86bcdcff2541e0b5348c62a929289a3">findVar</a>(QString <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_variable_map.html#ac435dbede2dec38476769320a0a7f442">deleteVar</a>(QString <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_variable_map.html#a99d11605a386225423e876e0e8062d0b">insertVar</a>(QString <span class="keywordtype">id</span>, <a class="code" href="class_variable.html">Variable</a>* var);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_variable_map.html#a19c21036d83e549e304d0b7759499500">setVar</a>(QString <span class="keywordtype">id</span>, QString value);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_variable_map.html#aa1051f3b5128bb8c00e54babe54ea7d8">getCount</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    QMap&lt;QString, Variable*&gt;::const_iterator <a class="code" href="class_variable_map.html#aebac451964043ed552db903ee8bc36da">getIteratorBegin</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    QMap&lt;QString, Variable*&gt;::const_iterator <a class="code" href="class_variable_map.html#a07ecf6d6d7b5176fc66fe561efdfb3e7">getIteratorEnd</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;};</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif // VARIABLE_H</span></div>
+<div class="ttc" id="class_variable_map_html_a0b7e9a6f90c8e0035c3bcdd49aca49bc"><div class="ttname"><a href="class_variable_map.html#a0b7e9a6f90c8e0035c3bcdd49aca49bc">VariableMap::map</a></div><div class="ttdeci">QMap&lt; QString, Variable * &gt; map</div><div class="ttdoc">A QMap where all variables are stored. They are identified by their id. </div><div class="ttdef"><b>Definition:</b> variable.h:69</div></div>
+<div class="ttc" id="controleur_8h_html"><div class="ttname"><a href="controleur_8h.html">controleur.h</a></div></div>
+<div class="ttc" id="class_variable_map_html"><div class="ttname"><a href="class_variable_map.html">VariableMap</a></div><div class="ttdoc">VariableMap is a singleton containing a QMap with all variables. </div><div class="ttdef"><b>Definition:</b> variable.h:64</div></div>
+<div class="ttc" id="class_variable_map_html_a9650cf0111e3389682913a1c3890da06"><div class="ttname"><a href="class_variable_map.html#a9650cf0111e3389682913a1c3890da06">VariableMap::operator=</a></div><div class="ttdeci">VariableMap &amp; operator=(const VariableMap &amp;)=delete</div><div class="ttdoc">Disables the assignment possibility between VariableMap objects. </div></div>
+<div class="ttc" id="class_variable_map_html_a0c40a5fca5c6aef62a045644c749b69c"><div class="ttname"><a href="class_variable_map.html#a0c40a5fca5c6aef62a045644c749b69c">VariableMap::libererInstance</a></div><div class="ttdeci">static void libererInstance()</div><div class="ttdoc">Deletes the VariableMap instance. </div><div class="ttdef"><b>Definition:</b> variable.cpp:55</div></div>
+<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdoc">The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. </div><div class="ttdef"><b>Definition:</b> litteral.h:11</div></div>
+<div class="ttc" id="variable_8h_html_a13fb5f39333343cd62f9bc6c962f74f0"><div class="ttname"><a href="variable_8h.html#a13fb5f39333343cd62f9bc6c962f74f0">isVariable</a></div><div class="ttdeci">bool isVariable(T &amp;a)</div><div class="ttdoc">Tests whether an object is a Variable. </div><div class="ttdef"><b>Definition:</b> variable.cpp:40</div></div>
+<div class="ttc" id="class_variable_html_a8fd78c36a2f51a3d448d64316d28580c"><div class="ttname"><a href="class_variable.html#a8fd78c36a2f51a3d448d64316d28580c">Variable::getValue</a></div><div class="ttdeci">Litteral * getValue() const </div><div class="ttdoc">Value getter. </div><div class="ttdef"><b>Definition:</b> variable.cpp:23</div></div>
+<div class="ttc" id="class_variable_map_html_a99d11605a386225423e876e0e8062d0b"><div class="ttname"><a href="class_variable_map.html#a99d11605a386225423e876e0e8062d0b">VariableMap::insertVar</a></div><div class="ttdeci">void insertVar(QString id, Variable *var)</div><div class="ttdoc">Inserts a new Variable in the QMap. </div><div class="ttdef"><b>Definition:</b> variable.cpp:71</div></div>
+<div class="ttc" id="class_variable_map_html_acc040a4a590cc5409773b5a82e465345"><div class="ttname"><a href="class_variable_map.html#acc040a4a590cc5409773b5a82e465345">VariableMap::getInstance</a></div><div class="ttdeci">static VariableMap * getInstance()</div><div class="ttdoc">Singleton getter. </div><div class="ttdef"><b>Definition:</b> variable.cpp:49</div></div>
+<div class="ttc" id="class_variable_html_a614c5283349ec858a057f802b9003cbd"><div class="ttname"><a href="class_variable.html#a614c5283349ec858a057f802b9003cbd">Variable::setValue</a></div><div class="ttdeci">void setValue(Litteral *v)</div><div class="ttdoc">Value setter. </div><div class="ttdef"><b>Definition:</b> variable.cpp:35</div></div>
+<div class="ttc" id="class_variable_map_html_ac86bcdcff2541e0b5348c62a929289a3"><div class="ttname"><a href="class_variable_map.html#ac86bcdcff2541e0b5348c62a929289a3">VariableMap::findVar</a></div><div class="ttdeci">Variable * findVar(QString id) const </div><div class="ttdoc">Checks whether a Variable with the specified id exisits. </div><div class="ttdef"><b>Definition:</b> variable.cpp:60</div></div>
+<div class="ttc" id="class_variable_html_a027da58eea3adae122889c2033fc634b"><div class="ttname"><a href="class_variable.html#a027da58eea3adae122889c2033fc634b">Variable::id</a></div><div class="ttdeci">QString id</div><div class="ttdoc">Unique name used to identify the variable. </div><div class="ttdef"><b>Definition:</b> variable.h:22</div></div>
+<div class="ttc" id="class_variable_map_html_aebac451964043ed552db903ee8bc36da"><div class="ttname"><a href="class_variable_map.html#aebac451964043ed552db903ee8bc36da">VariableMap::getIteratorBegin</a></div><div class="ttdeci">QMap&lt; QString, Variable * &gt;::const_iterator getIteratorBegin() const </div><div class="ttdoc">Returns a const iterator pointing at the beginning of the QMap. </div><div class="ttdef"><b>Definition:</b> variable.cpp:83</div></div>
+<div class="ttc" id="class_variable_html_ad637767fe5e8c13c0aaef8c1cf91eeeb"><div class="ttname"><a href="class_variable.html#ad637767fe5e8c13c0aaef8c1cf91eeeb">Variable::getId</a></div><div class="ttdeci">QString getId() const </div><div class="ttdoc">Id getter. </div><div class="ttdef"><b>Definition:</b> variable.cpp:27</div></div>
+<div class="ttc" id="class_variable_map_html_a19c21036d83e549e304d0b7759499500"><div class="ttname"><a href="class_variable_map.html#a19c21036d83e549e304d0b7759499500">VariableMap::setVar</a></div><div class="ttdeci">void setVar(QString id, QString value)</div><div class="ttdoc">Creates a corresponding Litteral object using Litteral Factory then sets the value of the Variable id...</div><div class="ttdef"><b>Definition:</b> variable.cpp:75</div></div>
+<div class="ttc" id="class_variable_map_html_ac435dbede2dec38476769320a0a7f442"><div class="ttname"><a href="class_variable_map.html#ac435dbede2dec38476769320a0a7f442">VariableMap::deleteVar</a></div><div class="ttdeci">void deleteVar(QString id)</div><div class="ttdoc">Deletes a Variable with the specified id. </div><div class="ttdef"><b>Definition:</b> variable.cpp:67</div></div>
+<div class="ttc" id="class_variable_html_a5be619e4e7d834663be275b88fa4c5f3"><div class="ttname"><a href="class_variable.html#a5be619e4e7d834663be275b88fa4c5f3">Variable::toString</a></div><div class="ttdeci">QString toString() const </div><div class="ttdoc">Returns the Variable&#39;s value in a QString format. </div><div class="ttdef"><b>Definition:</b> variable.cpp:31</div></div>
+<div class="ttc" id="class_variable_map_html_a07ecf6d6d7b5176fc66fe561efdfb3e7"><div class="ttname"><a href="class_variable_map.html#a07ecf6d6d7b5176fc66fe561efdfb3e7">VariableMap::getIteratorEnd</a></div><div class="ttdeci">QMap&lt; QString, Variable * &gt;::const_iterator getIteratorEnd() const </div><div class="ttdoc">Returns a const iterator pointing at the end of the QMap. </div><div class="ttdef"><b>Definition:</b> variable.cpp:88</div></div>
+<div class="ttc" id="litteral_8h_html"><div class="ttname"><a href="litteral_8h.html">litteral.h</a></div></div>
+<div class="ttc" id="class_variable_html_a74d35c150ed7a1f0efb345052097b078"><div class="ttname"><a href="class_variable.html#a74d35c150ed7a1f0efb345052097b078">Variable::value</a></div><div class="ttdeci">Litteral * value</div><div class="ttdoc">The variable&#39;s value is another Litteral. </div><div class="ttdef"><b>Definition:</b> variable.h:18</div></div>
+<div class="ttc" id="class_variable_html_a7d2a2b0c49b75aaf10f69ac5671738ff"><div class="ttname"><a href="class_variable.html#a7d2a2b0c49b75aaf10f69ac5671738ff">Variable::Variable</a></div><div class="ttdeci">Variable(Litteral *v, QString id)</div><div class="ttdoc">Checks whether the variable&#39;s name is correct and adds the variable to the VariableMap. </div><div class="ttdef"><b>Definition:</b> variable.cpp:5</div></div>
+<div class="ttc" id="class_variable_map_html_a11e9f1f27f6817f1a77ea94e4185c6e9"><div class="ttname"><a href="class_variable_map.html#a11e9f1f27f6817f1a77ea94e4185c6e9">VariableMap::VariableMap</a></div><div class="ttdeci">VariableMap()</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> variable.h:77</div></div>
+<div class="ttc" id="class_variable_map_html_acb76ecc13625eb691f1791ca00b4f1c9"><div class="ttname"><a href="class_variable_map.html#acb76ecc13625eb691f1791ca00b4f1c9">VariableMap::instance</a></div><div class="ttdeci">static VariableMap * instance</div><div class="ttdoc">VariableMap instance used for the Singleton design pattern. </div><div class="ttdef"><b>Definition:</b> variable.h:73</div></div>
+<div class="ttc" id="class_variable_html"><div class="ttname"><a href="class_variable.html">Variable</a></div><div class="ttdoc">Variable class. </div><div class="ttdef"><b>Definition:</b> variable.h:13</div></div>
+<div class="ttc" id="class_variable_map_html_aa1051f3b5128bb8c00e54babe54ea7d8"><div class="ttname"><a href="class_variable_map.html#aa1051f3b5128bb8c00e54babe54ea7d8">VariableMap::getCount</a></div><div class="ttdeci">unsigned int getCount() const </div><div class="ttdoc">Returns the count of existing variables. </div><div class="ttdef"><b>Definition:</b> variable.cpp:79</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="variable_8h.html">variable.h</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

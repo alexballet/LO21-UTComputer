@@ -8,6 +8,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
@@ -40,6 +47,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -63,15 +71,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('pile_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -85,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">pile.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PILE_H</span></div>
+<a href="pile_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PILE_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PILE_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
@@ -93,60 +116,85 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QStack&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QtCore/qmath.h&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;typeinfo&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;memento.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;litteral.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;atome.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;controleur.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="memento_8h.html">memento.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="litteral_8h.html">litteral.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="atome_8h.html">atome.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="controleur_8h.html">controleur.h</a>&quot;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_pile.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_pile.html">Pile</a> : <span class="keyword">public</span> QObject {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_pile.html">Pile</a>* instance;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_pile.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_pile.html">Pile</a> : <span class="keyword">public</span> QObject {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QStack&lt;Litteral*&gt; stack;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    QString message;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> maxAffiche;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_pile.html">Pile</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">//disabling copy and assignment</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_pile.html">Pile</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="class_pile.html">Pile</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_pile.html">Pile</a> (<span class="keyword">const</span> <a class="code" href="class_pile.html">Pile</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_pile.html">Pile</a>* getInstance();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> libererInstance();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QString getMessage() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> setMaxAffiche(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> setMessage(<span class="keyword">const</span> QString&amp; msg);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> getMaxAffiche() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> push(<a class="code" href="class_litteral.html">Litteral</a>* lit);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">int</span> getLength() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span> isEmpty();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* pop();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* top() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    QStack&lt;Litteral*&gt;::const_iterator getIteratorBegin() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    QStack&lt;Litteral*&gt;::const_iterator getIteratorEnd() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">//Memento</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="class_memento.html">Memento</a>* createMemento();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> reinstateMemento(<a class="code" href="class_memento.html">Memento</a>* mem);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;signals:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> modificationEtat();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif // PILE_H</span></div>
-<div class="ttc" id="class_pile_html"><div class="ttname"><a href="class_pile.html">Pile</a></div><div class="ttdef"><b>Definition:</b> pile.h:14</div></div>
-<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdef"><b>Definition:</b> litteral.h:9</div></div>
-<div class="ttc" id="class_memento_html"><div class="ttname"><a href="class_memento.html">Memento</a></div><div class="ttdef"><b>Definition:</b> memento.h:6</div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_pile.html#a842e7e9976e544ba1ba3336da2f80d9b">   24</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="class_pile.html">Pile</a>* <a class="code" href="class_pile.html#a842e7e9976e544ba1ba3336da2f80d9b">instance</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_pile.html#a3877b676b1639c5f84860dbdd85cf094">   28</a></span>&#160;    QStack&lt;Litteral*&gt; <a class="code" href="class_pile.html#a3877b676b1639c5f84860dbdd85cf094">stack</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_pile.html#a6a5dd4f3899cf54b3379a27c273b538e">   32</a></span>&#160;    QString <a class="code" href="class_pile.html#a6a5dd4f3899cf54b3379a27c273b538e">message</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_pile.html#a077ae8a4b32ce89db548768ded870ce3">   36</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_pile.html#a077ae8a4b32ce89db548768ded870ce3">maxAffiche</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_pile.html#ab44e927107b28f5f3ac7697d10e0a739">Pile</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//disabling copy and assignment</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span>    <a class="code" href="class_pile.html">Pile</a>&amp; <a class="code" href="class_pile.html#aa147d35a0f223fc5b1daad0b5659e96b">operator=</a>(<span class="keyword">const</span> <a class="code" href="class_pile.html">Pile</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_pile.html#ab44e927107b28f5f3ac7697d10e0a739">Pile</a> (<span class="keyword">const</span> <a class="code" href="class_pile.html">Pile</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_pile.html">Pile</a>* <a class="code" href="class_pile.html#abd0c2d4d26d9aaf1ee6e0b86149dcfe3">getInstance</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_pile.html#ac3868cf82736d86edfe47034393bbd76">libererInstance</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    QString <a class="code" href="class_pile.html#ab04b223738a2fa12b627b138a9c102ed">getMessage</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_pile.html#a606ebb5aac49ba282a34c9787965a509">setMessage</a>(<span class="keyword">const</span> QString&amp; msg);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_pile.html#aa74a5dbcbd71e97de482498f0de88c3f">getMaxAffiche</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_pile.html#a1051f4c60b5d8f37038f5ca0735165a7">setMaxAffiche</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_pile.html#aa52e6887c08408ea9708863ec1e269f4">getLength</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_pile.html#ac8dedfaa7bd03de18c6c707afb55b83d">isEmpty</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_pile.html#aac9c31a5029044d51c9d9ed481e0ab53">push</a>(<a class="code" href="class_litteral.html">Litteral</a>* lit);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* <a class="code" href="class_pile.html#ac1426b97b771b85b8758be83c70c845c">pop</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="class_litteral.html">Litteral</a>* <a class="code" href="class_pile.html#aa11624b7ca832d36079b9e30ee59037a">top</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    QStack&lt;Litteral*&gt;::const_iterator <a class="code" href="class_pile.html#a1fbe64c87add3e77603ef6ec6298e131">getIteratorBegin</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    QStack&lt;Litteral*&gt;::const_iterator <a class="code" href="class_pile.html#a2cc0321da936d613abe487c8e107b1f8">getIteratorEnd</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="comment">//Memento</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"></span>    <a class="code" href="class_memento.html">Memento</a>* <a class="code" href="class_pile.html#a723c09b1c8f22378e43c27988f824a03">createMemento</a>();</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_pile.html#a5db1fa6a34f113457e28525466e789b0">reinstateMemento</a>(<a class="code" href="class_memento.html">Memento</a>* mem);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;signals:</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_pile.html#ac55a0afb626baffd1019567cbaa7f4b2">modificationEtat</a>();</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif // PILE_H</span></div>
+<div class="ttc" id="class_pile_html_ac1426b97b771b85b8758be83c70c845c"><div class="ttname"><a href="class_pile.html#ac1426b97b771b85b8758be83c70c845c">Pile::pop</a></div><div class="ttdeci">Litteral * pop()</div><div class="ttdoc">Pops a Litteral object pointer out of the stack. </div><div class="ttdef"><b>Definition:</b> pile.cpp:43</div></div>
+<div class="ttc" id="class_pile_html_ac55a0afb626baffd1019567cbaa7f4b2"><div class="ttname"><a href="class_pile.html#ac55a0afb626baffd1019567cbaa7f4b2">Pile::modificationEtat</a></div><div class="ttdeci">void modificationEtat()</div><div class="ttdoc">Signal sent to QComputer to refresh the tableWidget every time the Pile object is modified...</div></div>
+<div class="ttc" id="controleur_8h_html"><div class="ttname"><a href="controleur_8h.html">controleur.h</a></div></div>
+<div class="ttc" id="class_pile_html_a6a5dd4f3899cf54b3379a27c273b538e"><div class="ttname"><a href="class_pile.html#a6a5dd4f3899cf54b3379a27c273b538e">Pile::message</a></div><div class="ttdeci">QString message</div><div class="ttdoc">Message displayed to the user. </div><div class="ttdef"><b>Definition:</b> pile.h:32</div></div>
+<div class="ttc" id="class_pile_html_a2cc0321da936d613abe487c8e107b1f8"><div class="ttname"><a href="class_pile.html#a2cc0321da936d613abe487c8e107b1f8">Pile::getIteratorEnd</a></div><div class="ttdeci">QStack&lt; Litteral * &gt;::const_iterator getIteratorEnd() const </div><div class="ttdoc">Returns a const iterator pointing at the end of the stack. </div><div class="ttdef"><b>Definition:</b> pile.cpp:70</div></div>
+<div class="ttc" id="class_pile_html"><div class="ttname"><a href="class_pile.html">Pile</a></div><div class="ttdoc">Singleton containing the stack with all Litteral objects pointers. </div><div class="ttdef"><b>Definition:</b> pile.h:17</div></div>
+<div class="ttc" id="memento_8h_html"><div class="ttname"><a href="memento_8h.html">memento.h</a></div></div>
+<div class="ttc" id="class_litteral_html"><div class="ttname"><a href="class_litteral.html">Litteral</a></div><div class="ttdoc">The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method. </div><div class="ttdef"><b>Definition:</b> litteral.h:11</div></div>
+<div class="ttc" id="class_pile_html_a077ae8a4b32ce89db548768ded870ce3"><div class="ttname"><a href="class_pile.html#a077ae8a4b32ce89db548768ded870ce3">Pile::maxAffiche</a></div><div class="ttdeci">unsigned int maxAffiche</div><div class="ttdoc">Maximum number of elements displayed to the user. </div><div class="ttdef"><b>Definition:</b> pile.h:36</div></div>
+<div class="ttc" id="class_pile_html_abd0c2d4d26d9aaf1ee6e0b86149dcfe3"><div class="ttname"><a href="class_pile.html#abd0c2d4d26d9aaf1ee6e0b86149dcfe3">Pile::getInstance</a></div><div class="ttdeci">static Pile * getInstance()</div><div class="ttdoc">Singleton getter. </div><div class="ttdef"><b>Definition:</b> pile.cpp:10</div></div>
+<div class="ttc" id="class_memento_html"><div class="ttname"><a href="class_memento.html">Memento</a></div><div class="ttdoc">The Memento class stores states of the Pile instance, each time the Pile instance is modified...</div><div class="ttdef"><b>Definition:</b> memento.h:9</div></div>
+<div class="ttc" id="atome_8h_html"><div class="ttname"><a href="atome_8h.html">atome.h</a></div></div>
+<div class="ttc" id="class_pile_html_a1051f4c60b5d8f37038f5ca0735165a7"><div class="ttname"><a href="class_pile.html#a1051f4c60b5d8f37038f5ca0735165a7">Pile::setMaxAffiche</a></div><div class="ttdeci">void setMaxAffiche(unsigned int)</div><div class="ttdoc">maxAffiche setter. </div><div class="ttdef"><b>Definition:</b> pile.cpp:29</div></div>
+<div class="ttc" id="class_pile_html_a723c09b1c8f22378e43c27988f824a03"><div class="ttname"><a href="class_pile.html#a723c09b1c8f22378e43c27988f824a03">Pile::createMemento</a></div><div class="ttdeci">Memento * createMemento()</div><div class="ttdoc">Creates a new Memento object with the current state of the stack. </div><div class="ttdef"><b>Definition:</b> pile.cpp:75</div></div>
+<div class="ttc" id="litteral_8h_html"><div class="ttname"><a href="litteral_8h.html">litteral.h</a></div></div>
+<div class="ttc" id="class_pile_html_ab44e927107b28f5f3ac7697d10e0a739"><div class="ttname"><a href="class_pile.html#ab44e927107b28f5f3ac7697d10e0a739">Pile::Pile</a></div><div class="ttdeci">Pile()</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> pile.cpp:6</div></div>
+<div class="ttc" id="class_pile_html_aa11624b7ca832d36079b9e30ee59037a"><div class="ttname"><a href="class_pile.html#aa11624b7ca832d36079b9e30ee59037a">Pile::top</a></div><div class="ttdeci">Litteral * top() const </div><div class="ttdoc">Peeks at the top item of the stack. </div><div class="ttdef"><b>Definition:</b> pile.cpp:50</div></div>
+<div class="ttc" id="class_pile_html_aa74a5dbcbd71e97de482498f0de88c3f"><div class="ttname"><a href="class_pile.html#aa74a5dbcbd71e97de482498f0de88c3f">Pile::getMaxAffiche</a></div><div class="ttdeci">unsigned int getMaxAffiche() const </div><div class="ttdoc">maxAffiche getter. </div><div class="ttdef"><b>Definition:</b> pile.cpp:33</div></div>
+<div class="ttc" id="class_pile_html_aac9c31a5029044d51c9d9ed481e0ab53"><div class="ttname"><a href="class_pile.html#aac9c31a5029044d51c9d9ed481e0ab53">Pile::push</a></div><div class="ttdeci">void push(Litteral *lit)</div><div class="ttdoc">Pushes a Litteral object pointer into the stack. </div><div class="ttdef"><b>Definition:</b> pile.cpp:37</div></div>
+<div class="ttc" id="class_pile_html_ac8dedfaa7bd03de18c6c707afb55b83d"><div class="ttname"><a href="class_pile.html#ac8dedfaa7bd03de18c6c707afb55b83d">Pile::isEmpty</a></div><div class="ttdeci">bool isEmpty()</div><div class="ttdef"><b>Definition:</b> pile.cpp:61</div></div>
+<div class="ttc" id="class_pile_html_a842e7e9976e544ba1ba3336da2f80d9b"><div class="ttname"><a href="class_pile.html#a842e7e9976e544ba1ba3336da2f80d9b">Pile::instance</a></div><div class="ttdeci">static Pile * instance</div><div class="ttdoc">Pile instance used for the Singleton design pattern. </div><div class="ttdef"><b>Definition:</b> pile.h:24</div></div>
+<div class="ttc" id="class_pile_html_ac3868cf82736d86edfe47034393bbd76"><div class="ttname"><a href="class_pile.html#ac3868cf82736d86edfe47034393bbd76">Pile::libererInstance</a></div><div class="ttdeci">static void libererInstance()</div><div class="ttdoc">Deletes the Pile instance. </div><div class="ttdef"><b>Definition:</b> pile.cpp:16</div></div>
+<div class="ttc" id="class_pile_html_ab04b223738a2fa12b627b138a9c102ed"><div class="ttname"><a href="class_pile.html#ab04b223738a2fa12b627b138a9c102ed">Pile::getMessage</a></div><div class="ttdeci">QString getMessage() const </div><div class="ttdoc">Message getter. </div><div class="ttdef"><b>Definition:</b> pile.cpp:21</div></div>
+<div class="ttc" id="class_pile_html_aa52e6887c08408ea9708863ec1e269f4"><div class="ttname"><a href="class_pile.html#aa52e6887c08408ea9708863ec1e269f4">Pile::getLength</a></div><div class="ttdeci">int getLength() const </div><div class="ttdef"><b>Definition:</b> pile.cpp:57</div></div>
+<div class="ttc" id="class_pile_html_a5db1fa6a34f113457e28525466e789b0"><div class="ttname"><a href="class_pile.html#a5db1fa6a34f113457e28525466e789b0">Pile::reinstateMemento</a></div><div class="ttdeci">void reinstateMemento(Memento *mem)</div><div class="ttdoc">Gets the stack state from a Memento object. </div><div class="ttdef"><b>Definition:</b> pile.cpp:79</div></div>
+<div class="ttc" id="class_pile_html_a1fbe64c87add3e77603ef6ec6298e131"><div class="ttname"><a href="class_pile.html#a1fbe64c87add3e77603ef6ec6298e131">Pile::getIteratorBegin</a></div><div class="ttdeci">QStack&lt; Litteral * &gt;::const_iterator getIteratorBegin() const </div><div class="ttdoc">Returns a const iterator pointing at the beginning of the stack. </div><div class="ttdef"><b>Definition:</b> pile.cpp:65</div></div>
+<div class="ttc" id="class_pile_html_a606ebb5aac49ba282a34c9787965a509"><div class="ttname"><a href="class_pile.html#a606ebb5aac49ba282a34c9787965a509">Pile::setMessage</a></div><div class="ttdeci">void setMessage(const QString &amp;msg)</div><div class="ttdoc">Message setter. </div><div class="ttdef"><b>Definition:</b> pile.cpp:25</div></div>
+<div class="ttc" id="class_pile_html_aa147d35a0f223fc5b1daad0b5659e96b"><div class="ttname"><a href="class_pile.html#aa147d35a0f223fc5b1daad0b5659e96b">Pile::operator=</a></div><div class="ttdeci">Pile &amp; operator=(const Pile &amp;)=delete</div><div class="ttdoc">Disables the assignment possibility between Pile objects. </div></div>
+<div class="ttc" id="class_pile_html_a3877b676b1639c5f84860dbdd85cf094"><div class="ttname"><a href="class_pile.html#a3877b676b1639c5f84860dbdd85cf094">Pile::stack</a></div><div class="ttdeci">QStack&lt; Litteral * &gt; stack</div><div class="ttdoc">Stack containing all Litteral object pointers. </div><div class="ttdef"><b>Definition:</b> pile.h:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 1 2016 23:08:23 for LO21-UTComputer by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="pile_8h.html">pile.h</a></li>
+    <li class="footer">Generated on Sat Jun 4 2016 15:29:51 for LO21-UTComputer by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
 </body>
 </html>

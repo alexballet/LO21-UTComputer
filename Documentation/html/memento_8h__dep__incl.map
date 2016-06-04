@@ -1,0 +1,27 @@
+<map id="memento.h" name="memento.h">
+<area shape="rect" id="node2" href="$controleur_8h.html" title="controleur.h" alt="" coords="756,80,847,107"/>
+<area shape="rect" id="node6" href="$pile_8h.html" title="pile.h" alt="" coords="1149,304,1203,331"/>
+<area shape="rect" id="node26" href="$memento_8cpp.html" title="memento.cpp" alt="" coords="1276,80,1377,107"/>
+<area shape="rect" id="node3" href="$variable_8h.html" title="variable.h" alt="" coords="762,155,841,181"/>
+<area shape="rect" id="node10" href="$qcomputer_8h.html" title="qcomputer.h" alt="" coords="847,379,942,405"/>
+<area shape="rect" id="node15" href="$variable_8cpp.html" title="variable.cpp" alt="" coords="754,229,846,256"/>
+<area shape="rect" id="node16" href="$programme_8h.html" title="programme.h" alt="" coords="293,155,392,181"/>
+<area shape="rect" id="node21" href="$programme_8cpp.html" title="programme.cpp" alt="" coords="380,229,492,256"/>
+<area shape="rect" id="node22" href="$expression_8h.html" title="expression.h" alt="" coords="591,155,687,181"/>
+<area shape="rect" id="node24" href="$controleur_8cpp.html" title="controleur.cpp" alt="" coords="865,155,969,181"/>
+<area shape="rect" id="node25" href="$litteral_8cpp.html" title="litteral.cpp" alt="" coords="993,155,1076,181"/>
+<area shape="rect" id="node4" href="$atome_8h.html" title="atome.h" alt="" coords="1057,229,1127,256"/>
+<area shape="rect" id="node5" href="$atome_8cpp.html" title="atome.cpp" alt="" coords="740,304,823,331"/>
+<area shape="rect" id="node13" href="$variableeditor_8h.html" title="variableeditor.h" alt="" coords="922,229,1033,256"/>
+<area shape="rect" id="node7" href="$dbmanager_8h.html" title="dbmanager.h" alt="" coords="1145,379,1242,405"/>
+<area shape="rect" id="node12" href="$pile_8cpp.html" title="pile.cpp" alt="" coords="1053,379,1120,405"/>
+<area shape="rect" id="node8" href="$dbmanager_8cpp.html" title="dbmanager.cpp" alt="" coords="1138,453,1249,480"/>
+<area shape="rect" id="node9" href="$qcomputer_8cpp.html" title="qcomputer.cpp" alt="" coords="990,453,1098,480"/>
+<area shape="rect" id="node11" href="$main_8cpp.html" title="main.cpp" alt="" coords="857,453,932,480"/>
+<area shape="rect" id="node14" href="$variableeditor_8cpp.html" title="variableeditor.cpp" alt="" coords="933,304,1057,331"/>
+<area shape="rect" id="node17" href="$programeditorwindow_8h.html" title="programeditorwindow.h" alt="" coords="13,229,169,256"/>
+<area shape="rect" id="node19" href="$programeditor_8h.html" title="programeditor.h" alt="" coords="193,229,305,256"/>
+<area shape="rect" id="node18" href="$programeditorwindow_8cpp.html" title="programeditorwindow.cpp" alt="" coords="5,304,176,331"/>
+<area shape="rect" id="node20" href="$programeditor_8cpp.html" title="programeditor.cpp" alt="" coords="287,304,414,331"/>
+<area shape="rect" id="node23" href="$expression_8cpp.html" title="expression.cpp" alt="" coords="567,229,678,256"/>
+</map>
