@@ -629,7 +629,9 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp){
                 prog->setInstructions(p2->getInstructions());
             }
             else{
-                prog = new Programme(y, id);
+                p2->setId(id);
+                ProgrammeMap::getInstance()->insertProg(id, p2);
+                prog=p2;
             }
             pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
         }

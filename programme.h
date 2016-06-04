@@ -21,6 +21,7 @@ public:
     Programme(Litteral* lit, const QString id);
     QString getId() const;
     void setInstructions(QStringList l);
+    void setId(const QString& s);
     QStringList getInstructions() const;
     QString toString() const;
 };

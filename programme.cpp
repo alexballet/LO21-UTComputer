@@ -71,6 +71,10 @@ void Programme::setInstructions(QStringList l){
     instructions = l;
 }
 
+void Programme::setId(const QString& s){
+    id=s;
+}
+
 QString Programme::toString() const {
     QString str;
     str.append('[');
