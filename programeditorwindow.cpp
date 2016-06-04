@@ -13,6 +13,9 @@ ProgramEditorWindow::ProgramEditorWindow(QObject *sender, QWidget *parent) :
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
     Programme* prog = progmap->findProg(progId);
     ui->progEdit->setText(prog->toString());
+
+    //setting the title
+    this->setWindowTitle("Editing " + progId);
 }
 
 ProgramEditorWindow::~ProgramEditorWindow()
@@ -23,7 +26,7 @@ ProgramEditorWindow::~ProgramEditorWindow()
 void ProgramEditorWindow::on_ProgramEditorWindow_accepted()
 {
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    QString temp = ui->progEdit->toPlainText().replace('\n', ' ');
+    QString temp = ui->progEdit->toPlainText().replace('\n', ' ').replace('\t', ' '); //replacing newlines and tabs by spaces
     if(temp!=""){
         while(temp.at(0)==' ')
             temp.remove(0,1);
