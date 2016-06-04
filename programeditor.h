@@ -13,9 +13,14 @@ class ProgramEditor : public QDialog
     Q_OBJECT
 
 public:
+    /*!
+     * \brief ProgramEditor constructor, sets up the ui.
+     */
     explicit ProgramEditor(QWidget *parent = 0);
+    /*!
+     * \brief ProgramEditor destructor, deletes the ui.
+    */
     ~ProgramEditor();
-
 private:
     /*!
      * \brief ui for Qt Designer
