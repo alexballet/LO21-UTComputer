@@ -90,6 +90,10 @@ private:
      * \brief Default constructor
      */
     ProgrammeMap(){}
+    /*!
+     * \brief Destructor
+     */
+    ~ProgrammeMap();
 
     //disabling copy and assignment
     /*!

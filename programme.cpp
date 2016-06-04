@@ -90,6 +90,10 @@ void ProgrammeMap::libererInstance() {
         delete instance;
 }
 
+ProgrammeMap::~ProgrammeMap(){
+    libererInstance();
+}
+
 Programme* ProgrammeMap::findProg(QString id) const {
     if (map.contains(id)){
         return map.value(id);

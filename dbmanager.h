@@ -27,7 +27,10 @@ private:
      * The "options" table has 3 columns : id, option (the name of the option) and valeur (the value of the option). E.g : 4 | Pile | 5
      */
     DbManager();
-
+    /*!
+      * \brief Destructor
+      */
+    ~DbManager();
     /*!
      * \brief Disabling the assignment possibility between DbManager objects.
      */
@@ -42,6 +45,10 @@ public:
      * \return Pointer to the DbManager singleton. If the singleton is not instanciated yet, it returns a new DbManager. Otherwise, it returns the DbManager instance.
      */
     static DbManager* getInstance();
+    /*!
+     * \brief Deletes the DbManager instance.
+     */
+    static void libererInstance();
     /*!
      * \brief Method that saves the Litteral objects pushed into the Pile instance.
      * It clears the "pile" table and copies the Litteral objects from the Pile instance into the "pile" table.

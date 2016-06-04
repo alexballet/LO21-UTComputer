@@ -31,6 +31,15 @@ DbManager* DbManager::getInstance() {
     return instance;
 }
 
+void DbManager::libererInstance() {
+    if (instance)
+        delete instance;
+}
+
+DbManager::~DbManager(){
+    libererInstance();
+}
+
 void DbManager::savePile() {
 
     QSqlQuery query(db);

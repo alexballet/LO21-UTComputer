@@ -747,6 +747,15 @@ Controleur* Controleur::getInstance() {
     return instance;
 }
 
+void Controleur::libererInstance() {
+    if (instance)
+        delete instance;
+}
+
+Controleur::~Controleur(){
+    libererInstance();
+}
+
 bool isOperatorNum(const QString& a){
     return opsNum.contains(a);
 }

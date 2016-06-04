@@ -75,6 +75,10 @@ private:
      * \brief Default constructor
      */
     VariableMap(){}
+    /*!
+     * \brief Destructor
+     */
+    ~VariableMap();
     //disabling copy and assignment
     /*!
      * \brief Disables the assignment possibility between VariableMap objects.

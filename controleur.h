@@ -34,6 +34,10 @@ private:
      */
     Controleur() {}
     /*!
+     * \brief Private Controleur destructor to forbid destruction by any other way than using the libererInstance() method.
+     */
+    ~Controleur();
+    /*!
      * \brief Vector of pointers to the Memento objects created.
      */
     static QVector<Memento*> mementoList;
@@ -56,6 +60,10 @@ public:
      * \return Pointer to the Controleur singleton. If the singleton is not instanciated yet, it returns a new Controleur. Otherwise, it returns the Controleur instance.
      */
     static Controleur* getInstance();
+    /*!
+     * \brief Deletes the Controleur instance.
+     */
+    static void libererInstance();
     /*!
      * \brief Method that parses a QString to isolate the expressions to form Litteral objects or execute operators.
      * If it's a Programme or an Expression, it creates the associated Litteral and pushes it in the Pile.

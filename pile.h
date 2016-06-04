@@ -38,6 +38,10 @@ private:
      * \brief Default constructor.
      */
     Pile();
+    /*!
+     * \brief Destructor.
+     */
+    ~Pile();
     //disabling copy and assignment
     /*!
      * \brief Disables the assignment possibility between Pile objects.

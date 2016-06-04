@@ -57,6 +57,10 @@ void VariableMap::libererInstance() {
         delete instance;
 }
 
+VariableMap::~VariableMap(){
+    libererInstance();
+}
+
 Variable* VariableMap::findVar(QString id) const {
     if (map.contains(id)){
         return map.value(id);

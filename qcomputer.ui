@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>QComputer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/calculette_icon_top_Zrm_icon.ico</normaloff>:/calculette_icon_top_Zrm_icon.ico</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <widget class="QWidget" name="widget" native="true">
@@ -937,6 +941,8 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
