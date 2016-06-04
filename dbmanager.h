@@ -9,7 +9,7 @@
  * \brief The DbManager class manages the SQLite database that stores the context (variables, programs and settings) of UTComputer.
  */
 class DbManager {
-private:
+  private:
     /*!
      * \brief Pointer to the unique instance of the DbManager object.
      */
@@ -39,7 +39,7 @@ private:
      * \brief Disabling the copy constructor of the DbManager class.
      */
     DbManager (const DbManager&) = delete;
-public:
+  public:
     /*!
      * \brief Method to access the DbManager singleton.
      * \return Pointer to the DbManager singleton. If the singleton is not instanciated yet, it returns a new DbManager. Otherwise, it returns the DbManager instance.

@@ -8,35 +8,35 @@
 
 ProgramEditor::ProgramEditor(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ProgramEditor)
-{
+    ui(new Ui::ProgramEditor) {
     ui->setupUi(this);
     refreshTab();
     connect(ui->newProgBtn, SIGNAL(clicked()), this, SLOT(newProgramSlot()));
 }
 
-ProgramEditor::~ProgramEditor()
-{
+ProgramEditor::~ProgramEditor() {
     delete ui;
 }
 
 void ProgramEditor::newProgramSlot() {
     const QString id = ui->lineEditProg->text();
+
     if (id.isEmpty()) {
         QMessageBox::critical(this, tr("Program Editor"),
-                                       tr("Remplissez le nom!"),
-                                       QMessageBox::Ok);
+                              tr("Remplissez le nom!"),
+                              QMessageBox::Ok);
         return;
     }
+
     try {
         new Programme(QStringList(), id.toUpper());
-    }
-    catch (ComputerException e) {
+    } catch (ComputerException e) {
         QMessageBox::critical(this, tr("Program Editor"),
-                                       tr(e.getInfo().toStdString().c_str()),
-                                       QMessageBox::Ok);
+                              tr(e.getInfo().toStdString().c_str()),
+                              QMessageBox::Ok);
         return;
     }
+
     refreshTab();
 }
 
@@ -47,14 +47,14 @@ void ProgramEditor::deleteProgSlot() {
     refreshTab();
 }
 
-void ProgramEditor::editProgWindowSlot(){
+void ProgramEditor::editProgWindowSlot() {
     QObject* senderBtn = sender();
     ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
     progEditorWindow->setModal(true);
     progEditorWindow->exec();
 }
 
-void ProgramEditor::refreshTab(){
+void ProgramEditor::refreshTab() {
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
 
     //reset progView
@@ -72,6 +72,7 @@ void ProgramEditor::refreshTab(){
     QWidget* pWidget2;
     QPushButton* btn_edit;
     QHBoxLayout* pLayout2;
+
     for (i = progmap->getIteratorBegin(); i != progmap->getIteratorEnd(); ++i) {
         item = new QTableWidgetItem(i.key());
         item->setFlags(item->flags() ^ Qt::ItemIsEditable); //Name column read only

@@ -11,12 +11,12 @@
  * \brief The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation.
  */
 class Expression : public Litteral {
-private:
+  private:
     /*!
      * \brief Attribute storing the expression.
      */
     QString text;
-public:
+  public:
     /*!
      * \brief Expression Constructor.
      * If the parameter t is already in the expression form (e.g : 'X DUP'), the the character ' is removed from t an it is stored in the text attribute.

@@ -9,15 +9,13 @@
 
 VariableEditor::VariableEditor(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::VariableEditor)
-{
+    ui(new Ui::VariableEditor) {
     ui->setupUi(this);
     refreshTab();
     connect(ui->newVariableBtn, SIGNAL(clicked()), this, SLOT(newVariableSlot()));
 }
 
-VariableEditor::~VariableEditor()
-{
+VariableEditor::~VariableEditor() {
     delete ui;
 }
 
@@ -38,6 +36,7 @@ void VariableEditor::refreshTab() {
     QWidget* pWidget;
     QPushButton* btn_delete; //delete button for each row
     QHBoxLayout* pLayout; //used to stretch the button so as it fills the cell
+
     for (i = varmap->getIteratorBegin(); i != varmap->getIteratorEnd(); ++i) {
         item = new QTableWidgetItem(i.key());
         item->setFlags(item->flags() ^ Qt::ItemIsEditable); //Name column is read only
@@ -59,6 +58,7 @@ void VariableEditor::refreshTab() {
         ui->variableView->setCellWidget(row++, 2, pWidget);
         connect(btn_delete, SIGNAL(pressed()), this, SLOT(deleteVariableSlot()));
     }
+
     //reconnect the signal
     connect(ui->variableView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editVariableSlot(QTableWidgetItem*)));
 
@@ -67,21 +67,23 @@ void VariableEditor::refreshTab() {
 void VariableEditor::newVariableSlot() {
     const QString name = ui->lineEdit->text();
     const QString value = ui->lineEdit_2->text();
+
     if (name.isEmpty() || value.isEmpty()) { //if fields are empty
         QMessageBox::critical(this, tr("Variable Editor"),
-                                       tr("Remplissez les champs!"),
-                                       QMessageBox::Ok);
+                              tr("Remplissez les champs!"),
+                              QMessageBox::Ok);
         return;
     }
+
     try {
         new Variable(Litteral::createLitteral(value, typeLitteral(value)), name.toUpper());
-    }
-    catch (ComputerException e) { //if fields are incorrect
+    } catch (ComputerException e) { //if fields are incorrect
         QMessageBox::critical(this, tr("Variable Editor"),
-                                       tr(e.getInfo().toStdString().c_str()),
-                                       QMessageBox::Ok);
+                              tr(e.getInfo().toStdString().c_str()),
+                              QMessageBox::Ok);
         return;
     }
+
     refreshTab();
 }
 

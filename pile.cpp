@@ -6,13 +6,14 @@ Pile* Pile::instance = nullptr;
 Pile::Pile(): message(""), maxAffiche(0) {
 }
 
-Pile::~Pile(){
+Pile::~Pile() {
     libererInstance();
 }
 
 Pile* Pile::getInstance() {
     if (!instance)
         instance = new Pile();
+
     return instance;
 }
 
@@ -43,34 +44,34 @@ void Pile::push(Litteral *lit) {
 }
 
 
-Litteral* Pile::pop(){
-    if(stack.length()==0)
+Litteral* Pile::pop() {
+    if(stack.length() == 0)
         throw ComputerException("Erreur : Pile vide");
     else
         return stack.pop();
 }
 
-Litteral* Pile::top() const{
-    if(stack.length()==0)
+Litteral* Pile::top() const {
+    if(stack.length() == 0)
         throw ComputerException("Erreur : Pile vide");
     else
         return stack.top();
 }
 
-int Pile::getLength() const{
+int Pile::getLength() const {
     return stack.length();
 }
 
-bool Pile::isEmpty(){
+bool Pile::isEmpty() {
     return stack.isEmpty();
 }
 
-QStack<Litteral*>::const_iterator Pile::getIteratorBegin() const{
+QStack<Litteral*>::const_iterator Pile::getIteratorBegin() const {
     QStack<Litteral*>::const_iterator i = stack.constBegin();
     return i;
 }
 
-QStack<Litteral*>::const_iterator Pile::getIteratorEnd() const{
+QStack<Litteral*>::const_iterator Pile::getIteratorEnd() const {
     QStack<Litteral*>::const_iterator i = stack.constEnd();
     return i;
 }

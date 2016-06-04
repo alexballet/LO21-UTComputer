@@ -3,8 +3,7 @@
 #include <QCoreApplication>
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QCoreApplication::setOrganizationName("LO21StarTeam");
     QCoreApplication::setOrganizationDomain("lo21.com");

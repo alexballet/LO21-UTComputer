@@ -20,17 +20,16 @@
 #include "programeditor.h"
 
 namespace Ui {
-    class QComputer;
+class QComputer;
 }
 
 /*!
  * \brief Main class, controls the main window.
  */
-class QComputer : public QWidget
-{
+class QComputer : public QWidget {
     Q_OBJECT
 
-public:
+  public:
     /*!
      * \brief Constructor responsible for initializing the ui and app options
      * Asks the user whether he wants to restore the previous context. Then initializes the settings, the menu bar, the Pile tableWidget,
@@ -41,7 +40,7 @@ public:
      * \brief Saves the context into a SQLite DB then deletes the ui
     */
     ~QComputer();
-public slots:
+  public slots:
     /*!
      * \brief Refreshes the Pile tableWidget.
      * Called every time the Pile object is modified.
@@ -64,7 +63,7 @@ public slots:
      * \brief Opens the Program Editor window
      */
     void slotProgEditor();
-private slots:
+  private slots:
     /*!
      * \brief All buttons are connected to this slot.
      * Displays the button's text in the command line or directly performs an action (for example for UNDO/REDO buttons or the SEND button)
@@ -83,7 +82,7 @@ private slots:
     void setMaxAffiche(int);
 
 
-private:
+  private:
     /*!
      * \brief ui for Qt Designer
      */

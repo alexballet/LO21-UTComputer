@@ -8,7 +8,7 @@
 /*!
  * \brief Stores the numeric operators and their arities.
  */
-static const QMap<QString, int> opsNum{
+static const QMap<QString, int> opsNum {
     {"+", 2},
     {"-", 2},
     {"*", 2},
@@ -29,12 +29,12 @@ static const QMap<QString, int> opsNum{
     {"ARCTAN", 1},
     {"EXP", 1},
     {"LN", 1}
-    };
+};
 
 /*!
  * \brief Stores the logical operators and their arities.
  */
-static const QMap<QString, int> opsLog{
+static const QMap<QString, int> opsLog {
     {"=", 2},
     {"!=", 2},
     {"<", 2},
@@ -44,12 +44,12 @@ static const QMap<QString, int> opsLog{
     {"AND", 2},
     {"OR", 2},
     {"NOT", 1}
-    };
+};
 
 /*!
  * \brief Stores the Pile operators and their arities.
  */
-static const QMap<QString, int> opsPile{
+static const QMap<QString, int> opsPile {
     {"DUP", 0},
     {"SWAP", 2},
     {"LASTOP", 0},
@@ -60,6 +60,6 @@ static const QMap<QString, int> opsPile{
     {"EDIT", 1},
     {"IFT", 2},
     {"DROP", 0}
-    };
+};
 
 #endif // OPERATEUR_H

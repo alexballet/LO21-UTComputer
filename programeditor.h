@@ -11,11 +11,10 @@ class ProgramEditor;
 /*!
  * \brief Window for adding, deleting and editing programs
  */
-class ProgramEditor : public QDialog
-{
+class ProgramEditor : public QDialog {
     Q_OBJECT
 
-public:
+  public:
     /*!
      * \brief ProgramEditor constructor, sets up the ui.
      */
@@ -24,7 +23,7 @@ public:
      * \brief ProgramEditor destructor, deletes the ui.
     */
     ~ProgramEditor();
-private:
+  private:
     /*!
      * \brief ui for Qt Designer
      */
@@ -34,7 +33,7 @@ private:
      */
     void refreshTab();
 
-private slots:
+  private slots:
     /*!
      * \brief Verifies user input and creates a new empty program.
      */

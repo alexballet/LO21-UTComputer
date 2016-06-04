@@ -5,8 +5,7 @@
 
 QComputer::QComputer(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::QComputer)
-{
+    ui(new Ui::QComputer) {
 
     ui->setupUi(this);
 
@@ -23,7 +22,7 @@ QComputer::QComputer(QWidget *parent) :
 
     //connect all the keyboard buttons
     QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
-    foreach (QPushButton *button, buttons){
+    foreach (QPushButton * button, buttons) {
         connect(button, SIGNAL(released()), this, SLOT(editCommmande()));
     }
 
@@ -40,8 +39,7 @@ QComputer::QComputer(QWidget *parent) :
     refresh();
 }
 
-QComputer::~QComputer()
-{
+QComputer::~QComputer() {
     //save context before exiting
     DbManager *dbman = DbManager::getInstance();
     dbman->savePile();
@@ -51,27 +49,27 @@ QComputer::~QComputer()
     delete ui;
 }
 
-void QComputer::refresh(){
+void QComputer::refresh() {
     Pile* pile = Pile::getInstance();
 
     // the message
     ui->message->setText(pile->getMessage());
 
     // delete everything
-    for(unsigned int i=0; i<pile->getMaxAffiche(); i++)
-        ui->vuePile->item(i,0)->setText("");
+    for(unsigned int i = 0; i < pile->getMaxAffiche(); i++)
+        ui->vuePile->item(i, 0)->setText("");
 
     // update
     unsigned int nb = 0;
     QStack<Litteral*>::const_iterator it;
-    for(it=pile->getIteratorEnd()-1 ; it!=pile->getIteratorBegin()-1 && nb<pile->getMaxAffiche(); nb++, --it){
-        ui->vuePile->item(pile->getMaxAffiche()-nb-1,0)->setText((*it)->toString());
+
+    for(it = pile->getIteratorEnd() - 1 ; it != pile->getIteratorBegin() - 1 && nb < pile->getMaxAffiche(); nb++, --it) {
+        ui->vuePile->item(pile->getMaxAffiche() - nb - 1, 0)->setText((*it)->toString());
     }
 }
 
 
-void QComputer::on_commande_returnPressed()
-{
+void QComputer::on_commande_returnPressed() {
     Pile* pile = Pile::getInstance();
     Controleur* controleur = Controleur::getInstance();
 
@@ -81,9 +79,9 @@ void QComputer::on_commande_returnPressed()
     // getting text for the command bar
     QString c = ui->commande->text();
 
-    try{
+    try {
         controleur->parse(c);
-    }catch(ComputerException c){
+    } catch(ComputerException c) {
         pile->setMessage(c.getInfo());
     }
 
@@ -92,78 +90,70 @@ void QComputer::on_commande_returnPressed()
     emit pile->modificationEtat();
 }
 
-void QComputer::editCommmande(){
+void QComputer::editCommmande() {
     QPushButton *button = (QPushButton*)sender();
     QString com = ui->commande->text();
-    QString addedText="";
+    QString addedText = "";
 
-    if((isOperatorNum(button->text()) && button->text()!= "/" && button->text()!= "$" && button->text()!= "-") || isOperatorLog(button->text()) || isOperatorPile(button->text())){
-        ui->commande->setText(com+button->text());
+    if((isOperatorNum(button->text()) && button->text() != "/" && button->text() != "$" && button->text() != "-") || isOperatorLog(button->text()) || isOperatorPile(button->text())) {
+        ui->commande->setText(com + button->text());
         emit ui->commande->returnPressed();
-    }
-    else{
-        if (button->objectName() !="DELETE" && button->objectName()!="EMPTY" && button->objectName() != "SEND" && button->objectName() != "UNDO" && button->objectName() != "REDO"){
-            if (button->text()=="_")
+    } else {
+        if (button->objectName() != "DELETE" && button->objectName() != "EMPTY" && button->objectName() != "SEND" && button->objectName() != "UNDO" && button->objectName() != "REDO") {
+            if (button->text() == "_")
                 addedText = " ";
             else
                 addedText = button->text();
-        }
-        else if(button->text()=="<-"){
-            com.truncate(com.length()-1);
+        } else if(button->text() == "<-") {
+            com.truncate(com.length() - 1);
             ui->commande->setText(com);
-        }
-        else if(button->text()=="SEND"){
+        } else if(button->text() == "SEND") {
             emit ui->commande->returnPressed();
             return;
-        }
-        else if(button->text()=="EMPTY"){
+        } else if(button->text() == "EMPTY") {
             ui->commande->clear();
             return;
-        }
-        else if(button->text()=="UNDO"){
+        } else if(button->text() == "UNDO") {
             try {
                 Controleur::undo();
-            }
-            catch (ComputerException c) {
+            } catch (ComputerException c) {
                 Pile* pile = Pile::getInstance();
                 pile->setMessage(c.getInfo());
                 refresh();
             }
+
             return;
-        }
-        else if(button->text()=="REDO"){
+        } else if(button->text() == "REDO") {
             try {
                 Controleur::redo();
-            }
-            catch (ComputerException c) {
+            } catch (ComputerException c) {
                 Pile* pile = Pile::getInstance();
                 pile->setMessage(c.getInfo());
                 refresh();
             }
+
             return;
         }
 
-        ui->commande->setText(com+addedText);
+        ui->commande->setText(com + addedText);
     }
 }
 
 
 
-void QComputer::activerClavier(bool state)
-{
-    if(state){
+void QComputer::activerClavier(bool state) {
+    if(state) {
         ui->clavier->show();
         ui->opLogiques->show();
         ui->opNumeriques->show();
         ui->opPile->show();
-        this->setFixedSize(589,776);
-    }
-    else{
+        this->setFixedSize(589, 776);
+    } else {
         ui->clavier->hide();
         ui->opLogiques->hide();
         ui->opNumeriques->hide();
         ui->opPile->hide();
-        this->setFixedSize(589,322);
+        this->setFixedSize(589, 322);
     }
 }
 
@@ -173,16 +163,16 @@ void QComputer::setMaxAffiche(int n) {
     ui->vuePile->setRowCount(n);
     QStringList numberList;
 
-    for(unsigned int i = n; i>0; i--) {
+    for(unsigned int i = n; i > 0; i--) {
         QString str = QString::number(i);
         str += " :";
         numberList << str;
         // creation of the item of each line initialized with an empty string (chaine vide).
-        ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
+        ui->vuePile->setItem(i - 1, 0, new QTableWidgetItem(""));
     }
 
     ui->vuePile->setVerticalHeaderLabels(numberList);
-    ui->vuePile->setFixedHeight(n * ui->vuePile->rowHeight(0)+2);
+    ui->vuePile->setFixedHeight(n * ui->vuePile->rowHeight(0) + 2);
     emit pile->modificationEtat();
 
 }
@@ -208,11 +198,11 @@ void QComputer::slotProgEditor() {
     progEditor.exec();
 }
 
-void QComputer::restoreContext(){
+void QComputer::restoreContext() {
 
     QMessageBox messageBox(QMessageBox::Question, tr("Restaurer contexte"),
-                                   tr("Voulez-vous restaurer la dernière session ?"),
-                                   QMessageBox::Yes | QMessageBox::No);
+                           tr("Voulez-vous restaurer la dernière session ?"),
+                           QMessageBox::Yes | QMessageBox::No);
 
     messageBox.setButtonText(QMessageBox::Yes, tr("Oui"));
     messageBox.setButtonText(QMessageBox::No, tr("Non"));
@@ -223,8 +213,7 @@ void QComputer::restoreContext(){
     QSettings settings;
 
     switch (ret) {
-      case QMessageBox::Yes:
-    {
+    case QMessageBox::Yes: {
         DbManager *dbman = DbManager::getInstance();
         dbman->setOptions();
         dbman->setPile();
@@ -234,41 +223,42 @@ void QComputer::restoreContext(){
 
         int state = settings.value("Clavier").toInt();
 
-        if(state){
+        if(state) {
             ui->clavier->show();
             ui->opLogiques->show();
             ui->opNumeriques->show();
             ui->opPile->show();
-            this->setFixedSize(589,776);
-        }
-        else{
+            this->setFixedSize(589, 776);
+        } else {
             ui->clavier->hide();
             ui->opLogiques->hide();
             ui->opNumeriques->hide();
             ui->opPile->hide();
-            this->setFixedSize(589,322);
+            this->setFixedSize(589, 322);
         }
+
         break;
     }
-    case QMessageBox::No:
-    {
+
+    case QMessageBox::No: {
         pile->setMaxAffiche(4);
         settings.setValue("Pile", 4);
 
         //keyboard enabled at start
         settings.setValue("Clavier", true);
-        this->setFixedSize(589,776);
+        this->setFixedSize(589, 776);
 
         //disable bip sound
         settings.setValue("Bip", true);
         break;
     }
-      default:
-          break;
+
+    default:
+        break;
     }
 }
 
-void QComputer::initMenuBar(){
+void QComputer::initMenuBar() {
     //menu bar
     QMenuBar* menuBar = new QMenuBar();
 
@@ -287,37 +277,39 @@ void QComputer::initMenuBar(){
     this->layout()->setMenuBar(menuBar);
 
     //ouvrir la fenetre "options"
-    connect(actionOptions, SIGNAL(triggered()),this,SLOT(slotOptions()));
+    connect(actionOptions, SIGNAL(triggered()), this, SLOT(slotOptions()));
     //ouvrir l'editeur de variables
-    connect(actionVarEditor, SIGNAL(triggered()),this,SLOT(slotVarEditor()));
+    connect(actionVarEditor, SIGNAL(triggered()), this, SLOT(slotVarEditor()));
     //ouvrir l'editeur de programmes
-    connect(actionProgEditor, SIGNAL(triggered()),this,SLOT(slotProgEditor()));
+    connect(actionProgEditor, SIGNAL(triggered()), this, SLOT(slotProgEditor()));
     //quitter
     connect(actionExit, SIGNAL(triggered()), this, SLOT(close()));
 }
 
-void QComputer::initPile(){
+void QComputer::initPile() {
     Pile* pile = Pile::getInstance();
     ui->vuePile->setRowCount(pile->getMaxAffiche());
     ui->vuePile->setColumnCount(1);
     ui->vuePile->verticalHeader()->setSectionResizeMode (QHeaderView::Fixed);
 
     QStringList numberList;
-    for(unsigned int i = pile->getMaxAffiche(); i>0; i--) {
+
+    for(unsigned int i = pile->getMaxAffiche(); i > 0; i--) {
         QString str = QString::number(i);
         str += " :";
         numberList << str;
         // creation of the item of each line initialized with an empty string (chaine vide).
-        ui->vuePile->setItem(i-1, 0, new QTableWidgetItem(""));
+        ui->vuePile->setItem(i - 1, 0, new QTableWidgetItem(""));
     }
+
     ui->vuePile->setVerticalHeaderLabels(numberList);
-    ui->vuePile->setFixedHeight(pile->getMaxAffiche() * ui->vuePile->rowHeight(0)+2);
+    ui->vuePile->setFixedHeight(pile->getMaxAffiche() * ui->vuePile->rowHeight(0) + 2);
 
     // inhibit modification
     ui->vuePile->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // connection
-    connect(pile,SIGNAL(modificationEtat()),this,SLOT(refresh()));
+    connect(pile, SIGNAL(modificationEtat()), this, SLOT(refresh()));
 
     // first message
     pile->setMessage("Bienvenue !");

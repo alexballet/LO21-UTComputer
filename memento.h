@@ -7,13 +7,13 @@
  * It is used for the UNDO and REDO operators.
  */
 class Memento {
-private:
+  private:
     friend class Pile;
     /*!
      * \brief Stores the Pile instance stack's state, containing all the pushed Litteral objects.
      */
     QStack<Litteral*> state;
-public:
+  public:
     /*!
      * \brief Constructor of Memento.
      * \param State of the Pile instance stack, to initialize the state attribute.

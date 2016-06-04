@@ -8,12 +8,12 @@
  * \brief The Atome class can represent a Variable or Atome identifier, or an operator.
  */
 class Atome : public Litteral {
-private:
+  private:
     /*!
      * \brief Defines and represents the Atome object.
      */
     QString id;
-public:
+  public:
     /*!
      * \brief Constructor of Atome class.
      * \param id - QString to initialize the id of the Atome object.

@@ -17,7 +17,7 @@
 class Pile : public QObject {
     Q_OBJECT
 
-private:
+  private:
     /*!
      * \brief Pile instance used for the Singleton design pattern.
      */
@@ -51,7 +51,7 @@ private:
      * \brief Disables the copy constructor.
      */
     Pile (const Pile&) = delete;
-public:
+  public:
     /*!
      * \brief Singleton getter.
      * \return Pile instance.
@@ -123,7 +123,7 @@ public:
      * \param mem is the pointer to a Memento object
      */
     void reinstateMemento(Memento* mem);
-signals:
+  signals:
     /*!
      * \brief Signal sent to QComputer to refresh the tableWidget every time the Pile object is modified.
      */

@@ -10,11 +10,10 @@ class Options;
 /*!
  * \brief Window where the user can change app settings
  */
-class Options : public QDialog
-{
+class Options : public QDialog {
     Q_OBJECT
 
-public:
+  public:
     /*!
      * \brief Options constructor, sets up the ui, connects all signals.
      */
@@ -24,7 +23,7 @@ public:
      */
     ~Options();
 
-private slots:
+  private slots:
     /*!
      * \brief Slot called when the user modifies the activerClavier checkbox.
      * The QSettings object is updated and activerClavierSig signal is sent to QComputer.
@@ -44,11 +43,11 @@ private slots:
      */
     void activerBipOpt(bool);
 
-signals:
+  signals:
     void activerClavierSig(bool);
     void setMaxAfficheSig(int);
 
-private:
+  private:
     /*!
      * \brief ui for Qt Designer
      */

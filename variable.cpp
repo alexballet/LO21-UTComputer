@@ -5,16 +5,14 @@
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
     QString type = typeLitteral(id);
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
+
     if (isOperatorLog(id) || isOperatorNum(id) || isOperatorPile(id)) {
         throw ComputerException("Une variable ne peut pas avoir un nom d'opérateur !");
-    }
-    else if(type != "Atome"){
+    } else if(type != "Atome") {
         throw ComputerException("Une variable doit être un atome !");
-    }
-    else if(progmap->findProg(id)) {
+    } else if(progmap->findProg(id)) {
         throw ComputerException("Un programme avec le même nom existe deja!");
-    }
-    else {
+    } else {
         VariableMap* varmap = VariableMap::getInstance();
         varmap->insertVar(id, this);
     }
@@ -37,9 +35,9 @@ void Variable::setValue(Litteral* v) {
 }
 
 template<class T>
-bool isVariable(T& a){
+bool isVariable(T& a) {
     Variable *c = dynamic_cast<Variable*>(&a);
-    return c!=nullptr;
+    return c != nullptr;
 }
 
 //Variable Map
@@ -49,6 +47,7 @@ VariableMap* VariableMap::instance = nullptr;
 VariableMap* VariableMap::getInstance() {
     if (!instance)
         instance = new VariableMap;
+
     return instance;
 }
 
@@ -57,14 +56,15 @@ void VariableMap::libererInstance() {
         delete instance;
 }
 
-VariableMap::~VariableMap(){
+VariableMap::~VariableMap() {
     libererInstance();
 }
 
 Variable* VariableMap::findVar(QString id) const {
-    if (map.contains(id)){
+    if (map.contains(id)) {
         return map.value(id);
     }
+
     return nullptr;
 }
 

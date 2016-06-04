@@ -7,16 +7,18 @@ QVector<Memento*> Controleur::mementoList;
 int Controleur::currentMemento = -1;
 
 void Controleur::parse(const QString& com) {
-    if(com=="")
+    if(com == "")
         throw ComputerException("La ligne de commande est vide !");
+
     Pile* pile = Pile::getInstance();
-    if(typeLitteral(com)=="Programme"){
+
+    if(typeLitteral(com) == "Programme") {
         pile->push(Litteral::createLitteral(com, "Programme"));
         addMementoState(pile->createMemento());
         return;
     }
 
-    if(typeLitteral(com)=="Expression"){
+    if(typeLitteral(com) == "Expression") {
         QString comTemp = com;
         pile->push(Litteral::createLitteral(comTemp.remove('\''), "Expression"));
         addMementoState(pile->createMemento());
@@ -30,81 +32,87 @@ void Controleur::parse(const QString& com) {
     }
 }
 
-QStringList Controleur::manualSplit(const QString& com){
+QStringList Controleur::manualSplit(const QString& com) {
     QStringList words;
 
     int i;
     QString temp;
-    bool stop=false;
-    for(i=0;i<com.length();i++){
-        if(com.at(i)==' '){
-            if(temp!=""){
+    bool stop = false;
+
+    for(i = 0; i < com.length(); i++) {
+        if(com.at(i) == ' ') {
+            if(temp != "") {
                 words.append(temp);
-                temp="";
+                temp = "";
             }
-            while(com.at(i)==' ' && i!=com.length()-1){//get to first character or end of string
+
+            while(com.at(i) == ' ' && i != com.length() - 1) { //get to first character or end of string
                 i++;
             }
-            if(i==com.length()-1){
-                if(com.at(i)!=' ')
+
+            if(i == com.length() - 1) {
+                if(com.at(i) != ' ')
                     temp.append(com.at(i));
-                if(temp!="")
+
+                if(temp != "")
                     words.append(temp);
-                    temp="";
-                    stop=true;
+
+                temp = "";
+                stop = true;
             }
         }
-        if(!stop){
+
+        if(!stop) {
             temp.append(com.at(i));
-            if(com.at(i)=='['){
+
+            if(com.at(i) == '[') {
                 i++;
-                do{
+
+                do {
                     temp.append(com.at(i));
                     i++;
-                }while(com.at(i)!=']');
+                } while(com.at(i) != ']');
+
                 temp.append(com.at(i));
                 words.append(temp);
-                temp="";
+                temp = "";
             }
         }
     }
-    if(temp!="")
+
+    if(temp != "")
         words.append(temp);
 
     return words;
 }
 
-void Controleur::process(const QString word){
+void Controleur::process(const QString word) {
     QString type = typeLitteral(word);
     Pile* pile = Pile::getInstance();
     Programme *p = ProgrammeMap::getInstance()->findProg(word);
-    if(p){
-        try{
-            pile->push(Litteral::createLitteral(word, type));
-            return;
-        }
-        catch(ComputerException c){
-            pile->setMessage(c.getInfo());
-        }
-    }
-    else if(isOperator(word)){
-        try{
-            applyOperator(word);
-        }
-        catch(ComputerException c){
-            pile->setMessage(c.getInfo());
-        }
-        lastOp=word;
-    }
-    else if(type != "Inconnu") {
+
+    if(p) {
         try {
             pile->push(Litteral::createLitteral(word, type));
-        }
-        catch (ComputerException c) {
+            return;
+        } catch(ComputerException c) {
             pile->setMessage(c.getInfo());
         }
-    }
-    else{
+    } else if(isOperator(word)) {
+        try {
+            applyOperator(word);
+        } catch(ComputerException c) {
+            pile->setMessage(c.getInfo());
+        }
+
+        lastOp = word;
+    } else if(type != "Inconnu") {
+        try {
+            pile->push(Litteral::createLitteral(word, type));
+        } catch (ComputerException c) {
+            pile->setMessage(c.getInfo());
+        }
+    } else {
         pile->setMessage("Commande inconnue !");
     }
 
@@ -114,9 +122,10 @@ void Controleur::process(const QString word){
 }
 
 void Controleur::addMementoState(Memento* mem) {
-    if (currentMemento != mementoList.length()-1) { //if changing something after undos
+    if (currentMemento != mementoList.length() - 1) { //if changing something after undos
         mementoList.remove(currentMemento + 1, mementoList.length() - currentMemento - 1);
     }
+
     mementoList.append(mem);
     currentMemento++;
 }
@@ -125,50 +134,46 @@ void Controleur::undo() {
     if (currentMemento == 0) {
         throw ComputerException("On ne peut plus revenir en arriere!");
     }
+
     Pile* pile = Pile::getInstance();
     pile->reinstateMemento(mementoList[--currentMemento]);
 }
 
 void Controleur::redo() {
-    if (currentMemento == mementoList.length()-1) {
+    if (currentMemento == mementoList.length() - 1) {
         throw ComputerException("On ne peut plus revenir en avant!");
     }
+
     Pile* pile = Pile::getInstance();
     pile->reinstateMemento(mementoList[++currentMemento]);
 }
 
 
-QString typeLitteral(const QString& lit){
-    if(isProgramme(lit)){
+QString typeLitteral(const QString& lit) {
+    if(isProgramme(lit)) {
         return "Programme";
     }
-    if(isExpression(lit)){
+
+    if(isExpression(lit)) {
         return "Expression";
-    }
-    else if(isOperatorNum(lit)){
+    } else if(isOperatorNum(lit)) {
         return "OperatorNum";
-    }
-    else if(isOperatorLog(lit)){
+    } else if(isOperatorLog(lit)) {
         return "OperatorLog";
-    }
-    else if(isOperatorPile(lit)){
+    } else if(isOperatorPile(lit)) {
         return "OperatorPile";
-    }
-    else if(lit.count('$')==1 || lit.count('i')==1){
+    } else if(lit.count('$') == 1 || lit.count('i') == 1) {
         return "Complexe";
-    }
-    else if(lit.count('.') == 1){
+    } else if(lit.count('.') == 1) {
         return "Reel";
-    }
-    else if(lit.count('/') == 1) {
+    } else if(lit.count('/') == 1) {
         return "Rationnel";
-    }
-    else if(lit=="0" || (lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0]=='-' && lit[1].isDigit())))){
+    } else if(lit == "0" || (lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0] == '-' && lit[1].isDigit())))) {
         return "Entier";
-    }
-    else {
+    } else {
         QRegularExpression re("[A-Z][A-Z0-9]*"); //starts with a capital letter and is followed by letters or numbers
         QRegularExpressionMatch match = re.match(lit);
+
         if (match.hasMatch() && match.captured(0) == lit) { //if the whole string is matched
             return "Atome";
         }
@@ -177,561 +182,528 @@ QString typeLitteral(const QString& lit){
     return "Inconnu";
 }
 
-void Controleur::applyOperatorNum(const QString& op, const int nbOp){
+void Controleur::applyOperatorNum(const QString& op, const int nbOp) {
     Pile *pile = Pile::getInstance();
-    if(pile->getLength()<nbOp)
+
+    if(pile->getLength() < nbOp)
         throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
+
     Litteral *temp1 = pile->pop();
     Litteral *x;
     Litteral *y;
     Variable *var1 = dynamic_cast<Variable*>(temp1);
-    if(var1){
+
+    if(var1) {
         x = var1->getValue();
-    }
-    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1) || isExpression(*temp1)){
+    } else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1) || isExpression(*temp1)) {
         x = temp1;
-    }
-    else{
+    } else {
         pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
         throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme ou atome");
     }
 
-    if(nbOp==2){
+    if(nbOp == 2) {
         Litteral *temp2 = pile->pop();
         Variable *var2 = dynamic_cast<Variable*>(temp2);
+
         if(var2)
             y = var2->getValue();
-        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2) || isExpression(*temp2)){
+        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2) || isExpression(*temp2)) {
             y = temp2;
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(temp2->toString(), typeLitteral(temp2->toString())));
             pile->push(Litteral::createLitteral(temp1->toString(), typeLitteral(temp1->toString())));
             throw ComputerException("Erreur : Un opérateur numérique ne peut pas être appliqué à un programme ou atome");
         }
     }
 
-    if(op=="+"){
-        Litteral *res = *y+*x;
+    if(op == "+") {
+        Litteral *res = *y + *x;
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="-"){
-        Litteral *res = *y-*x;
+    } else if(op == "-") {
+        Litteral *res = *y - *x;
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="*"){
-        Litteral *res = *y * *x;
+    } else if(op == "*") {
+        Litteral *res = *y **x;
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
 
-    }
-    else if(op=="/"){
+    } else if(op == "/") {
         Litteral *res;
-        try{
+
+        try {
             res = *y / *x;
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }catch(ComputerException c){
+        } catch(ComputerException c) {
             pile->setMessage(c.getInfo());
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
         }
-    }
-    else if(op=="DIV"){
-        if(isEntier(*x) && isEntier(*y)){
+    } else if(op == "DIV") {
+        if(isEntier(*x) && isEntier(*y)) {
             Litteral *res;
-            try{
+
+            try {
                 res = div(*y, *x);
                 pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-            }catch(ComputerException c){
+            } catch(ComputerException c) {
                 pile->setMessage(c.getInfo());
                 pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
                 pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             }
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur DIV s'applique sur des opérandes entières");
         }
-    }
-    else if(op=="MOD"){
-        if(isEntier(*x) && isEntier(*y)){
+    } else if(op == "MOD") {
+        if(isEntier(*x) && isEntier(*y)) {
             Litteral *res;
-            try{
+
+            try {
                 res = mod(*y, *x);
                 pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-            }catch(ComputerException c){
+            } catch(ComputerException c) {
                 pile->setMessage(c.getInfo());
                 pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
                 pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             }
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur MOD s'applique sur des opérandes entières");
         }
-    }
-    else if(op=="NEG"){
+    } else if(op == "NEG") {
         Litteral *res = neg(*x);
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="NUM"){
-        if(isRationnel(*x) || isEntier(*x)){
+    } else if(op == "NUM") {
+        if(isRationnel(*x) || isEntier(*x)) {
             Litteral *res;
             res = num(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
         }
-    }
-    else if(op=="DEN"){
-        if(isRationnel(*x) || isEntier(*x)){
+    } else if(op == "DEN") {
+        if(isRationnel(*x) || isEntier(*x)) {
             Litteral *res;
             res = den(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur NUM s'applique sur une opérande rationnelle ou entière");
         }
-    }
-    else if(op=="$"){
-        if((isEntier(*x) || isReel(*x) || isRationnel(*x)) && (isEntier(*y) || isReel(*y) || isRationnel(*y))){
+    } else if(op == "$") {
+        if((isEntier(*x) || isReel(*x) || isRationnel(*x)) && (isEntier(*y) || isReel(*y) || isRationnel(*y))) {
             Litteral *res = createComplexe(*y, *x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur $ s'applique sur des opérandes entières, réelles ou rationnelles");
         }
-    }
-    else if(op=="RE"){
+    } else if(op == "RE") {
         Litteral *res = re(*x);
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="IM"){
+    } else if(op == "IM") {
         Litteral *res = im(*x);
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="SIN"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "SIN") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = sin(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur SIN s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="COS"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "COS") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = cos(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur COS s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="TAN"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "TAN") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = tan(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur TAN s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="ARCSIN"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "ARCSIN") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = arcSin(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur ARCSIN s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="ARCCOS"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "ARCCOS") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = arcCos(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur ARCCOS s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="ARCTAN"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "ARCTAN") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = arcTan(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur ARCTAN s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="EXP"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "EXP") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = exp(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur EXP s'applique sur une opérande entière, réelle ou rationnelle");
         }
-    }
-    else if(op=="LN"){
-        if(isEntier(*x) || isReel(*x) || isRationnel(*x)){
+    } else if(op == "LN") {
+        if(isEntier(*x) || isReel(*x) || isRationnel(*x)) {
             Litteral *res = ln(*x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur LN s'applique sur une opérande entière, réelle ou rationnelle");
         }
     }
 }
 
-void Controleur::applyOperatorLog(const QString& op, const int nbOp){
+void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
     Pile *pile = Pile::getInstance();
-    if(pile->getLength()<nbOp)
+
+    if(pile->getLength() < nbOp)
         throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
+
     Litteral *temp1 = pile->pop();
     Litteral *x;
     Litteral *y;
     Variable *var1 = dynamic_cast<Variable*>(temp1);
+
     if(var1)
         x = var1->getValue();
-    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1)){
+    else if(isEntier(*temp1) || isReel(*temp1) || isRationnel(*temp1) || isComplexe(*temp1)) {
         x = temp1;
-    }
-    else{
+    } else {
         pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
         throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
     }
 
-    if(nbOp==2){
+    if(nbOp == 2) {
         Litteral *temp2 = pile->pop();
         Variable *var2 = dynamic_cast<Variable*>(temp2);
+
         if(var2)
             y = var2->getValue();
-        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2)){
+        else if(isEntier(*temp2) || isReel(*temp2) || isRationnel(*temp2) || isComplexe(*temp2)) {
             y = temp2;
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(temp2->toString().remove('\''), typeLitteral(temp2->toString().remove('\''))));
             pile->push(Litteral::createLitteral(temp1->toString().remove('\''), typeLitteral(temp1->toString().remove('\''))));
             throw ComputerException("Erreur : Un opérateur logique ne peut pas être appliqué à un programme");
         }
     }
 
-    if(op=="="){
+    if(op == "=") {
         Litteral *res = (*y == *x);
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="!="){
+    } else if(op == "!=") {
         Litteral *res = (*y != *x);
         pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-    }
-    else if(op=="<"){
-        if(!isComplexe(*x) && !isComplexe(*y)){
+    } else if(op == "<") {
+        if(!isComplexe(*x) && !isComplexe(*y)) {
             Litteral *res = (*y < *x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
-    }
-    else if(op==">"){
-        if(!isComplexe(*x) && !isComplexe(*y)){
+    } else if(op == ">") {
+        if(!isComplexe(*x) && !isComplexe(*y)) {
             Litteral *res = (*y > *x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
-    }
-    else if(op==">="){
-        if(!isComplexe(*x) && !isComplexe(*y)){
+    } else if(op == ">=") {
+        if(!isComplexe(*x) && !isComplexe(*y)) {
             Litteral *res1 = (*y > *x);
             Litteral *res2 = (*y == *x);
             Entier *e1 = dynamic_cast<Entier*>(res1);
             Entier *e2 = dynamic_cast<Entier*>(res2);
             Entier *res;
-            if(e1->getValue()==1 || e2->getValue()==1)
+
+            if(e1->getValue() == 1 || e2->getValue() == 1)
                 res = new Entier(1);
             else
                 res = new Entier(0);
+
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
-    }
-    else if(op=="<="){
-        if(!isComplexe(*x) && !isComplexe(*y)){
+    } else if(op == "<=") {
+        if(!isComplexe(*x) && !isComplexe(*y)) {
             Litteral *res1 = (*y < *x);
             Litteral *res2 = (*y == *x);
             Entier *e1 = dynamic_cast<Entier*>(res1);
             Entier *e2 = dynamic_cast<Entier*>(res2);
             Entier *res;
-            if(e1->getValue()==1 || e2->getValue()==1)
+
+            if(e1->getValue() == 1 || e2->getValue() == 1)
                 res = new Entier(1);
             else
                 res = new Entier(0);
+
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : On ne peut pas comparer des nombres complexes");
         }
-    }
-    else if(op=="AND"){
-        if(isEntier(*x) && isEntier(*y)){
+    } else if(op == "AND") {
+        if(isEntier(*x) && isEntier(*y)) {
             Litteral *res = andF(*y, *x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur AND s'applique sur des opérandes entières ou des expressions");
         }
-    }
-    else if(op=="OR"){
-        if(isEntier(*x) && isEntier(*y)){
+    } else if(op == "OR") {
+        if(isEntier(*x) && isEntier(*y)) {
             Litteral *res = orF(*y, *x);
             pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
             throw ComputerException("Erreur : L'opérateur OR s'applique sur des opérandes entières ou des expressions");
         }
-    }
-    else if(op=="NOT"){
-        try{
-            if(isEntier(*x)){
+    } else if(op == "NOT") {
+        try {
+            if(isEntier(*x)) {
                 Litteral *res = notF(*x);
                 pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
-            }
-            else{
+            } else {
                 pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
                 throw ComputerException("Erreur : L'opérateur NOT s'applique sur une opérande entière ou une expression");
             }
-        }
-        catch(ComputerException e){
+        } catch(ComputerException e) {
             pile->setMessage(e.getInfo());
         }
     }
 }
 
-void Controleur::applyOperatorPile(const QString& op, const int nbOp){
+void Controleur::applyOperatorPile(const QString& op, const int nbOp) {
     Pile *pile = Pile::getInstance();
     Litteral *x;
     Litteral *y;
-    if(nbOp!=0){
-        if(pile->getLength()<nbOp)
+
+    if(nbOp != 0) {
+        if(pile->getLength() < nbOp)
             throw ComputerException("Erreur : $ arguments empilés nécessaires", nbOp);
+
         x = pile->pop();
-        if(nbOp==2){
+
+        if(nbOp == 2) {
             y = pile->pop();
         }
     }
 
-    if(op=="DUP"){
-        try{
+    if(op == "DUP") {
+        try {
             x = pile->top();
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
-        }
-        catch(ComputerException e){
+        } catch(ComputerException e) {
             pile->setMessage(e.getInfo());
         }
-    }
-    else if(op=="DROP"){
-        try{
+    } else if(op == "DROP") {
+        try {
             pile->pop();
-        }
-        catch(ComputerException e){
+        } catch(ComputerException e) {
             pile->setMessage(e.getInfo());
         }
-    }
-    else if(op=="SWAP"){
+    } else if(op == "SWAP") {
         pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
         pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
-    }
-    else if(op=="CLEAR"){
+    } else if(op == "CLEAR") {
         while(!pile->isEmpty())
             pile->pop();
-    }
-    else if(op=="EVAL"){
+    } else if(op == "EVAL") {
         Expression *e = dynamic_cast<Expression*>(x);
         Programme *pTemp = dynamic_cast<Programme*>(x);
-        if(pTemp){
+
+        if(pTemp) {
             QString temp = x->toString();
-            if(temp!=""){
-                while(temp.at(0)==' ')
-                    temp.remove(0,1);
-                if(temp.at(0)=='[')
+
+            if(temp != "") {
+                while(temp.at(0) == ' ')
                     temp.remove(0, 1);
-                while(temp.at(temp.length()-1)==' '){
-                    temp.remove(temp.length()-1,1);
+
+                if(temp.at(0) == '[')
+                    temp.remove(0, 1);
+
+                while(temp.at(temp.length() - 1) == ' ') {
+                    temp.remove(temp.length() - 1, 1);
                 }
-                if(temp.at(temp.length()-1)==']')
-                    temp.remove(temp.length()-1, 1);
+
+                if(temp.at(temp.length() - 1) == ']')
+                    temp.remove(temp.length() - 1, 1);
             }
+
             parse(temp);
             return;
-        }
-        else if(e){
+        } else if(e) {
             QString temp = e->toString().remove('\'');
             Programme *p = ProgrammeMap::getInstance()->findProg(temp);
             Variable *v = VariableMap::getInstance()->findVar(temp);
-            if(p || v){
+
+            if(p || v) {
                 parse(temp);
-            }
-            else{//if it's not a variable neither a program => it's an operation like '1+SIN(3-X)'
+            } else { //if it's not a variable neither a program => it's an operation like '1+SIN(3-X)'
                 QString exp = parseExpression(temp);
-                try{
+
+                try {
                     parse(exp);
-                }catch(ComputerException c){
+                } catch(ComputerException c) {
                     pile->setMessage(c.getInfo());
                 }
             }
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
             throw ComputerException("Erreur : l'argument empilé n'est pas une expression ou un programme");
         }
-    }
-    else if(op=="STO"){
+    } else if(op == "STO") {
         Programme *p2 = dynamic_cast<Programme*>(y);
         QString id = x->toString().remove('\'');
-        if(typeLitteral(y->toString())=="Programme"){
+
+        if(typeLitteral(y->toString()) == "Programme") {
             QString strToSearch = x->toString().remove('\'');
             Programme *p = dynamic_cast<Programme*>(x);
+
             if(p)
                 strToSearch = p->getId();
+
             Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
-            if(prog){
+
+            if(prog) {
                 prog->setInstructions(p2->getInstructions());
-            }
-            else{
+            } else {
                 p2->setId(id);
                 ProgrammeMap::getInstance()->insertProg(id, p2);
-                prog=p2;
+                prog = p2;
             }
-            pile->setMessage("Update : la valeur "+prog->toString()+" est stockée dans "+prog->getId());
-        }
-        else{
+
+            pile->setMessage("Update : la valeur " + prog->toString() + " est stockée dans " + prog->getId());
+        } else {
             QString strToSearch = x->toString().remove('\'');
             Variable *a = dynamic_cast<Variable*>(x);
-            if(a){
+
+            if(a) {
                 strToSearch = a->getId();
             }
+
             Variable *var = VariableMap::getInstance()->findVar(strToSearch);
-            if(var){
+
+            if(var) {
                 var->setValue(y);
-            }
-            else{
+            } else {
                 var = new Variable(y, id);
             }
-            pile->setMessage("Update : la valeur "+y->toString()+" est stockée dans "+strToSearch);
+
+            pile->setMessage("Update : la valeur " + y->toString() + " est stockée dans " + strToSearch);
         }
-    }
-    else if(op=="FORGET"){
+    } else if(op == "FORGET") {
         Programme *p = dynamic_cast<Programme*>(x);
         Variable *v = dynamic_cast<Variable*>(x);
-        if(p){
+
+        if(p) {
             QString strToSearch = p->getId();
             Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
-            if(prog){
+
+            if(prog) {
                 ProgrammeMap::getInstance()->deleteProg(strToSearch);
-            }
-            else{
+            } else {
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
             }
-            pile->setMessage("Update : le programme "+strToSearch+" est oublié");
-        }
-        else if(v){
+
+            pile->setMessage("Update : le programme " + strToSearch + " est oublié");
+        } else if(v) {
             QString strToSearch = v->getId();
             Variable *var = VariableMap::getInstance()->findVar(strToSearch);
-            if(var){
+
+            if(var) {
                 VariableMap::getInstance()->deleteVar(strToSearch);
-            }
-            else{
+            } else {
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 throw ComputerException("Erreur : l'expression n'est pas une variable enregistrée");
             }
-            pile->setMessage("Update : la variable "+strToSearch+" est oubliée");
-        }
-        else{
+
+            pile->setMessage("Update : la variable " + strToSearch + " est oubliée");
+        } else {
             pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
             throw ComputerException("Erreur : la litterale empilée n'est ni un programme, ni une variable");
         }
-    }
-    else if(op=="EDIT"){
+    } else if(op == "EDIT") {
         Programme *p = dynamic_cast<Programme*>(x);
-        if(p){
+
+        if(p) {
             QString strToSearch = p->getId();
             Programme *prog = ProgrammeMap::getInstance()->findProg(strToSearch);
-            if(prog){
+
+            if(prog) {
                 QObject* senderBtn = new QObject();
                 senderBtn->setObjectName(prog->getId());
                 ProgramEditorWindow *progEditorWindow = new ProgramEditorWindow(senderBtn);
                 progEditorWindow->setModal(true);
                 progEditorWindow->exec();
-            }
-            else{
+            } else {
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 throw ComputerException("Erreur : l'expression n'est pas un programme enregistré");
             }
-            pile->setMessage("Update : le programme "+strToSearch+" est modifié");
-        }
-        else{
+
+            pile->setMessage("Update : le programme " + strToSearch + " est modifié");
+        } else {
             pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
             throw ComputerException("Erreur : la litterale empilée n'est pas un programme");
         }
-    }
-    else if(op=="IFT"){
+    } else if(op == "IFT") {
         Programme *p = dynamic_cast<Programme*>(x);
-        if(isEntier(*y) && p){
+
+        if(isEntier(*y) && p) {
             Entier *e = dynamic_cast<Entier*>(y);
-            if(e->getValue()!=0){
+
+            if(e->getValue() != 0) {
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 parse("EVAL");
             }
-        }
-        else{
+        } else {
             pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
             pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
             throw ComputerException("Erreur : l'opérateur IFT s'applique sur un Entier et un Programme");
         }
-    }
-    else if(op=="LASTOP"){
-        if(lastOp!="" && lastOp!="LASTOP"){
+    } else if(op == "LASTOP") {
+        if(lastOp != "" && lastOp != "LASTOP") {
             parse(lastOp);
-        }
-        else{
+        } else {
             throw ComputerException("Erreur : Il n'y a pas de dernier opérateur");
         }
     }
 }
 
-void Controleur::applyOperator(const QString& op){
+void Controleur::applyOperator(const QString& op) {
     if(isOperatorLog(op))
         applyOperatorLog(op, opsLog.value(op));
     else if(isOperatorNum(op))
@@ -741,9 +713,10 @@ void Controleur::applyOperator(const QString& op){
 }
 
 Controleur* Controleur::getInstance() {
-    if(!instance){
+    if(!instance) {
         instance = new Controleur();
     }
+
     return instance;
 }
 
@@ -752,20 +725,20 @@ void Controleur::libererInstance() {
         delete instance;
 }
 
-Controleur::~Controleur(){
+Controleur::~Controleur() {
     libererInstance();
 }
 
-bool isOperatorNum(const QString& a){
+bool isOperatorNum(const QString& a) {
     return opsNum.contains(a);
 }
-bool isOperatorLog(const QString& a){
+bool isOperatorLog(const QString& a) {
     return opsLog.contains(a);
 }
-bool isOperatorPile(const QString& a){
+bool isOperatorPile(const QString& a) {
     return opsPile.contains(a);
 }
 
-bool isOperator(const QString& a){
+bool isOperator(const QString& a) {
     return isOperatorNum(a) || isOperatorLog(a) || isOperatorPile(a);
 }

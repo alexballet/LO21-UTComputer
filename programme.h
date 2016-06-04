@@ -15,7 +15,7 @@
  * \brief Programme class
  */
 class Programme : public Litteral {
-private:
+  private:
     /*!
      * \brief Program instructions: a list of strings.
      */
@@ -24,7 +24,7 @@ private:
      * \brief Unique name, used to identify the program.
      */
     QString id;
-public:
+  public:
     /*!
      * \brief Constructor used for named programs. Checks whether the program's name is correct and adds the variable to the ProgrammeMap.
      * \param i are the program's instructions.
@@ -77,7 +77,7 @@ bool isProgramme(const QString& i);
  * \brief ProgrammeMap is a singleton containing a QMap with all named programs.
  */
 class ProgrammeMap {
-private:
+  private:
     /*!
      * \brief A QMap where all programs are stored. They are identified by their id.
      */
@@ -89,7 +89,7 @@ private:
     /*!
      * \brief Default constructor
      */
-    ProgrammeMap(){}
+    ProgrammeMap() {}
     /*!
      * \brief Destructor
      */
@@ -104,7 +104,7 @@ private:
      * \brief Disables the copy constructor.
      */
     ProgrammeMap (const ProgrammeMap&) = delete;
-public:
+  public:
     /*!
      * \brief Singleton getter.
      * \return ProgrammeMap instance.

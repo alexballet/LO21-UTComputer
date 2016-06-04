@@ -15,7 +15,7 @@ class VariableEditor;
 class VariableEditor : public QDialog {
     Q_OBJECT
 
-public:
+  public:
     /*!
      * \brief VariableEditor constructor, sets up the ui.
      */
@@ -24,7 +24,7 @@ public:
       \brief VariableEditor destructor, deletes the ui.
     */
     ~VariableEditor();
-private:
+  private:
     /*!
      * \brief ui for Qt Designer
      */
@@ -33,7 +33,7 @@ private:
      * \brief Refreshes the TableWidget that lists all variables.
      */
     void refreshTab();
-private slots:
+  private slots:
     /*!
      * \brief Verifies user input and creates a new variable.
      * Uses Litteral factory to parse the input, create a corresponding Litteral object, then adds it to VariableMap.

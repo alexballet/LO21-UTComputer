@@ -9,7 +9,7 @@
  * \brief The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method.
  */
 class Litteral {
-public:
+  public:
     /*!
      * \brief Factory method used to instanciate any type of Litteral.
      * This method parses the value parameter depending on the type parameter, then initializes a new Litteral with the parsed value.
@@ -76,32 +76,32 @@ public:
  * \brief The abstract LitteralNumerique class is the parent class of Entier, Reel and Rationnel.
  */
 class LitteralNumerique : public Litteral {
-public:
-    virtual QString toString() const=0;
-    virtual bool operator<(const int& a) const=0;
-    virtual bool operator>(const int& a) const=0;
+  public:
+    virtual QString toString() const = 0;
+    virtual bool operator<(const int& a) const = 0;
+    virtual bool operator>(const int& a) const = 0;
 };
 /*!
  * \brief The Entier class contains an integer value.
  */
 class Entier : public LitteralNumerique {
-private:
+  private:
     /*!
      * \brief Value of the Entier object
      */
     int value;
-public:
+  public:
     /*!
      * \brief Constructor of Entier.
      * \param v - initializes the value attribute.
      */
-    Entier(int v): value(v){}
+    Entier(int v): value(v) {}
     /*!
      * \brief Override of the constructor of Entier.
      * Used when manipulating QStrings
      * \param s - initializes the value attribute.
      */
-    Entier(const QString& s):value(s.toInt()){}
+    Entier(const QString& s): value(s.toInt()) {}
     /*!
      * \brief Accessor of the value attribute.
      * \return Returns the value attribute.
@@ -119,23 +119,23 @@ public:
  * \brief The Reel class contains a double value.
  */
 class Reel : public LitteralNumerique {
-private:
+  private:
     /*!
      * \brief Value of the Reel object
      */
     double value;
-public:
+  public:
     /*!
      * \brief Constructor of Reel.
      * \param v - initializes the value attribute.
      */
-    Reel(double v): value(v){}
+    Reel(double v): value(v) {}
     /*!
      * \brief Override of the constructor of Reel.
      * Used when manipulating QStrings
      * \param s - initializes the value attribute.
      */
-    Reel(const QString& s):value(s.toDouble()){}
+    Reel(const QString& s): value(s.toDouble()) {}
     /*!
      * \brief Accessor of the value attribute.
      * \return Returns the value attribute.
@@ -153,7 +153,7 @@ public:
  * \brief The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store Rationnal numbers as a fracion.
  */
 class Rationnel : public LitteralNumerique {
-private:
+  private:
     /*!
      * \brief Numerator of the Rationnel object
      */
@@ -162,7 +162,7 @@ private:
      * \brief Denomminator of the Rationnel object
      */
     Entier denominateur;
-public:
+  public:
     /*!
      * \brief Constructor of Rationnel.
      * Sets the fraction by initializing both the numerator and denominator attributes.
@@ -214,7 +214,7 @@ class Complexe : public Litteral {
      * Pointer to an Entier, Reel or Rationnel object.
      */
     LitteralNumerique* pImaginaire;
-public:
+  public:
     /*!
      * \brief Constructor of Complexe.
      * Sets the complex number by initializing both the real part and imaginary part attributes.

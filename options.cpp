@@ -4,8 +4,7 @@
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Options)
-{
+    ui(new Ui::Options) {
     ui->setupUi(this);
 
     //connecting radioButtons and dial
@@ -20,8 +19,7 @@ Options::Options(QWidget *parent) :
     ui->dial->setValue(settings.value("Pile").toInt());
 }
 
-Options::~Options()
-{
+Options::~Options() {
     delete ui;
 }
 
@@ -37,7 +35,7 @@ void Options::setMaxAfficheSlot(int i) {
     emit setMaxAfficheSig(i);
 }
 
- void Options::activerBipOpt(bool s){
-     QSettings settings;
-     settings.setValue("Bip", s);
- }
+void Options::activerBipOpt(bool s) {
+    QSettings settings;
+    settings.setValue("Bip", s);
+}

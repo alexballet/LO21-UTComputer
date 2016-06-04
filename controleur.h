@@ -20,7 +20,7 @@
  * \brief The Controleur class parses and executes the user input. It also manages the Memento object and is a singleton.
  */
 class Controleur {
-private:
+  private:
     /*!
      * \brief Attribute storing the last operator used. Usefull for the LASTOP operator.
      */
@@ -54,7 +54,7 @@ private:
      * \brief Disabling the copy constructor of the Controleur class.
      */
     Controleur (const Controleur&) = delete;
-public:
+  public:
     /*!
      * \brief Method to access the Controleur singleton.
      * \return Pointer to the Controleur singleton. If the singleton is not instanciated yet, it returns a new Controleur. Otherwise, it returns the Controleur instance.

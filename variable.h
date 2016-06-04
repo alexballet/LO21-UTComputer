@@ -11,7 +11,7 @@
  * \brief Variable class
  */
 class Variable : public Litteral {
-private:
+  private:
     /*!
      * \brief The variable's value is another Litteral.
      */
@@ -20,7 +20,7 @@ private:
      * \brief Unique name used to identify the variable.
      */
     QString id;
-public:
+  public:
     /*!
      * \brief Checks whether the variable's name is correct and adds the variable to the VariableMap.
      * \param v is the value.
@@ -62,7 +62,7 @@ bool isVariable(T& a);
  * \brief VariableMap is a singleton containing a QMap with all variables.
  */
 class VariableMap {
-private:
+  private:
     /*!
      * \brief A QMap where all variables are stored. They are identified by their id.
      */
@@ -74,7 +74,7 @@ private:
     /*!
      * \brief Default constructor
      */
-    VariableMap(){}
+    VariableMap() {}
     /*!
      * \brief Destructor
      */
@@ -88,7 +88,7 @@ private:
      * \brief Disables the copy constructor.
      */
     VariableMap (const VariableMap&) = delete;
-public:
+  public:
     /*!
      * \brief Singleton getter.
      * \return VariableMap instance.

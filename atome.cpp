@@ -20,14 +20,18 @@ Litteral* Atome::getLitterale() const { //finds the corresponding litterale
     //is this a Variable?
     VariableMap* varmap = VariableMap::getInstance();
     Litteral* lit = varmap->findVar(id);
-    if (lit){
+
+    if (lit) {
         return lit;
     }
+
     //else if pour Programme
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
     lit = progmap->findProg(id);
+
     if (lit)
         return lit;
+
     //else pour Atome
     return new Atome(id);
 }

@@ -4,8 +4,7 @@
 ProgramEditorWindow::ProgramEditorWindow(QObject *sender, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ProgramEditorWindow),
-    progId(sender->objectName())
-{
+    progId(sender->objectName()) {
     ui->setupUi(this);
     ui->progName->setText(progId);
 
@@ -18,26 +17,29 @@ ProgramEditorWindow::ProgramEditorWindow(QObject *sender, QWidget *parent) :
     this->setWindowTitle("Editing " + progId);
 }
 
-ProgramEditorWindow::~ProgramEditorWindow()
-{
+ProgramEditorWindow::~ProgramEditorWindow() {
     delete ui;
 }
 
-void ProgramEditorWindow::on_ProgramEditorWindow_accepted()
-{
+void ProgramEditorWindow::on_ProgramEditorWindow_accepted() {
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
     QString temp = ui->progEdit->toPlainText().replace('\n', ' ').replace('\t', ' '); //replacing newlines and tabs by spaces
-    if(temp!=""){
-        while(temp.at(0)==' ')
-            temp.remove(0,1);
-        if(temp.at(0)=='[')
+
+    if(temp != "") {
+        while(temp.at(0) == ' ')
             temp.remove(0, 1);
-        while(temp.at(temp.length()-1)==' '){
-            temp.remove(temp.length()-1,1);
+
+        if(temp.at(0) == '[')
+            temp.remove(0, 1);
+
+        while(temp.at(temp.length() - 1) == ' ') {
+            temp.remove(temp.length() - 1, 1);
         }
-        if(temp.at(temp.length()-1)==']')
-            temp.remove(temp.length()-1, 1);
+
+        if(temp.at(temp.length() - 1) == ']')
+            temp.remove(temp.length() - 1, 1);
     }
+
     QStringList inst = temp.split(' ', QString::SkipEmptyParts);
     Programme* prog = progmap->findProg(progId);
     prog->setInstructions(inst);

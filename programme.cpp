@@ -6,16 +6,14 @@
 Programme::Programme(const QStringList i, const QString& id): instructions(i), id(id) {
     QString type = typeLitteral(id);
     VariableMap* varmap = VariableMap::getInstance();
+
     if (isOperator(id)) {
         throw ComputerException("Un programme ne peut pas avoir un nom d'opérateur !");
-    }
-    else if(varmap->findVar(id)) {
+    } else if(varmap->findVar(id)) {
         throw ComputerException("Une variable avec le même nom existe deja!");
-    }
-    else if(type != "Atome"){
+    } else if(type != "Atome") {
         throw ComputerException("Un programme doit être un atome !");
-    }
-    else {
+    } else {
         ProgrammeMap* progmap = ProgrammeMap::getInstance();
         progmap->insertProg(id, this);
     }
@@ -23,17 +21,22 @@ Programme::Programme(const QStringList i, const QString& id): instructions(i), i
 
 Programme::Programme(const QString& i): id("") {
     QString temp = i;
-    if(temp!=""){
-        while(temp.at(0)==' ')
-            temp.remove(0,1);
-        if(temp.at(0)=='[')
+
+    if(temp != "") {
+        while(temp.at(0) == ' ')
             temp.remove(0, 1);
-        while(temp.at(temp.length()-1)==' '){
-            temp.remove(temp.length()-1,1);
+
+        if(temp.at(0) == '[')
+            temp.remove(0, 1);
+
+        while(temp.at(temp.length() - 1) == ' ') {
+            temp.remove(temp.length() - 1, 1);
         }
-        if(temp.at(temp.length()-1)==']')
-            temp.remove(temp.length()-1, 1);
+
+        if(temp.at(temp.length() - 1) == ']')
+            temp.remove(temp.length() - 1, 1);
     }
+
     instructions = temp.split(' ', QString::SkipEmptyParts);
 }
 
@@ -41,23 +44,23 @@ QString Programme::getId() const {
     return id;
 }
 
-QStringList Programme::getInstructions() const{
+QStringList Programme::getInstructions() const {
     return instructions;
 }
 
-void Programme::setInstructions(QStringList l){
+void Programme::setInstructions(QStringList l) {
     instructions = l;
 }
 
-void Programme::setId(const QString& s){
-    id=s;
+void Programme::setId(const QString& s) {
+    id = s;
 }
 
 QString Programme::toString() const {
     QString str;
     str.append('[');
     str.append(' ');
-    foreach(QString s, instructions){
+    foreach(QString s, instructions) {
         str.append(s);
         str.append(' ');
     }
@@ -66,13 +69,13 @@ QString Programme::toString() const {
 }
 
 template<class T>
-bool isProgramme(T& a){
+bool isProgramme(T& a) {
     Programme *c = dynamic_cast<Programme*>(&a);
-    return c!=nullptr;
+    return c != nullptr;
 }
 
-bool isProgramme(const QString& i){
-    return i.at(0)=='[' && i.at(i.length()-1)==']';
+bool isProgramme(const QString& i) {
+    return i.at(0) == '[' && i.at(i.length() - 1) == ']';
 }
 
 //ProgrammeMap
@@ -82,6 +85,7 @@ ProgrammeMap* ProgrammeMap::instance = nullptr;
 ProgrammeMap* ProgrammeMap::getInstance() {
     if (!instance)
         instance = new ProgrammeMap;
+
     return instance;
 }
 
@@ -90,14 +94,15 @@ void ProgrammeMap::libererInstance() {
         delete instance;
 }
 
-ProgrammeMap::~ProgrammeMap(){
+ProgrammeMap::~ProgrammeMap() {
     libererInstance();
 }
 
 Programme* ProgrammeMap::findProg(QString id) const {
-    if (map.contains(id)){
+    if (map.contains(id)) {
         return map.value(id);
     }
+
     return nullptr;
 }
 
