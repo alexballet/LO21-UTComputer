@@ -85,20 +85,58 @@ In this report, we will present our application developped for the L021 course. 
 
 \section{Architecture}
 
-\subsection{QComputer}
+    \subsection{QComputer}
 
-Our \textit{QComputer} class is the interface of our application, our \textit{MainWindow}. It sends the content of the \textit{QLineEdit} widget to the \textit{Controleur} instance each time the user presses the \textit{Enter} key or clicks on an operator button. Every instruction is sent to the \textit{parse()} method of the \textit{Controleur} instance by the \textit{QLineEdit} widget. The \textit{QComputer} object refreshes the \textit{QTableWidget} displaying our \textit{Pile} instance each time it is modified.
-It also saves/restores the context when the application terminates/launches : the content of the \textit{Pile} instance, the \textit{Variable} and \textit{Programme} objects, and the global settings (keyboard, error sound and number of \textit{Litteral} objects displayed in the \textit{QTableWidget}).\\
+    Our \textit{QComputer} class is the interface of our application, our \textit{MainWindow}. It sends the content of the \textit{QLineEdit} widget to the \textit{Controleur} instance each time the user presses the \textit{Enter} key or clicks on an operator button. Every instruction is sent to the \textit{parse()} method of the \textit{Controleur} instance by the \textit{QLineEdit} widget. The \textit{QComputer} object refreshes the \textit{QTableWidget} displaying our \textit{Pile} instance each time it is modified.
+    It also saves/restores the context when the application terminates/launches : the content of the \textit{Pile} instance, the \textit{Variable} and \textit{Programme} objects, and the global settings (keyboard, error sound and number of \textit{Litteral} objects displayed in the \textit{QTableWidget}).\\
 
-\subsection{Controleur}
+    \subsection{Controleur}
 
-Our \textit{Controleur} class is a singleton and manages every interaction with the user. It parses and processes each user input : creates the corresponding \textit{Litteral} objects, pushes them into the \textit{Pile} instance, applies the operators, parses and evaluates the \textit{Expression} objects. It also manages the \textit{Memento} class : adds \textit{Memento} states to the \textit{mementoList} stored in the \textit{Pile} instance.\\
+    Our \textit{Controleur} class is a singleton and manages every interaction with the user. It parses and processes each user input : creates the corresponding \textit{Litteral} objects, pushes them into the \textit{Pile} instance, applies the operators, parses and evaluates the \textit{Expression} objects. It also manages the \textit{Memento} class : adds \textit{Memento} states to the \textit{mementoList} stored in the \textit{Pile} instance.\\
 
-We chose to centralise each user input processing into the \textit{parse()} method in order to simplify the use of the \textit{Controleur} class. If the input is not a \textit{Programme} or an \textit{Expression}, which both contain \textit{spaces}, the \textit{parse()} method manually splits the input into seperate words to be processed by the \textit{process()} method. The \textit{Litteral} objects are pushed into the \textit{Pile} instance and the operators are applied.
+    We chose to centralise every user input processing into the \textit{parse()} method in order to simplify the use of the \textit{Controleur} class. If the input is not a \textit{Programme} or an \textit{Expression}, which both contain \textit{spaces}, the \textit{parse()} method manually splits the input into seperate words to be processed by the \textit{process()} method. The \textit{Litteral} objects are pushed into the \textit{Pile} instance and the operators are applied.
 
-\subsection{Pile}
+    \subsection{Pile}
 
-As there can only be one \textit{Pile} object, our \textit{Pile} class is a singleton. It has a \textit{QStack} attribute (called \textit{stack}) of pointers to \textit{Litteral} objects.\\
+    As there can only be one \textit{Pile} object, our \textit{Pile} class is a singleton. It has a \textit{QStack} attribute (called \textit{stack}) of pointers to \textit{Litteral} objects. The \textit{Pile} instance has \textit{pop()} and \textit{push()} methods in order to manage the stack attribute. It has a \textit{QString} attribute called \textit{message}, used to display \textit{QComputerExceptions} into a \textit{QLineEdit} widget of the main window.
+
+    \subsection{Litterals}
+
+    The \textit{Litteral} class is the mother class of \textit{LitteralNumerique}, \textit{Complexe}, \textit{Variable}, \textit{Programme}, \textit{Expression} and \textit{Atome}.\\
+    A \textit{LitteralNumerique} object is either an \textit{Entier}, a \textit{Reel} or a \textit{Rationnel}. \\
+    A \textit{Complexe} object is composed of 2 \textit{LitteralNumerique} objects.\\
+    A \textit{Rationnel} object is composed of 2 \textit{Entier} objects.\\
+    A \textit{Variable} object is composed of an id (\textit{QString}) and a \textit{Litteral} object (as it can store \textit{Entier}, \textit{Reel}, \textit{Rationnel} or \textit{Complexe} objects).\\
+    A \textit{Programme} object is composed of an id (\textit{QString}) and instructions (\textit{QStringList}), as it can contain operators, which are not objects.
+
+    \subsection{Operators}
+
+    An operator is not an object. When an operator is parsed by the \textit{Controleur} instance, it is recognized as an \textit{operatorNum}, \textit{operatorLog} or \textit{operatorPile}. The method \textit{applyOperatorNum()}, \textit{applyOperatorLog()} or \textit{applyOperatorPile()} is then called, having as parameters the \textit{QString} id of the operator parsed, and its arity (found in the static \textit{QMap<QString, int>} opsNum, opsLog or opsPile, which associate each operator to its arity).\\
+
+    C\texttt{++} code sample of the \textit{QMap} for logical operators :
+    \begin{lstlisting}
+        static const QMap<QString, int> opsLog{
+            {"=", 2},
+            {"!=", 2},
+            {"<", 2},
+            {">", 2},
+            {">=", 2},
+            {"<=", 2},
+            {"AND", 2},
+            {"OR", 2},
+            {"NOT", 1}
+        };
+    \end{lstlisting}
+
+    \subsection{VariableMap and ProgrammeMap}
+
+    \textit{Variable} objects are stored in a \textit{QMap} attribute of a singleton \textit{VariableMap} class. This means that the research of a \textit{Variable} object has a complexity in O(1).\\
+    \textit{Programme} objects are stored in a \textit{QMap} attribute of a singleton \textit{ProgrammeMap} class. Like \textit{VariableMap}, the research of a \textit{Programme} object has a complexity in O(1).
+
+    \subsection{ComputerException}
+
+    Every error occuring in \textit{UTComputer} is managed by the \textit{ComputerException} class. Each time a \textit{ComputerException} object is created, the message of the \textit{Pile} instance is updated and displayed in the \textit{QComputer} interface.
+
 
 C\texttt{++} code sample:
 \begin{lstlisting}
