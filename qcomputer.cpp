@@ -42,6 +42,7 @@ QComputer::QComputer(QWidget *parent) :
 
 QComputer::~QComputer()
 {
+    //save context before exiting
     DbManager *dbman = DbManager::getInstance();
     dbman->savePile();
     dbman->saveVariables();
@@ -56,11 +57,12 @@ void QComputer::refresh(){
     // the message
     ui->message->setText(pile->getMessage());
 
-    unsigned int nb = 0;
     // delete everything
     for(unsigned int i=0; i<pile->getMaxAffiche(); i++)
         ui->vuePile->item(i,0)->setText("");
+
     // update
+    unsigned int nb = 0;
     QStack<Litteral*>::const_iterator it;
     for(it=pile->getIteratorEnd()-1 ; it!=pile->getIteratorBegin()-1 && nb<pile->getMaxAffiche(); nb++, --it){
         ui->vuePile->item(pile->getMaxAffiche()-nb-1,0)->setText((*it)->toString());
@@ -165,13 +167,13 @@ void QComputer::activerClavier(bool state)
     }
 }
 
-void QComputer::setMaxAffiche(int i) {
+void QComputer::setMaxAffiche(int n) {
     Pile* pile = Pile::getInstance();
-    pile->setMaxAffiche(i);
-    ui->vuePile->setRowCount(i);
+    pile->setMaxAffiche(n);
+    ui->vuePile->setRowCount(n);
     QStringList numberList;
 
-    for(unsigned int i = pile->getMaxAffiche(); i>0; i--) {
+    for(unsigned int i = n; i>0; i--) {
         QString str = QString::number(i);
         str += " :";
         numberList << str;
@@ -180,7 +182,7 @@ void QComputer::setMaxAffiche(int i) {
     }
 
     ui->vuePile->setVerticalHeaderLabels(numberList);
-    ui->vuePile->setFixedHeight(pile->getMaxAffiche() * ui->vuePile->rowHeight(0)+2);
+    ui->vuePile->setFixedHeight(n * ui->vuePile->rowHeight(0)+2);
     emit pile->modificationEtat();
 
 }
@@ -320,6 +322,4 @@ void QComputer::initPile(){
     // first message
     pile->setMessage("Bienvenue !");
 
-    // set ui message
-    ui->message->setText(pile->getMessage());
 }
