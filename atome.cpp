@@ -21,7 +21,6 @@ Litteral* Atome::getLitterale() const { //finds the corresponding litterale
     VariableMap* varmap = VariableMap::getInstance();
     Litteral* lit = varmap->findVar(id);
     if (lit){
-        qDebug()<<" lit : "<<lit->toString();
         return lit;
     }
     //else if pour Programme
