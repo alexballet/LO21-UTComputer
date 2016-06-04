@@ -20,15 +20,6 @@ ProgramEditor::~ProgramEditor()
     delete ui;
 }
 
-void ProgramEditor::refreshTab() {
-    disconnect(ui->progView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editProgSlot(QTableWidgetItem*)));
-
-    setTab();
-
-    connect(ui->progView, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(editProgSlot(QTableWidgetItem*)));
-}
-
-
 void ProgramEditor::newProgramSlot() {
     const QString id = ui->lineEditProg->text();
     if (id.isEmpty()) {
@@ -38,7 +29,7 @@ void ProgramEditor::newProgramSlot() {
         return;
     }
     try {
-        new Programme(Litteral::createLitteral("", "Programme"), id.toUpper());
+        new Programme(QStringList(), id.toUpper());
     }
     catch (ComputerException e) {
         QMessageBox::critical(this, tr("Program Editor"),
@@ -47,14 +38,6 @@ void ProgramEditor::newProgramSlot() {
         return;
     }
     refreshTab();
-}
-
-void ProgramEditor::editProgSlot(QTableWidgetItem* item) {
-    QString id = ui->progView->item(item->row(), 0)->text();
-    QString value = item->text();
-    ProgrammeMap* progmap = ProgrammeMap::getInstance();
-    progmap->deleteProg(id);
-    new Programme(Litteral::createLitteral(value, typeLitteral(value)), id);
 }
 
 void ProgramEditor::deleteProgSlot() {
@@ -71,7 +54,7 @@ void ProgramEditor::editProgWindowSlot(){
     progEditorWindow->exec();
 }
 
-void ProgramEditor::setTab(){
+void ProgramEditor::refreshTab(){
     ProgrammeMap* progmap = ProgrammeMap::getInstance();
 
     //reset progView

@@ -17,14 +17,28 @@ public:
     ~ProgramEditor();
 
 private:
+    /*!
+     * \brief ui for Qt Designer
+     */
     Ui::ProgramEditor *ui;
+    /*!
+     * \brief Refreshes the TableWidget that lists all programs.
+     */
     void refreshTab();
-    void setTab();
 
 private slots:
+    /*!
+     * \brief Verifies user input and creates a new empty program.
+     */
     void newProgramSlot();
-    void editProgSlot(QTableWidgetItem* item);
+    /*!
+     * \brief Lets the user delete a program. This slot is connected to all delete buttons in the 3rd column.
+     */
     void deleteProgSlot();
+    /*!
+     * \brief Opens a new ProgramEditorWindow that lets the user edit the program.
+     * This slot is connected to all edit buttons in the 2nd column.
+     */
     void editProgWindowSlot();
 };
 
