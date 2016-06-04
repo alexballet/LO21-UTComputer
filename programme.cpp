@@ -3,7 +3,7 @@
 #include <QDebug>
 
 //Programme
-Programme::Programme(QStringList i, QString id): instructions(i), id(id) {
+Programme::Programme(const QStringList i, const QString& id): instructions(i), id(id) {
     QString type = typeLitteral(id);
     VariableMap* varmap = VariableMap::getInstance();
     if (isOperator(id)) {
