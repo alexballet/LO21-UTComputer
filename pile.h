@@ -96,7 +96,7 @@ public:
     Litteral* pop();
     /*!
      * \brief Peeks at the top item of the stack.
-     * \return Pointer to Litteral object at the top of the stack.
+     * \return Pointer to the Litteral object at the top of the stack.
      */
     Litteral* top() const;
     /*!
@@ -111,7 +111,7 @@ public:
     //Memento
     /*!
      * \brief Creates a new Memento object with the current state of the stack.
-     * \return pointer to new Memento object
+     * \return Pointer to new Memento object
      */
     Memento* createMemento();
     /*!

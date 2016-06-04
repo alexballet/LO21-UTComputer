@@ -7,6 +7,9 @@ namespace Ui {
 class Options;
 }
 
+/*!
+ * \brief Window where the user can change app settings
+ */
 class Options : public QDialog
 {
     Q_OBJECT

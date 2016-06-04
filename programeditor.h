@@ -8,6 +8,9 @@ namespace Ui {
 class ProgramEditor;
 }
 
+/*!
+ * \brief Window for adding, deleting and editing programs
+ */
 class ProgramEditor : public QDialog
 {
     Q_OBJECT

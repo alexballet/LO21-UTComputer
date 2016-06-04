@@ -10,7 +10,7 @@ class VariableEditor;
 }
 
 /*!
- * \brief Window for adding/deleting and editing variables
+ * \brief Window for adding, deleting and editing variables
  */
 class VariableEditor : public QDialog {
     Q_OBJECT
