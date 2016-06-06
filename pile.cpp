@@ -62,7 +62,7 @@ int Pile::getLength() const {
     return stack.length();
 }
 
-bool Pile::isEmpty() {
+bool Pile::isEmpty() const {
     return stack.isEmpty();
 }
 
@@ -76,7 +76,7 @@ QStack<Litteral*>::const_iterator Pile::getIteratorEnd() const {
     return i;
 }
 
-Memento* Pile::createMemento() {
+Memento* Pile::createMemento() const {
     return new Memento(stack);
 }
 
