@@ -113,7 +113,7 @@ void Controleur::process(const QString word) {
             pile->setMessage(c.getInfo());
         }
     } else {
-        pile->setMessage("Commande inconnue !");
+        throw ComputerException("Commande inconnue!");
     }
 
     if (word != "EVAL") {

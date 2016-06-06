@@ -72,7 +72,7 @@
 
 
 \begin{document}
-\title{LO21 project report: Calculator from the future}
+\title{LO21 project report: UTComputer}
 \author{Alexandre Ballet, Anton Ippolitov (GI02)}
 \date{P16}
 \maketitle
@@ -80,7 +80,7 @@
 \tableofcontents
 
 \begin{abstract}
-In this report, we will present our application developped for the L021 course. A revolutionnary and innovative calculator which will simplify your everyday life.
+In this report, we will present our application developped for the L021 course. A revolutionary and innovative calculator which will simplify your everyday life.
 \end{abstract}
 
 \section{Architecture}
@@ -107,7 +107,7 @@ In this report, we will present our application developped for the L021 course. 
     A \textit{Complexe} object is composed of 2 \textit{LitteralNumerique} objects.\\
     A \textit{Rationnel} object is composed of 2 \textit{Entier} objects.\\
     A \textit{Variable} object is composed of an id (\textit{QString}) and a \textit{Litteral} object (as it can store \textit{Entier}, \textit{Reel}, \textit{Rationnel} or \textit{Complexe} objects).\\
-    A \textit{Programme} object is composed of an id (\textit{QString}) and instructions (\textit{QStringList}), as it can contain operators, which are not objects.
+    A \textit{Programme} object is composed of an id (\textit{QString}) and instructions (\textit{QStringList}), as it can contain operators, that are not objects.
 
     \subsection{Operators}
 
@@ -138,7 +138,25 @@ In this report, we will present our application developped for the L021 course. 
     Every error occuring in \textit{UTComputer} is managed by the \textit{ComputerException} class. Each time a \textit{ComputerException} object is created, the message of the \textit{Pile} instance is updated and displayed in the \textit{QComputer} interface.
 
 \newpage
-\section{LEL}
+\section{Architecture extensibility possibilities}
+	Our architecture allows for easy extensibility. Here are some examples of extensibility possibilities that can be easily implemented within our architecture.
+	\subsection{Adding operators}
+	If we want to add a new operator, most of the steps are already automated. Qt Designer is quite practical for this task: it is very easy to add a new button for the operator. The button is then automatically connected to a slot handling the button's action using a \textit{foreach} loop: 
+	\begin{lstlisting}
+    //connect all keyboard buttons
+    QList<QPushButton*> buttons = this->findChildren<QPushButton*>();
+    foreach (QPushButton* button, buttons) {
+        connect(button, SIGNAL(released()), this, SLOT(editCommmande()));
+    }
+	\end{lstlisting}
+	The next step is choosing the operator's category (e.g. stack operator, numerical operator, etc.). The operator as well as its arity must then be added to the corresponding \textit{QMap} in the \textit{operator.h} file. \\
+	The final step is writing a function that implements the operator's functionality and putting it into \textit{Controleur.h}. This step is operator-specific so it cannot be automated. All the other connections and logic are completely the same, be it 10 operators or 100.
+	\subsection{Settings}
+	It also easy to add new settings to the app (for instance for changing the color of the application or changing the decimal precision). Using Qt Designer, a checkbox or an appropriate input widget can be quickly added to the settings window. This widget is then connected to a slot handling user input. This slot basically contains an update of the \textit{QSettings} object. As the settings' values can be booleans, integers or even strings this part of the process is simple yet cannot be automated. The \textit{QSettings} is then used in the appropriate method or slot of the target object that handles the settings for this object (for instance \textit{QComputer} would have a slot that would react when the 'color' setting is changed). All other aspects are automated, such as restoring and saving settings from and to the SQLite database: a \textit{foreach} loop iterates through all table rows (or settings' keys) and restores them (or saves them) automatically.
+	\subsection{Translations}
+	All the text that the user sees is embedded in the Qt \textit{tr} function.... meh
+	\subsection{Resources}
+	Sounds and icons are managed via .qrc files (Qt Resource files) that make it easy to add, remove or edit auxiliary files for the application. It is very quick to customize the app sounds or icons using this approach.
 
 
 \end{document}
