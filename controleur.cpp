@@ -88,6 +88,7 @@ QStringList Controleur::manualSplit(const QString& com) {
 
 void Controleur::process(const QString word) {
     QString type = typeLitteral(word);
+    qDebug()<<type;
     Pile* pile = Pile::getInstance();
     Programme *p = ProgrammeMap::getInstance()->findProg(word);
 
@@ -163,10 +164,39 @@ QString typeLitteral(const QString& lit) {
     } else if(isOperatorPile(lit)) {
         return "OperatorPile";
     } else if(lit.count('$') == 1 || lit.count('i') == 1) {
-        return "Complexe";
+        QStringList l = lit.split('$', QString::KeepEmptyParts);
+        if(l[0]=="" || l[1]=="")
+            return "Inconnu";
+        QString type1 = typeLitteral(l[0]);
+        QString type2 = typeLitteral(l[1]);
+        if((type1=="Entier" || type1=="Reel" || type1=="Rationnel") && (type2=="Entier" || type2=="Reel" || type2=="Rationnel"))
+            return "Complexe";
+        return "Inconnu";
     } else if(lit.count('.') == 1) {
+        QStringList l = lit.split('.', QString::KeepEmptyParts);
+        if(l[0]!=""){
+            QString type1 = typeLitteral(l[0]);
+            if(type1!="Entier")
+                return "Inconnu";
+        }
+        if(l[1]!=""){
+            QString type2 = typeLitteral(l[1]);
+            if(type2!="Entier")
+                return "Inconnu";
+        }
         return "Reel";
     } else if(lit.count('/') == 1) {
+        QStringList l = lit.split('/', QString::KeepEmptyParts);
+        if(l[0]!=""){
+            QString type1 = typeLitteral(l[0]);
+            if(type1!="Entier")
+                return "Inconnu";
+        }
+        if(l[1]!=""){
+            QString type2 = typeLitteral(l[1]);
+            if(type2!="Entier")
+                return "Inconnu";
+        }
         return "Rationnel";
     } else if(lit == "0" || (lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0] == '-' && lit[1].isDigit())))) {
         return "Entier";
