@@ -66,6 +66,7 @@ class Controleur {
     static void libererInstance();
     /*!
      * \brief Method that parses a QString to isolate the expressions to form Litteral objects or execute operators.
+     *
      * If it's a Programme or an Expression, it creates the associated Litteral and pushes it in the Pile.
      * Otherwise, it means it's one or a series of different Litterals. It splits the com parameter and analyzes each one independently.
      * \param com - QString to parse.
@@ -79,12 +80,14 @@ class Controleur {
     QStringList manualSplit(const QString& com);
     /*!
      * \brief Method that processes an expression.
+     *
      * If it's an operator, it applies it. Otherwise, it's a Litteral and it pushes it in the Pile.
      * \param word - QString to process.
      */
     void process(const QString word);
     /*!
      * \brief Method that applies a numeric operator, poping nbOp Litteral objects from the Pile.
+     *
      * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
      * \param op - id of the operator to apply.
      * \param nbOp - number of operands needed to apply the operator.
@@ -92,6 +95,7 @@ class Controleur {
     void applyOperatorNum(const QString& op, const int nbOp);
     /*!
      * \brief Method that applies a logical operator, poping nbOp Litteral objects from the Pile.
+     *
      * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
      * \param op - id of the operator to apply.
      * \param nbOp - number of operands needed to apply the operator.
@@ -99,6 +103,7 @@ class Controleur {
     void applyOperatorLog(const QString& op, const int nbOp);
     /*!
      * \brief Method that applies a Pile operator, poping nbOp Litteral objects from the Pile.
+     *
      * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
      * \param op - id of the operator to apply.
      * \param nbOp - number of operands needed to apply the operator.
@@ -134,6 +139,7 @@ class Controleur {
 QString typeLitteral(const QString& lit);
 /*!
  * \brief Checks if the QString corresponds to a numeric operator.
+ *
  * Searches for the parameter a in the QMap opsNum, containing all the numeric operators and their arity.
  * \param a - QString to check.
  * \return Return true if a is a numeric operator, false if it's not.
@@ -141,6 +147,7 @@ QString typeLitteral(const QString& lit);
 bool isOperatorNum(const QString& a);
 /*!
  * \brief Checks if the QString corresponds to a logical operator.
+ *
  * Searches for the parameter a in the QMap opsLog, containing all the logical operators and their arity.
  * \param a - QString to check.
  * \return Return true if a is a logical operator, false if it's not.
@@ -148,6 +155,7 @@ bool isOperatorNum(const QString& a);
 bool isOperatorLog(const QString& a);
 /*!
  * \brief Checks if the QString corresponds to a Pile operator.
+ *
  * Searches for the parameter a in the QMap opsPile, containing all the Pile operators and their arity.
  * \param a - QString to check.
  * \return Return true if a is a Pile operator, false if it's not.
@@ -155,6 +163,7 @@ bool isOperatorLog(const QString& a);
 bool isOperatorPile(const QString& a);
 /*!
  * \brief Checks if the QString corresponds to an operator.
+ *
  * Checks if the parameter a is a numeric operator, a logical operator or a Pile operator.
  * \param a - QString to check.
  * \return Return true if a is numeric operator, a logical operator or a Pile operator, false if it's none of them.

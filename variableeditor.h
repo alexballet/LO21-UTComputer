@@ -36,6 +36,7 @@ class VariableEditor : public QDialog {
   private slots:
     /*!
      * \brief Verifies user input and creates a new variable.
+     *
      * Uses Litteral factory to parse the input, create a corresponding Litteral object, then adds it to VariableMap.
      */
     void newVariableSlot();

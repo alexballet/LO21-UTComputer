@@ -6,12 +6,15 @@
 #include <typeinfo>
 #include "computerexception.h"
 /*!
- * \brief The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme. It declares all the virtual operators and the toString() method.
+ * \brief The abstract Litteral class is the parent class (and factory) of LitteralNumerique, Complexe, Atome, Variable and Programme.
+ *
+ * It declares all the virtual operators and the toString() method.
  */
 class Litteral {
   public:
     /*!
      * \brief Factory method used to instanciate any type of Litteral.
+     *
      * This method parses the value parameter depending on the type parameter, then initializes a new Litteral with the parsed value.
      * \param value - the value of the Litteral to instanciate.
      * \param type - the type of the Litteral to instanciate.
@@ -20,6 +23,7 @@ class Litteral {
     static Litteral* createLitteral(const QString& value, const QString& type);
     /*!
      * \brief Pure virtual method to be defined in the child classes.
+     *
      * Used to display any Litteral as a QString into the Pile.
      */
     virtual QString toString() const = 0;
@@ -98,6 +102,7 @@ class Entier : public LitteralNumerique {
     Entier(int v): value(v) {}
     /*!
      * \brief Override of the constructor of Entier.
+     *
      * Used when manipulating QStrings
      * \param s - initializes the value attribute.
      */
@@ -132,6 +137,7 @@ class Reel : public LitteralNumerique {
     Reel(double v): value(v) {}
     /*!
      * \brief Override of the constructor of Reel.
+     *
      * Used when manipulating QStrings
      * \param s - initializes the value attribute.
      */
@@ -164,6 +170,7 @@ class Rationnel : public LitteralNumerique {
     Entier denominateur;
     /*!
      * \brief Method used to simplify the fraction of a Rationnal object. It is called within the constructor of Rationnel.
+     *
      * If the numerator is 0, it creates a new Entier object initialized with 0. If the denominator is 1, it creates a new Entier object initialized with the numerator value.
      * If the fraction can be simplified, it simplifies it. E.g : 4/2 -> 2 or 3/6 -> 1/2
      */
@@ -171,6 +178,7 @@ class Rationnel : public LitteralNumerique {
   public:
     /*!
      * \brief Constructor of Rationnel.
+     *
      * Sets the fraction by initializing both the numerator and denominator attributes.
      * \param n - Initializes the numerator attribute.
      * \param d - Initializes the denominator attribute.
@@ -178,6 +186,7 @@ class Rationnel : public LitteralNumerique {
     Rationnel(int n, int d);
     /*!
      * \brief Override of the constructor of Rationnel.
+     *
      * Used when manipulating QStrings. The QString is parsed ans splited at the '/' character to isolate the numerateur and denominateur attributes.
      * \param s - QString to be parsed
      */
@@ -206,17 +215,20 @@ class Rationnel : public LitteralNumerique {
 class Complexe : public Litteral {
     /*!
      * \brief Real part of the Complexe object.
+     *
      * Pointer to an Entier, Reel or Rationnel object.
      */
     LitteralNumerique* pReelle;
     /*!
      * \brief Imaginary part of the Complexe object.
+     *
      * Pointer to an Entier, Reel or Rationnel object.
      */
     LitteralNumerique* pImaginaire;
   public:
     /*!
      * \brief Constructor of Complexe.
+     *
      * Sets the complex number by initializing both the real part and imaginary part attributes.
      * \param pRe - Initializes the real part attribute.
      * \param pIm - Initializes the imaginary part attribute.
@@ -224,6 +236,7 @@ class Complexe : public Litteral {
     Complexe(LitteralNumerique& pRe, LitteralNumerique& pIm);
     /*!
      * \brief Override of the constructor of Complexe.
+     *
      * Used when manipulating QStrings
      * \param pRe - Initializes the real part attribute, calling the overrided constructors of the different LitteralNumerique objects.
      * \param pIm - Initializes the imaginary part attribute, calling the overrided constructors of the different LitteralNumerique objects.
@@ -289,6 +302,7 @@ bool isExpression(T& a);
 //opérateurs numériques
 /*!
  * \brief Integer division operator
+ *
  * Can be used between Entier objects only. Otherwise, throws a ComputerException.
  * \param a - Object to be divided
  * \param b - Divisor object
@@ -297,6 +311,7 @@ bool isExpression(T& a);
 Litteral* div(Litteral& a, Litteral& b);
 /*!
  * \brief Modulo operator
+ *
  * Can be used between Entier objects only. Otherwise, throws a ComputerException.
  * \param a - Object to be divided
  * \param b - Divisor object
@@ -305,6 +320,7 @@ Litteral* div(Litteral& a, Litteral& b);
 Litteral* mod(Litteral& a, Litteral& b);
 /*!
  * \brief Opposite operator
+ *
  * Can be used on any LitteralNumerique or Complexe object.
  * \param a - Object on which the operator is applied.
  * \return Returns the opposite object of a. E.g : neg 3 -> -3 ; neg 5 - 4i -> -5 + 4i
@@ -312,6 +328,7 @@ Litteral* mod(Litteral& a, Litteral& b);
 Litteral* neg(Litteral& a);
 /*!
  * \brief Numerator operator
+ *
  * Can only be used on a Rationnel object or an Entier object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return If the a parameter is a Rationnel object, it returns its numerateur attribute. If it's an Entier object, it returns the Entier object.
@@ -319,6 +336,7 @@ Litteral* neg(Litteral& a);
 Litteral* num(Litteral& a);
 /*!
  * \brief Denominator operator
+ *
  * Can only be used on a Rationnel object or an Entier object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return If the a parameter is a Rationnel object, it returns its denominateur attribute. If it's an Entier object, it returns a new Entier object initialized with 1.
@@ -326,6 +344,7 @@ Litteral* num(Litteral& a);
 Litteral* den(Litteral& a);
 /*!
  * \brief createComplexe operator
+ *
  * Constructs a Complexe object from two LitteralNumerique objects. Called using the '$' operator on the UTComputer interface.
  * \param a - Object to initialize the pReelle attribute with.
  * \param b - Object to initialize the pImaginaire attribute with.
@@ -334,6 +353,7 @@ Litteral* den(Litteral& a);
 Litteral* createComplexe(Litteral& a, Litteral& b);
 /*!
  * \brief Real part operator
+ *
  * Can be used on any LitteralNumerique or Complexe object.
  * \param a - Object on which the operator is applied.
  * \return If the a parameter is a Complexe object, it returns its pReelle attribute. Otherwise, it returns the object.
@@ -341,6 +361,7 @@ Litteral* createComplexe(Litteral& a, Litteral& b);
 Litteral* re(Litteral& a);
 /*!
  * \brief Imaginary part operator
+ *
  * Can be used on any LitteralNumerique or Complexe object.
  * \param a - Object on which the operator is applied.
  * \return If the a parameter is a Complexe object, it returns its pImaginaire attribute. Otherwise, it returns a new Entier initialized with 0.
@@ -348,6 +369,7 @@ Litteral* re(Litteral& a);
 Litteral* im(Litteral& a);
 /*!
  * \brief Sinus operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the sinus value, in radian, of the LitteralNumerique object.
@@ -355,6 +377,7 @@ Litteral* im(Litteral& a);
 Litteral* sin(Litteral& a);
 /*!
  * \brief Cosinus operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the cosinus value, in radian, of the LitteralNumerique object.
@@ -362,6 +385,7 @@ Litteral* sin(Litteral& a);
 Litteral* cos(Litteral& a);
 /*!
  * \brief Tangent operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the tangent value, in radian, of the LitteralNumerique object.
@@ -369,6 +393,7 @@ Litteral* cos(Litteral& a);
 Litteral* tan(Litteral& a);
 /*!
  * \brief Arcsin operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the arcsin value, in radian, of the LitteralNumerique object.
@@ -376,6 +401,7 @@ Litteral* tan(Litteral& a);
 Litteral* arcSin(Litteral& a);
 /*!
  * \brief Arccos operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the arccos value, in radian, of the LitteralNumerique object.
@@ -383,6 +409,7 @@ Litteral* arcSin(Litteral& a);
 Litteral* arcCos(Litteral& a);
 /*!
  * \brief Arctan operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the arctan value, in radian, of the LitteralNumerique object.
@@ -390,6 +417,7 @@ Litteral* arcCos(Litteral& a);
 Litteral* arcTan(Litteral& a);
 /*!
  * \brief Exponential operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the value of the exp function applied to the LitteralNumerique object.
@@ -397,6 +425,7 @@ Litteral* arcTan(Litteral& a);
 Litteral* exp(Litteral& a);
 /*!
  * \brief Natural logarithm operator
+ *
  * Can be used on any LitteralNumerique object. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return Returns the value of the ln function applied to the LitteralNumerique object.
@@ -406,6 +435,7 @@ Litteral* ln(Litteral& a);
 //opérateurs logiques
 /*!
  * \brief AND logical operator
+ *
  * Can be used on Entier objects only. Otherwise, throws a ComputerException.
  * \param a - First operand.
  * \param b - Second operand.
@@ -414,6 +444,7 @@ Litteral* ln(Litteral& a);
 Litteral* andF(Litteral& a, Litteral& b);
 /*!
  * \brief OR logical operator
+ *
  * Can be used on Entier objects only. Otherwise, throws a ComputerException.
  * \param a - First operand.
  * \param b - Second operand.
@@ -422,6 +453,7 @@ Litteral* andF(Litteral& a, Litteral& b);
 Litteral* orF(Litteral& a, Litteral& b);
 /*!
  * \brief NOT logical operator
+ *
  * Can be used on Entier objects only. Otherwise, throws a ComputerException.
  * \param a - Object on which the operator is applied.
  * \return If the object is not 0, it returns a new Entier initialized with 0. Else, it returns a new Entier initialized with 1.

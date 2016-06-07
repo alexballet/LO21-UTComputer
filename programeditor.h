@@ -44,6 +44,7 @@ class ProgramEditor : public QDialog {
     void deleteProgSlot();
     /*!
      * \brief Opens a new ProgramEditorWindow that lets the user edit the program.
+     *
      * This slot is connected to all edit buttons in the 2nd column.
      */
     void editProgWindowSlot();

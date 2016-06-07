@@ -26,18 +26,21 @@ class Options : public QDialog {
   private slots:
     /*!
      * \brief Slot called when the user modifies the activerClavier checkbox.
+     *
      * The QSettings object is updated and activerClavierSig signal is sent to QComputer.
      * QComputer catches the signal and updates its state.
      */
     void activerClavierOpt(bool);
     /*!
      * \brief Slot called when the user modifies the dial. The dial controls the number of values displayed in the Pile tableWidget.
+     *
      * The QSettings object is updated and setMaxAfficheSig signal is sent to QComputer.
      * QComputer catches the signal and updates its state.
      */
     void setMaxAfficheSlot(int);
     /*!
      * \brief Slot called when the user modifies the activerBip checkbox.
+     *
      * The QSettings object is updated.
      * This affects the ComputerException constructor which will play a beep sound if the settings 'beep' value is set to true.
      */

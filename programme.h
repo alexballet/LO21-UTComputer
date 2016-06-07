@@ -30,9 +30,10 @@ class Programme : public Litteral {
      * \param i are the program's instructions.
      * \param id is the program's name.
      */
-    Programme(const QStringList i, const QString& id);
+    Programme(const QStringList& i, const QString& id);
     /*!
      * \brief Constructor used to initialize the Programme object from a string passed from the command line.
+     *
      * Parses the string and initializes the instructions attribute. Id is empty because the program is simply pushed to the stack without assigning it an id.
      * \param i is the string with all the program instructions.
      */
@@ -129,6 +130,7 @@ class ProgrammeMap {
      * \brief Inserts a new Programme in the QMap.
      * \param id of the program
      * \param prog is the pointer to the program.
+     *
      * If the id corresponds to the id of an exisiting Programme, its value is overriden.
      */
     void insertProg(QString id, Programme* prog);

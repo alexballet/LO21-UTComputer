@@ -8,7 +8,9 @@
 #include <QChar>
 #include <QStack>
 /*!
- * \brief The Expression class is represented by a QString containing Litteral objects or operators. It can be an operation using the infix notation.
+ * \brief The Expression class is represented by a QString containing Litteral objects or operators.
+ *
+ * It can be an operation using the infix notation.
  */
 class Expression : public Litteral {
   private:
@@ -19,6 +21,7 @@ class Expression : public Litteral {
   public:
     /*!
      * \brief Expression Constructor.
+     *
      * If the parameter t is already in the expression form (e.g : 'X DUP'), the the character ' is removed from t an it is stored in the text attribute.
      * \param t - QString to initialize the text attribute.
      */
@@ -36,6 +39,7 @@ class Expression : public Litteral {
 };
 /*!
  * \brief Checks whether the parameter is an Expression.
+ *
  * Checks if the parameter i starts and ends with a simple quote.
  * \param i - QString to check.
  * \return Returns true if the parameter is an Expression, false if it's not.
@@ -45,6 +49,7 @@ bool isExpression(const QString& i);
 //parsing functions (infix to postfix)
 /*!
  * \brief Function that parses an Expression previously considered as an operation.
+ *
  * It uses the algorithm "infix-postfix" to transform an operation using the infix notation into an operation using the postfix notation.
  * This way, the Controleur instance can parse the expression as usual.
  * This is how it works : the algorithm reads each expression.
@@ -78,6 +83,7 @@ int order(QString op);
 bool isChar(QChar a);
 /*!
  * \brief Checks if the QChar is a independent symbol or is part of the operand.
+ *
  * E.g : '.' and '$' are part of an operand
  * \param a - QChar to check.
  * \return Returns true if a is part of an operand, false if it's not.

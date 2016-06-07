@@ -18,6 +18,7 @@ class ProgramEditorWindow : public QDialog {
   public:
     /*!
      * \brief ProgramEditorWindow constructor, sets up the ui.
+     *
      * Displays the name and instructions of the program being edited.
      */
     explicit ProgramEditorWindow(QObject* sender, QWidget *parent = 0);

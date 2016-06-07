@@ -4,6 +4,7 @@
 #include <QStack>
 /*!
  * \brief The Memento class stores states of the Pile instance, each time the Pile instance is modified.
+ *
  * It is used for the UNDO and REDO operators.
  */
 class Memento {
