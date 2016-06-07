@@ -1083,7 +1083,6 @@ Complexe::Complexe(const QString& pRe, const QString& pIm) {
         pReelle = new Reel(pRe);
     else if(typeLitteral(pRe) == "Rationnel") {
         Rationnel* rat = new Rationnel(pRe);
-        rat->simplifier();
 
         if(rat->getDenominateur().getValue() == 1 || rat->getNumerateur().getValue() == 0) {
             Entier* e = new Entier(rat->getNumerateur().getValue());
@@ -1099,7 +1098,6 @@ Complexe::Complexe(const QString& pRe, const QString& pIm) {
         pImaginaire = new Reel(pIm);
     else if(typeLitteral(pIm) == "Rationnel") {
         Rationnel* rat = new Rationnel(pIm);
-        rat->simplifier();
 
         if(rat->getDenominateur().getValue() == 1 || rat->getNumerateur().getValue() == 0) {
             Entier* e = new Entier(rat->getNumerateur().getValue());
@@ -1117,7 +1115,6 @@ Complexe::Complexe(LitteralNumerique& pRe, LitteralNumerique& pIm) {
         pReelle = new Reel(pRe.toString());
     else if(isRationnel(pRe)) {
         Rationnel* rat = new Rationnel(pRe.toString());
-        rat->simplifier();
 
         if(rat->getDenominateur().getValue() == 1 || rat->getNumerateur().getValue() == 0) {
             Entier* e = new Entier(rat->getNumerateur().getValue());
@@ -1133,7 +1130,6 @@ Complexe::Complexe(LitteralNumerique& pRe, LitteralNumerique& pIm) {
         pImaginaire = new Reel(pIm.toString());
     else if(isRationnel(pIm)) {
         Rationnel* rat = new Rationnel(pIm.toString());
-        rat->simplifier();
 
         if(rat->getDenominateur().getValue() == 1 || rat->getNumerateur().getValue() == 0) {
             Entier* e = new Entier(rat->getNumerateur().getValue());

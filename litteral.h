@@ -162,6 +162,12 @@ class Rationnel : public LitteralNumerique {
      * \brief Denomminator of the Rationnel object
      */
     Entier denominateur;
+    /*!
+     * \brief Method used to simplify the fraction of a Rationnal object. It is called within the constructor of Rationnel.
+     * If the numerator is 0, it creates a new Entier object initialized with 0. If the denominator is 1, it creates a new Entier object initialized with the numerator value.
+     * If the fraction can be simplified, it simplifies it. E.g : 4/2 -> 2 or 3/6 -> 1/2
+     */
+    void simplifier();
   public:
     /*!
      * \brief Constructor of Rationnel.
@@ -191,12 +197,6 @@ class Rationnel : public LitteralNumerique {
      * \return Returns a QString composed of both the numerateur and denominateur attributes. E.g : "numerateur/denominateur"
      */
     QString toString() const;
-    /*!
-     * \brief Method used to simplify the fraction of a Rationnal object. It is called within the constructor of Rationnel.
-     * If the numerator is 0, it creates a new Entier object initialized with 0. If the denominator is 1, it creates a new Entier object initialized with the numerator value.
-     * If the fraction can be simplified, it simplifies it. E.g : 4/2 -> 2 or 3/6 -> 1/2
-     */
-    void simplifier();
     bool operator<(const int& a) const;
     bool operator>(const int& a) const;
 };
