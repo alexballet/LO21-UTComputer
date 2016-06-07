@@ -441,15 +441,24 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
     }
 
     if(op == "=") {
-        Litteral *res = (*y == *x);
-        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
+        if(*y == *x){
+            pile->push(Litteral::createLitteral("1", "Entier"));
+        }
+        else
+            pile->push(Litteral::createLitteral("0", "Entier"));
     } else if(op == "!=") {
-        Litteral *res = (*y != *x);
-        pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
+        if(*y != *x){
+            pile->push(Litteral::createLitteral("1", "Entier"));
+        }
+        else
+            pile->push(Litteral::createLitteral("0", "Entier"));
     } else if(op == "<") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            Litteral *res = (*y < *x);
-            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
+            if(*y < *x){
+                pile->push(Litteral::createLitteral("1", "Entier"));
+            }
+            else
+                pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
@@ -457,8 +466,11 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
         }
     } else if(op == ">") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            Litteral *res = (*y > *x);
-            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
+            if(*y > *x){
+                pile->push(Litteral::createLitteral("1", "Entier"));
+            }
+            else
+                pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
@@ -466,18 +478,11 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
         }
     } else if(op == ">=") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            Litteral *res1 = (*y > *x);
-            Litteral *res2 = (*y == *x);
-            Entier *e1 = dynamic_cast<Entier*>(res1);
-            Entier *e2 = dynamic_cast<Entier*>(res2);
-            Entier *res;
-
-            if(e1->getValue() == 1 || e2->getValue() == 1)
-                res = new Entier(1);
+            if((*y > *x) || *y==*x){
+                pile->push(Litteral::createLitteral("1", "Entier"));
+            }
             else
-                res = new Entier(0);
-
-            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
+                pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));
@@ -485,18 +490,11 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
         }
     } else if(op == "<=") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            Litteral *res1 = (*y < *x);
-            Litteral *res2 = (*y == *x);
-            Entier *e1 = dynamic_cast<Entier*>(res1);
-            Entier *e2 = dynamic_cast<Entier*>(res2);
-            Entier *res;
-
-            if(e1->getValue() == 1 || e2->getValue() == 1)
-                res = new Entier(1);
+            if((*y < *x) || *y==*x){
+                pile->push(Litteral::createLitteral("1", "Entier"));
+            }
             else
-                res = new Entier(0);
-
-            pile->push(Litteral::createLitteral(res->toString(), typeLitteral(res->toString())));
+                pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
             pile->push(Litteral::createLitteral(x->toString(), typeLitteral(x->toString())));

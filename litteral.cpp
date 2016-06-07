@@ -472,23 +472,23 @@ Litteral* Litteral::operator /(Litteral& a) {
     throw ComputerException("operation impossible !");
 }
 
-Litteral* Litteral::operator ==(Litteral& a) {
+bool Litteral::operator ==(Litteral& a) {
     if(isEntier(*this) && isEntier(a)) { //Entier = Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
 
         if(op1->getValue() == op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isReel(*this) && isReel(a)) { //Reel = Reel
         Reel *op1 = dynamic_cast<Reel*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
 
         if(op1->getValue() == op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isRationnel(a)) { //Rationnel = Rationnel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
@@ -496,9 +496,9 @@ Litteral* Litteral::operator ==(Litteral& a) {
         double res2 = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(res1 == res2)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isComplexe(*this) && isComplexe(a)) { //Complexe = Complexe
         Complexe *op1 = dynamic_cast<Complexe*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
@@ -506,34 +506,30 @@ Litteral* Litteral::operator ==(Litteral& a) {
         Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
         Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
         Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
-        Litteral *t1Temp = (*op1pRe == *op2pRe);
-        Litteral *t2Temp = (*op1pIm == *op2pIm);
-        Entier *t1 = dynamic_cast<Entier*>(t1Temp);
-        Entier *t2 = dynamic_cast<Entier*>(t2Temp);
 
-        if(t1->getValue() && t2->getValue())
-            return new Entier(1);
+        if((*op1pRe == *op2pRe) && (*op1pIm == *op2pIm))
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else
-        return new Entier(0);
+        return false;
 }
 
-Litteral* Litteral::operator !=(Litteral& a) {
+bool Litteral::operator !=(Litteral& a) {
     if(isEntier(*this) && isEntier(a)) { //Entier != Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
 
         if(op1->getValue() != op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isReel(*this) && isReel(a)) { //Reel != Reel
         Reel *op1 = dynamic_cast<Reel*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
 
         if(op1->getValue() != op2->getValue())
-            return new Entier(1);
+            return true;
         else
             return new Entier(0);
     } else if(isRationnel(*this) && isRationnel(a)) { //Rationnel != Rationnel
@@ -543,9 +539,9 @@ Litteral* Litteral::operator !=(Litteral& a) {
         double res2 = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(res1 != res2)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isComplexe(*this) && isComplexe(a)) { //Complexe != Complexe
         Complexe *op1 = dynamic_cast<Complexe*>(this);
         Complexe *op2 = dynamic_cast<Complexe*>(&a);
@@ -553,28 +549,24 @@ Litteral* Litteral::operator !=(Litteral& a) {
         Litteral *op1pIm = dynamic_cast<Litteral*>(op1->getPIm());
         Litteral *op2pRe = dynamic_cast<Litteral*>(op2->getPRe());
         Litteral *op2pIm = dynamic_cast<Litteral*>(op2->getPIm());
-        Litteral *t1Temp = (*op1pRe != *op2pRe);
-        Litteral *t2Temp = (*op1pIm != *op2pIm);
-        Entier *t1 = dynamic_cast<Entier*>(t1Temp);
-        Entier *t2 = dynamic_cast<Entier*>(t2Temp);
 
-        if(t1->getValue() || t2->getValue())
-            return new Entier(1);
+        if((*op1pRe != *op2pRe) || (*op1pIm != *op2pIm))
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else
-        return new Entier(0);
+        return false;
 }
 
-Litteral* Litteral::operator <(Litteral& a) {
+bool Litteral::operator <(Litteral& a) {
     if(isEntier(*this) && isEntier(a)) { //Entier < Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
 
         if(op1->getValue() < op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isEntier(*this) && isReel(a)) { //Entier < Reel
@@ -582,9 +574,9 @@ Litteral* Litteral::operator <(Litteral& a) {
         Reel *op2 = dynamic_cast<Reel*>(&a);
 
         if(op1->getValue() < op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isEntier(*this) && isRationnel(a)) { //Entier < Rationnel
@@ -593,17 +585,17 @@ Litteral* Litteral::operator <(Litteral& a) {
         double op2Res = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(op1->getValue() < op2Res)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isReel(*this) && isEntier(a)) { //Reel < Entier
         Reel *op1 = dynamic_cast<Reel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
 
         if(op1->getValue() < op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isReel(*this) && isReel(a)) { //Reel < Reel
@@ -611,9 +603,9 @@ Litteral* Litteral::operator <(Litteral& a) {
         Reel *op2 = dynamic_cast<Reel*>(&a);
 
         if(op1->getValue() < op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isReel(*this) && isRationnel(a)) { //Reel < Rationnel
@@ -622,27 +614,27 @@ Litteral* Litteral::operator <(Litteral& a) {
         double op2Res = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(op1->getValue() < op2Res)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isEntier(a)) { //Rationnel < Entier
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
         double res1 = (double)op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
 
         if(res1 < op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isReel(a)) { //Rationnel < Reel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         double res1 = (double)op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
 
         if(res1 < op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isRationnel(a)) { //Rationnel < Rationnel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
@@ -650,22 +642,22 @@ Litteral* Litteral::operator <(Litteral& a) {
         double res2 = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(res1 < res2)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else
-        return new Entier(0);
+        return false;
 }
 
-Litteral* Litteral::operator >(Litteral& a) {
+bool Litteral::operator >(Litteral& a) {
     if(isEntier(*this) && isEntier(a)) { //Entier >= Entier
         Entier *op1 = dynamic_cast<Entier*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
 
         if(op1->getValue() > op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isEntier(*this) && isReel(a)) { //Entier > Reel
@@ -673,9 +665,9 @@ Litteral* Litteral::operator >(Litteral& a) {
         Reel *op2 = dynamic_cast<Reel*>(&a);
 
         if(op1->getValue() > op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isEntier(*this) && isRationnel(a)) { //Entier > Rationnel
@@ -684,17 +676,17 @@ Litteral* Litteral::operator >(Litteral& a) {
         double op2Res = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(op1->getValue() > op2Res)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isReel(*this) && isEntier(a)) { //Reel > Entier
         Reel *op1 = dynamic_cast<Reel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
 
         if(op1->getValue() > op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isReel(*this) && isReel(a)) { //Reel > Reel
@@ -702,9 +694,9 @@ Litteral* Litteral::operator >(Litteral& a) {
         Reel *op2 = dynamic_cast<Reel*>(&a);
 
         if(op1->getValue() > op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     }
 
     if(isReel(*this) && isRationnel(a)) { //Reel > Rationnel
@@ -713,27 +705,27 @@ Litteral* Litteral::operator >(Litteral& a) {
         double op2Res = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(op1->getValue() > op2Res)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isEntier(a)) { //Rationnel > Entier
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Entier *op2 = dynamic_cast<Entier*>(&a);
         double res1 = (double)op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
 
         if(res1 > op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isReel(a)) { //Rationnel > Reel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Reel *op2 = dynamic_cast<Reel*>(&a);
         double res1 = (double)op1->getNumerateur().getValue() / op1->getDenominateur().getValue();
 
         if(res1 > op2->getValue())
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else if(isRationnel(*this) && isRationnel(a)) { //Rationnel > Rationnel
         Rationnel *op1 = dynamic_cast<Rationnel*>(this);
         Rationnel *op2 = dynamic_cast<Rationnel*>(&a);
@@ -741,11 +733,11 @@ Litteral* Litteral::operator >(Litteral& a) {
         double res2 = (double)op2->getNumerateur().getValue() / op2->getDenominateur().getValue();
 
         if(res1 > res2)
-            return new Entier(1);
+            return true;
         else
-            return new Entier(0);
+            return false;
     } else
-        return new Entier(0);
+        return false;
 }
 
 Litteral* div(Litteral& a, Litteral& b) {

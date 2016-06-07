@@ -52,25 +52,25 @@ class Litteral {
      * \param a - Litteral to compare to the current object.
      * \return Returns true if the Litteral objects are equal, false if they're different.
      */
-    Litteral* operator ==(Litteral& a);
+    bool operator ==(Litteral& a);
     /*!
      * \brief Method to check if two Litteral objects are different to each other.
      * \param a - Litteral to compare to the current object.
      * \return Returns true if the Litteral objects are different, false if they're equal.
      */
-    Litteral* operator !=(Litteral& a);
+    bool operator !=(Litteral& a);
     /*!
      * \brief Method to compare two Litteral objects.
      * \param a - Litteral to compare to the current object.
      * \return Returns true if this < a are equal, false if this > a.
      */
-    Litteral* operator <(Litteral& a);
+    bool operator <(Litteral& a);
     /*!
      * \brief Method to compare two Litteral objects.
      * \param a - Litteral to compare to the current object.
      * \return Returns true if this > a are equal, false if this < a.
      */
-    Litteral* operator >(Litteral& a);
+    bool operator >(Litteral& a);
 };
 /*!
  * \brief The abstract LitteralNumerique class is the parent class of Entier, Reel and Rationnel.
