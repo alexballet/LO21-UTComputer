@@ -1,6 +1,5 @@
 #include "variable.h"
 #include "controleur.h"
-#include <QDebug>
 
 Variable::Variable(Litteral *v, QString id): value(v), id(id) {
     QString type = typeLitteral(id);

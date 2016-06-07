@@ -3,7 +3,6 @@
 #include <QStringList>
 #include <QMap>
 #include <QMessageBox>
-#include <QDebug>
 #include <QPushButton>
 #include <QHBoxLayout>
 

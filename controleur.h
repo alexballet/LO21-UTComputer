@@ -2,7 +2,6 @@
 #define CONTROLEUR_H
 
 #include <QString>
-#include <QDebug>
 #include <QVector>
 #include <QSettings>
 #include <QStringList>

@@ -3,8 +3,6 @@
 #include <QStringList>
 #include <QMap>
 #include <QMessageBox>
-#include <QDebug>
-
 
 ProgramEditor::ProgramEditor(QWidget *parent) :
     QDialog(parent),

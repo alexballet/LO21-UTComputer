@@ -1,6 +1,5 @@
 #include "litteral.h"
 #include "controleur.h"
-#include <QDebug>
 
 //Litteral
 Litteral* Litteral::createLitteral(const QString& value, const QString& type) {

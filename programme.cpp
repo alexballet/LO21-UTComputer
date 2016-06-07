@@ -1,6 +1,5 @@
 #include "programme.h"
 #include "controleur.h"
-#include <QDebug>
 
 //Programme
 Programme::Programme(const QStringList &i, const QString& id): instructions(i), id(id) {

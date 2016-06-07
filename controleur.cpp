@@ -1,5 +1,4 @@
 #include "controleur.h"
-#include <QDebug>
 #include <QRegularExpressionMatch>
 
 Controleur* Controleur::instance = nullptr;
@@ -88,7 +87,6 @@ QStringList Controleur::manualSplit(const QString& com) {
 
 void Controleur::process(const QString word) {
     QString type = typeLitteral(word);
-    qDebug()<<type;
     Pile* pile = Pile::getInstance();
     Programme *p = ProgrammeMap::getInstance()->findProg(word);
 

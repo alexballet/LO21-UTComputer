@@ -2,7 +2,6 @@
 #include "programme.h"
 #include "variable.h"
 #include "expression.h"
-#include <QDebug>
 
 Atome::Atome(QString id): id(id) {
 
