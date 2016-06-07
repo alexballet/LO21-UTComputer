@@ -2,7 +2,6 @@
 #define QCOMPUTER_H
 
 #include <QWidget>
-#include <QDebug>
 #include <QVector>
 #include <QStringList>
 #include <QMessageBox>
@@ -13,6 +12,7 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QShortcut>
+#include <QTimer>
 #include "pile.h"
 #include "controleur.h"
 #include "options.h"
@@ -86,7 +86,7 @@ class QComputer : public QWidget {
      * \param n is the new number of items
      */
     void setMaxAffiche(int);
-
+    void changeColor();
 
   private:
     /*!
@@ -112,6 +112,7 @@ class QComputer : public QWidget {
      * Called from the constructor.
      */
     void initPile();
+
 };
 
 #endif // QCOMPUTER_H
