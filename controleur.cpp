@@ -164,6 +164,8 @@ QString typeLitteral(const QString& lit) {
     } else if(isOperatorPile(lit)) {
         return "OperatorPile";
     } else if(lit.count('$') == 1 || lit.count('i') == 1) {
+        if(lit.count('i')==1)
+            return "Complexe";
         QStringList l = lit.split('$', QString::KeepEmptyParts);
         if(l[0]=="" || l[1]=="")
             return "Inconnu";
