@@ -87,7 +87,7 @@ class Pile : public QObject {
     /*!
      * \return True if the stack is empty, false otherwise
      */
-    bool isEmpty();
+    bool isEmpty() const;
     /*!
      * \brief Pushes a Litteral object pointer into the stack.
      * \param lit is the Litteral to push.
@@ -117,7 +117,7 @@ class Pile : public QObject {
      * \brief Creates a new Memento object with the current state of the stack.
      * \return Pointer to new Memento object
      */
-    Memento* createMemento();
+    Memento* createMemento() const;
     /*!
      * \brief Gets the stack state from a Memento object.
      * \param mem is the pointer to a Memento object
