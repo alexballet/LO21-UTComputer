@@ -103,7 +103,7 @@ In this report, we will present our application developped for the L021 course. 
     \subsection{Litterals}
 
     The \textit{Litteral} class is the mother class of \textit{LitteralNumerique}, \textit{Complexe}, \textit{Variable}, \textit{Programme}, \textit{Expression} and \textit{Atome}.\\
-    A \textit{LitteralNumerique} object is either an \textit{Entier}, a \textit{Reel} or a \textit{Rationnel}. \\
+    A \textit{LitteralNumerique} object is either an \textit{Entier}, a \textit{Reel} or a \textit{Rationnel}. It has 2 virtual methods \textit{operator<()} and \textit{operator>()} which are implemented in the children classes and used to compare each other.\\
     A \textit{Complexe} object is composed of 2 \textit{LitteralNumerique} objects.\\
     A \textit{Rationnel} object is composed of 2 \textit{Entier} objects.\\
     A \textit{Variable} object is composed of an id (\textit{QString}) and a \textit{Litteral} object (as it can store \textit{Entier}, \textit{Reel}, \textit{Rationnel} or \textit{Complexe} objects).\\
