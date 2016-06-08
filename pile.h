@@ -12,7 +12,7 @@
 #include "controleur.h"
 
 /*!
- * \brief Singleton containing the stack with all Litteral objects pointers
+ * \brief Singleton containing the stack with pointers to all Litteral objects.
  */
 class Pile : public QObject {
     Q_OBJECT
@@ -73,7 +73,7 @@ class Pile : public QObject {
     void setMessage(const QString& msg);
     /*!
      * \brief maxAffiche getter.
-     * \return maxAffiche
+     * \return maxAffiche attribute
      */
     unsigned int getMaxAffiche() const;
     /*!

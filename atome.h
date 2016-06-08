@@ -5,7 +5,7 @@
 #include <QString>
 
 /*!
- * \brief The Atome class can represent a Variable or Atome identifier, or an operator.
+ * \brief The Atome class can represent a Variable identifier or a Programme identifier.
  */
 class Atome : public Litteral {
   private:

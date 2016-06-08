@@ -11,13 +11,13 @@ class Memento {
   private:
     friend class Pile;
     /*!
-     * \brief Stores the Pile instance stack's state, containing all the pushed Litteral objects.
+     * \brief Stores the Pile's stack's state, containing all the pushed Litteral objects.
      */
     QStack<Litteral*> state;
   public:
     /*!
      * \brief Constructor of Memento.
-     * \param State of the Pile instance stack, to initialize the state attribute.
+     * \param State of the Pile instance stack, initializes the state attribute.
      */
     Memento(QStack<Litteral*> s);
 };

@@ -16,12 +16,12 @@
 #include "dbmanager.h"
 
 /*!
- * \brief The Controleur class parses and executes the user input. It also manages the Memento object and is a singleton.
+ * \brief The Controleur singleton parses and executes user input. It also manages Memento objects.
  */
 class Controleur {
   private:
     /*!
-     * \brief Attribute storing the last operator used. Usefull for the LASTOP operator.
+     * \brief Attribute storing the last operator used. Useful for the LASTOP operator.
      */
     QString lastOp;
     /*!
@@ -29,7 +29,7 @@ class Controleur {
      */
     static Controleur* instance;
     /*!
-     * \brief Private Controleur constructor to forbid instanciation by any other way than using the getInstance() method.
+     * \brief Private Controleur constructor to forbid instantiation by any other way than using the getInstance() method.
      */
     Controleur() {}
     /*!
@@ -56,7 +56,7 @@ class Controleur {
   public:
     /*!
      * \brief Method to access the Controleur singleton.
-     * \return Pointer to the Controleur singleton. If the singleton is not instanciated yet, it returns a new Controleur. Otherwise, it returns the Controleur instance.
+     * \return Pointer to the Controleur singleton. If the singleton is not instantiated yet, it returns a new Controleur. Otherwise, it returns the Controleur instance.
      */
     static Controleur* getInstance();
     /*!
@@ -66,7 +66,7 @@ class Controleur {
     /*!
      * \brief Method that parses a QString to isolate the expressions to form Litteral objects or execute operators.
      *
-     * If it's a Programme or an Expression, it creates the associated Litteral and pushes it in the Pile.
+     * If it's a Programme or an Expression, it creates the associated Litteral and pushes it into the Pile.
      * Otherwise, it means it's one or a series of different Litterals. It splits the com parameter and analyzes each one independently.
      * \param com - QString to parse.
      */
@@ -80,30 +80,30 @@ class Controleur {
     /*!
      * \brief Method that processes an expression.
      *
-     * If it's an operator, it applies it. Otherwise, it's a Litteral and it pushes it in the Pile.
+     * If it's an operator, it applies it. Otherwise, it's a Litteral and it pushes it into the Pile.
      * \param word - QString to process.
      */
     void process(const QString word);
     /*!
-     * \brief Method that applies a numeric operator, poping nbOp Litteral objects from the Pile.
+     * \brief Method that applies a numeric operator, popping nbOp Litteral objects out of the Pile.
      *
-     * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
+     * If there are enough Litteral objects on the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
      * \param op - id of the operator to apply.
      * \param nbOp - number of operands needed to apply the operator.
      */
     void applyOperatorNum(const QString& op, const int nbOp);
     /*!
-     * \brief Method that applies a logical operator, poping nbOp Litteral objects from the Pile.
+     * \brief Method that applies a logical operator, popping nbOp Litteral objects out of the Pile.
      *
-     * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
+     * If there are enough Litteral objects on the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
      * \param op - id of the operator to apply.
      * \param nbOp - number of operands needed to apply the operator.
      */
     void applyOperatorLog(const QString& op, const int nbOp);
     /*!
-     * \brief Method that applies a Pile operator, poping nbOp Litteral objects from the Pile.
+     * \brief Method that applies a Pile operator, popping nbOp Litteral objects out of the Pile.
      *
-     * If there is enough Litteral objects in the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
+     * If there are enough Litteral objects on the Pile and if the operation is possible between those types of Litteral objects, it applies the operator.
      * \param op - id of the operator to apply.
      * \param nbOp - number of operands needed to apply the operator.
      */
@@ -116,22 +116,22 @@ class Controleur {
 
     //taking care of memento
     /*!
-     * \brief Method that adds the Memento state mem to mementoList. Called each time an expression is processed.
+     * \brief Method that adds a Memento state to mementoList. Called each time a Litteral is processed.
      * \param mem - Memento state to add.
      */
     static void addMementoState(Memento* mem);
     /*!
-     * \brief Method that reinstate the previous Memento state.
+     * \brief Method that reinstates the previous Memento state.
      */
     static void undo();
     /*!
-     * \brief Method that reinstate the next Memento state.
+     * \brief Method that reinstates the next Memento state.
      */
     static void redo();
 };
 
 /*!
- * \brief Function that analyzes the QString to determine it's type. It is used in order to create a new Litteral object from a QString.
+ * \brief Function that analyzes the QString to determine its type. It is used in order to create a new Litteral object from a QString.
  * \param lit - QString to analyze.
  * \return Returns the type of the analyzed QString. E.g : typeLitteral("[ 2 DUP +]") -> "Programme".
  */
@@ -141,7 +141,7 @@ QString typeLitteral(const QString& lit);
  *
  * Searches for the parameter a in the QMap opsNum, containing all the numeric operators and their arity.
  * \param a - QString to check.
- * \return Return true if a is a numeric operator, false if it's not.
+ * \return Returns true if a is a numeric operator, false if it's not.
  */
 bool isOperatorNum(const QString& a);
 /*!
@@ -149,7 +149,7 @@ bool isOperatorNum(const QString& a);
  *
  * Searches for the parameter a in the QMap opsLog, containing all the logical operators and their arity.
  * \param a - QString to check.
- * \return Return true if a is a logical operator, false if it's not.
+ * \return Returns true if a is a logical operator, false if it's not.
  */
 bool isOperatorLog(const QString& a);
 /*!
@@ -157,7 +157,7 @@ bool isOperatorLog(const QString& a);
  *
  * Searches for the parameter a in the QMap opsPile, containing all the Pile operators and their arity.
  * \param a - QString to check.
- * \return Return true if a is a Pile operator, false if it's not.
+ * \return Returns true if a is a Pile operator, false if it's not.
  */
 bool isOperatorPile(const QString& a);
 /*!
@@ -165,7 +165,7 @@ bool isOperatorPile(const QString& a);
  *
  * Checks if the parameter a is a numeric operator, a logical operator or a Pile operator.
  * \param a - QString to check.
- * \return Return true if a is numeric operator, a logical operator or a Pile operator, false if it's none of them.
+ * \return Returns true if a is numeric operator, a logical operator or a Pile operator, false if it's none of them.
  */
 bool isOperator(const QString& a);
 

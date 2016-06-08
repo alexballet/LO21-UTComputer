@@ -22,7 +22,7 @@ class Expression : public Litteral {
     /*!
      * \brief Expression Constructor.
      *
-     * If the parameter t is already in the expression form (e.g : 'X DUP'), the the character ' is removed from t an it is stored in the text attribute.
+     * If the parameter t is already in the expression form (e.g : 'X DUP') then the character ' is removed from t an is stored in the text attribute.
      * \param t - QString to initialize the text attribute.
      */
     Expression(QString t);
@@ -48,18 +48,18 @@ bool isExpression(const QString& i);
 
 //parsing functions (infix to postfix)
 /*!
- * \brief Function that parses an Expression previously considered as an operation.
+ * \brief Function that parses an Expression
  *
- * It uses the algorithm "infix-postfix" to transform an operation using the infix notation into an operation using the postfix notation.
+ * It uses the algorithm "infix-postfix" to transform an expression using the infix notation into an expression using the postfix notation.
  * This way, the Controleur instance can parse the expression as usual.
  * This is how it works : the algorithm reads each expression.
  * If it's an operand, it is added to the final postfix expression.
- * If it's an operator, the stack of operators in popped, and the operators are added to the postfix expression, until the operator to pop (from the stack) has lesser priority, is null or is '('. Then the operator is pushed into the back of the stack.
+ * If it's an operator, the stack of operators is popped, and the operators are added to the postfix expression, until the operator to pop (from the stack) has lesser priority, is null or is '('. Then the operator is pushed into the back of the stack.
  * If it's a '(', it is pushed into the back of the stack of operators.
  * If it's a ')', the stack of operator is popped, and the operators are added to the postfix expression, until the operator to pop (from the stack) is ')'. Then ')' is popped and NOT added to the postfix expression.
  * If there is no more expression to read, all the remaining operators from the stack are popped and added to the postfix notation.
  * \param s - QString to parse.
- * \return Returns a QString representing a postfix operation.
+ * \return Returns a QString representing a postfix expression.
  */
 QString parseExpression(const QString& s);
 /*!

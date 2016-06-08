@@ -5,7 +5,7 @@
 #include <QSettings>
 #include <QMediaPlayer>
 /*!
- * \brief The ComputerException class manages to catch all the exceptions of the UTComputer.
+ * \brief The ComputerException class manages all exceptions of the UTComputer.
  */
 class ComputerException {
   private:

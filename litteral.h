@@ -15,28 +15,28 @@ class Litteral {
     /*!
      * \brief Factory method used to instanciate any type of Litteral.
      *
-     * This method parses the value parameter depending on the type parameter, then initializes a new Litteral with the parsed value.
-     * \param value - the value of the Litteral to instanciate.
-     * \param type - the type of the Litteral to instanciate.
-     * \return Return a pointer to the instanciated Litteral object.
+     * This method parses the value parameter depending on the type of parameter, then initializes a new Litteral with the parsed value.
+     * \param value - the value of the Litteral to instantiate.
+     * \param type - the type of the Litteral to instantiate.
+     * \return Return a pointer to the instantiated Litteral object.
      */
     static Litteral* createLitteral(const QString& value, const QString& type);
     /*!
      * \brief Pure virtual method to be defined in the child classes.
      *
-     * Used to display any Litteral as a QString into the Pile.
+     * Used to display any Litteral as a QString on the Pile.
      */
     virtual QString toString() const = 0;
     /*!
      * \brief Method to sum Litteral objects.
-     * \param a - Litteral to sum to the current object.
+     * \param a - Litteral to add to the current object.
      * \return Returns the sum of the two Litteral objects.
      */
     Litteral* operator +(Litteral& a);
     /*!
-     * \brief Method to substract Litteral objects.
-     * \param a - Litteral to substract to the current object.
-     * \return Returns the substraction of the two Litteral objects : this - a
+     * \brief Method to subtract Litteral objects.
+     * \param a - Litteral to subtract from the current object.
+     * \return Returns the subtraction of the two Litteral objects : this - a
      */
     Litteral* operator -(Litteral& a);
     /*!
@@ -156,7 +156,7 @@ class Reel : public LitteralNumerique {
     bool operator>(const int& a) const;
 };
 /*!
- * \brief The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store Rationnal numbers as a fracion.
+ * \brief The Rationnel class contains two Entier objects : a numerator and a denominator. It is used to store rational numbers.
  */
 class Rationnel : public LitteralNumerique {
   private:
@@ -165,11 +165,11 @@ class Rationnel : public LitteralNumerique {
      */
     Entier numerateur;
     /*!
-     * \brief Denomminator of the Rationnel object
+     * \brief Denominator of the Rationnel object
      */
     Entier denominateur;
     /*!
-     * \brief Method used to simplify the fraction of a Rationnal object. It is called within the constructor of Rationnel.
+     * \brief Method used to simplify the fraction of a Rationnel object. It is called within the constructor of Rationnel.
      *
      * If the numerator is 0, it creates a new Entier object initialized with 0. If the denominator is 1, it creates a new Entier object initialized with the numerator value.
      * If the fraction can be simplified, it simplifies it. E.g : 4/2 -> 2 or 3/6 -> 1/2
@@ -187,7 +187,7 @@ class Rationnel : public LitteralNumerique {
     /*!
      * \brief Override of the constructor of Rationnel.
      *
-     * Used when manipulating QStrings. The QString is parsed ans splited at the '/' character to isolate the numerateur and denominateur attributes.
+     * Used when manipulating QStrings. The QString is parsed ans split at the '/' character to isolate the numerateur and denominateur attributes.
      * \param s - QString to be parsed
      */
     Rationnel(const QString& s);
@@ -210,7 +210,7 @@ class Rationnel : public LitteralNumerique {
     bool operator>(const int& a) const;
 };
 /*!
- * \brief The Complexe class is used to represent a complex value. It stores 2 LitteralNumerique objects (Entier, Reel or Rationnel).
+ * \brief The Complexe class is used to represent a complex value. It uses 2 LitteralNumerique objects (Entier, Reel or Rationnel).
  */
 class Complexe : public Litteral {
     /*!
@@ -253,7 +253,7 @@ class Complexe : public Litteral {
      */
     LitteralNumerique* getPIm() const;
     /*!
-     * \brief Method used to display the Complexe object in the Pile instance.
+     * \brief Method used to display the Complexe object on the Pile.
      * \return Returns a QString composed of both the pReelle and pImaginaire attributes. E.g : "pReelle + pImaginaire i"
      */
     QString toString() const;
@@ -345,7 +345,7 @@ Litteral* den(Litteral& a);
 /*!
  * \brief createComplexe operator
  *
- * Constructs a Complexe object from two LitteralNumerique objects. Called using the '$' operator on the UTComputer interface.
+ * Constructs a Complexe object from two LitteralNumerique objects. Called using the '$' operator from the UTComputer interface.
  * \param a - Object to initialize the pReelle attribute with.
  * \param b - Object to initialize the pImaginaire attribute with.
  * \return Returns a new Complexe
