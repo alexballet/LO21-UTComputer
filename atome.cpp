@@ -1,6 +1,5 @@
 #include "atome.h"
 #include "programme.h"
-#include "variable.h"
 #include "expression.h"
 
 Atome::Atome(QString id): id(id) {

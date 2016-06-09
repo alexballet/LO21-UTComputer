@@ -162,41 +162,56 @@ QString typeLitteral(const QString& lit) {
     } else if(isOperatorPile(lit)) {
         return "OperatorPile";
     } else if(lit.count('$') == 1 || lit.count('i') == 1) {
-        if(lit.count('i')==1)
+        if(lit.count('i') == 1)
             return "Complexe";
+
         QStringList l = lit.split('$', QString::KeepEmptyParts);
-        if(l[0]=="" || l[1]=="")
+
+        if(l[0] == "" || l[1] == "")
             return "Inconnu";
+
         QString type1 = typeLitteral(l[0]);
         QString type2 = typeLitteral(l[1]);
-        if((type1=="Entier" || type1=="Reel" || type1=="Rationnel") && (type2=="Entier" || type2=="Reel" || type2=="Rationnel"))
+
+        if((type1 == "Entier" || type1 == "Reel" || type1 == "Rationnel") && (type2 == "Entier" || type2 == "Reel" || type2 == "Rationnel"))
             return "Complexe";
+
         return "Inconnu";
     } else if(lit.count('.') == 1) {
         QStringList l = lit.split('.', QString::KeepEmptyParts);
-        if(l[0]!=""){
+
+        if(l[0] != "") {
             QString type1 = typeLitteral(l[0]);
-            if(type1!="Entier")
+
+            if(type1 != "Entier")
                 return "Inconnu";
         }
-        if(l[1]!=""){
+
+        if(l[1] != "") {
             QString type2 = typeLitteral(l[1]);
-            if(type2!="Entier")
+
+            if(type2 != "Entier")
                 return "Inconnu";
         }
+
         return "Reel";
     } else if(lit.count('/') == 1) {
         QStringList l = lit.split('/', QString::KeepEmptyParts);
-        if(l[0]!=""){
+
+        if(l[0] != "") {
             QString type1 = typeLitteral(l[0]);
-            if(type1!="Entier")
+
+            if(type1 != "Entier")
                 return "Inconnu";
         }
-        if(l[1]!=""){
+
+        if(l[1] != "") {
             QString type2 = typeLitteral(l[1]);
-            if(type2!="Entier")
+
+            if(type2 != "Entier")
                 return "Inconnu";
         }
+
         return "Rationnel";
     } else if(lit == "0" || (lit.toInt() && lit.count('.') == 0 && (lit[0].isDigit() || (lit[0] == '-' && lit[1].isDigit())))) {
         return "Entier";
@@ -441,23 +456,20 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
     }
 
     if(op == "=") {
-        if(*y == *x){
+        if(*y == *x) {
             pile->push(Litteral::createLitteral("1", "Entier"));
-        }
-        else
+        } else
             pile->push(Litteral::createLitteral("0", "Entier"));
     } else if(op == "!=") {
-        if(*y != *x){
+        if(*y != *x) {
             pile->push(Litteral::createLitteral("1", "Entier"));
-        }
-        else
+        } else
             pile->push(Litteral::createLitteral("0", "Entier"));
     } else if(op == "<") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            if(*y < *x){
+            if(*y < *x) {
                 pile->push(Litteral::createLitteral("1", "Entier"));
-            }
-            else
+            } else
                 pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
@@ -466,10 +478,9 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
         }
     } else if(op == ">") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            if(*y > *x){
+            if(*y > *x) {
                 pile->push(Litteral::createLitteral("1", "Entier"));
-            }
-            else
+            } else
                 pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
@@ -478,10 +489,9 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
         }
     } else if(op == ">=") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            if((*y > *x) || *y==*x){
+            if((*y > *x) || *y == *x) {
                 pile->push(Litteral::createLitteral("1", "Entier"));
-            }
-            else
+            } else
                 pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
@@ -490,10 +500,9 @@ void Controleur::applyOperatorLog(const QString& op, const int nbOp) {
         }
     } else if(op == "<=") {
         if(!isComplexe(*x) && !isComplexe(*y)) {
-            if((*y < *x) || *y==*x){
+            if((*y < *x) || *y == *x) {
                 pile->push(Litteral::createLitteral("1", "Entier"));
-            }
-            else
+            } else
                 pile->push(Litteral::createLitteral("0", "Entier"));
         } else {
             pile->push(Litteral::createLitteral(y->toString(), typeLitteral(y->toString())));
@@ -616,10 +625,12 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp) {
         Programme *p2 = dynamic_cast<Programme*>(y);
         QString id = x->toString().remove('\'');
         Atome *a = dynamic_cast<Atome*>(x);
+
         if(typeLitteral(y->toString()) == "Programme") {
             QString strToSearch = x->toString().remove('\'');
             Programme *p = dynamic_cast<Programme*>(x);
-            if(!p && !a){
+
+            if(!p && !a) {
                 pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 throw ComputerException("Un programme doit être un atome !");
@@ -643,7 +654,7 @@ void Controleur::applyOperatorPile(const QString& op, const int nbOp) {
             QString strToSearch = x->toString().remove('\'');
             Variable *v = dynamic_cast<Variable*>(x);
 
-            if(!v && !a){
+            if(!v && !a) {
                 pile->push(Litteral::createLitteral(y->toString().remove('\''), typeLitteral(y->toString().remove('\''))));
                 pile->push(Litteral::createLitteral(x->toString().remove('\''), typeLitteral(x->toString().remove('\''))));
                 throw ComputerException("Une variable doit être un atome !");

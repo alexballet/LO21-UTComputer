@@ -78,6 +78,7 @@ void QComputer::on_commande_returnPressed() {
 
     // getting text for the command bar
     QString c = ui->commande->text();
+
     if(c == "DISCO") {
         QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(changeColor()));
@@ -87,6 +88,7 @@ void QComputer::on_commande_returnPressed() {
         player->setVolume(50);
         player->play();
     }
+
     try {
         controleur->parse(c);
     } catch(ComputerException c) {
@@ -325,6 +327,6 @@ void QComputer::initPile() {
 }
 
 void QComputer::changeColor() {
-    QString style = QString("background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgb(%1,%2,%3), stop:1 rgb(%4,%5,%6));").arg(QString::number(qrand()%255), QString::number(qrand()%255), QString::number(qrand()%255), QString::number(qrand()%255), QString::number(qrand()%255), QString::number(qrand()%255));
+    QString style = QString("background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgb(%1,%2,%3), stop:1 rgb(%4,%5,%6));").arg(QString::number(qrand() % 255), QString::number(qrand() % 255), QString::number(qrand() % 255), QString::number(qrand() % 255), QString::number(qrand() % 255), QString::number(qrand() % 255));
     ui->widget->setStyleSheet(style);
 }
