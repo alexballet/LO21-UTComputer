@@ -80,34 +80,37 @@
 \tableofcontents
 
 \begin{abstract}
-In this report, we will present our application developped for the L021 course. A revolutionary and innovative calculator which will simplify your everyday life.
+In this report, we will present our application developed for the L021 course. A revolutionary and innovative calculator which will simplify your everyday life.
 \end{abstract}
 
 \section{Architecture}
 
     \subsection{QComputer}
 
-    Our \textit{QComputer} class is the interface of our application, our \textit{MainWindow}. It sends the content of the \textit{QLineEdit} widget to the \textit{Controleur} instance each time the user presses the \textit{Enter} key or clicks on an operator button. Every instruction is sent to the \textit{parse()} method of the \textit{Controleur} instance by the \textit{QLineEdit} widget. The \textit{QComputer} object refreshes the \textit{QTableWidget} displaying our \textit{Pile} instance each time it is modified.
-    It also saves/restores the context when the application terminates/launches : the content of the \textit{Pile} instance, the \textit{Variable} and \textit{Programme} objects, and the global settings (keyboard, error sound and number of \textit{Litteral} objects displayed in the \textit{QTableWidget}).\\
+    Our \textit{QComputer} class is the interface of our application, our \textit{MainWindow}. It sends the content of the \textit{QLineEdit} widget to the \textit{Controleur} instance each time the user presses the \textit{Enter} key or clicks on an operator button. Every instruction is sent to the \textit{parse()} method of the \textit{Controleur} instance by the \textit{QLineEdit} widget. The \textit{QComputer} object refreshes the \textit{QTableWidget} displaying our \textit{Pile} instance every time it is modified.\\
+    It also manages the saving/restoring of context via the \textit{DbManager} class when the application terminates/launches : it saves the content of the \textit{Pile} instance, all \textit{Variable} and \textit{Programme} objects as well as the global settings (keyboard on/off, error sound on/off and number of \textit{Litteral} objects displayed in the \textit{QTableWidget}).\\
 
     \subsection{Controleur}
 
-    Our \textit{Controleur} class is a singleton and manages every interaction with the user. It parses and processes each user input : creates the corresponding \textit{Litteral} objects, pushes them into the \textit{Pile} instance, applies the operators, parses and evaluates the \textit{Expression} objects. It also manages the \textit{Memento} class : adds \textit{Memento} states to the \textit{mementoList} stored in the \textit{Pile} instance.\\
+    Our \textit{Controleur} class is a singleton and manages every interaction with the user. It parses and processes all user input : it creates the corresponding \textit{Litteral} objects, pushes them into the \textit{Pile} instance, applies the operators, parses and evaluates the \textit{Expression} objects. It also manages the \textit{Memento} class : it adds \textit{Memento} states to the \textit{mementoList} which is used for undo/redo operations.\\
 
-    We chose to centralise every user input processing into the \textit{parse()} method in order to simplify the use of the \textit{Controleur} class. If the input is not a \textit{Programme} or an \textit{Expression}, which both contain \textit{spaces}, the \textit{parse()} method manually splits the input into seperate words to be processed by the \textit{process()} method. The \textit{Litteral} objects are pushed into the \textit{Pile} instance and the operators are applied.
+    We chose to centralise all user input processing into the \textit{parse()} method in order to simplify the use of the \textit{Controleur} class. If the input is not a \textit{Programme} or an \textit{Expression}, which both contain spaces, the \textit{parse()} method manually splits the input into seperate words to be processed by the \textit{process()} method. The \textit{Litteral} objects are pushed into the \textit{Pile} instance and the operators are applied.
 
     \subsection{Pile}
 
-    As there can only be one \textit{Pile} object, our \textit{Pile} class is a singleton. It has a \textit{QStack} attribute (called \textit{stack}) of pointers to \textit{Litteral} objects. The \textit{Pile} instance has \textit{pop()} and \textit{push()} methods in order to manage the stack attribute. It has a \textit{QString} attribute called \textit{message}, used to display \textit{QComputerExceptions} into a \textit{QLineEdit} widget of the main window.
+    As there can only be one \textit{Pile} object, our \textit{Pile} class is a singleton. It has a \textit{QStack} attribute (called \textit{stack}) of pointers to \textit{Litteral} objects. The \textit{Pile} instance has \textit{pop()} and \textit{push()} methods in order to manage the stack. It has a \textit{QString} attribute called \textit{message}, used to display \textit{QComputerExceptions} on a \textit{QLineEdit} widget of the main window.\\
+    The \textit{Pile} object can also create a \textit{Memento} object holding the current state of the stack. It can also restore a state of the stack from a textit{Memento} object. All textit{Memento} objects are managed by the textit{Controleur} class.
 
     \subsection{Litterals}
 
-    The \textit{Litteral} class is the mother class of \textit{LitteralNumerique}, \textit{Complexe}, \textit{Variable}, \textit{Programme}, \textit{Expression} and \textit{Atome}.\\
+    The \textit{Litteral} class is the base class of \textit{LitteralNumerique}, \textit{Complexe}, \textit{Variable}, \textit{Programme}, \textit{Expression} and \textit{Atome}. It also implements a factory methods which instantiates the correct child class object from user input (a QString). \\
     A \textit{LitteralNumerique} object is either an \textit{Entier}, a \textit{Reel} or a \textit{Rationnel}. It has 2 virtual methods \textit{operator<()} and \textit{operator>()} which are implemented in the children classes and used to compare each other.\\
     A \textit{Complexe} object is composed of 2 \textit{LitteralNumerique} objects.\\
-    A \textit{Rationnel} object is composed of 2 \textit{Entier} objects.\\
-    A \textit{Variable} object is composed of an id (\textit{QString}) and a \textit{Litteral} object (as it can store \textit{Entier}, \textit{Reel}, \textit{Rationnel} or \textit{Complexe} objects).\\
-    A \textit{Programme} object is composed of an id (\textit{QString}) and instructions (\textit{QStringList}), as it can contain operators, that are not objects.
+    A \textit{Rationnel} object is composed of 2 \textit{Entier} objects. It simplifies itself during construction. The factory method then can even instantiate an \textit{Entier} object if the denominator equals to 1.\\
+    A \textit{Variable} object is composed of an id (\textit{QString}) and a pointer to a \textit{Litteral} object (as it can store \textit{Entier}, \textit{Reel}, \textit{Rationnel} or \textit{Complexe} objects). On construction it is automatically added to the singleton \textit{VariableMap} which manages all Variables. \\
+    A \textit{Programme} object is composed of an id (\textit{QString}) and instructions (\textit{QStringList}), as it can contain operators, that are not objects. On construction it is automatically added to the singleton \textit{ProgrammeMap} which manages all programs. When the EVAL operator is applied, a program is parsed and executed by the textit{Controleur}.\\
+    An \textit{Expression} object is composed of a QString attribute which holds the expression itself. The expression is in infix notation. When the EVAL operator is used, a function parses the expression uses an infix to postfix transformation algorithm and returns a postfix expression which is then evaluated by the \textit{Controleur}.\\ 
+    
 
     \subsection{Operators}
 
@@ -130,16 +133,26 @@ In this report, we will present our application developped for the L021 course. 
 
     \subsection{VariableMap and ProgrammeMap}
 
-    \textit{Variable} objects are stored in a \textit{QMap<QString, Variable*>} attribute of a singleton \textit{VariableMap} class. This means that the research and the deletion of a \textit{Variable} object has a complexity in O(Log(n)). We can then find, edit and delete \textit{Variable} objects efficiently from their id.
-    \textit{Programme} objects are stored in a \textit{QMap<QString, Programme*>} attribute of a singleton \textit{ProgrammeMap} class. Like \textit{VariableMap}, the research and deletion of a \textit{Programme} object has a complexity in O(Log(n)).
+    \textit{Variable} objects are stored in a \textit{QMap<QString, Variable*>} attribute of a singleton \textit{VariableMap} class. This means that the lookup and the deletion of a \textit{Variable} object has a complexity of $\mathcal{O}(\log(n))$. We can then find, edit and delete \textit{Variable} objects efficiently using their id. The user can manage Variables using STO and FORGET operators but also using a \textit{VariableEditor} window. This window can be accessed from the menu bar. It allows for editing, adding and deleting variables. It instantiates the \textit{VariableMap} singleton and performs these simple operations using dedicated \textit{VariableMap} methods.\\
+    \textit{Programme} objects are stored in a \textit{QMap<QString, Programme*>} attribute of a singleton \textit{ProgrammeMap} class. Like \textit{VariableMap}, the lookup and deletion of a \textit{Programme} object has a complexity of $\mathcal{O}(\log(n))$. The user can also manage programs from a special \textit{ProgramEditor} window similar to the \textit{VariableEditor} window. This window can launch smaller notepad-like windows where the user can modify specific programs. Different delimiters are accepted such as spaces, tabs and newlines. 
 
     \subsection{ComputerException}
 
-    Every error occuring in \textit{UTComputer} is managed by the \textit{ComputerException} class. Each time a \textit{ComputerException} object is created, the message of the \textit{Pile} instance is updated and displayed in the \textit{QComputer} interface.
+    Every error occuring in \textit{UTComputer} is managed by the \textit{ComputerException} class. Each time a \textit{ComputerException} object is created, the message of the \textit{Pile} instance is updated and displayed in the \textit{QComputer} interface. A beep sound is also played on creation.
+    
+    \subsection{Options}
+    
+    The user can change app settings from a dedicated settings window, accessible from the menu bar. It is possible to hide or show the keyboard, to turn off or on the beep sound as well as to change the number of \textit{Litteral} objects displayed on the QTableWidget stack in the main window. All settings are stored in the QSettings class which provides an easy to use and platform independent way to manage user settings. The \textit{QComputer} listens for signals sent from the Options window (a signal is sent when the user changes settings) and reacts accordingly (e.g. hides or shows the keyboard).
+    
+    \subsection{DbManager}
+    
+    We chose to store app context in an SQLite database. The \textit{DbManager} singleton does all the dirty work so the \textit{QComputer} class can simply call appropriate methods and easily save the context when the user closes the app or restore it when the app is launched. The SQLite database has 4 tables: pile, variables, programs and settings. The \textit{DbManager} has methods for saving textual representations of all objects into appropriate tables as well as for restoring objects from the tables.\\
+    
+    On the next page is a UML diagram showing all our classes. We chose to represent only inheritance relationships because representing other relationships would make the diagram incredibly cluttered, unnecessarily complicated and impossible to read. Moreover, visualisations generated by Doxygen complement this diagram very well as they only represent relationships between classes.
 
 \newpage
 \section{Architecture extensibility possibilities}
-	Our architecture allows for easy extensibility. Here are some examples of extensibility possibilities that can be easily implemented within our architecture.
+	Our architecture allows for easy extensibility. Here are some examples of extensibility possibilities that can be quickly implemented within our architecture.
 	\subsection{Adding operators}
 	If we want to add a new operator, most of the steps are already automated. Qt Designer is quite practical for this task: it is very easy to add a new button for the operator. The button is then automatically connected to a slot handling the button's action using a \textit{foreach} loop: 
 	\begin{lstlisting}
@@ -151,12 +164,14 @@ In this report, we will present our application developped for the L021 course. 
 	\end{lstlisting}
 	The next step is choosing the operator's category (e.g. stack operator, numerical operator, etc.). The operator as well as its arity must then be added to the corresponding \textit{QMap} in the \textit{operator.h} file. \\
 	The final step is writing a function that implements the operator's functionality and putting it into \textit{Controleur.h}. This step is operator-specific so it cannot be automated. All the other connections and logic are completely the same, be it 10 operators or 100.
-    //parsing infox to postfix
+
 	\subsection{Settings}
 	It also easy to add new settings to the app (for instance for changing the color of the application or changing the decimal precision). Using Qt Designer, a checkbox or an appropriate input widget can be quickly added to the settings window. This widget is then connected to a slot handling user input. This slot basically contains an update of the \textit{QSettings} object. As the settings' values can be booleans, integers or even strings this part of the process is simple yet cannot be automated. The \textit{QSettings} is then used in the appropriate method or slot of the target object that handles the settings for this object (for instance \textit{QComputer} would have a slot that would react when the 'color' setting is changed). All other aspects are automated, such as restoring and saving settings from and to the SQLite database: a \textit{foreach} loop iterates through all table rows (or settings' keys) and restores them (or saves them) automatically.
-	\subsection{Translations}
-	All the text that the user sees is embedded in the Qt \textit{tr} function.... meh
+	
 	\subsection{Resources}
-	Sounds and icons are managed via .qrc files (Qt Resource files) that make it easy to add, remove or edit auxiliary files for the application. It is very quick to customize the app sounds or icons using this approach.
+	Sounds and icons are managed via .qrc files (Qt Resource files) that make it easy to add, remove or edit auxiliary files for the application. It is very quick to customize app sounds or icons using this approach. This means that it is possible to create themes for the app and let users customize it.\\
+
+	{\scriptsize PS: type DISCO in the command line and turn on the sound for a unique user experience in the realm of calculator apps!}
 
 \end{document}
+\grid
